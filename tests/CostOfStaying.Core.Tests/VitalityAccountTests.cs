@@ -33,7 +33,7 @@ namespace CostOfStaying.Core.Tests
         public void Lose_ClampsAtZero()
         {
             var account = new VitalityAccount(new ActorId(1));
-            account.Lose(ulong.MaxValue > uint.MaxValue ? uint.MaxValue : (uint)ulong.MaxValue);
+            account.Lose(uint.MaxValue);
             Assert.That(account.Current, Is.Zero);
             Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Spirit));
         }
