@@ -1,6 +1,5 @@
 namespace CostOfStaying.Core.Tests
 {
-    using System;
     using CostOfStaying.Core.Domain;
     using NUnit.Framework;
 
@@ -17,16 +16,21 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
-        public void Lose_ReducesVitality_AndZeroTransitionsToSpirit()
+        public void Lose_ReducesVitalityWithoutChangingAliveStateBeforeZero()
         {
             var account = new VitalityAccount(new ActorId(1));
             account.Lose(40);
             Assert.That(account.Current, Is.EqualTo(60u));
             Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Alive));
+        }
 
-            account.Lose(60);
+        [Test]
+        public void Lose_ReachingZeroTransitionsToDead()
+        {
+            var account = new VitalityAccount(new ActorId(1));
+            account.Lose(100);
             Assert.That(account.Current, Is.Zero);
-            Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Spirit));
+            Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Dead));
         }
 
         [Test]
@@ -35,7 +39,7 @@ namespace CostOfStaying.Core.Tests
             var account = new VitalityAccount(new ActorId(1));
             account.Lose(uint.MaxValue);
             Assert.That(account.Current, Is.Zero);
-            Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Spirit));
+            Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Dead));
         }
 
         [Test]
@@ -48,63 +52,49 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
-        public void Spirit_LoseAndRestoreAreNoOps()
+        public void Dead_LoseAndRestoreAreNoOps()
         {
             var account = new VitalityAccount(new ActorId(1));
             account.Lose(100);
             account.Lose(10);
             account.Restore(50);
-            Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Spirit));
+            Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Dead));
             Assert.That(account.Current, Is.Zero);
         }
 
         [Test]
-        public void Eliminated_IsTerminalForLoseAndRestore()
+        public void ZeroLoss_IsNoOp()
         {
             var account = new VitalityAccount(new ActorId(1));
-            account.Lose(100);
-            account.Eliminate();
-            account.Lose(10);
-            account.Restore(50);
-            Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Eliminated));
-            Assert.That(account.Current, Is.Zero);
-        }
-
-        [Test]
-        public void Resurrect_IsAllowedOnlyFromSpirit()
-        {
-            var account = new VitalityAccount(new ActorId(1));
-            Assert.Throws<InvalidOperationException>(() => account.Resurrect(50));
-            account.Lose(100);
-            account.Resurrect(50);
+            account.Lose(0);
+            Assert.That(account.Current, Is.EqualTo(100u));
             Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Alive));
-            Assert.That(account.Current, Is.EqualTo(50u));
         }
 
         [Test]
-        public void Eliminate_IsAllowedOnlyFromSpirit()
+        public void ZeroRestore_IsNoOp()
         {
             var account = new VitalityAccount(new ActorId(1));
-            Assert.Throws<InvalidOperationException>(() => account.Eliminate());
-            account.Lose(100);
-            account.Eliminate();
-            Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Eliminated));
-        }
-
-        [Test]
-        public void Resurrect_RejectsZeroOrAboveMaximum()
-        {
-            var account = new VitalityAccount(new ActorId(1));
-            account.Lose(100);
-            Assert.Throws<ArgumentOutOfRangeException>(() => account.Resurrect(0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => account.Resurrect(101));
+            account.Lose(25);
+            account.Restore(0);
+            Assert.That(account.Current, Is.EqualTo(75u));
         }
 
         [Test]
         public void Constructor_RejectsZeroMaximum()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            Assert.Throws<System.ArgumentOutOfRangeException>(() =>
                 new VitalityAccount(new ActorId(1), 0));
+        }
+
+        [Test]
+        public void DeadStateCannotBeRevivedByRestore()
+        {
+            var account = new VitalityAccount(new ActorId(1));
+            account.Lose(100);
+            account.Restore(uint.MaxValue);
+            Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Dead));
+            Assert.That(account.Current, Is.Zero);
         }
     }
 }
