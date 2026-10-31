@@ -60,14 +60,13 @@ namespace CostOfStaying.Core.Domain
             if (_hasSequence && betrayalEvent.SequenceId.Value <= _lastSequence)
                 throw new InvalidOperationException("Event sequence IDs must be strictly increasing.");
 
-            _events.Add(betrayalEvent.SequenceId, betrayalEvent);
-            _lastSequence = betrayalEvent.SequenceId.Value;
-            _hasSequence = true;
-
             ulong current = ScoreFor(betrayalEvent.ActorId);
             if (current == ulong.MaxValue)
                 throw new OverflowException("Betrayal score overflow.");
 
+            _events.Add(betrayalEvent.SequenceId, betrayalEvent);
+            _lastSequence = betrayalEvent.SequenceId.Value;
+            _hasSequence = true;
             _scores[betrayalEvent.ActorId] = current + 1UL;
             return true;
         }
