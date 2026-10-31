@@ -14,7 +14,7 @@
 - IVitalityAccount and IBetrayalLedger pure contracts.
 - VitalityAccount with bounded vitality and terminal Alive → Dead behavior.
 - BetrayalLedger with monotonic event sequence, exact replay rejection and actor score accumulation.
-- Standalone NUnit tests targeting .NET 8.
+- Standalone NUnit tests targeting .NET 8, including identifier value-semantics coverage.
 
 ## Vitality semantics
 
@@ -40,11 +40,11 @@ Spirit is a separate post-death role/projection. It is not a Vitality state. The
 
 ## Deliberate exclusions
 
-No Unity project, Unity assemblies, FishNet adapters, connection identity mapping, command transport, server tick scheduler, Debuff model, atomic transfer system, persistence, or backend has been added. No tuning values beyond default Vitality maximum 100 have been invented.
+No Unity project, Unity assemblies, FishNet adapters, connection identity mapping, command transport, server tick scheduler, Debuff model, atomic transfer system, persistence, or backend has been added. `IdentifierTests` covers numeric preservation, equality/inequality, zero and `ulong.MaxValue` representation, and separation between identifier types. Zero is tested as a representable value only; this does not declare zero a valid runtime identity. No tuning values beyond default Vitality maximum 100 have been invented.
 
 ## Verification status
 
-- Source files and NUnit test cases: **IMPLEMENTED** (committed to feature branch).
+- Source files and NUnit test cases, including `IdentifierTests`: **IMPLEMENTED** (committed to feature branch).
 - Compilation: **NOT VERIFIED** — the available environment reported dotnet: command not found.
 - NUnit execution: **NOT VERIFIED** — no reproducible test run is available.
 - Unity/FishNet integration: **NOT IMPLEMENTED**.
