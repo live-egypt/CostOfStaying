@@ -323,7 +323,7 @@ Unity behaviours are thin adapters; authoritative rules do not belong in MonoBeh
 | CorePipelineTests.cs | Deterministic tick | PROPOSED |
 | SnapshotTests.cs | Immutability and revision | PROPOSED |
 | SecurityInvariantTests.cs | Authority, replay, identity spoofing | PROPOSED |
-| VitalityAccountTests.cs | Current Vitality primitive | IMPLEMENTED / NOT EXECUTED |
+| IdentifierTests.cs | Numeric value semantics and type separation for current IDs | IMPLEMENTED / NOT EXECUTED |\n| VitalityAccountTests.cs | Current Vitality primitive | IMPLEMENTED / NOT EXECUTED |
 | BetrayalLedgerTests.cs | Current ledger primitive | IMPLEMENTED / NOT EXECUTED |
 
 ### 6.10 Unity/FishNet integration tests
@@ -449,11 +449,11 @@ After a real Unity project and exact package lock exist, run EditMode and PlayMo
 |---|---|
 | ADR-005 approval | APPROVED |
 | Core .NET project | IMPLEMENTED / NOT VERIFIED |
-| Numeric identifiers | IMPLEMENTED / NOT VERIFIED |
+| Numeric identifiers and identifier value-semantics tests | IMPLEMENTED / NOT VERIFIED |
 | Vitality contract and primitive | IMPLEMENTED / NOT VERIFIED |
 | Vitality terminal state aligned with v2.1 | IMPLEMENTED / NOT VERIFIED |
 | Betrayal ledger contract and primitive | IMPLEMENTED / NOT VERIFIED |
-| Vitality and ledger NUnit tests | IMPLEMENTED / NOT EXECUTED |
+| Identifier, Vitality and ledger NUnit tests | IMPLEMENTED / NOT EXECUTED |
 | Unity project/package lock | NOT CREATED |
 | FishNet version | ASSUMPTION ONLY |
 | Network/session adapters | NOT IMPLEMENTED |
