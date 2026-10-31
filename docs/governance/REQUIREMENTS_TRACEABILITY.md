@@ -1,12 +1,22 @@
-# Requirements Traceability — v2.0
-**الحالة: PROPOSED**
+# تتبع المتطلبات — v2.1
+**الحالة: PROPOSED | المعرفات أولية وتحتاج تثبيتاً قبل التنفيذ**
 
-| Requirement | Control | Test | Evidence |
-|---|---|---|---|
-| NET-001 server authority | TRUST-001 | SEC-001 | CI + server log |
-| TRF-001 atomic transfer | TRF-CTRL-001 | TRF-TEST-001 | integration report |
-| COL-001 per-player timer | COL-CTRL-001 | COL-TEST-001 | unit report |
-| MATCH-001 4-player match | MATCH-CTRL-001 | SYS-001 | match log |
-| PERF-001 mobile target | PERF-CTRL-001 | PERF-001 | device benchmark |
+الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. الصفوف أدناه أمثلة أولية وليست دليلاً على وجود الاختبارات.
 
-المعرفات أولية. أضف المتطلبات الفعلية قبل التنفيذ. VERIFIED يتطلب دليلاً محفوظاً.
+| Requirement ID | المتطلب | Control ID | Test ID المقترح | الدليل المطلوب |
+|---|---|---|---|---|
+| GAME-001 | Vitality خادمية والموت عند الصفر | GAME-CTRL-001 | UNIT-GAME-001 | تقرير Unit Test |
+| COL-001 | مؤقت Collapse وإعادة الجدولة | COL-CTRL-001 | UNIT-COL-001 | تقرير Unit Test |
+| TRF-001 | نقل Debuff ذرياً دون Copy | TRF-CTRL-001 | INT-TRF-001 | تقرير Integration |
+| BET-001 | احتساب Betrayal بعد نجاح النقل فقط | BET-CTRL-001 | UNIT-BET-001 | تقرير Unit Test |
+| SP-001 | الروح لا تغير حالة الأحياء مباشرة | SP-CTRL-001 | INT-SP-001 | تقرير Integration |
+| END-001 | التصويت والنتيجة يقررهما الخادم | END-CTRL-001 | NET-END-001 | سجل مباراة واختبار شبكة |
+| NET-001 | العميل يرسل Intent فقط | TRUST-CTRL-001 | SEC-NET-001 | Security regression report |
+| PERF-001 | أداء Android ضمن ميزانية معتمدة | PERF-CTRL-001 | PERF-ANDROID-001 | تقرير جهاز فعلي |
+
+## قواعد التتبع
+- لكل متطلب مالك وأولوية ومعيار قبول قبل التنفيذ.
+- لكل اختبار خطوات ونتيجة متوقعة ونتيجة فعلية وبيئة وcommit SHA.
+- الدليل يشير إلى artifact أو تقرير محفوظ يمكن مراجعته.
+- الحالة VERIFIED تتطلب اجتيازاً فعلياً؛ لا تمنح بناءً على اكتمال الوثيقة.
+- حدّث الجدول مع كل تغيير في المواصفات أو الاختبارات.
