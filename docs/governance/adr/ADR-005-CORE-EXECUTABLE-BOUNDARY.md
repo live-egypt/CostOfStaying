@@ -1,6 +1,6 @@
 # ADR-005 — Core Executable Boundary and First Implementation Slice
 
-**Status:** PROPOSED — requires project-owner approval  
+**Status:** APPROVED — project-owner approval received 2026-11-01  
 **Date:** 2026-11-01  
 **Related:** ADR-001, ADR-002, ADR-004; `docs/02_GAME_RULES_SPECIFICATION.md`
 
@@ -78,4 +78,4 @@ The exact FishNet assembly reference must be read from the installed package; it
 
 ## Acceptance criteria
 
-This ADR may move to APPROVED only after the project owner confirms the proposed Core boundary and first-slice scope. Code may then be marked IMPLEMENTED only when committed; VERIFIED requires reproducible compilation and test evidence. Gameplay rules remain PROPOSED FOR PLAYTEST until the playtest gate in ADR-004 is satisfied.
+The project owner approved the proposed Core boundary and first-slice scope on 2026-11-01. Code may be marked IMPLEMENTED only when committed; VERIFIED requires reproducible compilation and test evidence. Gameplay rules remain PROPOSED FOR PLAYTEST until the playtest gate in ADR-004 is satisfied.
