@@ -15,7 +15,5 @@ namespace CostOfStaying.Core.Contracts
 
         void Lose(uint amount);
         void Restore(uint amount);
-        void Resurrect(uint vitality);
-        void Eliminate();
     }
 }
