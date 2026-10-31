@@ -1,4 +1,4 @@
-# وثائق ثمن البقاء — v2.0
+# وثائق ثمن البقاء — v2.1
 
 ## التصميم
 - [ميثاق المشروع](00_PROJECT_CHARTER.md)
@@ -47,6 +47,7 @@
 - [ADR-001: التكدس التقني](governance/adr/ADR-001-TECH-STACK.md)
 - [ADR-002: سلطة الخادم](governance/adr/ADR-002-SERVER-AUTHORITY.md)
 - [ADR-003: Backend والاستضافة](governance/adr/ADR-003-BACKEND-AND-HOSTING.md)
+- [ADR-004: خط أساس قواعد اللعب](governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md)
 - [نطاق MVP](roadmap/MVP_SCOPE.md)
 - [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
