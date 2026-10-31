@@ -1,10 +1,13 @@
 # وثائق ثمن البقاء — v2.1
 
-## التصميم
+هذه الوثائق تصف التصميم المقترح وخطط التحقق. لا تعني أن أي نظام منفذ أو مختبر ما لم يذكر دليل قابل للمراجعة.
+
+## ابدأ هنا
 - [ميثاق المشروع](00_PROJECT_CHARTER.md)
 - [Game Design Document](01_GAME_DESIGN_DOCUMENT.md)
 - [مواصفات قواعد اللعبة](02_GAME_RULES_SPECIFICATION.md)
 - [تجربة اللاعب والحلقة الأساسية](03_PLAYER_EXPERIENCE_AND_CORE_LOOP.md)
+- [مسرد المصطلحات](GLOSSARY.md)
 
 ## الأنظمة
 - [Collapse](systems/COLLAPSE_SYSTEM.md)
@@ -32,6 +35,7 @@
 ## الجودة والاختبار
 - [استراتيجية الاختبار](quality/TEST_STRATEGY.md)
 - [خطة الاختبارات الأمنية](quality/SECURITY_TEST_PLAN.md)
+- [خطة اختبار اللعب](quality/PLAYTEST_PLAN.md)
 - [ميزانية الأداء](quality/PERFORMANCE_BUDGET.md)
 - [بروتوكول قياس الأداء](quality/PERFORMANCE_TEST_PROTOCOL.md)
 - [توافق الأجهزة](quality/DEVICE_COMPATIBILITY.md)
@@ -53,10 +57,11 @@
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
 
 ## حالات الوثائق
-- **PROPOSED:** مقترح لم يعتمد بعد.
-- **APPROVED:** قرار معتمد.
-- **TBD:** يحتاج قراراً قبل التنفيذ.
+- **PROPOSED:** مقترح لم يعتمد.
+- **PROPOSED FOR PLAYTEST:** خط أساس يحتاج جلسات اختبار قبل اعتماده.
+- **APPROVED:** قرار معتمد تصميمياً.
 - **IMPLEMENTED:** منفذ في كود محدد.
 - **VERIFIED:** اجتاز اختباراً وله دليل محفوظ.
+- **TBD:** لم يحسم بعد.
 
-لا تستخدم IMPLEMENTED أو VERIFIED لمجرد وجود وثيقة أو تصميم.
+لا تستخدم IMPLEMENTED أو VERIFIED لمجرد وجود تصميم أو وثيقة.
