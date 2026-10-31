@@ -18,6 +18,8 @@
 - [Endgame](systems/ENDGAME_SYSTEM.md)
 
 ## المعمارية
+- [المواصفة التقنية الموحدة لـ Phase 1](architecture/PHASE1_TECHNICAL_MASTER.md)
+- [حالة تنفيذ Core في Phase 1](architecture/PHASE1_CORE_IMPLEMENTATION.md)
 - [المعمارية التقنية](architecture/TECHNICAL_ARCHITECTURE.md)
 - [معمارية الشبكة](architecture/NETWORK_ARCHITECTURE.md)
 - [Backend والاستضافة](architecture/BACKEND_AND_HOSTING.md)
@@ -52,6 +54,7 @@
 - [ADR-002: سلطة الخادم](governance/adr/ADR-002-SERVER-AUTHORITY.md)
 - [ADR-003: Backend والاستضافة](governance/adr/ADR-003-BACKEND-AND-HOSTING.md)
 - [ADR-004: خط أساس قواعد اللعب](governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md)
+- [ADR-005: حدود Core التنفيذي](governance/adr/ADR-005-CORE-EXECUTABLE-BOUNDARY.md)
 - [نطاق MVP](roadmap/MVP_SCOPE.md)
 - [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
