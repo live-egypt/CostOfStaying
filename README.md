@@ -7,12 +7,12 @@
 ## الحالة الحالية
 - المنصة المستهدفة أولاً: Android.
 - نطاق MVP: مباراة مكتملة لأربعة لاعبين وخريطة واحدة.
-- حالة التنفيذ: لا يوجد في هذا التغيير تنفيذ برمجي أو Unity project أو Dedicated Server أو CI أو اختبارات منفذة.
+- حالة التنفيذ: توجد نواة Core مستقلة ومشروع NUnit على فرع التطوير؛ البناء والاختبارات لم يتم التحقق منهما بعد. لا يوجد Unity project أو FishNet integration أو Dedicated Server أو CI مثبت.
 - حالة قواعد اللعب: خط أساس PROPOSED FOR PLAYTEST، وليس اعتماداً نهائياً.
-- حالة التكدس التقني: PROPOSED، باستثناء مبدأ سلطة الخادم المعتمد تصميمياً وغير المثبت تنفيذياً.
+- حالة التكدس التقني: ADR-001 ما زال PROPOSED؛ مبدأ سلطة الخادم APPROVED تصميمياً عبر ADR-002؛ حدود Core التنفيذي APPROVED عبر ADR-005. لا يعني ذلك اكتمال التكامل أو التحقق.
 
 ## نقطة البداية
-ابدأ من [فهرس الوثائق](docs/README.md)، ثم [ميثاق المشروع](docs/00_PROJECT_CHARTER.md)، [قواعد اللعبة](docs/02_GAME_RULES_SPECIFICATION.md)، و[خطة الاختبار](docs/quality/TEST_STRATEGY.md).
+ابدأ من [فهرس الوثائق](docs/README.md)، وراجع [المواصفة التقنية الموحدة لـ Phase 1](docs/architecture/PHASE1_TECHNICAL_MASTER.md) و[حالة تنفيذ Core](docs/architecture/PHASE1_CORE_IMPLEMENTATION.md)، ثم [ميثاق المشروع](docs/00_PROJECT_CHARTER.md)، [قواعد اللعبة](docs/02_GAME_RULES_SPECIFICATION.md)، و[خطة الاختبار](docs/quality/TEST_STRATEGY.md).
 
 ## مبادئ العمل
 1. لا قرار معماري مهم بلا ADR.
