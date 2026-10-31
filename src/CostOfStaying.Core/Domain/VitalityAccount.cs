@@ -3,16 +3,19 @@ namespace CostOfStaying.Core.Domain
     using System;
     using CostOfStaying.Core.Contracts;
 
+    /// <summary>
+    /// Vitality lifecycle only. Spirit is a separate post-death role/projection
+    /// and must not be represented as a Vitality state.
+    /// </summary>
     public enum PlayerVitalityState
     {
         Alive = 0,
-        Spirit = 1,
-        Eliminated = 2
+        Dead = 1
     }
 
     /// <summary>
-    /// Deterministic vitality primitive. This is a domain primitive, not permission
-    /// for the MVP application layer to revive a player; MVP rules prohibit revival.
+    /// Deterministic, engine-independent vitality account.
+    /// Reaching zero is terminal for the MVP: no resurrection transition exists.
     /// </summary>
     public sealed class VitalityAccount : IVitalityAccount
     {
@@ -36,15 +39,12 @@ namespace CostOfStaying.Core.Domain
 
         public void Lose(uint amount)
         {
-            if (State != PlayerVitalityState.Alive)
-                return;
-
-            if (amount == 0)
+            if (State != PlayerVitalityState.Alive || amount == 0)
                 return;
 
             Current = amount >= Current ? 0 : Current - amount;
             if (Current == 0)
-                State = PlayerVitalityState.Spirit;
+                State = PlayerVitalityState.Dead;
         }
 
         public void Restore(uint amount)
@@ -54,29 +54,6 @@ namespace CostOfStaying.Core.Domain
 
             ulong restored = (ulong)Current + amount;
             Current = restored >= Maximum ? Maximum : (uint)restored;
-        }
-
-        public void Resurrect(uint vitality)
-        {
-            EnsureSpirit(nameof(Resurrect));
-            if (vitality == 0 || vitality > Maximum)
-                throw new ArgumentOutOfRangeException(nameof(vitality), "Resurrection vitality must be within (0, Maximum].");
-
-            Current = vitality;
-            State = PlayerVitalityState.Alive;
-        }
-
-        public void Eliminate()
-        {
-            EnsureSpirit(nameof(Eliminate));
-            Current = 0;
-            State = PlayerVitalityState.Eliminated;
-        }
-
-        private void EnsureSpirit(string operation)
-        {
-            if (State != PlayerVitalityState.Spirit)
-                throw new InvalidOperationException($"{operation} is only valid while the player is a Spirit.");
         }
     }
 }
