@@ -38,7 +38,7 @@ namespace CostOfStaying.Core
             return new SessionLifecycle(sessionId);
         }
 
-        public ISessionRegistry CreateSessionRegistry(int capacity)
+        public SessionRegistry CreateSessionRegistry(int capacity)
         {
             return new SessionRegistry(capacity);
         }
@@ -56,7 +56,7 @@ namespace CostOfStaying.Core
         }
 
         public ISessionCleanupService<TCommand> CreateSessionCleanupService<TCommand>(
-            ISessionRegistry sessions,
+            SessionRegistry sessions,
             CommandAdmissionQueue<TCommand> queue)
         {
             return new SessionCleanupService<TCommand>(sessions, queue);
