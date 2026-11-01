@@ -14,7 +14,8 @@
 - Source commit: `be67d8a3399f99c2c0e05a37eec8ffa0cb2abb13`.
 - Core dependency boundary and composition-root guards: PASS.
 - .NET 10 SDK restore/build: PASS.
-- Core target: .NET Standard 2.1; test target: .NET 10.\n- SessionLifecycle and CoreComposition factory: included in this run.
+- Core target: .NET Standard 2.1; test target: .NET 10.
+- SessionLifecycle and CoreComposition factory: included in this run.
 - NUnit: **148 passed, 0 failed, 0 skipped**.
 - TRX artifact: `13093536721`.
 - Artifact SHA-256: `2b13f11e173414f7b232a89ef1ec0389d1d237686cc9137f5efa9662a8d1ee67`.
@@ -106,3 +107,18 @@ These changes prevent unconfigured external account integrations from creating a
 All workflow corrections are on the Draft PR branch. They have not been merged to `main`. PR #6 remains unmerged. Do not claim the default branch is repaired until the PR is reviewed and merged.
 
 **Status:** Core CI is green for the verified source increment. CodeQL and MobSF replacement runs have passed within their stated scope. SecurityCodeScan's analyzer build and native report retention pass (run 41331240071); two raw SARIF 1.0.0 reports with zero reported findings are retained as an artifact, not uploaded to GitHub Code Scanning. Account-backed scanners remain optional/manual until valid secrets and artifacts exist.
+
+
+## 6. Latest verified PR #6 scanner baseline
+
+The latest source-and-documentation head used for the current verified baseline is `c33faf84aa39856d46181ccc1c9decbfba2777d2`.
+
+| Workflow | Run | Result | Evidence |
+|---|---:|---|---|
+| Core CI | 41332989910 | PASS | .NET 10 Release build; **181 NUnit passed, 0 failed, 0 skipped**; TRX artifact 13093814339 |
+| CodeQL Advanced | 41332990015 | PASS | Both C# and GitHub Actions analysis jobs completed successfully; alerts still require triage |
+| SecurityCodeScan | 41332989918 | PASS | Analyzer build and SARIF retention completed; artifact 13093029825 contains two native SARIF 1.0.0 reports, each reporting zero findings |
+
+SecurityCodeScan's successful job does not imply the SARIF reports were uploaded to GitHub Code Scanning; they are retained as a workflow artifact. A zero-finding analyzer result is scoped to the rules and source analyzed, not a general security certification. CodeQL completion likewise means analysis completed; review any generated alerts in the repository's Security tab.
+
+The current Core CI workflow no longer runs on both feature-branch push and pull-request events. It runs on pushes to `main`, pull requests targeting `main`, manual dispatch and its scheduled default-branch scan, avoiding duplicate branch-push/PR checks.
