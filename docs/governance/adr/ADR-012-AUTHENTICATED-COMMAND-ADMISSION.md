@@ -19,6 +19,7 @@ The bounded FIFO and per-session sequence tracker prevent duplicate/stale sequen
 7. Queue capacity and sequence/replay rules remain enforced by `CommandAdmissionQueue<TCommand>`.
 8. Session rejection must not consume a sequence or mutate the queue.
 9. The service is pure C#, in-memory and single-writer/server-serialized.
+10. `TryTakeNext` revalidates the session at dequeue time and returns an `AuthenticatedCommand<TCommand>` carrying the ActorId re-resolved from the current session. Commands queued before disconnect/close are discarded with Unauthorized rather than handed to gameplay handlers.
 
 ## Explicit non-goals
 
@@ -36,7 +37,9 @@ Those checks belong to trusted transport/session resolution and typed applicatio
 - `ICommandAdmissionService<TCommand>`
 - `CommandAdmissionService<TCommand>`
 - `CoreComposition.CreateCommandAdmissionService(...)`
-- NUnit coverage for null dependencies, default envelopes, unknown sessions, Pending/Disconnected/Closed sessions, missing ActorId binding, successful admission, replay rejection, full-queue retry and no sequence consumption before authentication.
+- `AuthenticatedCommand<TCommand>` is created internally and carries server-resolved ActorId, SessionId, sequence, receive tick and command.
+- `TryTakeNext` discards stale commands if the session disconnected/closed after admission.
+- NUnit coverage for null dependencies, default envelopes, unknown sessions, Pending/Disconnected/Closed sessions, missing ActorId binding, successful admission, replay rejection, full-queue retry, actor-binding validation, dequeue-time disconnect/close revalidation and no sequence consumption before authentication.
 
 ## Verification boundary
 
