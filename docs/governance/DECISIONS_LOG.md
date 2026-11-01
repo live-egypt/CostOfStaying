@@ -14,7 +14,10 @@
 | ADR-007 | دورة حياة اللاعب وVitality | APPROVED | تأكيد القرار السابق: Alive / Spirit / Eliminated؛ الصفر ينقل إلى Spirit؛ Resurrect وEliminate عمليتان صريحتان وخادميتان؛ Eliminated نهائية |
 | ADR-008 | Server Command Envelope وSequence Admission | PROPOSED | عقد خادمي للهوية/التوقيت/التسلسل ومنع replay؛ قيم الحدود وسياسة reconnect ما زالت TBD |
 | ADR-009 | Match-Scoped Player Registry | PROPOSED | سجل عضوية bounded لكل MatchId؛ سعة اللاعبين وسياسة spectator/reconnect ما زالت TBD |
-| ADR-010 | Server Session Lifecycle | PROPOSED | Pending/Authenticated/Disconnected/Closed؛ reconnect/timeout/multi-session policy ما زالت TBD |\n| ADR-011 | Bounded Server Session Registry | PROPOSED | سعة صريحة؛ تسجيل Pending فقط؛ الإزالة بعد Closed؛ سياسة تعدد الجلسات لكل لاعب تبقى TBD |
+| ADR-010 | Server Session Lifecycle | PROPOSED | Pending/Authenticated/Disconnected/Closed؛ reconnect/timeout/multi-session policy ما زالت TBD |
+| ADR-011 | Bounded Server Session Registry | PROPOSED | سعة صريحة؛ تسجيل Pending فقط؛ الإزالة بعد Closed وبعد تفريغ أوامر الجلسة؛ سياسة تعدد الجلسات لكل لاعب تبقى TBD |
+| ADR-012 | Authenticated Command Admission Gate | PROPOSED | قبول الأمر من Session مسجلة وAuthenticated ومرتبطة بـ ActorId صالح؛ إعادة التحقق عند dequeue |
+| ADR-013 | Safe Session Cleanup and Replay-State Release | PROPOSED | خدمة واحدة تنظّم إغلاق الجلسة وتفريغ الطابور وإعادة ضبط replay ثم إزالة التسجيل |
 
 ## قرارات نطاق ومبادئ
 - MVP لأربعة لاعبين وخريطة واحدة: نطاق المنتج المستهدف في ميثاق المشروع، ويعاد تقييمه عبر قرار موثق إذا تغير.
