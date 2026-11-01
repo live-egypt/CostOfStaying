@@ -8,6 +8,7 @@
 - [تدقيق تحقق أساسيات Core ونتائج الاختبارات](audit/CORE_FOUNDATIONS_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق تحقق MatchLifecycle وCoreComposition](audit/MATCH_LIFECYCLE_COMPOSITION_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق Core CI وفحص عزل Unity/FishNet](audit/CORE_CI_BOUNDARY_AND_BASELINE_2026-11-01.md)
+- [ADR-008 — Server Command Envelope and Sequence Admission](governance/adr/ADR-008-SERVER-COMMAND-ENVELOPE-AND-SEQUENCE-ADMISSION.md)
 - [ميثاق المشروع](00_PROJECT_CHARTER.md)
 - [Game Design Document](01_GAME_DESIGN_DOCUMENT.md)
 - [مواصفات قواعد اللعبة](02_GAME_RULES_SPECIFICATION.md)
