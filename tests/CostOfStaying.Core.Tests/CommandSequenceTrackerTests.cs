@@ -11,7 +11,7 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void Constructor_RejectsZeroMaximumJump()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new CommandSequenceTracker(0));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new CommandSequenceTracker(0, 1));
         }
 
         [Test]
