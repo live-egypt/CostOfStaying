@@ -53,7 +53,7 @@ namespace CostOfStaying.Core.Domain
         /// Releases replay state after a session is permanently removed.
         /// Reset is refused while commands from that session remain queued.
         /// </summary>
-        public Result ResetSession(SessionId sessionId)
+        internal Result ResetSession(SessionId sessionId)
         {
             if (!sessionId.IsValid)
                 return Result.Failure(CoreErrorCode.InvalidArgument);
