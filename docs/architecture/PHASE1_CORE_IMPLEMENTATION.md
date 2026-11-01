@@ -58,6 +58,7 @@ No Unity project, Unity assemblies, FishNet adapters, connection identity mappin
 - **Tests:** 38 passed, 0 failed, 0 skipped
 - **Test duration:** 21 ms
 - **Artifact:** core-test-results, artifact ID 13062876559 (TRX result retained by GitHub Actions)
+- **Latest workflow rerun:** 41255769742 — all Restore, Release build, NUnit and artifact-upload steps succeeded; artifact ID 13062794038 (TRX result retained). This rerun used the same Core source; subsequent branch commits were documentation/governance-only.
 - **Evidence report:** docs/audit/PHASE1_CORE_CI_VERIFICATION.md
 
 This is VERIFIED for the standalone Core build/test scope only. It does not verify Unity import, FishNet integration, server authority across a live network, gameplay balance, dedicated-server operation, or production security. It also does not resolve the conflicting owner-approved player lifecycle contract recorded in ADR-007.
