@@ -1,11 +1,11 @@
 # تتبع المتطلبات — v2.1
-**الحالة: PARTIALLY VERIFIED | Core CI passed; gameplay lifecycle decision remains blocked by ADR-007**
+**الحالة: PARTIALLY VERIFIED | ADR-007 approved; lifecycle implementation CI verification pending on this branch**
 
-الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. اجتاز Core build و38 اختبار NUnit في run 41255553487، كما نجح workflow لاحق 41255769742. هذا يثبت سلوك الكود الحالي فقط؛ لا يحسم تعارض دورة حياة اللاعب ولا يثبت تكامل Unity/FishNet.
+الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. اجتاز Core CI السابق 38 اختباراً، لكنه سبق تعديل دورة الحياة. ADR-007 حُسم لصالح Alive / Spirit / Eliminated؛ يلزم تشغيل CI على commit التعديل قبل إعلان التحقق. لا يثبت Core CI تكامل Unity/FishNet.
 
 | Requirement ID | المتطلب | Control ID | Test ID المقترح | الدليل المطلوب |
 |---|---|---|---|---|
-| GAME-001 | انتقال Vitality عند الصفر — متطلب متعارض | GAME-CTRL-001 | UNIT-VIT-001 (السلوك الحالي فقط) | CI يثبت الكود الحالي؛ اعتماد السلوك النهائي محظور حتى حسم ADR-007 |
+| GAME-001 | انتقال Vitality عند الصفر إلى Spirit وفق ADR-007 | GAME-CTRL-001 | VitalityAccountTests: Lose_ReachingZeroAutomaticallyTransitionsToSpirit | تشغيل Core CI على commit lifecycle الجديد؛ لا يُعد run السابق دليلاً لهذا التعديل |
 | COL-001 | مؤقت Collapse وإعادة الجدولة | COL-CTRL-001 | UNIT-COL-001 | تقرير Unit Test |
 | TRF-001 | نقل Debuff ذرياً دون Copy | TRF-CTRL-001 | INT-TRF-001 | تقرير Integration |
 | BET-001 | احتساب Betrayal بعد نجاح النقل فقط | BET-CTRL-001 | UNIT-BET-001 | تقرير Unit Test |
@@ -23,3 +23,16 @@
 - الدليل يشير إلى artifact أو تقرير محفوظ يمكن مراجعته.
 - الحالة VERIFIED تتطلب اجتيازاً فعلياً؛ لا تمنح بناءً على اكتمال الوثيقة.
 - حدّث الجدول مع كل تغيير في المواصفات أو الاختبارات.
+
+
+## تحديث ADR-007 — 2026-11-01
+
+تم اعتماد دورة حياة اللاعب وفق القرار السابق الموثق:
+- Alive + Vitality > 0 → Alive.
+- Alive + Vitality reaches 0 → Spirit automatically.
+- Spirit → Alive فقط عبر Resurrect صريح.
+- Alive أو Spirit → Eliminated فقط عبر Eliminate صريح.
+- Eliminated حالة نهائية.
+- Restore لا يحيي Spirit ولا يعيد لاعباً Eliminated.
+
+اختبارات القبول المضافة تغطي الانتقالات والرفض والحالات النهائية. حالة هذه الاختبارات: IMPLEMENTED؛ تصبح VERIFIED فقط بعد نجاح CI على commit الذي يحتوي التغيير.
