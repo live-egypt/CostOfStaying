@@ -19,7 +19,7 @@ namespace CostOfStaying.Core.Domain
     {
         public const uint DefaultMaximum = 100;
 
-        public VitalityAccount(ActorId playerId, uint maximum = DefaultMaximum)
+        internal VitalityAccount(ActorId playerId, uint maximum = DefaultMaximum)
         {
             if (!playerId.IsValid)
                 throw new ArgumentException("Player identity must be non-zero.", nameof(playerId));
