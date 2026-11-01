@@ -10,6 +10,7 @@
 - [تدقيق Core CI وفحص عزل Unity/FishNet](audit/CORE_CI_BOUNDARY_AND_BASELINE_2026-11-01.md)
 - [ADR-008 — Server Command Envelope and Sequence Admission](governance/adr/ADR-008-SERVER-COMMAND-ENVELOPE-AND-SEQUENCE-ADMISSION.md)
 - [ADR-009 — Match-Scoped Player Registry](governance/adr/ADR-009-MATCH-SCOPED-PLAYER-REGISTRY.md)
+- [ADR-010 — Server Session Lifecycle](governance/adr/ADR-010-SESSION-LIFECYCLE.md)
 - [تدقيق CI لتسلسل الأوامر وCommandEnvelope](audit/COMMAND_SEQUENCE_CORE_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق CI لطابور الأوامر المحدود وسعة الجلسات](audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق CI لسجل لاعبي المباراة](audit/CORE_MATCH_PLAYER_REGISTRY_CI_VERIFICATION_2026-11-01.md)
