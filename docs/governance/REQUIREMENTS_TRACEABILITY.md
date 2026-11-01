@@ -1,7 +1,7 @@
 # تتبع المتطلبات — v2.1
-**الحالة: PARTIALLY VERIFIED | Lifecycle, results, identifiers, match lifecycle, composition, command/time primitives and bounded FIFO queue verified; ADR-008 policy remains proposed**
+**الحالة: PARTIALLY VERIFIED | Lifecycle, results, identifiers, match lifecycle, composition, command/time primitives, bounded FIFO queue and match player registry verified; ADR-008/ADR-009 policies remain proposed**
 
-الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. The latest Core CI run 41330344616 passed the dependency-boundary scan, CoreComposition construction-root scan, Release build and 103 NUnit tests. This verifies standalone Core only and does not verify Unity/FishNet.
+الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. The latest Core CI run 41330344616 passed the dependency-boundary scan, CoreComposition construction-root scan, Release build and 132 NUnit tests. This verifies standalone Core only and does not verify Unity/FishNet.
 
 | Requirement ID | المتطلب | Control ID | Test ID المقترح | الدليل المطلوب |
 |---|---|---|---|---|
@@ -17,7 +17,7 @@
 | BET-003 | ترتيب ledger يعتمد EventSequenceId لا ServerTick | BET-CTRL-003 | BetrayalLedgerTests | CI run 41330344616; 132 NUnit passed |
 | CORE-TIME-001 | ServerTick zero is valid; StateRevision advances without overflow | CORE-TIME-CTRL-001 | TimeValueTests | Core CI run 41330344616; 132 NUnit passed |
 | CORE-CMD-001 | CommandEnvelope uses server-resolved SessionId and server receive tick | CORE-CMD-CTRL-001 | CommandEnvelopeTests | Core CI run 41330344616; 132 NUnit passed |
-| CORE-SEQ-001 | Per-session command sequence is monotonic and bounded by configured maximum jump | CORE-SEQ-CTRL-001 | CommandSequenceTrackerTests | Core CI run for command/time increment pending |
+| CORE-SEQ-001 | Per-session command sequence is monotonic and bounded by configured maximum jump | CORE-SEQ-CTRL-001 | CommandSequenceTrackerTests | Core CI run 41330344616; 132 NUnit passed |
 | CORE-ROSTER-001 | Match membership is bounded per MatchId; duplicate ActorId rejected; removal does not mutate player lifecycle; snapshots preserve registration order | CORE-ROSTER-CTRL-001 | MatchPlayerRegistryTests | Core CI run 41330344616; 132 NUnit passed; ADR-009 PROPOSED |
 | CORE-QUEUE-001 | Command admission uses bounded FIFO; full queue rejects without consuming sequence; session replay state resets only after queued commands drain | CORE-QUEUE-CTRL-001 | CommandAdmissionQueueTests | Core CI run 41330344616; 132 NUnit passed |
 | PERF-001 | أداء Android ضمن ميزانية معتمدة | PERF-CTRL-001 | PERF-ANDROID-001 | تقرير جهاز فعلي |
@@ -40,9 +40,14 @@
 - Eliminated حالة نهائية.
 - Restore لا يحيي Spirit ولا يعيد لاعباً Eliminated.
 
-اختبارات القبول المضافة تغطي الانتقالات والرفض والحالات النهائية. حالة هذه الاختبارات: IMPLEMENTED؛ تصبح VERIFIED فقط بعد نجاح CI على commit الذي يحتوي التغيير.
+اختبارات القبول المضافة تغطي الانتقالات والرفض والحالات النهائية. حالة هذه الاختبارات: VERIFIED في Core CI run 41330344616 على commit 08b68e68a6cf393c6177b6b54ecd53d6ffff5496.
 
 
 ## ADR-008 — Command envelope and sequence admission
 
 ADR-008 is PROPOSED. The implementation and tests exist, but the policy is not yet owner-approved. Open policy items include production MaximumSequenceJump, maximum tracked sessions, queue capacity, reconnect/session continuity, rate limiting and command timeout. Queue-full behavior and safe reset semantics passed Core CI run 41330344616. The current implementation consumes an accepted sequence before later gameplay-rule validation; this is explicitly recorded in ADR-008 and awaits review.
+
+
+## ADR-009 — Match-scoped player registry
+
+ADR-009 is PROPOSED. The bounded registry, deterministic insertion order, immutable player-ID snapshot and membership-only removal passed Core CI run 41330344616 with 132 NUnit tests. Production match capacity, spectator/Spirit slot treatment, reconnect grace period and post-match retention remain owner/application policy.
