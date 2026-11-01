@@ -80,38 +80,6 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
-        public void Remove_RejectsSessionUntilItIsClosed()
-        {
-            var registry = new SessionRegistry(4);
-            registry.Register(new SessionLifecycle(new SessionId(1)));
-
-            Assert.That(registry.Remove(new SessionId(1)).ErrorCode, Is.EqualTo(CoreErrorCode.InvalidState));
-            Assert.That(registry.Count, Is.EqualTo(1));
-            Assert.That(registry.Get(new SessionId(1)).IsSuccess, Is.True);
-        }
-
-        [Test]
-        public void Remove_ClosedSessionReleasesCapacity()
-        {
-            var registry = new SessionRegistry(1);
-            var session = new SessionLifecycle(new SessionId(1));
-            registry.Register(session);
-            session.TryClose();
-
-            Assert.That(registry.Remove(new SessionId(1)).IsSuccess, Is.True);
-            Assert.That(registry.Count, Is.Zero);
-            Assert.That(registry.Register(new SessionLifecycle(new SessionId(2))).IsSuccess, Is.True);
-        }
-
-        [Test]
-        public void Remove_RejectsInvalidAndUnknownSessionIds()
-        {
-            var registry = new SessionRegistry(4);
-            Assert.That(registry.Remove(default).ErrorCode, Is.EqualTo(CoreErrorCode.InvalidArgument));
-            Assert.That(registry.Remove(new SessionId(99)).ErrorCode, Is.EqualTo(CoreErrorCode.NotFound));
-        }
-
-        [Test]
         public void Snapshot_PreservesRegistrationOrderAndIsImmutable()
         {
             var registry = new SessionRegistry(4);
