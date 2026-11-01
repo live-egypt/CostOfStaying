@@ -1,0 +1,54 @@
+name: SecurityCodeScan
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/**/*.cs"
+      - "tests/**/*.cs"
+      - ".github/workflows/securitycodescan.yml"
+      - ".github/workflows/core-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/**/*.cs"
+      - "tests/**/*.cs"
+      - ".github/workflows/securitycodescan.yml"
+      - ".github/workflows/core-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  security-code-scan:
+    name: Static analysis for C# source
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Add SecurityCodeScan analyzer
+        uses: security-code-scan/security-code-scan-add-action@f8ff4f2763ed6f229eded80b1f9af82ae7f32a0d
+
+      - name: Restore Core test project
+        run: dotnet restore tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj
+
+      - name: Build Core test project with analyzers
+        run: dotnet build tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-restore
+
+      - name: Convert SARIF for upload
+        uses: security-code-scan/security-code-scan-results-action@cdb3d5e639054395e45bf401cba8688fcaf7a687
+
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v3
+        if: always() && hashFiles('**/analysis.sarif') != ''
+        with:
+          sarif_file: analysis.sarif
