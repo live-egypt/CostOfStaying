@@ -1,6 +1,7 @@
 namespace CostOfStaying.Core.Domain
 {
     using System.Collections.Generic;
+    using CostOfStaying.Core.Domain;
     using CostOfStaying;
 
     /// <summary>
@@ -47,6 +48,26 @@ namespace CostOfStaying.Core.Domain
 
             _pending.Enqueue(envelope);
             return Result.Success();
+        }
+
+        /// <summary>
+        /// Releases replay state after a session is permanently removed.
+        /// Reset is refused while commands from that session remain queued.
+        /// </summary>
+        public Result ResetSession(SessionId sessionId)
+        {
+            if (!sessionId.IsValid)
+                return Result.Failure(CoreErrorCode.InvalidArgument);
+
+            foreach (CommandEnvelope<TCommand> pending in _pending)
+            {
+                if (pending.SessionId == sessionId)
+                    return Result.Failure(CoreErrorCode.InvalidState);
+            }
+
+            return _sequenceTracker.Reset(sessionId)
+                ? Result.Success()
+                : Result.Failure(CoreErrorCode.NotFound);
         }
 
         /// <summary>Removes the oldest pending command. Returns false and default when the queue is empty.</summary>
