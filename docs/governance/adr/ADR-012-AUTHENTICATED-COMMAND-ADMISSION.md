@@ -43,4 +43,4 @@ Those checks belong to trusted transport/session resolution and typed applicatio
 
 ## Verification boundary
 
-Core CI run `41332755494` passed the Release build and **177 NUnit tests (0 failed, 0 skipped)** on source commit `26a77dcf1394d35d3db48ea0f5b7cde4c118998f`. This verifies the pure Core gate only; it does not certify transport authentication or production authorization policy.
+Core CI run `41332989910` passed the Release build and **181 NUnit tests (0 failed, 0 skipped)** on source commit `c33faf84aa39856d46181ccc1c9decbfba2777d2`. This verifies the pure Core gate only; it does not certify transport authentication or production authorization policy.
