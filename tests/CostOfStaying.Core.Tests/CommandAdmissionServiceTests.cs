@@ -145,6 +145,63 @@ namespace CostOfStaying.Core.Tests
             Assert.That(service.TryAdmit(envelope).IsSuccess, Is.True);
         }
 
+        [Test]
+        public void TryTakeNext_ReturnsUnavailableWhenQueueIsEmpty()
+        {
+            var service = CreateService(out _, out _);
+            Assert.That(service.TryTakeNext().ErrorCode, Is.EqualTo(CoreErrorCode.Unavailable));
+        }
+
+        [Test]
+        public void TryTakeNext_ResolvesActorFromAuthenticatedSession()
+        {
+            var service = CreateService(out SessionRegistry sessions, out _);
+            var session = new SessionLifecycle(new SessionId(20));
+            sessions.Register(session);
+            session.TryAuthenticate(new ActorId(42));
+            var envelope = new CommandEnvelope<string>(session.SessionId, new CommandSequenceId(3), new ServerTick(9), "move");
+            Assert.That(service.TryAdmit(envelope).IsSuccess, Is.True);
+
+            Result<AuthenticatedCommand<string>> result = service.TryTakeNext();
+
+            Assert.That(result.IsSuccess, Is.True);
+            Assert.That(result.Value.ActorId, Is.EqualTo(new ActorId(42)));
+            Assert.That(result.Value.SessionId, Is.EqualTo(session.SessionId));
+            Assert.That(result.Value.SequenceId, Is.EqualTo(new CommandSequenceId(3)));
+            Assert.That(result.Value.ReceivedAt, Is.EqualTo(new ServerTick(9)));
+            Assert.That(result.Value.Command, Is.EqualTo("move"));
+        }
+
+        [Test]
+        public void TryTakeNext_DiscardsCommandWhenSessionDisconnectsAfterAdmission()
+        {
+            var service = CreateService(out SessionRegistry sessions, out CommandAdmissionQueue<string> queue);
+            var session = new SessionLifecycle(new SessionId(21));
+            sessions.Register(session);
+            session.TryAuthenticate(new ActorId(43));
+            var envelope = new CommandEnvelope<string>(session.SessionId, new CommandSequenceId(1), new ServerTick(1), "move");
+            Assert.That(service.TryAdmit(envelope).IsSuccess, Is.True);
+            session.TryDisconnect();
+
+            Assert.That(service.TryTakeNext().ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
+            Assert.That(queue.PendingCount, Is.Zero);
+        }
+
+        [Test]
+        public void TryTakeNext_DiscardsCommandWhenSessionClosesAfterAdmission()
+        {
+            var service = CreateService(out SessionRegistry sessions, out CommandAdmissionQueue<string> queue);
+            var session = new SessionLifecycle(new SessionId(22));
+            sessions.Register(session);
+            session.TryAuthenticate(new ActorId(44));
+            var envelope = new CommandEnvelope<string>(session.SessionId, new CommandSequenceId(1), new ServerTick(1), "move");
+            Assert.That(service.TryAdmit(envelope).IsSuccess, Is.True);
+            session.TryClose();
+
+            Assert.That(service.TryTakeNext().ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
+            Assert.That(queue.PendingCount, Is.Zero);
+        }
+
         private static CommandAdmissionService<string> CreateService(out SessionRegistry sessions, out CommandAdmissionQueue<string> queue)
         {
             sessions = new SessionRegistry(4);
