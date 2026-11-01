@@ -15,7 +15,7 @@ namespace CostOfStaying.Core.Domain
             new Dictionary<ActorId, IVitalityAccount>();
         private readonly List<ActorId> _orderedIds = new List<ActorId>();
 
-        public MatchPlayerRegistry(MatchId matchId, int capacity)
+        internal MatchPlayerRegistry(MatchId matchId, int capacity)
         {
             if (!matchId.IsValid)
                 throw new ArgumentException("Match identity must be non-zero.", nameof(matchId));
