@@ -30,4 +30,4 @@ SessionRegistry removal and command replay-state release are separate operations
 
 ## Verification boundary
 
-Core CI run `41332755494` passed **177 NUnit tests (0 failed, 0 skipped)**. It verifies this in-memory cleanup order only. The server application remains responsible for ensuring dequeued commands have finished before invoking cleanup.
+Core CI run `41332989910` passed **181 NUnit tests (0 failed, 0 skipped)** on source commit `c33faf84aa39856d46181ccc1c9decbfba2777d2`. It verifies this in-memory cleanup order only. The server application remains responsible for ensuring dequeued commands have finished before invoking cleanup.
