@@ -16,15 +16,15 @@
 
 ## 1. Executive status
 
-The repository currently has a standalone pure-C# Core project and an NUnit test project committed on the feature branch. It does not yet contain a Unity project, FishNet package installation, Unity assembly definitions, network adapters, or reproducible build/test evidence.
+The repository currently has a standalone pure-C# Core project and an NUnit test project committed on the feature branch. It does not yet contain a Unity project, FishNet package installation, Unity assembly definitions, or network adapters. The standalone .NET Core build and NUnit tests have passed in GitHub Actions; this evidence does not cover Unity or FishNet.
 
 | Area | Status | Meaning |
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
-| Pure Core project | VERIFIED | .NET 8 Release build passed in GitHub Actions run 41255553487 |
+| Pure Core project | VERIFIED | .NET 8 Release build passed in GitHub Actions runs 41255553487 and 41255769742 |
 | Vitality primitive | VERIFIED — code/test only | CI passed for the current v2.1 implementation; canonical lifecycle is blocked by ADR-007 |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
-| Core unit tests | VERIFIED | 38 passed; 0 failed; 0 skipped; TRX artifact retained |
+| Core unit tests | VERIFIED | 38 passed; 0 failed; 0 skipped in run 41255553487; latest workflow run 41255769742 also passed and retained a TRX artifact |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
 | Match/session lifecycle | NOT IMPLEMENTED | Authoritative identity/lifecycle contracts pending |
 | Command admission / queue / pipeline | NOT IMPLEMENTED | Ordering and bounds require decisions |
@@ -99,11 +99,14 @@ Until ADR-007 is resolved:
 - Treat Restore-on-Dead as behavior of the current provisional implementation, not a final gameplay decision.
 - The standalone Core CI result verifies source behavior, not the unresolved gameplay contract.
 
-### 4.2 Vitality
-- Default maximum: 100, as stated in v2.1.
-- Loss applies only while Alive.
-- Vitality is clamped to [0, Maximum].
-- Reaching zero transitions to Dead.
+### 4.2 Vitality — current v2.1 proposal only; not canonical until ADR-007
+The following describes the current repository proposal and implementation, not an approved final lifecycle:
+- Proposed default maximum: 100, as stated in v2.1.
+- Proposed loss behavior: applies only while Alive.
+- Proposed bounds: Vitality is clamped to [0, Maximum].
+- Proposed zero transition: Alive → Dead; no MVP revival.
+- Current VitalityAccount implements this proposal and is CI-verified as code behavior only.
+- The earlier owner-approved Alive / Spirit / Eliminated matrix remains unresolved against this proposal. Do not use this subsection as authorization to extend lifecycle behavior.
 - Decay rate and Collapse increments remain configuration/TBD until playtest evidence.
 - Only server-side simulation may call mutation methods.
 
