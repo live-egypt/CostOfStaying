@@ -39,8 +39,8 @@ namespace CostOfStaying
 
         public static Result Failure(CoreErrorCode errorCode)
         {
-            if (errorCode == CoreErrorCode.None)
-                throw new ArgumentOutOfRangeException(nameof(errorCode), "Failure requires a non-success error code.");
+            if (!Enum.IsDefined(typeof(CoreErrorCode), errorCode) || errorCode == CoreErrorCode.None)
+                throw new ArgumentOutOfRangeException(nameof(errorCode), "Failure requires a defined, non-success error code.");
 
             return new Result(false, errorCode);
         }
@@ -94,8 +94,8 @@ namespace CostOfStaying
 
         public static Result<T> Failure(CoreErrorCode errorCode)
         {
-            if (errorCode == CoreErrorCode.None)
-                throw new ArgumentOutOfRangeException(nameof(errorCode), "Failure requires a non-success error code.");
+            if (!Enum.IsDefined(typeof(CoreErrorCode), errorCode) || errorCode == CoreErrorCode.None)
+                throw new ArgumentOutOfRangeException(nameof(errorCode), "Failure requires a defined, non-success error code.");
 
             return new Result<T>(errorCode);
         }
