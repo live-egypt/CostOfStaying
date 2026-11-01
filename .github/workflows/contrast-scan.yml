@@ -1,0 +1,51 @@
+name: Optional Contrast Security Scan
+
+on:
+  workflow_dispatch:
+    inputs:
+      artifact_path:
+        description: "Path to a built .NET, JavaScript, or Java artifact in the checked-out repository"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  contrast-scan:
+    name: Scan explicitly supplied deployable artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate artifact and required credentials
+        id: validate
+        shell: bash
+        env:
+          CONTRAST_API_KEY: ${{ secrets.CONTRAST_API_KEY }}
+          CONTRAST_ORGANIZATION_ID: ${{ secrets.CONTRAST_ORGANIZATION_ID }}
+          CONTRAST_AUTH_HEADER: ${{ secrets.CONTRAST_AUTH_HEADER }}
+          ARTIFACT_PATH: ${{ inputs.artifact_path }}
+        run: |
+          test -n "$ARTIFACT_PATH" || { echo "::error::artifact_path is required"; exit 1; }
+          test -f "$ARTIFACT_PATH" || { echo "::error::Artifact not found: $ARTIFACT_PATH"; exit 1; }
+          test -n "$CONTRAST_API_KEY" || { echo "::error::Missing CONTRAST_API_KEY repository secret"; exit 1; }
+          test -n "$CONTRAST_ORGANIZATION_ID" || { echo "::error::Missing CONTRAST_ORGANIZATION_ID repository secret"; exit 1; }
+          test -n "$CONTRAST_AUTH_HEADER" || { echo "::error::Missing CONTRAST_AUTH_HEADER repository secret"; exit 1; }
+
+      - name: Run Contrast Scan
+        uses: Contrast-Security-OSS/contrastscan-action@7352a45d9678ec8a434cf061b07ffb51c1e351a1
+        with:
+          artifact: ${{ inputs.artifact_path }}
+          apiKey: ${{ secrets.CONTRAST_API_KEY }}
+          orgId: ${{ secrets.CONTRAST_ORGANIZATION_ID }}
+          authHeader: ${{ secrets.CONTRAST_AUTH_HEADER }}
+
+      - name: Upload SARIF
+        if: always() && hashFiles('results.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: results.sarif
