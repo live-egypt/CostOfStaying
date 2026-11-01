@@ -41,9 +41,10 @@ namespace CostOfStaying.Core.Tests
         public void CreateCommandSequenceTracker_UsesConfiguredMaximumJump()
         {
             CoreComposition composition = CoreComposition.Create();
-            var tracker = composition.CreateCommandSequenceTracker(12);
+            var tracker = composition.CreateCommandSequenceTracker(12, 16);
 
             Assert.That(tracker.MaximumSequenceJump, Is.EqualTo(12UL));
+            Assert.That(tracker.MaximumTrackedSessions, Is.EqualTo(16));
         }
 
         [Test]
