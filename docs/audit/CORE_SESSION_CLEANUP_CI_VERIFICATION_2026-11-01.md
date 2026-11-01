@@ -3,11 +3,11 @@
 **Date:** 2026-11-01  
 **Repository:** `live-egypt/CostOfStaying`  
 **Branch:** `feature/core-lifecycle-resolution`  
-**Source commit:** `26a77dcf1394d35d3db48ea0f5b7cde4c118998f`  
+**Source commit:** `c33faf84aa39856d46181ccc1c9decbfba2777d2`  
 **Workflow:** Core CI  
-**Run:** `41332755494` — SUCCESS  
-**TRX artifact:** `13093413196`  
-**Artifact SHA-256:** `7320747a7a78878879a651882467800b2c5514fac93cb0b480e996aa1545b39f`
+**Run:** `41332989910` — SUCCESS  
+**TRX artifact:** `13093814339`  
+**Artifact SHA-256:** `badb2929b1fdd4f4bbacc74405499df5c1902ca2181789f2903369db8dd5f7c1`
 
 ## Verification results
 
@@ -15,7 +15,7 @@
 - CoreComposition construction-root scan: PASS.
 - .NET 10 restore/build: PASS.
 - Core Release build targeting .NET Standard 2.1: PASS.
-- NUnit: **177 passed, 0 failed, 0 skipped**.
+- NUnit: **181 passed, 0 failed, 0 skipped**.
 
 ## Safe cleanup path
 
@@ -38,6 +38,10 @@ The public registry contract no longer exposes removal, and the queue no longer 
 6. Registry removal occurs only after replay reset succeeds or is already absent.
 7. Caller must wait until any dequeued/in-flight command handler has completed before invoking cleanup; the current queue does not track in-flight handlers.
 
+## Dequeue-time command authority
+
+`CommandAdmissionService.TryTakeNext` re-resolves the registered session immediately before handing a command to the application handler. It returns `AuthenticatedCommand<TCommand>` with the server-resolved ActorId only when the session remains Authenticated and its actor binding is valid. Commands admitted before disconnect/close are discarded as Unauthorized. NUnit coverage verifies empty queue, successful ActorId resolution and discard after disconnect/close.
+
 ## Decision boundary
 
-ADR-013 remains **PROPOSED**. The service verifies deterministic in-memory ordering, not production disconnect detection, authentication, reconnect, persistence or distributed cleanup.
+ADR-013 and ADR-012 remain **PROPOSED**. The service verifies deterministic in-memory ordering, not production disconnect detection, authentication, reconnect, persistence or distributed cleanup.
