@@ -32,9 +32,9 @@ namespace CostOfStaying.Core
             return new MatchLifecycle(matchId);
         }
 
-        public CommandSequenceTracker CreateCommandSequenceTracker(ulong maximumSequenceJump)
+        public CommandSequenceTracker CreateCommandSequenceTracker(ulong maximumSequenceJump, int maximumTrackedSessions)
         {
-            return new CommandSequenceTracker(maximumSequenceJump);
+            return new CommandSequenceTracker(maximumSequenceJump, maximumTrackedSessions);
         }
     }
 }
