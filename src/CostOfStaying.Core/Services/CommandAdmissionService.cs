@@ -16,7 +16,7 @@ namespace CostOfStaying.Core.Services
         private readonly ISessionRegistry _sessions;
         private readonly CommandAdmissionQueue<TCommand> _queue;
 
-        public CommandAdmissionService(
+        internal CommandAdmissionService(
             ISessionRegistry sessions,
             CommandAdmissionQueue<TCommand> queue)
         {
