@@ -26,7 +26,7 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
 | Core unit tests | VERIFIED | 132 passed; 0 failed; 0 skipped in run 41330344616; TRX artifact 13093370056 retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
-| Match/session lifecycle | PARTIAL | Match phase state machine implemented and verified; session lifecycle and aggregate membership not implemented |
+| Match/session lifecycle | PARTIAL | Match phase state machine and bounded match membership registry implemented and verified; authenticated session lifecycle/reconnect policy not implemented |
 | Command envelope and sequence admission | PARTIAL | Envelope, bounded tracker and bounded FIFO queue passed 132-test Core CI; application validation and ADR-008 policy review remain pending |
 | Snapshots | NOT IMPLEMENTED | Projection/revision semantics pending |
 | FishNet / Unity adapters | NOT IMPLEMENTED | Requires actual Unity project and pinned package |
@@ -53,7 +53,7 @@ Existing ADR identifiers are occupied:
 - ADR-005: executable Core boundary.
 - ADR-006: Core identifier and Betrayal ledger invariants (PROPOSED; pending owner approval).
 - ADR-007: canonical player lifecycle (APPROVED: Alive / Spirit / Eliminated).
-- ADR-008: server command envelope and sequence admission (PROPOSED).
+- ADR-008: server command envelope and sequence admission (PROPOSED).\n- ADR-009: match-scoped bounded player registry (PROPOSED; capacity/spectator/reconnect policy remains open).
 
 Do not create duplicate ADR-001 through ADR-007 using the historical transcript's suggested titles. New decisions use the next available ADR number and must be added to docs/governance/DECISIONS_LOG.md.
 
@@ -486,10 +486,10 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 | BetrayalLedger primitive | VERIFIED |
 | MatchLifecycle phase state machine | VERIFIED |
 | CoreComposition | VERIFIED for the implemented scope |
-| NUnit tests | VERIFIED — 119 passed, 0 failed, 0 skipped |
+| NUnit tests | VERIFIED — 132 passed, 0 failed, 0 skipped |
 | Session lifecycle and authentication state | NOT IMPLEMENTED |
 | Full match/player/world aggregates and membership | NOT IMPLEMENTED |
-| ServerTick / StateRevision | VERIFIED in Core CI baseline — 103 NUnit passed |
+| ServerTick / StateRevision | VERIFIED in Core CI baseline — 132 NUnit passed |
 | Command envelope and sequence tracker | VERIFIED — 132 NUnit passed; ADR-008 PROPOSED |
 | Bounded command admission queue | VERIFIED — 132 NUnit passed; production capacity TBD |
 | Movement simulation | NOT IMPLEMENTED |
