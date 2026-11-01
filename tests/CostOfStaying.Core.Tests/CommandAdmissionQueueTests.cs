@@ -19,7 +19,8 @@ namespace CostOfStaying.Core.Tests
             int capacity)
         {
             return new CommandAdmissionQueue<TestCommand>(
-                new CommandSequenceTracker(maximumSequenceJump, maximumTrackedSessions),
+                maximumSequenceJump,
+                maximumTrackedSessions,
                 capacity);
         }
 
@@ -33,8 +34,8 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void Constructor_RejectsInvalidSequenceConfiguration()
         {
-            Assert.Throws<System.ArgumentOutOfRangeException>(() => new CommandSequenceTracker(0, 2));
-            Assert.Throws<System.ArgumentOutOfRangeException>(() => new CommandSequenceTracker(4, 0));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => CreateQueue(0, 2, 1));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => CreateQueue(4, 0, 1));
         }
 
         [Test]
