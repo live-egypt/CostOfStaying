@@ -1,8 +1,8 @@
 # Core CI — Consolidated Standalone Core Baseline
 
 **Date:** 2026-11-01  
-**Source commit:** `1353b84ff1951f9c1fa8f2a3c3316bd3c89a6ac8`  
-**Workflow run:** `41331861227` — SUCCESS  
+**Source commit:** `21682e9af7285013ac17524097fffbebc69bf293`  
+**Workflow run:** `41332141494` — SUCCESS  
 **Branch:** `feature/core-lifecycle-resolution`
 
 ## Verification
@@ -12,9 +12,9 @@
 - .NET 10 SDK restore: PASS.
 - Core Release build: PASS — target framework .NET Standard 2.1.
 - NUnit test project Release build: PASS — target framework .NET 10.
-- NUnit: **161 passed, 0 failed, 0 skipped**.
-- TRX artifact: `13093327104`.
-- Artifact SHA-256: `e3c698e55c592137bea7df3bf8ee31ae2bafa5ecaacbef6e135313cb090598bb`.
+- NUnit: **173 passed, 0 failed, 0 skipped**.
+- TRX artifact: `13093412354`.
+- Artifact SHA-256: `9fef72d79dce1f86e96558896d6cb25946079a7cca3d5286b45f465d706e31eb`.
 
 ## Verified Core inventory
 
@@ -28,7 +28,7 @@
 - ServerTick and overflow-safe StateRevision.
 - Server-side CommandEnvelope.
 - Bounded per-session CommandSequenceTracker.
-- Bounded FIFO CommandAdmissionQueue with replay-aware admission and safe session-state reset after queue drain.
+- Bounded FIFO CommandAdmissionQueue with replay-aware admission and safe session-state reset after queue drain.\n- CommandAdmissionService: requires a registered Authenticated session with valid ActorId before enqueuing; tests verify unauthorized sessions do not consume sequences.
 
 ## Verification boundary
 
