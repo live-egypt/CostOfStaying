@@ -3,11 +3,11 @@
 **Date:** 2026-11-01  
 **Repository:** `live-egypt/CostOfStaying`  
 **Branch:** `feature/core-lifecycle-resolution`  
-**Source commit:** `c33faf84aa39856d46181ccc1c9decbfba2777d2`  
+**Source commit:** `8a193190fb5f2e10c05773fb0789171011bfd2eb`  
 **Workflow:** Core CI  
-**Run:** `41332989910` — SUCCESS  
-**TRX artifact:** `13093814339`  
-**Artifact SHA-256:** `badb2929b1fdd4f4bbacc74405499df5c1902ca2181789f2903369db8dd5f7c1`
+**Run:** `41333575156` — SUCCESS  
+**TRX artifact:** `13094535795`  
+**Artifact SHA-256:** `d561476795814d2b2f9a57b151539dfbcbb64f1e27b3e896605e64a6db7033d2`
 
 ## Verification results
 
