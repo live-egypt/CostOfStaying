@@ -1,6 +1,6 @@
 # Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 134/148 NUnit on commit `be67d8a3399f99c2c0e05a37eec8ffa0cb2abb13`; the broader Core scope remains incomplete.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 148/148 NUnit on commit `be67d8a3399f99c2c0e05a37eec8ffa0cb2abb13`; the broader Core scope remains incomplete.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 10 / NUnit 3.14  
@@ -93,7 +93,7 @@ Completed is terminal. Undefined enum values and all undocumented transitions fa
 The following remain unimplemented and must not be represented as complete:
 
 1. Global session registry, connection-to-session map, credential validation and reconnect/timeout orchestration (the per-session lifecycle primitive is implemented and verified).
-2. Full match aggregate, player registry, membership and world-state ownership.
+2. Full match aggregate, world-state ownership and cross-aggregate coordination (bounded match membership registry is implemented).
 3. Player aggregate and cross-system state coordination.
 4. Command payload validation, application handlers and end-to-end authoritative admission pipeline.
 5. Movement command model, validation, simulation and deterministic movement rules.
