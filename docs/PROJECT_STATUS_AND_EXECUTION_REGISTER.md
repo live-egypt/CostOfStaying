@@ -96,7 +96,7 @@ Do not skip a gate to make the project appear more complete. Keep deferred syste
 2. Reconcile all remaining gameplay/system documents with ADR-007; keep ADR-004 PROPOSED FOR PLAYTEST until playtest evidence exists.
 3. Review PR #6 as the consolidated technical baseline; it remains unmerged pending review.
 4. Keep PR #5 as static source audit only; do not represent the Unity source ZIP as uploaded.
-5. Continue missing Core foundations: session lifecycle, authoritative state ownership, ServerTick/StateRevision, command admission, movement, atomic transfer and snapshots.
+5. Continue missing Core foundations: session lifecycle, authoritative state ownership, command validation/queue, movement, atomic transfer and snapshots. ServerTick/StateRevision and sequence replay tracking are implemented and CI-verified; ADR-008 policy remains PROPOSED.
 5. Keep Unity/FishNet integration gated on actual project metadata and exact package verification.
 
 ## 7. Status vocabulary
