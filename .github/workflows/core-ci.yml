@@ -38,6 +38,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Enforce Core dependency boundary
+        shell: bash
+        run: |
+          if grep -R -n -E 'using (UnityEngine|FishNet)(\\.|;)|UnityEngine\\.|FishNet\\.' src/CostOfStaying.Core --include='*.cs' --include='*.csproj'; then
+            echo "::error::Core must not reference UnityEngine or FishNet."
+            exit 1
+          fi
+
       - name: Set up .NET 8
         uses: actions/setup-dotnet@v4
         with:
