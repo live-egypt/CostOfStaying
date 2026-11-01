@@ -25,7 +25,6 @@ on:
       - "**/*.swift"
       - "**/*.m"
       - "**/*.mm"
-      - ".github/workflows/mobsf.yml"
   workflow_dispatch:
 
 permissions:
