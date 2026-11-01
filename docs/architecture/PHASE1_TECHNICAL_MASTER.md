@@ -52,8 +52,9 @@ Existing ADR identifiers are occupied:
 - ADR-004: gameplay rules baseline.
 - ADR-005: executable Core boundary.
 - ADR-006: Core identifier and Betrayal ledger invariants (PROPOSED; pending owner approval).
+- ADR-007: player lifecycle and Vitality zero-transition conflict (DECISION REQUIRED).
 
-Do not create duplicate ADR-001 through ADR-006 using the historical transcript's suggested titles. New decisions use the next available ADR number and must be added to docs/governance/DECISIONS_LOG.md.
+Do not create duplicate ADR-001 through ADR-007 using the historical transcript's suggested titles. New decisions use the next available ADR number and must be added to docs/governance/DECISIONS_LOG.md.
 
 ## 3. Non-negotiable architecture
 
@@ -86,7 +87,7 @@ Every public state transition, rule decision, command admission path and determi
 
 ## 4. Canonical domain decisions
 
-### 4.1 Vitality is separate from Spirit role
+### 4.1 Vitality and Spirit lifecycle — decision blocked by ADR-007
 The repository's v2.1 gameplay specification currently proposes that Vitality reaching zero transitions to Dead, with no MVP revival and Spirit represented separately. However, an earlier explicit owner-approved Phase 1 decision (2026-10-31) specified the player-state matrix Alive / Spirit / Eliminated, automatic transition to Spirit at zero Vitality, and explicit Resurrect / Eliminate operations. These are incompatible lifecycle contracts.
 
 The current VitalityAccount implementation and its passing tests implement the repository's v2.1 proposal only. They do not establish that this proposal superseded the earlier owner-approved matrix. ADR-007 records the conflict and blocks final lifecycle approval.
@@ -364,7 +365,7 @@ Do not create placeholder manifests or locks that imply an installed Unity/FishN
 
 ## 7. Required future ADRs
 
-The historical transcript suggested new ADRs numbered 001–006, which conflict with the existing register. ADR-006 is assigned to Core identifier and Betrayal ledger invariants. The following topics are candidates for ADR-007 onward; create each only when the decision is ready for review.
+The historical transcript suggested new ADRs numbered 001–006, which conflict with the existing register. ADR-006 is assigned to Core identifier and Betrayal ledger invariants; ADR-007 is assigned to the player lifecycle/Vitality conflict. The following topics are candidates for ADR-008 onward; create each only when the decision is ready for review.
 
 | Candidate topic | Decision required | Gate |
 |---|---|---|
