@@ -9,6 +9,27 @@ namespace CostOfStaying.Core.Tests
     public sealed class CoreCompositionTests
     {
         [Test]
+        public void CoreServices_ExposeNoPublicConstructors()
+        {
+            System.Type[] serviceTypes =
+            {
+                typeof(VitalityAccount),
+                typeof(BetrayalLedger),
+                typeof(MatchLifecycle),
+                typeof(SessionLifecycle),
+                typeof(SessionRegistry),
+                typeof(MatchPlayerRegistry),
+                typeof(CommandSequenceTracker),
+                typeof(CommandAdmissionQueue<string>),
+                typeof(CommandAdmissionService<string>),
+                typeof(SessionCleanupService<string>)
+            };
+
+            foreach (System.Type serviceType in serviceTypes)
+                Assert.That(serviceType.GetConstructors(), Is.Empty, serviceType.FullName);
+        }
+
+        [Test]
         public void Create_ProvidesStableMatchScopedBetrayalLedger()
         {
             CoreComposition composition = CoreComposition.Create();
