@@ -78,6 +78,20 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void CommandSequenceId_ZeroIsInvalidAndMaximumIsValid()
+        {
+            Assert.That(new CommandSequenceId(0UL).IsValid, Is.False);
+            Assert.That(new CommandSequenceId(ulong.MaxValue).IsValid, Is.True);
+        }
+
+        [Test]
+        public void CommandSequenceId_EqualityUsesNumericValue()
+        {
+            Assert.That(new CommandSequenceId(5UL), Is.EqualTo(new CommandSequenceId(5UL)));
+            Assert.That(new CommandSequenceId(5UL), Is.Not.EqualTo(new CommandSequenceId(6UL)));
+        }
+
+        [Test]
         public void DifferentIdentifierTypes_AreNotInterchangeable()
         {
             Assert.That(typeof(ActorId), Is.Not.EqualTo(typeof(MatchId)));
