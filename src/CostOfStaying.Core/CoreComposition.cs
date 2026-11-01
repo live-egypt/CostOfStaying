@@ -42,7 +42,8 @@ namespace CostOfStaying.Core
             int maximumTrackedSessions,
             int capacity)
         {
-            return new CommandAdmissionQueue<TCommand>(maximumSequenceJump, maximumTrackedSessions, capacity);
+            CommandSequenceTracker sequenceTracker = new CommandSequenceTracker(maximumSequenceJump, maximumTrackedSessions);
+            return new CommandAdmissionQueue<TCommand>(sequenceTracker, capacity);
         }
     }
 }
