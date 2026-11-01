@@ -127,7 +127,7 @@ Concurrency cancels obsolete in-progress runs for the same workflow/ref. Job tim
 
 Dependabot is configured in `.github/dependabot.yml` for weekly NuGet and GitHub Actions update pull requests. Dependency updates are proposals: they must pass CI and receive review before merge. Automatic dependency PR creation is enabled; automatic merging is not.
 
-**Current Core verification state (2026-11-01):** Core CI run `41331236864` completed successfully against source commit `be67d8a3399f99c2c0e05a37eec8ffa0cb2abb13`: dependency-boundary and CoreComposition construction-root scans, .NET 10 Release restore/build/test succeeded; NUnit reported 148 passed, 0 failed, 0 skipped; TRX artifact `13093536721` was uploaded. This verifies standalone Core only, not Unity/FishNet. The inherited security workflows contained template/configuration defects. The branch now contains scoped replacements for CodeQL, MobSF, SecurityCodeScan, Contrast, NowSecure, Debricked and Frogbot. CodeQL (C# and Actions) and MobSF replacement runs passed within their stated scopes. SecurityCodeScan run 41330871497 passed and retained two native SARIF 1.0.0 reports (0 findings reported in each). Account-backed services remain manual-only and unverified until credentials/artifacts exist.
+**Current Core verification state (2026-11-01):** Core CI run `41331236864` completed successfully against source commit `be67d8a3399f99c2c0e05a37eec8ffa0cb2abb13`: dependency-boundary and CoreComposition construction-root scans, .NET 10 Release restore/build/test succeeded; NUnit reported 148 passed, 0 failed, 0 skipped; TRX artifact `13093536721` was uploaded. This verifies standalone Core only, not Unity/FishNet. The inherited security workflows contained template/configuration defects. The branch now contains scoped replacements for CodeQL, MobSF, SecurityCodeScan, Contrast, NowSecure, Debricked and Frogbot. CodeQL C# and Actions run 41331240115 passed. MobSF replacement run 41329727360 completed within its scanner-execution scope; no mobile app source exists to certify. SecurityCodeScan run 41331240071 passed and retained two native SARIF 1.0.0 reports with empty results arrays (artifact 13093451136). Account-backed services remain manual-only and unverified until credentials/artifacts exist.
 
 
 ## 9. Latest CI and security-scanner audit
@@ -137,9 +137,9 @@ The latest Core CI run `41331236864` passed on source commit `be67d8a3399f99c2c0
 The inherited scanner workflows had configuration defects: legacy MobSF could not install its pinned Semgrep version; SecurityCodeScan initially ran restore at the repository root and its old SARIF converter relied on an EOL runtime; CodeQL had an empty language matrix; Contrast and Debricked lacked valid artifacts/credentials; NowSecure contained an unresolved group-ID placeholder and assumed an Android build that does not exist. These failed runs are not clean security scans.
 
 Branch remediation and current evidence:
-- CodeQL C# + GitHub Actions: PASS (run 41330669137).
+- CodeQL C# + GitHub Actions: PASS (run 41331240115).
 - MobSF scanner setup: PASS (run 41329727360), but no Android/iOS application source exists to certify.
-- SecurityCodeScan: PASS (run 41330871497); two native SARIF 1.0.0 reports retained as artifact 13093401456, each with zero reported findings. They are not uploaded to GitHub Code Scanning.
+- SecurityCodeScan: PASS (run 41331240071); two native SARIF 1.0.0 reports retained as artifact 13093401456, each with zero reported findings. They are not uploaded to GitHub Code Scanning.
 - Contrast, NowSecure and Debricked are manual-only and require real artifacts and valid service credentials.
 - Frogbot is manual-only and requires JFrog credentials; no automated write workflow is run on pushes.
 
