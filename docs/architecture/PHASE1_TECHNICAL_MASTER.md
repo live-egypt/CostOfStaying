@@ -21,10 +21,10 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Area | Status | Meaning |
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
-| Pure Core project | VERIFIED | .NET 10 Release build and 177 NUnit tests passed in run 41331400978 for commit 94c5789b0e82493290ca85133fc692e83ffd9884; Core dependency-boundary and composition-root scans passed |
-| Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41331400978: 177/177 NUnit passed |
+| Pure Core project | VERIFIED | .NET 10 Release build and 177 NUnit tests passed in run 41332755494 for commit 26a77dcf1394d35d3db48ea0f5b7cde4c118998f; Core dependency-boundary and composition-root scans passed |
+| Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41332755494: 177/177 NUnit passed |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
-| Core unit tests | VERIFIED | 177 passed; 0 failed; 0 skipped in run 41331400978; TRX artifact 13092964341 retained |
+| Core unit tests | VERIFIED | 177 passed; 0 failed; 0 skipped in run 41332755494; TRX artifact 13092964341 retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
 | Match/session lifecycle | PARTIAL | Match phase state machine, bounded match registry and per-session lifecycle primitive verified; global session registry, transport authentication and reconnect policy remain unimplemented |
 | Command envelope and sequence admission | PARTIAL | Authenticated-session admission gate, bounded tracker and bounded FIFO queue passed 177-test Core CI; gameplay payload validation and ADR-008 policy review remain pending |
@@ -55,7 +55,8 @@ Existing ADR identifiers are occupied:
 - ADR-007: canonical player lifecycle (APPROVED: Alive / Spirit / Eliminated).
 - ADR-008: server command envelope and sequence admission (PROPOSED).
 - ADR-009: match-scoped bounded player registry (PROPOSED; capacity/spectator/reconnect policy remains open).
-- ADR-010: server session lifecycle primitive (PROPOSED; transport authentication and reconnect policy remain outside Core).\n- ADR-011: bounded server session registry (PROPOSED; capacity and per-actor multi-session policy remain open).
+- ADR-010: server session lifecycle primitive (PROPOSED; transport authentication and reconnect policy remain outside Core).
+- ADR-011: bounded server session registry (PROPOSED; capacity and per-actor multi-session policy remain open).\n- ADR-012: authenticated command admission gate (PROPOSED; gameplay payload validation remains downstream).\n- ADR-013: safe session cleanup and replay-state release (PROPOSED).
 
 Do not create duplicate ADR-001 through ADR-007 using the historical transcript's suggested titles. New decisions use the next available ADR number and must be added to docs/governance/DECISIONS_LOG.md.
 
@@ -255,7 +256,9 @@ Naming rule: `ActorId` is the canonical player-actor identity in the current Cor
 | CommandAdmission.cs | Initial validation before queue | CommandAdmissionTests | PROPOSED |
 | MovementCommandIngress.cs | Validate/enqueue movement intent | MovementIngressTests | PROPOSED |
 | BetrayalCommandIngress.cs | Validate/enqueue transfer intent | BetrayalIngressTests | PROPOSED |
-| Domain/CommandAdmissionQueue.cs | Bounded FIFO, replay-aware enqueue and safe session reset after drain | CommandAdmissionQueueTests | VERIFIED — 177 NUnit passed; production capacity TBD |\n| Services/CommandAdmissionService.cs + Contracts/ICommandAdmissionService.cs | Requires valid envelope and authenticated session with valid ActorId before queue admission | CommandAdmissionServiceTests | VERIFIED — 177 NUnit passed; gameplay payload validation remains downstream |\n| Services/SessionCleanupService.cs + Contracts/ISessionCleanupService.cs | Closes cleanup sequence: require Closed, drain queue, reset replay state, then internally remove registry entry | SessionCleanupServiceTests | VERIFIED — 177 NUnit passed; ADR-013 PROPOSED |
+| Domain/CommandAdmissionQueue.cs | Bounded FIFO, replay-aware enqueue and safe session reset after drain | CommandAdmissionQueueTests | VERIFIED — 177 NUnit passed; production capacity TBD |
+| Services/CommandAdmissionService.cs + Contracts/ICommandAdmissionService.cs | Requires valid envelope and authenticated session with valid ActorId before queue admission | CommandAdmissionServiceTests | VERIFIED — 177 NUnit passed; gameplay payload validation remains downstream |
+| Services/SessionCleanupService.cs + Contracts/ISessionCleanupService.cs | Requires Closed, drains queue, resets replay state, then internally removes registry entry; only public cleanup path | SessionCleanupServiceTests | VERIFIED — 177 NUnit passed; ADR-013 PROPOSED |
 
 Client payloads must not choose authoritative sender identity, SessionId, server tick or state revision.
 
@@ -264,7 +267,8 @@ Client payloads must not choose authoritative sender identity, SessionId, server
 | File | Responsibility | Required test | Status |
 |---|---|---|---|
 | PlayerSession.cs | Authenticated player/session association | PlayerSessionTests | PROPOSED |
-| SessionLifecycle.cs | Pending/authenticated/disconnected/closed transitions; reconnect excluded | SessionLifecycleTests | VERIFIED — 177 NUnit passed; ADR-010 PROPOSED |\n| SessionRegistry.cs | Bounded registry keyed by SessionId; pending-only registration; removal is internal and only exposed through cleanup orchestration; immutable ordered snapshot | SessionRegistryTests | VERIFIED — 177 NUnit passed; ADR-011 PROPOSED |
+| SessionLifecycle.cs | Pending/authenticated/disconnected/closed transitions; reconnect excluded | SessionLifecycleTests | VERIFIED — 177 NUnit passed; ADR-010 PROPOSED |
+| SessionRegistry.cs | Bounded registry keyed by SessionId; pending-only registration; no public removal; immutable ordered snapshot | SessionRegistryTests | VERIFIED — 177 NUnit passed; ADR-011 PROPOSED |
 | MatchLifecycle.cs | Lobby/running/ending transitions | MatchLifecycleTests | VERIFIED |
 | AdmissionResult.cs | Admission decision value | AdmissionResultTests | PROPOSED |
 | ReconnectPolicy.cs | Reconnect eligibility and identity continuity | ReconnectPolicyTests | TBD; retention/token model unspecified |
@@ -475,7 +479,7 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 
 ## 12. Exact current implementation status
 
-**Current implementation status:** ADR-007 is APPROVED; ADR-010 remains PROPOSED. Core CI run 41331400978 passed the Core dependency-boundary scan, CoreComposition construction-root scan, Release build and 177/177 NUnit tests on source commit 94c5789b0e82493290ca85133fc692e83ffd9884. The bounded command queue and tracked-session capacity are included in this verification.
+**Current implementation status:** ADR-007 is APPROVED; ADR-010 through ADR-013 remain PROPOSED. Core CI run 41332755494 passed the Core dependency-boundary scan, CoreComposition construction-root scan, Release build and 177/177 NUnit tests on source commit 26a77dcf1394d35d3db48ea0f5b7cde4c118998f. The bounded command queue and tracked-session capacity are included in this verification.
 
 | Item | Status |
 |---|---|
@@ -489,7 +493,8 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 | MatchLifecycle phase state machine | VERIFIED |
 | CoreComposition | VERIFIED for the implemented scope |
 | NUnit tests | VERIFIED — 177 passed, 0 failed, 0 skipped |
-| Per-session Core lifecycle primitive | VERIFIED — 177 NUnit passed; ADR-010 PROPOSED |\n| Global transport connection/session mapping, credential validation and reconnect policy | NOT IMPLEMENTED |
+| Per-session Core lifecycle primitive | VERIFIED — 177 NUnit passed; ADR-010 PROPOSED |
+| Global transport connection/session mapping, credential validation and reconnect policy | NOT IMPLEMENTED |
 | Full match/player/world aggregates | NOT IMPLEMENTED; bounded membership registry exists |
 | ServerTick / StateRevision | VERIFIED in Core CI baseline — 177 NUnit passed |
 | Command envelope and sequence tracker | VERIFIED — 177 NUnit passed; ADR-008 PROPOSED |
