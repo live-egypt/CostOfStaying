@@ -129,4 +129,16 @@ Concurrency cancels obsolete in-progress runs for the same workflow/ref. Job tim
 
 Dependabot is configured in `.github/dependabot.yml` for weekly NuGet and GitHub Actions update pull requests. Dependency updates are proposals: they must pass CI and receive review before merge. Automatic dependency PR creation is enabled; automatic merging is not.
 
-**Current verification state:** configuration committed on the feature branch. The first run triggered by the workflow update is pending at the time of this revision. Do not mark the new pipeline VERIFIED until that run completes successfully. This pipeline currently verifies standalone Core only; it is not a Unity/FishNet build pipeline.
+**Current verification state (2026-11-01):** Core CI run `41312765519` completed successfully against commit `308c8541ad75befb4ade2d0de6ef1f4dcbd3d8cc`: Release restore/build/test succeeded; NUnit reported 38 passed, 0 failed, 0 skipped; TRX artifact `13086610319` was uploaded. This verifies standalone Core only, not Unity/FishNet. The same PR merge commit also triggered three pre-existing scanner workflows that failed before completing analysis; see [GitHub Actions Pipeline Audit](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md).
+
+
+## 9. Latest CI and security-scanner audit
+
+The latest observed PR workflow run confirms the new Core CI is operational: run `41312765519` passed and retained its NUnit TRX artifact. The test result was 38/38 passed.
+
+The existing MobSF, SecurityCodeScan and Contrast Scan workflows failed before producing completed security-analysis results:
+- MobSF: pinned `semgrep==0.50.1` dependency could not be installed.
+- SecurityCodeScan: root-level `dotnet restore` failed because there is no root solution/project.
+- Contrast Scan: required organization ID was absent and the configured artifact path remains a placeholder.
+
+These failures are not clean security scans and must not be reported as zero findings. The detailed run IDs, log-derived causes and remediation gates are recorded in [GitHub Actions Pipeline Audit](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md). The scanner workflows must be repaired or deliberately retired in separately reviewed changes; do not make them required checks until they complete successfully against the intended artifacts.
