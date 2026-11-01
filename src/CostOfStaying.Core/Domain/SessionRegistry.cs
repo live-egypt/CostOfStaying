@@ -16,7 +16,7 @@ namespace CostOfStaying.Core.Domain
             new Dictionary<SessionId, ISessionLifecycle>();
         private readonly List<SessionId> _orderedIds = new List<SessionId>();
 
-        public SessionRegistry(int capacity)
+        internal SessionRegistry(int capacity)
         {
             if (capacity <= 0)
                 throw new ArgumentOutOfRangeException(nameof(capacity), "Session capacity must be positive.");
