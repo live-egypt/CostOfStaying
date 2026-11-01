@@ -97,6 +97,21 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void CreateSessionCleanupService_UsesProvidedDependencies()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var sessions = composition.CreateSessionRegistry(4);
+            var queue = composition.CreateCommandAdmissionQueue<string>(8, 4, 8);
+            ISessionCleanupService<string> cleanup = composition.CreateSessionCleanupService(sessions, queue);
+            var session = composition.CreateSessionLifecycle(new SessionId(20));
+            sessions.Register(session);
+            session.TryClose();
+
+            Assert.That(cleanup.TryRemoveClosedSession(session.SessionId).IsSuccess, Is.True);
+            Assert.That(sessions.Get(session.SessionId).ErrorCode, Is.EqualTo(CoreErrorCode.NotFound));
+        }
+
+        [Test]
         public void CreateCommandAdmissionQueue_UsesExplicitBounds()
         {
             CoreComposition composition = CoreComposition.Create();
