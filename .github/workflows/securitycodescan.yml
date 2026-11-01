@@ -44,6 +44,10 @@ jobs:
       - name: Build Core test project with analyzers
         run: dotnet build tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-restore
 
+      - name: Prepare SARIF output parent directory
+        shell: bash
+        run: mkdir -p artifacts
+
       - name: Convert SARIF 1.0 to GitHub SARIF 2.1
         uses: security-code-scan/security-code-scan-results-action@cdb3d5e639054395e45bf401cba8688fcaf7a687
         env:
