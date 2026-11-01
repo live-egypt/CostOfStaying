@@ -46,6 +46,16 @@ jobs:
             exit 1
           fi
 
+      - name: Enforce Core composition root
+        shell: bash
+        run: |
+          violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|CommandSequenceTracker)\\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
+          if [ -n "$violations" ]; then
+            echo "$violations"
+            echo "::error::Core service and aggregate construction must be centralized in CoreComposition."
+            exit 1
+          fi
+
       - name: Set up .NET 8
         uses: actions/setup-dotnet@v4
         with:
