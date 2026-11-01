@@ -51,7 +51,7 @@ jobs:
           aggregate_violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|SessionLifecycle|SessionRegistry|MatchPlayerRegistry|CommandAdmissionQueue|CommandAdmissionService|SessionCleanupService)(\(|<)' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
           tracker_violations="$(grep -R -n -E 'new CommandSequenceTracker\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(CoreComposition|CommandAdmissionQueue)\.cs:' || true)"
           cleanup_violations="$(grep -R -n -E '(ResetSession|RemoveClosedSession)\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(SessionCleanupService|CommandAdmissionQueue|SessionRegistry)\.cs:' || true)"
-          queue_access_violations="$(grep -R -n -E '\\.Try(Enqueue|Dequeue)\\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(CommandAdmissionQueue|CommandAdmissionService)\\.cs:' || true)"
+          queue_access_violations="$(grep -R -n -E '\.Try(Enqueue|Dequeue)\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(CommandAdmissionQueue|CommandAdmissionService)\.cs:' || true)"
           if [ -n "$aggregate_violations$tracker_violations$cleanup_violations$queue_access_violations" ]; then
             printf '%s\n%s\n%s\n%s\n' "$aggregate_violations" "$tracker_violations" "$cleanup_violations" "$queue_access_violations"
             echo "::error::Core construction must be centralized in CoreComposition; only CommandAdmissionService may enqueue/dequeue and only SessionCleanupService may reset/remove sessions."
