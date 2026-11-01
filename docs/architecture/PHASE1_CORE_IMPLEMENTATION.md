@@ -7,7 +7,8 @@
 **Architecture ADR:** ADR-005 (APPROVED)  
 **Identifier/ledger ADR:** ADR-006 (PROPOSED; approval status must be confirmed before freezing policy)  
 **Player lifecycle ADR:** ADR-007 (APPROVED: Alive / Spirit / Eliminated)  
-**Command ingress ADR:** ADR-008 (PROPOSED; policy owner review pending)  
+**Command ingress ADR:** ADR-008 (PROPOSED; policy owner review pending)
+**Match membership ADR:** ADR-009 (PROPOSED; capacity/reconnect policy owner review pending)  
 **Unity/FishNet:** NOT IMPLEMENTED / NOT VERIFIED.
 
 ## Implemented Core source
@@ -108,7 +109,7 @@ The latest Core CI run:
 - Source commit: `6bf2d61f56e37ea54f93cfa42d2dc72e4b2a78b4`.
 - Core dependency boundary and composition-root checks: PASS.
 - .NET 8 Release restore/build: PASS.
-- NUnit: 119 passed, 0 failed, 0 skipped.
+- NUnit: 132 passed, 0 failed, 0 skipped.
 - TRX artifact: `13092503957`.
 - Artifact SHA-256: `bd80302f06e057c041c9ed418dbf7f64a98f86a145edfa7864eabe541af31bf5`.
 - Detailed evidence: [Bounded command queue and session replay capacity CI](../audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md).
