@@ -210,9 +210,9 @@ Status definitions:
 | Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId | IdentifierTests | IMPLEMENTED |
 | Domain/VitalityAccount.cs | Bounded vitality; Alive → Spirit; explicit Resurrect / Eliminate | VitalityAccountTests | IMPLEMENTED |
 | Domain/BetrayalLedger.cs | Monotonic event sequence, replay rejection, score | BetrayalLedgerTests | IMPLEMENTED |
-| Result.cs | Result / Result<T> and CoreErrorCode | ResultTests | IMPLEMENTED; latest CI pending |\n| CoreComposition.cs | Single Core composition root | CoreCompositionTests | PROPOSED |
+| Result.cs | Result / Result<T> and CoreErrorCode | ResultTests | VERIFIED — 55 NUnit passed |\n| CoreComposition.cs | Single Core composition root | CoreCompositionTests | PROPOSED |
 | Result.cs | Consistent success/failure contracts | ResultTests | IMPLEMENTED; latest CI pending |
-| MatchId / SessionId | Typed match/session IDs; ActorId remains canonical player actor ID | IdentifierTests | IMPLEMENTED |
+| MatchId / SessionId | Typed match/session IDs; ActorId remains canonical player actor ID | IdentifierTests | VERIFIED — 55 NUnit passed |
 | ServerTick.cs / StateRevision.cs | Server tick and revision values | TimeAndRevisionTests | PROPOSED |
 | Position2.cs / MovementInput.cs | Engine-independent movement values | MovementValueTests | PROPOSED |
 | PlayerState.cs / MatchState.cs / WorldState.cs | Authoritative domain state | Corresponding state tests | PROPOSED |
