@@ -24,7 +24,7 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Pure Core project | VERIFIED | .NET 8 Release build and 77 NUnit tests passed in run 41326831611 for commit a235b99712bbe635ec71832647af9592e117a121; Core dependency-boundary scan also passed |
 | Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41326831611: 77/77 NUnit passed |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
-| Core unit tests | VERIFIED | 77 passed; 0 failed; 0 skipped in run 41326831611; TRX artifact 13091612088 retained |
+| Core unit tests | VERIFIED | 103 passed; 0 failed; 0 skipped in run 41327543734; TRX artifact 13091687045 retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
 | Match/session lifecycle | PARTIAL | Match phase state machine implemented and verified; session lifecycle and aggregate membership not implemented |
 | Command envelope and sequence admission | PARTIAL | Envelope and tracker verified by CI; ADR-008 policy review, command validation and queue/backpressure remain pending |
@@ -478,7 +478,7 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 | BetrayalLedger primitive | VERIFIED |
 | MatchLifecycle phase state machine | VERIFIED |
 | CoreComposition | VERIFIED for the implemented scope |
-| NUnit tests | VERIFIED — 77 passed, 0 failed, 0 skipped |
+| NUnit tests | VERIFIED — 103 passed, 0 failed, 0 skipped |
 | Session lifecycle and authentication state | NOT IMPLEMENTED |
 | Full match/player/world aggregates and membership | NOT IMPLEMENTED |
 | ServerTick / StateRevision | VERIFIED — 103 NUnit passed |
