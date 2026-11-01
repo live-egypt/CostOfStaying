@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - feature/phase1-technical-consolidation
+      - feature/core-lifecycle-resolution
     paths:
       - "src/CostOfStaying.Core/**"
       - "tests/CostOfStaying.Core.Tests/**"
