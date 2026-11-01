@@ -43,6 +43,21 @@
 - Spirit abilities, connection/authentication state, match membership and spectator projection are separate concerns.
 - No resurrection cost/cooldown or other unapproved gameplay constant is embedded in Core.
 
+## Command envelope and sequence admission (ADR-008 PROPOSED)
+
+- CommandEnvelope is created by trusted server ingress after SessionId resolution and server receive-tick assignment; it is not a client wire DTO.
+- CommandSequenceId is a non-zero ulong scoped to one session.
+- CommandSequenceTracker accepts strictly increasing sequences within an explicitly supplied positive MaximumSequenceJump.
+- Duplicate, stale and excessive forward-jump sequences return typed failures without changing the high-water mark.
+- Accepted sequence numbers are consumed before later gameplay-rule validation to prevent replay.
+- Reset clears in-memory replay state when a session is permanently removed.
+- The tracker is single-writer and not thread-safe. Production jump limits, reconnect semantics, queue capacity and backpressure remain open under ADR-008.
+
+## Time and revision values
+
+- ServerTick is an explicit server-assigned monotonic value; zero is valid. Core does not read a clock.
+- StateRevision zero represents the initial state. TryAdvance increments by one and refuses to wrap at ulong.MaxValue.
+
 ## Match lifecycle semantics
 
 - New matches start in Created.
