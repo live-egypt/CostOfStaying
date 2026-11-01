@@ -19,6 +19,7 @@
 - `IVitalityAccount` / `VitalityAccount` implementing ADR-007 lifecycle and bounded vitality.
 - `IBetrayalLedger` / `BetrayalLedger` enforcing non-zero IDs, no self-target, monotonic event sequence, replay handling and actor score accumulation.
 - `IMatchLifecycle` / `MatchLifecycle` deterministic match-phase state machine.
+- `ISessionLifecycle` / `SessionLifecycle` server-owned Pending → Authenticated → Disconnected/Closed state machine; reconnect creates a new SessionId (ADR-010 PROPOSED).
 - `IMatchPlayerRegistry` / `MatchPlayerRegistry` bounded per-match membership with deterministic insertion order, immutable ID snapshots and membership-only removal (ADR-009 PROPOSED).
 - `CoreComposition` as the production construction root for the match-scoped ledger and factories for player vitality, match lifecycle, sequence tracker and command queue.
 - `ServerTick` and `StateRevision` value objects; zero is the initial value and revision advance refuses overflow.
