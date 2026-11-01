@@ -8,7 +8,7 @@ namespace CostOfStaying.Core.Domain
     /// Per-session monotonic command sequence admission.
     /// Calls must be serialized by the authoritative server; this type is not thread-safe.
     /// </summary>
-    public sealed class CommandSequenceTracker
+    internal sealed class CommandSequenceTracker
     {
         private readonly Dictionary<SessionId, ulong> _lastAccepted = new Dictionary<SessionId, ulong>();
 
