@@ -52,7 +52,7 @@ namespace CostOfStaying.Core.Domain
                 return Result<IVitalityAccount>.Failure(CoreErrorCode.InvalidArgument);
 
             return _accounts.TryGetValue(actorId, out IVitalityAccount? account)
-                ? Result<IVitalityAccount>.Success(account)
+                ? Result<IVitalityAccount>.Success(account!)
                 : Result<IVitalityAccount>.Failure(CoreErrorCode.NotFound);
         }
 
