@@ -112,3 +112,21 @@ Do not skip a gate to make the project appear more complete. Keep deferred syste
 - `PARTIAL`: some subcomponents exist, but the complete requirement is not met.
 
 A status must always be accompanied by its scope and evidence.
+
+## 8. Automated build and dependency maintenance
+
+The Core workflow `.github/workflows/core-ci.yml` is configured to run for relevant Core/test/workflow changes on pushes to the maintained branches and pull requests targeting `main`. It also supports manual dispatch and a weekly scheduled verification.
+
+The workflow performs:
+1. .NET 8 SDK setup with NuGet cache.
+2. Restore of the NUnit test project and its Core dependency.
+3. Release build of the pure-C# Core.
+4. Release build of the test project.
+5. NUnit execution with a TRX result file.
+6. Artifact upload even when tests fail, when a result file exists.
+
+Concurrency cancels obsolete in-progress runs for the same workflow/ref. Job timeout is 15 minutes. Workflow permissions are read-only for repository contents.
+
+Dependabot is configured in `.github/dependabot.yml` for weekly NuGet and GitHub Actions update pull requests. Dependency updates are proposals: they must pass CI and receive review before merge. Automatic dependency PR creation is enabled; automatic merging is not.
+
+**Current verification state:** configuration committed on the feature branch. The first run triggered by the workflow update is pending at the time of this revision. Do not mark the new pipeline VERIFIED until that run completes successfully. This pipeline currently verifies standalone Core only; it is not a Unity/FishNet build pipeline.
