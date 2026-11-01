@@ -1,137 +1,125 @@
-# Phase 1 Core — Implemented Contracts and Primitives
+# Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed dependency-boundary and composition-root scans, Release build and 103/103 NUnit on commit `c8a914970029c249081fd5cf6e48990d1a3cfaca`; remaining Core scope is not implemented.  
-**Architecture ADR:** ADR-005 (APPROVED)  
-**Lifecycle ADR:** ADR-007 (APPROVED: Alive / Spirit / Eliminated)  
-**Identifier/ledger ADR:** ADR-006 (PROPOSED — do not treat as owner-approved)  
+**Status:** PARTIALLY IMPLEMENTED — the existing baseline passed Core CI; the bounded command-queue and session-capacity increment is awaiting its own CI run.  
+**Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 8 / NUnit 3.14  
+**Architecture ADR:** ADR-005 (APPROVED)  
+**Identifier/ledger ADR:** ADR-006 (PROPOSED; approval status must be confirmed before freezing policy)  
+**Player lifecycle ADR:** ADR-007 (APPROVED: Alive / Spirit / Eliminated)  
+**Command ingress ADR:** ADR-008 (PROPOSED; policy owner review pending)  
 **Unity/FishNet:** NOT IMPLEMENTED / NOT VERIFIED.
 
-## Implemented source
+## Implemented Core source
 
-- Engine-independent .NET Standard 2.1 Core project.
-- Strongly typed numeric wrappers: `ActorId`, `MatchId`, `SessionId`, `VictimId`, `EventSequenceId` (ulong). ActorId remains the single canonical player-actor identity; no duplicate PlayerId wrapper is introduced.
-- Shared `Result` / `Result<T>` value contracts with stable `CoreErrorCode` categories and safe default-failure semantics.
-- `IMatchLifecycle` / `MatchLifecycle` with explicit, tested match-phase transitions.
-- `CoreComposition` as the Core construction root: one match-scoped Betrayal ledger and factories for player vitality accounts, match lifecycle aggregates and command sequence trackers.
-- `ServerTick` and `StateRevision` immutable values; zero is the initial value and revision advance is overflow-safe.
-- `CommandEnvelope<TCommand>` server-side envelope and `CommandSequenceTracker` with per-session bounded sequence admission.
-- `IVitalityAccount` and `IBetrayalLedger` contracts.
-- `VitalityAccount` with bounded vitality and canonical `Alive / Spirit / Eliminated` lifecycle.
-- `BetrayalLedger` with monotonic event sequence, exact replay handling and actor score accumulation.
-- NUnit tests for result semantics, identifier value semantics, lifecycle transitions and ledger invariants.
-- GitHub Actions Core CI workflow.
+- Engine-independent .NET Standard 2.1 class library.
+- Strongly typed numeric identifiers: `ActorId`, `MatchId`, `SessionId`, `VictimId`, `EventSequenceId`, `CommandSequenceId` (all backed by `ulong`; zero is the invalid/default sentinel).
+- Shared `Result` / `Result<T>` and stable `CoreErrorCode` categories.
+- `IVitalityAccount` / `VitalityAccount` implementing ADR-007 lifecycle and bounded vitality.
+- `IBetrayalLedger` / `BetrayalLedger` enforcing non-zero IDs, no self-target, monotonic event sequence, replay handling and actor score accumulation.
+- `IMatchLifecycle` / `MatchLifecycle` deterministic match-phase state machine.
+- `CoreComposition` as the production construction root for the match-scoped ledger and factories for player vitality, match lifecycle, sequence tracker and command queue.
+- `ServerTick` and `StateRevision` value objects; zero is the initial value and revision advance refuses overflow.
+- `CommandEnvelope<TCommand>` for server-resolved session identity, sequence, receive tick and command intent. It is not a client wire DTO.
+- `CommandSequenceTracker` with strictly increasing per-session sequences, explicit maximum jump, explicit maximum tracked sessions, duplicate/stale rejection and bounded in-memory state.
+- `CommandAdmissionQueue<TCommand>` with explicit bounded FIFO capacity, replay-aware enqueue and safe session reset only after that session's queued commands have drained.
+- NUnit coverage for the implemented primitives and invariants.
 
-## Canonical lifecycle (ADR-007)
+## Canonical player lifecycle — ADR-007
 
-| State | Lose | Restore | Resurrect | Eliminate |
+| Current state | Lose | Restore | Resurrect | Eliminate |
 |---|---|---|---|---|
 | Alive | Decrease; zero enters Spirit | Apply, capped at Maximum | Reject | Enter Eliminated; vitality becomes zero |
-| Spirit | No-op | No-op | Explicit operation; positive requested vitality, capped at Maximum | Enter Eliminated |
+| Spirit | No-op | No-op | Explicit operation; positive vitality, capped at Maximum | Enter Eliminated |
 | Eliminated | No-op | No-op | Reject | No-op / false |
 
-### Contract details
+### Lifecycle invariants
 
 - New accounts begin Alive at Maximum; Maximum must be positive.
-- Vitality reaching zero automatically transitions Alive → Spirit.
+- Vitality reaching zero transitions Alive → Spirit.
 - Restore never revives Spirit.
-- TryResurrect succeeds only from Spirit and with a positive requested amount.
-- TryEliminate succeeds from Alive or Spirit and is terminal.
-- Invalid or repeated Try operations return false without partial mutation.
-- Core does not authenticate or authorize the caller. The server application layer must validate permissions, match phase, costs, cooldowns and other policy before calling explicit lifecycle operations.
-- Spirit abilities, connection/authentication state, match membership and spectator projection are separate concerns.
-- No resurrection cost/cooldown or other unapproved gameplay constant is embedded in Core.
+- Resurrection is explicit, Spirit-only and requires positive requested vitality.
+- Elimination is explicit and terminal.
+- Authorization, match phase, costs, cooldowns and other gameplay policy belong to the server application layer.
+- Spirit abilities, connection/authentication state, match membership and spectator projection are separate systems.
 
-## Command envelope and sequence admission (ADR-008 PROPOSED)
+## Command ingress — ADR-008 PROPOSED
 
-- CommandEnvelope is created by trusted server ingress after SessionId resolution and server receive-tick assignment; it is not a client wire DTO.
-- CommandSequenceId is a non-zero ulong scoped to one session.
-- CommandSequenceTracker accepts strictly increasing sequences within an explicitly supplied positive MaximumSequenceJump.
-- Duplicate, stale and excessive forward-jump sequences return typed failures without changing the high-water mark.
-- Accepted sequence numbers are consumed before later gameplay-rule validation to prevent replay.
-- Reset clears in-memory replay state when a session is permanently removed.
-- The tracker is single-writer and not thread-safe. Production jump limits, reconnect semantics, queue capacity and backpressure remain open under ADR-008.
+- Trusted server ingress resolves the authenticated connection to `SessionId` and assigns `ServerTick`; clients do not author these values.
+- `CommandSequenceId` is a non-zero `ulong` scoped to one authenticated session.
+- `CommandSequenceTracker` accepts only strictly increasing sequences whose jump is within the configured positive maximum.
+- The tracker has a configured positive maximum session count. New sessions beyond that bound receive `CapacityExceeded`; existing sessions can continue.
+- `CommandAdmissionQueue<TCommand>` is FIFO and has an explicitly configured positive capacity.
+- A full queue rejects before sequence consumption, allowing the same envelope to be retried after backpressure clears.
+- Once admitted, the sequence is consumed even if later gameplay-rule validation rejects the command.
+- Session replay state can be reset only after that session has been permanently removed and no queued commands remain for it.
+- The tracker and queue are single-writer/server-serialized and are not thread-safe. They are in-memory, not durable anti-replay storage.
+- Production limits, reconnect continuity, rate limiting and command timeout policy remain application configuration / owner decisions.
 
-## Time and revision values
+## Time and revision
 
-- ServerTick is an explicit server-assigned monotonic value; zero is valid. Core does not read a clock.
-- StateRevision zero represents the initial state. TryAdvance increments by one and refuses to wrap at ulong.MaxValue.
+- `ServerTick` is supplied by authoritative server code; Core does not read wall-clock time.
+- Tick zero is valid.
+- `StateRevision` zero represents initial state. `TryAdvance` increments by one and returns false at `ulong.MaxValue` without wrapping.
 
-## Match lifecycle semantics
+## Match phase state machine
 
-- New matches start in Created.
-- Allowed transitions are Created → Waiting → Starting → Running; Running → VoteOpen or Ending; VoteOpen → Running or Ending; Ending → Completed.
-- Completed is terminal; undefined enum values and undocumented transitions are rejected without state mutation.
-- Player-count, timers, vote outcomes, end conditions and other policy preconditions are not embedded in this phase state machine; server application services must validate them before requesting a transition.
+Allowed transitions:
+- Created → Waiting → Starting → Running
+- Running → VoteOpen or Ending
+- VoteOpen → Running or Ending
+- Ending → Completed
 
-## Composition root
+Completed is terminal. Undefined enum values and all undocumented transitions fail without mutation. Player-count, timer, vote-result and match-end preconditions are application-service responsibilities.
 
-- Create a CoreComposition through `CoreComposition.Create()`.
-- One composition instance owns one match-scoped `IBetrayalLedger`.
-- It creates per-player `IVitalityAccount` and per-match `IMatchLifecycle` aggregates.
-- Separate compositions do not share ledger state.
-- The composition root is the only production construction point for Core services; tests may construct primitives directly for isolated unit tests.
+## Betrayal ledger invariants
 
-## Betrayal ledger semantics
-
-- ActorId, VictimId and EventSequenceId are numeric ulong wrappers.
-- Zero is representable as an invalid/default sentinel; domain boundaries reject invalid identities.
-- BetrayalEvent requires non-zero sequence, actor and victim IDs; actor and victim must differ.
-- The ledger validates default structs before mutation.
-- New events require strictly increasing EventSequenceId; gaps are allowed.
-- Exact replay returns false, including after newer accepted events.
-- Reusing a sequence ID with different data throws InvalidOperationException.
-- ServerTick is metadata, not the ledger ordering key.
+- ActorId, VictimId and EventSequenceId are typed ulong values; zero is invalid at domain boundaries.
+- Actor and victim must differ.
+- Default/invalid events are rejected before mutation.
+- New accepted events require strictly increasing EventSequenceId; gaps are allowed.
+- Exact replay is rejected; reusing an accepted sequence with conflicting data is an invariant violation.
+- ServerTick is metadata, not the ordering key.
 - Actor score increments exactly once per accepted event.
-- The application layer must append only after a successful authoritative transfer. The ledger does not validate eligibility or perform Debuff transfer.
-- Single-writer/server-serialized; no thread safety, persistence or network dependency is promised.
+- The application layer must append only after a successful authoritative transfer. The ledger does not itself validate transfer eligibility or mutate Debuff state.
+- Single-writer/server-serialized; no persistence or thread-safety guarantee.
 
-## Deliberate exclusions / remaining Core scope
+## Explicitly incomplete Core scope
 
-The following are not yet implemented and must not be represented as complete:
-- Session lifecycle service and connection/authentication state transitions.
-- Full match aggregate, player registry, membership and world-state ownership.
-- CoreComposition as the single service-composition root.
-- Player aggregate and match/world state ownership.
-- ServerTick / StateRevision.
-- CommandEnvelope, command validation/admission, sequence tracking and bounded queues.
-- Movement command/rules/simulation.
-- Debuff model, eligibility and atomic transfer application.
-- Snapshot/projection contracts.
-- Match endgame voting and outcome resolution.
-- Persistence and backend integration.
+The following remain unimplemented and must not be represented as complete:
 
-Unity project metadata, Unity assemblies, FishNet adapters, authenticated connection mapping, Host/Dedicated Server integration, and Unity EditMode/PlayMode tests are also not implemented.
+1. Session lifecycle service and connection/authentication state transitions.
+2. Full match aggregate, player registry, membership and world-state ownership.
+3. Player aggregate and cross-system state coordination.
+4. Command payload validation, application handlers and end-to-end authoritative admission pipeline.
+5. Movement command model, validation, simulation and deterministic movement rules.
+6. Debuff model, transfer eligibility and atomic transfer application/rollback.
+7. Immutable authoritative snapshots and projection contracts.
+8. Voting, endgame and match outcome resolution.
+9. Persistence, reconnect recovery and backend integration.
+
+Unity project metadata, Unity assemblies, FishNet adapters, authenticated transport mapping, Host/Dedicated Server integration, Unity EditMode/PlayMode tests, Android builds and device performance/security verification are also incomplete.
 
 ## Verification evidence
 
-- **Latest tested commit:** `c8a914970029c249081fd5cf6e48990d1a3cfaca`
-- **Latest Core CI run:** `41327543734` — SUCCESS
-- **Core dependency boundary scan:** PASS — no UnityEngine/FishNet references in Core source/project files
-- **CoreComposition construction-root scan:** PASS — production construction centralized in CoreComposition
-- **Release restore/build:** PASS
-- **NUnit:** 103 passed, 0 failed, 0 skipped
-- **TRX artifact:** `core-test-results`, ID `13091687045`
-- **Artifact SHA-256:** `1b5eb3259eb9207b8ca5fcbf6abce110be257ad32ee1449c12d115124ac798ed`
-- **Detailed evidence:** [Core CI purity and composition enforcement](../audit/CORE_CI_COMPOSITION_ENFORCEMENT_2026-11-01.md)
-- **Command sequence details:** [Command sequence Core CI verification](../audit/COMMAND_SEQUENCE_CORE_CI_VERIFICATION_2026-11-01.md)
-- **Previous boundary baseline:** [Core CI dependency boundary and baseline](../audit/CORE_CI_BOUNDARY_AND_BASELINE_2026-11-01.md)
-- **Match lifecycle/composition detail:** [Match lifecycle and composition CI verification](../audit/MATCH_LIFECYCLE_COMPOSITION_CI_VERIFICATION_2026-11-01.md)
-- **Previous 55-test evidence:** [Core foundations CI verification](../audit/CORE_FOUNDATIONS_CI_VERIFICATION_2026-11-01.md)
-- **Earlier lifecycle-only evidence:** [ADR-007 lifecycle CI verification](../audit/ADR007_LIFECYCLE_CI_VERIFICATION_2026-11-01.md)
+The last completed Core CI baseline before the latest queue/capacity changes:
+- Run: `41327543734` — SUCCESS.
+- Source commit: `c8a914970029c249081fd5cf6e48990d1a3cfaca`.
+- Dependency boundary and CoreComposition construction-root checks: PASS.
+- .NET 8 Release restore/build: PASS.
+- NUnit: 103 passed, 0 failed, 0 skipped.
+- TRX artifact: `13091687045`.
 
-The lifecycle, Result contracts, typed identifiers, match phase state machine, CoreComposition, time/revision values, server-side command envelope and bounded per-session sequence tracker are VERIFIED for the standalone Core scope at the exact source commit above. The command-admission policy remains PROPOSED under ADR-008. Subsequent commits to this branch have changed documentation only. Unity/FishNet, Android, performance and production security remain outside this standalone Core CI scope.
+**Important:** the queue, bounded-session-capacity and workflow corrections added after that source commit have not yet been covered by that run. They require a new CI result before being marked VERIFIED. See [Core CI purity and composition enforcement](../audit/CORE_CI_COMPOSITION_ENFORCEMENT_2026-11-01.md) for the exact baseline evidence.
 
 ## Next implementation order
 
-1. Common Result / Result<T> and stable error codes.
-2. MatchId / SessionId and explicit session/match lifecycle contracts.
-3. CoreComposition as the sole service creation root.
-4. Player/match state ownership and monotonic tick/revision values.
-5. CommandEnvelope, admission, replay tracking and bounded processing.
-6. Movement simulation.
-7. Debuff rules and atomic transfer transaction.
-8. Immutable snapshots and deterministic match outcome rules.
+1. Session lifecycle contract and service, separated from player lifecycle.
+2. Match/player aggregate ownership and authoritative state revision integration.
+3. Command payload validation and application handlers around the bounded queue.
+4. Movement command/rules/simulation.
+5. Debuff rules and atomic transfer transaction.
+6. Immutable snapshots and deterministic match outcome rules.
+7. Integration boundary design for Unity/FishNet after exact package/API verification.
 
-Each item requires an approved contract, focused NUnit coverage, Core purity checks, and CI evidence. Do not invent gameplay values or network API signatures.
+Every increment requires an approved contract, focused NUnit coverage, Core dependency/composition checks and a successful CI run. Do not invent gameplay constants or Unity/FishNet API signatures.
