@@ -27,7 +27,7 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Core unit tests | VERIFIED | 77 passed; 0 failed; 0 skipped in run 41326831611; TRX artifact 13091612088 retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
 | Match/session lifecycle | PARTIAL | Match phase state machine implemented and verified; session lifecycle and aggregate membership not implemented |
-| Command admission / queue / pipeline | NOT IMPLEMENTED | Ordering and bounds require decisions |
+| Command envelope and sequence admission | PARTIAL | Server-side envelope and per-session bounded sequence tracker implemented; queue/backpressure and ADR-008 approval pending |
 | Snapshots | NOT IMPLEMENTED | Projection/revision semantics pending |
 | FishNet / Unity adapters | NOT IMPLEMENTED | Requires actual Unity project and pinned package |
 | Unity project settings / manifests | NOT CREATED | No project metadata exists in repository |
@@ -53,6 +53,7 @@ Existing ADR identifiers are occupied:
 - ADR-005: executable Core boundary.
 - ADR-006: Core identifier and Betrayal ledger invariants (PROPOSED; pending owner approval).
 - ADR-007: canonical player lifecycle (APPROVED: Alive / Spirit / Eliminated).
+- ADR-008: server command envelope and sequence admission (PROPOSED).
 
 Do not create duplicate ADR-001 through ADR-007 using the historical transcript's suggested titles. New decisions use the next available ADR number and must be added to docs/governance/DECISIONS_LOG.md.
 
@@ -214,7 +215,7 @@ Status definitions:
 | Domain/MatchLifecycle.cs | Validated match phase transitions | MatchLifecycleTests | VERIFIED |
 | Result.cs | Result / Result<T> and CoreErrorCode | ResultTests | VERIFIED |
 | CoreComposition.cs | Single Core construction root and match-scoped ledger | CoreCompositionTests | VERIFIED |
-| ServerTick.cs / StateRevision.cs | Server tick and revision values | TimeAndRevisionTests | PROPOSED |
+| Domain/TimeValues.cs | ServerTick and StateRevision; zero initial values; overflow-safe revision advance | TimeValueTests | IMPLEMENTED; latest CI pending |
 | Position2.cs / MovementInput.cs | Engine-independent movement values | MovementValueTests | PROPOSED |
 | PlayerState.cs / MatchState.cs / WorldState.cs | Authoritative domain state | Corresponding state tests | PROPOSED |
 
@@ -235,12 +236,12 @@ Naming rule: `ActorId` is the canonical player-actor identity in the current Cor
 
 | File | Responsibility | Required test | Status |
 |---|---|---|---|
-| CommandEnvelope.cs | Server-derived sender/session, sequence and receive tick | CommandEnvelopeTests | PROPOSED |
+| Domain/CommandEnvelope.cs | Server-derived session, sequence and receive tick; not a client wire DTO | CommandEnvelopeTests | IMPLEMENTED; ADR-008 PROPOSED |
 | CommandKind.cs | Supported command kinds | CommandKindTests | PROPOSED |
 | MovementCommand.cs | Client movement intent only | MovementCommandTests | PROPOSED |
 | BetrayalCommand.cs | Client transfer intent only | BetrayalCommandTests | PROPOSED |
 | CommandOutcome.cs | Accepted/rejected outcome projection | CommandOutcomeTests | PROPOSED |
-| CommandSequenceTracker.cs | Duplicate and replay protection | CommandSequenceTrackerTests | PROPOSED |
+| Domain/CommandSequenceTracker.cs | Per-session monotonic sequence and max-jump enforcement | CommandSequenceTrackerTests | IMPLEMENTED; ADR-008 PROPOSED |
 | CommandAdmission.cs | Initial validation before queue | CommandAdmissionTests | PROPOSED |
 | MovementCommandIngress.cs | Validate/enqueue movement intent | MovementIngressTests | PROPOSED |
 | BetrayalCommandIngress.cs | Validate/enqueue transfer intent | BetrayalIngressTests | PROPOSED |
@@ -481,8 +482,8 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 | NUnit tests | VERIFIED — 77 passed, 0 failed, 0 skipped |
 | Session lifecycle and authentication state | NOT IMPLEMENTED |
 | Full match/player/world aggregates and membership | NOT IMPLEMENTED |
-| ServerTick / StateRevision | NOT IMPLEMENTED |
-| Command envelope/admission/sequence tracking | NOT IMPLEMENTED |
+| ServerTick / StateRevision | IMPLEMENTED; latest CI pending |
+| Command envelope and sequence tracker | IMPLEMENTED — ADR-008 PROPOSED; queue/admission pipeline remains NOT IMPLEMENTED |
 | Movement simulation | NOT IMPLEMENTED |
 | Debuff model and atomic transfer | NOT IMPLEMENTED |
 | Snapshot/projection and match outcome | NOT IMPLEMENTED |
