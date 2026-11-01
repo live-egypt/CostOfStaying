@@ -1,6 +1,6 @@
 # Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 173/173 NUnit on commit `94c5789b0e82493290ca85133fc692e83ffd9884`; the broader Core scope remains incomplete.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 177/177 NUnit on commit `94c5789b0e82493290ca85133fc692e83ffd9884`; the broader Core scope remains incomplete.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 10 / NUnit 3.14  
@@ -26,7 +26,7 @@
 - `ServerTick` and `StateRevision` value objects; zero is the initial value and revision advance refuses overflow.
 - `CommandEnvelope<TCommand>` for server-resolved session identity, sequence, receive tick and command intent. It is not a client wire DTO.
 - `CommandSequenceTracker` with strictly increasing per-session sequences, explicit maximum jump, explicit maximum tracked sessions, duplicate/stale rejection and bounded in-memory state.
-- `CommandAdmissionQueue<TCommand>` with explicit bounded FIFO capacity, replay-aware enqueue and safe session reset only after that session's queued commands have drained.\n- `ICommandAdmissionService<TCommand>` / `CommandAdmissionService<TCommand>` validates envelope and requires a registered Authenticated session with a valid ActorId before queue admission; gameplay payload rules remain downstream.
+- `CommandAdmissionQueue<TCommand>` with explicit bounded FIFO capacity, replay-aware enqueue and safe session reset only after that session's queued commands have drained.\n- `ICommandAdmissionService<TCommand>` / `CommandAdmissionService<TCommand>` validates envelope and requires a registered Authenticated session with a valid ActorId before queue admission; gameplay payload rules remain downstream.\n- `ISessionCleanupService<TCommand>` / `SessionCleanupService<TCommand>` drains pending queue state, resets replay state and removes a Closed session in one server-serialized cleanup path.
 - NUnit coverage for the implemented primitives and invariants.
 
 ## Canonical player lifecycle — ADR-007
@@ -92,7 +92,7 @@ Completed is terminal. Undefined enum values and all undocumented transitions fa
 
 The following remain unimplemented and must not be represented as complete:
 
-1. Transport connection-to-session mapping, credential validation and reconnect/timeout orchestration (the bounded Core session registry and per-session lifecycle primitive are implemented and verified).
+1. Transport connection-to-session mapping, credential validation and reconnect/timeout orchestration (per-session lifecycle, bounded registry and safe cleanup are implemented and verified).
 2. Full match aggregate, world-state ownership and cross-aggregate coordination (bounded match membership registry is implemented).
 3. Player aggregate and cross-system state coordination.
 4. Gameplay payload validation, application handlers and end-to-end authoritative execution pipeline (the authenticated session admission gate is implemented).
@@ -111,7 +111,7 @@ The latest Core CI run:
 - Source commit: `94c5789b0e82493290ca85133fc692e83ffd9884`.
 - Core dependency boundary and composition-root checks: PASS.
 - .NET 10 Release restore/build: PASS.
-- NUnit: 173 passed, 0 failed, 0 skipped.
+- NUnit: 177 passed, 0 failed, 0 skipped.
 - TRX artifact: `13092964341`.
 - Artifact SHA-256: `b4067bbd6c6b0492a245dea4c8970acca23d7196d398018f5266da42709b4295`.
 - Detailed evidence: [Bounded command queue and session replay capacity CI](../audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md).
