@@ -3,6 +3,7 @@
 هذه الوثائق تصف التصميم المقترح وخطط التحقق. لا تعني أن أي نظام منفذ أو مختبر ما لم يذكر دليل قابل للمراجعة.
 
 ## ابدأ هنا
+- [سجل حالة المشروع وتسلسل التنفيذ والتحقق](PROJECT_STATUS_AND_EXECUTION_REGISTER.md)
 - [ميثاق المشروع](00_PROJECT_CHARTER.md)
 - [Game Design Document](01_GAME_DESIGN_DOCUMENT.md)
 - [مواصفات قواعد اللعبة](02_GAME_RULES_SPECIFICATION.md)
