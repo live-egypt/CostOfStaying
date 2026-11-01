@@ -91,7 +91,7 @@ Completed is terminal. Undefined enum values and all undocumented transitions fa
 
 The following remain unimplemented and must not be represented as complete:
 
-1. Session lifecycle service and connection/authentication state transitions.
+1. Global session registry, connection-to-session map, credential validation and reconnect/timeout orchestration (the per-session lifecycle primitive is implemented).
 2. Full match aggregate, player registry, membership and world-state ownership.
 3. Player aggregate and cross-system state coordination.
 4. Command payload validation, application handlers and end-to-end authoritative admission pipeline.
