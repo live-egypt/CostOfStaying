@@ -45,11 +45,11 @@ ADR-007 has been resolved in favor of the earlier owner-approved model and reaff
 - Ordinary Restore never resurrects; only explicit Resurrect can transition Spirit → Alive.
 - The v2.1 `Alive → Dead` lifecycle text is superseded; maintained player-lifecycle specifications follow ADR-007.
 
-The Core source and NUnit tests have been updated on `feature/core-lifecycle-resolution`. Core CI run 41327543734 verified the latest Core source on commit c8a914970029c249081fd5cf6e48990d1a3cfaca: dependency-boundary and CoreComposition construction-root scans, Release build and 103/103 NUnit passed. This includes lifecycle, Result, typed IDs, MatchLifecycle, CoreComposition, time/revision values, command envelope and sequence tracker. The Core API does not implement authorization, costs, cooldowns or match-phase policy; those remain server application responsibilities.
+The Core source and NUnit tests have been updated on `feature/core-lifecycle-resolution`. Core CI run 41329400470 verified Core source commit a0cc96c02ce163691456bc2a02dbbc9c57cd1d12: dependency-boundary and CoreComposition construction-root scans, Release build and 119/119 NUnit passed. This includes lifecycle, Result, typed IDs, MatchLifecycle, CoreComposition, time/revision values, command envelope, bounded sequence tracker and bounded FIFO command queue. The Core API does not implement authorization, costs, cooldowns or match-phase policy; those remain server application responsibilities.
 
 ## 3. Verified evidence boundary
 
-The latest GitHub Actions Core CI run 41327543734 passed on source commit c8a914970029c249081fd5cf6e48990d1a3cfaca: dependency-boundary and CoreComposition construction-root scans, Release restore/build succeeded; NUnit reported 103 passed, 0 failed, 0 skipped. TRX artifact 13091687045 is retained.
+The latest GitHub Actions Core CI run 41329400470 passed on source commit a0cc96c02ce163691456bc2a02dbbc9c57cd1d12: dependency-boundary and CoreComposition construction-root scans, Release restore/build succeeded; NUnit reported 119 passed, 0 failed, 0 skipped. TRX artifact 13092811803 is retained.
 
 This verifies only the source and tests exercised by that workflow. It does **not** verify:
 
@@ -92,12 +92,13 @@ Do not skip a gate to make the project appear more complete. Keep deferred syste
 
 ## 6. Immediate next actions
 
-1. Re-run Core CI for the approved ADR-007 implementation and retain exact-commit evidence.
-2. Reconcile all remaining gameplay/system documents with ADR-007; keep ADR-004 PROPOSED FOR PLAYTEST until playtest evidence exists.
-3. Review PR #6 as the consolidated technical baseline; it remains unmerged pending review.
-4. Keep PR #5 as static source audit only; do not represent the Unity source ZIP as uploaded.
-5. Continue missing Core foundations: session lifecycle, authoritative state ownership, command validation/queue, movement, atomic transfer and snapshots. ServerTick/StateRevision and sequence replay tracking are implemented and CI-verified; ADR-008 policy remains PROPOSED.
-5. Keep Unity/FishNet integration gated on actual project metadata and exact package verification.
+1. Continue the Core roadmap with session lifecycle and authoritative match/player state ownership; do not mark the full Core complete.
+2. Add command payload validation/application handlers on top of the verified bounded queue.
+3. Implement movement and Debuff/atomic transfer only after their contracts and gameplay parameters are approved.
+4. Keep ADR-008 PROPOSED until production sequence/session/queue limits and reconnect policy are approved.
+5. Review PR #6 as the consolidated technical baseline; it remains unmerged pending review.
+6. Keep PR #5 as static source audit only; do not represent the Unity source ZIP as uploaded.
+7. Keep Unity/FishNet integration gated on actual project metadata and exact package verification.
 
 ## 7. Status vocabulary
 
@@ -112,7 +113,7 @@ A status must always be accompanied by its scope and evidence.
 
 ## 8. Automated build and dependency maintenance
 
-The Core workflow `.github/workflows/core-ci.yml` is configured to run for relevant Core/test/workflow changes on pushes to the maintained branches and pull requests targeting `main`. It also supports manual dispatch and a weekly scheduled verification.
+The Core workflow `.github/workflows/core-ci.yml` is configured to run for relevant Core/test/workflow changes on pushes to `main` and `feature/core-lifecycle-resolution`, and pull requests targeting `main`. It also supports manual dispatch and a weekly scheduled verification on the default branch (the schedule will not run from an unmerged feature branch).
 
 The workflow performs:
 1. .NET 8 SDK setup with NuGet cache.
@@ -126,16 +127,16 @@ Concurrency cancels obsolete in-progress runs for the same workflow/ref. Job tim
 
 Dependabot is configured in `.github/dependabot.yml` for weekly NuGet and GitHub Actions update pull requests. Dependency updates are proposals: they must pass CI and receive review before merge. Automatic dependency PR creation is enabled; automatic merging is not.
 
-**Current verification state (2026-11-01):** Core CI run `41327543734` completed successfully against source commit `c8a914970029c249081fd5cf6e48990d1a3cfaca`: dependency-boundary and CoreComposition construction-root scans, Release restore/build/test succeeded; NUnit reported 103 passed, 0 failed, 0 skipped; TRX artifact `13091687045` was uploaded. This verifies standalone Core only, not Unity/FishNet. The inherited MobSF, SecurityCodeScan and Contrast Scan workflows are separate and have known configuration failures; see [GitHub Actions Pipeline Audit](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md).
+**Current Core verification state (2026-11-01):** Core CI run `41329400470` completed successfully against source commit `a0cc96c02ce163691456bc2a02dbbc9c57cd1d12`: dependency-boundary and CoreComposition construction-root scans, Release restore/build/test succeeded; NUnit reported 119 passed, 0 failed, 0 skipped; TRX artifact `13092811803` was uploaded. This verifies standalone Core only, not Unity/FishNet. The three inherited scanner workflows failed due configuration/toolchain defects; branch-level replacements are prepared but not yet verified or merged.
 
 
 ## 9. Latest CI and security-scanner audit
 
-The latest Core CI run `41327543734` passed on source commit `c8a914970029c249081fd5cf6e48990d1a3cfaca`: dependency-boundary and CoreComposition construction-root scans, Release restore/build succeeded; NUnit reported 103 passed, 0 failed, 0 skipped. Artifact `13091687045` was retained. This verifies standalone Core only, not Unity/FishNet.
+The latest Core CI run `41329400470` passed on source commit `a0cc96c02ce163691456bc2a02dbbc9c57cd1d12`: dependency-boundary and CoreComposition construction-root scans, Release restore/build succeeded; NUnit reported 119 passed, 0 failed, 0 skipped. Artifact `13092811803` was retained. This verifies standalone Core only, not Unity/FishNet.
 
 The existing MobSF, SecurityCodeScan and Contrast Scan workflows failed before producing completed security-analysis results:
 - MobSF: pinned `semgrep==0.50.1` dependency could not be installed.
 - SecurityCodeScan: root-level `dotnet restore` failed because there is no root solution/project.
 - Contrast Scan: required organization ID was absent and the configured artifact path remains a placeholder.
 
-These failures are not clean security scans and must not be reported as zero findings. The detailed run IDs, log-derived causes and remediation gates are recorded in [GitHub Actions Pipeline Audit](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md). The scanner workflows must be repaired or deliberately retired in separately reviewed changes; do not make them required checks until they complete successfully against the intended artifacts.
+These failures are not clean security scans and must not be reported as zero findings. The detailed run IDs, log-derived causes and remediation gates are recorded in [GitHub Actions Pipeline Audit](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md). Branch PR #6 now contains replacement workflow definitions: MobSF uses pinned mobsfscan 1.1.0 and mobile-source path filters; SecurityCodeScan targets the explicit NUnit project; Contrast is manual-only and validates a real artifact path and secrets. These replacements are not yet verified and do not change `main` until PR merge. Do not make them required checks until they complete successfully against the intended artifacts.
