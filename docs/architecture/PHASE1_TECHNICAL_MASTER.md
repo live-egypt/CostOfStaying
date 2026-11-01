@@ -22,7 +22,7 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
 | Pure Core project | VERIFIED | .NET 8 Release build passed in GitHub Actions runs 41255553487 and 41255769742 |
-| Vitality and player lifecycle primitive | IMPLEMENTED — verification pending for this branch commit | ADR-007 now selects Alive / Spirit / Eliminated; CI rerun required |
+| Vitality and player lifecycle primitive | VERIFIED | ADR-007 lifecycle implementation passed Core CI run 41325988534: 45/45 NUnit |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
 | Core unit tests | VERIFIED | 38 passed; 0 failed; 0 skipped in run 41255553487; latest workflow run 41255769742 also passed and retained a TRX artifact |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
@@ -473,7 +473,7 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 | Core .NET project | VERIFIED for earlier baseline; current lifecycle branch verification pending |
 | Numeric identifiers and identifier value-semantics tests | VERIFIED on earlier baseline |
 | Betrayal ledger primitive | VERIFIED on earlier baseline |
-| Vitality contract and primitive | IMPLEMENTED on lifecycle branch; CI verification pending |
+| Vitality contract and primitive | VERIFIED — 45 NUnit passed on commit 48ee4d47d5f63b89b3210b59e8a289dd4fc8a2b8 |
 | Result / Result<T> | NOT IMPLEMENTED |
 | CoreComposition | NOT IMPLEMENTED |
 | Match/session lifecycle and state | NOT IMPLEMENTED |
