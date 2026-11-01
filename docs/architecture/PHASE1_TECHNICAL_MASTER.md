@@ -22,7 +22,7 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
 | Pure Core project | VERIFIED | .NET 8 Release build passed in GitHub Actions run 41255553487 |
-| Vitality primitive | VERIFIED | Included in successful Core build and NUnit run |
+| Vitality primitive | VERIFIED — code/test only | CI passed for the current v2.1 implementation; canonical lifecycle is blocked by ADR-007 |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
 | Core unit tests | VERIFIED | 38 passed; 0 failed; 0 skipped; TRX artifact retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
@@ -87,16 +87,16 @@ Every public state transition, rule decision, command admission path and determi
 ## 4. Canonical domain decisions
 
 ### 4.1 Vitality is separate from Spirit role
-The v2.1 gameplay specification says Vitality reaches zero and the player becomes Dead; MVP has no Dead → Alive revival.
+The repository's v2.1 gameplay specification currently proposes that Vitality reaching zero transitions to Dead, with no MVP revival and Spirit represented separately. However, an earlier explicit owner-approved Phase 1 decision (2026-10-31) specified the player-state matrix Alive / Spirit / Eliminated, automatic transition to Spirit at zero Vitality, and explicit Resurrect / Eliminate operations. These are incompatible lifecycle contracts.
 
-Therefore:
-- PlayerVitalityState is Alive or Dead.
-- Spirit is a post-death role/experience/projection concept, not a Vitality state.
-- A future lifecycle model may represent Dead/Spirit/Spectating separately; do not overload the Vitality enum.
-- The MVP Core Vitality contract exposes no resurrection operation.
-- Restore on Dead is a no-op and cannot revive a player.
+The current VitalityAccount implementation and its passing tests implement the repository's v2.1 proposal only. They do not establish that this proposal superseded the earlier owner-approved matrix. ADR-007 records the conflict and blocks final lifecycle approval.
 
-This supersedes an earlier Phase 1 draft that used Alive / Spirit / Eliminated as Vitality states.
+Until ADR-007 is resolved:
+- Do not treat Alive / Dead as the final player lifecycle.
+- Do not add Spirit, Resurrect or Eliminate behavior by inference.
+- Keep Vitality value bounds and arithmetic isolated from player participation/lifecycle state.
+- Treat Restore-on-Dead as behavior of the current provisional implementation, not a final gameplay decision.
+- The standalone Core CI result verifies source behavior, not the unresolved gameplay contract.
 
 ### 4.2 Vitality
 - Default maximum: 100, as stated in v2.1.
@@ -126,10 +126,7 @@ Cooldown duration, capacity, Debuff duration, decay modifier and eligible-select
 Match phases in v2.1:
 Created → Waiting → Starting → Running → VoteOpen → Running or Ending → Completed.
 
-Player flow includes:
-Connecting → Alive → Dead/Spirit → Spectating or Disconnected.
-
-Separate connection/authentication lifecycle, match membership, vitality/life state, Spirit role and spectator state. Do not compress these into one enum without a reviewed transition table.
+Player flow is unresolved between the prior owner-approved Alive / Spirit / Eliminated matrix and the later v2.1 proposal Alive → Dead with Spirit as a separate role. ADR-007 must decide the canonical transition table, including Resurrect and Eliminate semantics. Keep connection/authentication lifecycle, match membership, Vitality, Spirit role and spectator state separate until that decision is recorded.
 
 ### 4.5 Movement
 The server computes authoritative movement. Client messages are inputs/intents only. Final speed, acceleration, input normalization, collision, tick rate and anti-cheat thresholds are not established by the current baseline. Keep them configurable/TBD until a prototype and measurement exist.
@@ -212,7 +209,7 @@ Naming rule: do not create PlayerId as a second identity type if ActorId is reta
 | MatchRules.cs | Match capacity and phase invariants | MatchRulesTests | PROPOSED |
 | MovementRules.cs | Movement constraints and configured parameters | MovementRulesTests | PROPOSED; tuning TBD |
 | BetrayalRules.cs | Transfer eligibility, 2m range, cooldown/capacity | BetrayalRulesTests | PROPOSED |
-| VitalityRules.cs | Vitality bounds and terminal death | VitalityRulesTests | Partially represented; consolidate before duplicate |
+| VitalityRules.cs | Vitality bounds and owner-approved lifecycle transition | VitalityRulesTests | PROPOSED; lifecycle blocked by ADR-007 |
 | AdmissionRules.cs | Command admission conditions | AdmissionRulesTests | PROPOSED |
 | PhaseRules.cs | Command-to-phase permissions | PhaseRulesTests | PROPOSED |
 
@@ -450,13 +447,15 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 
 ## 12. Exact current implementation status
 
+**Lifecycle warning:** the CI-tested VitalityAccount implements the current repository v2.1 proposal. The earlier owner-approved Alive / Spirit / Eliminated matrix with automatic Spirit and explicit Resurrect / Eliminate remains in conflict; see ADR-007. Do not treat the Vitality API as final until the owner decision is reconciled.
+
 | Item | Status |
 |---|---|
 | ADR-005 approval | APPROVED |
 | Core .NET project | VERIFIED — CI Release build passed |
 | Numeric identifiers and identifier value-semantics tests | VERIFIED — included in 38 passing tests |
 | Vitality contract and primitive | VERIFIED — CI build and tests passed |
-| Vitality terminal state aligned with v2.1 | VERIFIED — covered by VitalityAccountTests |
+| Vitality terminal state aligned with v2.1 | VERIFIED against current v2.1 draft only; canonical gameplay lifecycle pending ADR-007 |
 | Betrayal ledger contract and primitive | VERIFIED — CI build and tests passed |
 | Identifier, Vitality and ledger NUnit tests | VERIFIED — 38 passed, 0 failed, 0 skipped |
 | Unity project/package lock | NOT CREATED |

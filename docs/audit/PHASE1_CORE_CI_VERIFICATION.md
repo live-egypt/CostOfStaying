@@ -60,6 +60,7 @@ This evidence does not establish:
 - atomic Debuff transfer across live match state;
 - multiplayer latency/loss/reconnect behavior;
 - gameplay balance or playtest acceptance;
+- conformance to the earlier owner-approved Alive / Spirit / Eliminated lifecycle matrix; this conflict is tracked in ADR-007;
 - production security or release readiness.
 
 Do not generalize this PASS result beyond the standalone Core build and the 38 NUnit tests in the specified commit.

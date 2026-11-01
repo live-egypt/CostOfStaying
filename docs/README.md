@@ -60,6 +60,7 @@
 - [ADR-004: خط أساس قواعد اللعب](governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md)
 - [ADR-005: حدود Core التنفيذي](governance/adr/ADR-005-CORE-EXECUTABLE-BOUNDARY.md)
 - [ADR-006: ثوابت معرفات Core وسجل Betrayal](governance/adr/ADR-006-CORE-IDENTIFIER-AND-LEDGER-INVARIANTS.md)
+- [ADR-007: تعارض دورة حياة اللاعب وVitality](governance/adr/ADR-007-PLAYER-LIFECYCLE-VITALITY-CONFLICT.md)
 
 ## حالات الوثائق
 - **PROPOSED:** مقترح لم يعتمد.

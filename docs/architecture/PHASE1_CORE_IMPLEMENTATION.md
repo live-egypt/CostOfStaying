@@ -27,7 +27,7 @@ The v2.1 gameplay specification defines zero Vitality as Dead and prohibits Dead
 | Alive | Apply; reaching zero transitions to Dead | Apply, capped at Maximum |
 | Dead | No-op | No-op; cannot revive |
 
-Spirit is a separate post-death role/projection. It is not a Vitality state. The earlier Alive / Spirit / Eliminated Vitality draft is superseded by ADR-005 and the current v2.1 baseline.
+**Lifecycle conflict — ADR-007:** this implementation follows the current repository v2.1 proposal (Alive → Dead, no MVP revival, Spirit separate). An earlier explicit owner-approved Phase 1 decision (2026-10-31) specified Alive / Spirit / Eliminated, automatic Spirit at zero Vitality, and explicit Resurrect / Eliminate operations. ADR-005's Core-boundary approval does not by itself prove that this earlier gameplay decision was revoked. The current code is CI-verified as code, but its lifecycle semantics remain provisional until ADR-007 is resolved.
 
 The account rejects an invalid/default ActorId(0) player identity at construction. The numeric wrapper can still represent zero so default(ActorId) remains detectable; IsValid is the explicit validity check.
 
@@ -60,7 +60,7 @@ No Unity project, Unity assemblies, FishNet adapters, connection identity mappin
 - **Artifact:** core-test-results, artifact ID 13062876559 (TRX result retained by GitHub Actions)
 - **Evidence report:** docs/audit/PHASE1_CORE_CI_VERIFICATION.md
 
-This is VERIFIED for the standalone Core build/test scope only. It does not verify Unity import, FishNet integration, server authority across a live network, gameplay balance, dedicated-server operation, or production security.
+This is VERIFIED for the standalone Core build/test scope only. It does not verify Unity import, FishNet integration, server authority across a live network, gameplay balance, dedicated-server operation, or production security. It also does not resolve the conflicting owner-approved player lifecycle contract recorded in ADR-007.
 
 ## Remaining status
 
@@ -68,3 +68,4 @@ This is VERIFIED for the standalone Core build/test scope only. It does not veri
 - FishNet 4.7.4R compatibility: **NOT VERIFIED**.
 - Gameplay rules: remain **PROPOSED FOR PLAYTEST**.
 - ADR-006: remains **PROPOSED** pending owner approval.
+- Vitality/player lifecycle alignment: **BLOCKED** pending ADR-007 owner decision.

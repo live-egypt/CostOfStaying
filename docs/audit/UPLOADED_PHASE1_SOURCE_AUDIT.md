@@ -247,3 +247,20 @@ This audit did **not**:
 - Modify `main`.
 
 The safe next implementation unit is a canonical Core contract and test design, after the conflicting rules and ADR drafts are reconciled.
+
+## 11. Cross-conversation owner decision reconciliation (2026-11-01)
+
+A review of the earlier project conversation history found an explicit owner-approved Phase 1 lifecycle decision dated 2026-10-31 12:28 UTC:
+
+- Player-state matrix: Alive / Spirit / Eliminated.
+- Vitality reaching zero automatically transitions the player to Spirit.
+- Resurrect and Eliminate are explicit operations.
+- Numeric identity values use ulong.
+- Server owns event ordering; Core does not claim thread safety.
+- NUnit coverage is required.
+
+The current repository v2.1 proposal and the ADR-005 implementation branch instead model Vitality as Alive / Dead, prohibit MVP revival, and treat Spirit as a separate post-death role. The current VitalityAccount code implements that later repository proposal and passes its tests, but the historical owner-approved lifecycle decision was not explicitly shown as revoked.
+
+**Audit finding:** the lifecycle conflict is unresolved and is now tracked in ADR-007. The Core CI PASS proves that the current source builds and its tests pass; it does not establish that the selected lifecycle is the owner's canonical gameplay decision. Keep ADR-007 open and do not mark the Vitality API as final until the conflict is explicitly resolved.
+
+The ulong identity direction is consistent across the owner-approved history and current Phase 1 source. The old Guid-based examples in the uploaded transcript are historical alternatives and must not be reintroduced.

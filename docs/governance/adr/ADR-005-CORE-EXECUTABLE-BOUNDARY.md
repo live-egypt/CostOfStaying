@@ -8,7 +8,7 @@
 
 The repository currently contains the v2.1 documentation baseline but no executable Unity project, Core source, networking source, test assemblies, or package manifest. The uploaded Phase 1 Markdown is an iterative transcript with competing snapshots; it cannot safely be copied as a single implementation.
 
-The game rules establish a server-authoritative match model. Vitality begins at 100 and reaches terminal Dead at zero; successful suffering transfer is a full move of an eligible Debuff, requires both players Alive in the same match, a different target within 2 metres, source cooldown readiness and target capacity, and must mutate neither player if rejected. Only a successful transfer increments the source Betrayal score. These rules remain PROPOSED FOR PLAYTEST under ADR-004.
+The current repository v2.1 proposal describes a server-authoritative match model. It proposes Vitality beginning at 100 and reaching Dead at zero, and a full move of an eligible Debuff with the documented transfer gates. These gameplay rules remain PROPOSED FOR PLAYTEST under ADR-004. The player lifecycle portion conflicts with an earlier explicit owner-approved Phase 1 matrix (Alive / Spirit / Eliminated, automatic Spirit at zero, explicit Resurrect / Eliminate); ADR-007 records this unresolved conflict. ADR-005 approves the Core boundary and implementation approach, not a silent replacement of that earlier gameplay decision.
 
 ## Decision proposal
 
@@ -28,7 +28,7 @@ Implement and test in this order:
 
 1. Common result/error representation and validated identifiers.
 2. Match/player lifecycle primitives matching the documented state matrix.
-3. Vitality state with bounded values and terminal death semantics.
+3. Vitality state with bounded values and the zero-transition semantics resolved by ADR-007.
 4. Debuff model and transfer eligibility/rules.
 5. Atomic transfer application and Betrayal score/event recording.
 6. Command admission and replay/idempotency boundary.
