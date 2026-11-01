@@ -12,7 +12,7 @@ namespace CostOfStaying.Core.Domain
         private readonly Queue<CommandEnvelope<TCommand>> _pending;
         private readonly CommandSequenceTracker _sequenceTracker;
 
-        public CommandAdmissionQueue(
+        internal CommandAdmissionQueue(
             ulong maximumSequenceJump,
             int maximumTrackedSessions,
             int capacity)
