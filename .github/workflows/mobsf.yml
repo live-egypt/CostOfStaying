@@ -13,7 +13,6 @@ on:
       - "**/*.swift"
       - "**/*.m"
       - "**/*.mm"
-      - ".github/workflows/mobsf.yml"
   pull_request:
     branches: [main]
     paths:
