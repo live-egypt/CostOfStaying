@@ -11,11 +11,12 @@
 ## Implemented source
 
 - Engine-independent .NET Standard 2.1 Core project.
-- Strongly typed numeric wrappers: `ActorId`, `VictimId`, `EventSequenceId` (ulong).
+- Strongly typed numeric wrappers: `ActorId`, `MatchId`, `SessionId`, `VictimId`, `EventSequenceId` (ulong). ActorId remains the single canonical player-actor identity; no duplicate PlayerId wrapper is introduced.
+- Shared `Result` / `Result<T>` value contracts with stable `CoreErrorCode` categories and safe default-failure semantics.
 - `IVitalityAccount` and `IBetrayalLedger` contracts.
 - `VitalityAccount` with bounded vitality and canonical `Alive / Spirit / Eliminated` lifecycle.
 - `BetrayalLedger` with monotonic event sequence, exact replay handling and actor score accumulation.
-- NUnit tests for identifier value semantics, lifecycle transitions and ledger invariants.
+- NUnit tests for result semantics, identifier value semantics, lifecycle transitions and ledger invariants.
 - GitHub Actions Core CI workflow.
 
 ## Canonical lifecycle (ADR-007)
@@ -55,8 +56,7 @@
 ## Deliberate exclusions / remaining Core scope
 
 The following are not yet implemented and must not be represented as complete:
-- Result / Result<T> error contracts.
-- SessionId / MatchId and session/match lifecycle.
+- Session and match lifecycle services and state transitions.
 - CoreComposition as the single service-composition root.
 - Player aggregate and match/world state ownership.
 - ServerTick / StateRevision.
