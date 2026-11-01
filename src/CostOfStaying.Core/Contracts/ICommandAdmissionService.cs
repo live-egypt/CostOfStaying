@@ -7,5 +7,6 @@ namespace CostOfStaying.Core.Contracts
     public interface ICommandAdmissionService<TCommand>
     {
         Result TryAdmit(CommandEnvelope<TCommand> envelope);
+        Result<AuthenticatedCommand<TCommand>> TryTakeNext();
     }
 }
