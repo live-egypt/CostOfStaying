@@ -11,7 +11,6 @@ namespace CostOfStaying.Core.Contracts
         int Count { get; }
         Result Register(ISessionLifecycle session);
         Result<ISessionLifecycle> Get(SessionId sessionId);
-        Result Remove(SessionId sessionId);
         IReadOnlyList<SessionId> GetSessionIdsSnapshot();
     }
 }
