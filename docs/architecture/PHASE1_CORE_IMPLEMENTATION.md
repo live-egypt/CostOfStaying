@@ -3,7 +3,7 @@
 **Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 132/132 NUnit on commit `08b68e68a6cf393c6177b6b54ecd53d6ffff5496`; the broader Core scope remains incomplete.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
-**Standalone tests:** .NET 8 / NUnit 3.14  
+**Standalone tests:** .NET 10 / NUnit 3.14  
 **Architecture ADR:** ADR-005 (APPROVED)  
 **Identifier/ledger ADR:** ADR-006 (PROPOSED; approval status must be confirmed before freezing policy)  
 **Player lifecycle ADR:** ADR-007 (APPROVED: Alive / Spirit / Eliminated)  
@@ -108,7 +108,7 @@ The latest Core CI run:
 - Run: `41330344616` — SUCCESS.
 - Source commit: `08b68e68a6cf393c6177b6b54ecd53d6ffff5496`.
 - Core dependency boundary and composition-root checks: PASS.
-- .NET 8 Release restore/build: PASS.
+- .NET 10 Release restore/build: PASS.
 - NUnit: 132 passed, 0 failed, 0 skipped.
 - TRX artifact: `13093370056`.
 - Artifact SHA-256: `19eeb3b4395035c5b8cae9051a10b69bddd3d5c15db6a4fe248340e46e3f88b7`.
