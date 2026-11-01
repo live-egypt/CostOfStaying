@@ -2,76 +2,102 @@
 
 **Audit date:** 2026-11-01  
 **Repository:** `live-egypt/CostOfStaying`  
-**PR:** #6 — `feature/core-lifecycle-resolution`  
-**Scope:** Core CI and inherited static-analysis workflows. This is an operational workflow audit, not a source-code security certification.
+**Review branch:** `feature/core-lifecycle-resolution`  
+**PR:** #6 — Draft, not merged  
+**Scope:** Core CI, static analysis and optional third-party scanners. This is an operational workflow audit, not a source-code security certification.
 
-## 1. Latest observed run before workflow remediation
+## 1. Observed execution evidence
 
-PR head at the time of the run: `0734b194bb7434a20873601c4f3d6033ac5d5f49`.
+### Core CI baseline
 
-| Workflow | Run ID | Result | Actual failure / evidence |
+- Run `41329400470` — SUCCESS.
+- Source commit: `a0cc96c02ce163691456bc2a02dbbc9c57cd1d12`.
+- Core dependency boundary and composition-root guards: PASS.
+- .NET 8 Release restore/build: PASS.
+- NUnit: **119 passed, 0 failed, 0 skipped**.
+- TRX artifact: `13092811803`.
+
+A later Core CI push run `41329723500` also completed successfully on merge-synced branch commit `e6478390b52f70c7fa29a6736a10078cd76a6e21`; its detailed NUnit result is retained in that run. Core CI verifies only standalone Core.
+
+### Scanner runs and root causes
+
+| Workflow | Run | Result | Root cause / interpretation |
 |---|---:|---|---|
-| Core CI | 41327877562 | PASS | Core dependency boundary, composition-root check, Release build and test job passed |
-| MobSF | 41327877519 | FAIL | Legacy action attempted to install `semgrep==0.50.1`, which pip could not resolve |
-| Contrast Scan | 41327877553 | FAIL | Placeholder artifact `mypath/target/myartifact.jar`; required Contrast Organization ID secret absent |
-| SecurityCodeScan | 41327877574 | FAIL | `dotnet restore` executed at repository root; no solution/project file exists there (MSB1003) |
+| MobSF legacy action | 41327877519 | FAIL | Legacy action dependency requested unavailable `semgrep==0.50.1`; scan never began |
+| MobSF replacement | 41329727360 | PASS | Pinned `mobsfscan==1.1.0` installed and ran; repository still has no Android/iOS application source, so this is scanner-execution evidence, not mobile-app security certification |
+| SecurityCodeScan inherited | 41327877574 | FAIL | Root-level `dotnet restore` failed with MSB1003 because no root solution/project exists |
+| SecurityCodeScan replacement attempt | 41329697483 | FAIL | Explicit Core test project restore and analyzer build succeeded, but the legacy SARIF converter required .NET Core 3.1, which is absent/EOL on the runner; no final SARIF upload |
+| CodeQL inherited | 41329615128 | FAIL | Inherited workflow had an empty language matrix and created no analysis jobs |
+| CodeQL corrected | 41329697491 | PASS | Explicit C# and GitHub Actions analysis jobs both completed successfully and uploaded results |
+| Contrast inherited | 41327877553 | FAIL | Template artifact path was `mypath/target/myartifact.jar`; required organization secret was absent |
+| Debricked inherited | 41329618006 | FAIL | Scan initialization returned Unauthorized because no valid Debricked access token was supplied |
+| NowSecure inherited | 41329616589 | FAIL | Template workflow targeted a Gradle build and APK that do not exist in this repository; it also contained an unresolved group-ID placeholder |
+| Frogbot inherited | Not triggered in this branch run | NOT VERIFIED | Template workflow grants write permissions and runs on main pushes; credentials and account configuration are not verified |
 
-The green Core CI result verifies only the standalone Core slice. Failed scanners are not clean scans and provide no evidence that the source is vulnerability-free.
+A failed scanner is not a clean scan. A workflow setup failure is not itself proof that the source is vulnerable or vulnerability-free.
 
-## 2. Root-cause analysis
+## 2. Branch-level workflow corrections
 
-### MobSF
+The review branch now contains these corrections:
 
-The inherited `MobSF/mobsfscan` action was pinned to a legacy action revision whose requirements attempted to install `semgrep==0.50.1`. That dependency could not be resolved by the runner's package index, so scanning never began and no SARIF report was produced.
+### Core CI
+- Enforces the Core dependency boundary (no UnityEngine/FishNet references).
+- Enforces CoreComposition as the construction root; the bounded queue may own its private sequence tracker.
+- Uses the active feature branch trigger, .NET 8, Release builds, NUnit and TRX artifact retention.
+- Latest source CI passed 119 tests; the merge-synced source-only follow-up also passed.
 
-**Branch remediation:** replace the legacy action with a pinned `mobsfscan==1.1.0` installation on Python 3.13, invoke the documented CLI, and restrict automatic triggers to mobile source changes. This avoids executing a mobile scanner for documentation/Core-only commits. The new workflow still requires a real mobile source tree and a successful run before mobile security can be marked verified.
+### CodeQL
+- Explicitly analyzes `csharp` and `actions` rather than an empty matrix.
+- Uses CodeQL Action v4.
+- Corrected run `41329697491` passed both language jobs.
 
 ### SecurityCodeScan
+- Targets `tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj` explicitly; this restores/builds the referenced Core project too.
+- The analyzer build passed in run `41329697483`.
+- The old SARIF conversion action was removed because it depends on the retired .NET Core 3.1 runtime.
+- The replacement combines SARIF 2.1.0 reports using Python's standard JSON library and uploads through CodeQL Action v4.
+- **The new SARIF-combination/upload revision still requires a successful CI run.** Do not mark SecurityCodeScan verified until it passes and findings are reviewed.
 
-The inherited workflow ran `dotnet restore` at the repository root. There is no root-level solution or project, so MSBuild returned MSB1003 before the analyzer build.
+### MobSF
+- Replaced the obsolete action dependency chain with pinned `mobsfscan==1.1.0` on Python 3.13.
+- Automatic triggers are limited to actual Android/iOS source changes; editing the workflow alone does not trigger a mobile scan.
+- Run `41329727360` proves the scanner installed and executed. There is currently no mobile application source in the repository, so it does not certify an Android/iOS app.
 
-**Branch remediation:** target `tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj` explicitly for restore and Release build. The test project references the Core project, so the analyzer build includes the current Core C# source. SARIF upload is conditional on a generated report. A successful scanner run and review of findings are still required.
+### Optional account-backed scanners
+- Contrast is manual-only and validates a real artifact path plus the required API key, organization ID and auth header.
+- NowSecure is manual-only and requires an existing APK/IPA, group ID and `NS_TOKEN`.
+- Debricked is manual-only and validates `DEBRICKED_TOKEN`.
+- Frogbot is manual-only, validates JFrog credentials and retains write permissions only for an explicitly requested dependency-fix run.
 
-### Contrast Scan
+These changes prevent unconfigured external account integrations from creating automatic failing checks or making unauthorized automated changes. Manual execution still requires valid account credentials and supported artifacts.
 
-The inherited workflow was an unconfigured template: it used a non-existent Java JAR path and required secrets that were not provisioned. The action failed because Organization ID was absent.
+## 3. Verification and security policy
 
-**Branch remediation:** make this a manual-only workflow requiring an explicit artifact path and validate all three required secrets before invoking the action. It is not an automatic required check. It can only be used after a real supported artifact has been built and Contrast credentials have been configured in repository secrets.
+- A successful scanner job means the scanner ran and uploaded its report; it does not mean zero vulnerabilities.
+- SARIF findings must be triaged and dispositioned; upload is not security sign-off.
+- MobSF must be evaluated against real mobile source or a built APK/IPA before mobile security is certified.
+- Contrast and NowSecure require real artifacts and provisioned account credentials.
+- Debricked and Frogbot require valid service tokens.
+- CodeQL and SecurityCodeScan results must be reviewed for actual alerts, not just workflow conclusion.
+- Core CI does not verify Unity, FishNet, Android, transport authentication, Host/Dedicated Server, persistence or production deployment.
 
-## 3. Core CI workflow hardening
+## 4. Remediation state
 
-The Core workflow includes:
-- A source scan that rejects UnityEngine/FishNet references in Core.
-- A composition-root scan that rejects direct production construction of Core aggregates/services outside `CoreComposition.cs`.
-- .NET 8 restore, Release builds and NUnit.
-- TRX artifact retention even when tests fail.
-- Read-only repository permissions and a bounded job timeout.
-
-The branch trigger was corrected to the active branch name, and the composition-root check was extended to include the bounded command-admission queue. The exact latest source increment still needs a new CI result.
-
-## 4. Verification policy
-
-- A failed scanner is not a clean scan.
-- A scanner setup/configuration failure is not itself proof of a source vulnerability.
-- A successful Core CI run does not verify Unity, FishNet, Android, authentication, host/dedicated-server behavior or production security.
-- MobSF findings must only be interpreted against actual Android/iOS source.
-- Contrast must not be reported as passed unless a real artifact is scanned with valid credentials.
-- Static-analysis findings must be triaged; merely uploading SARIF is not a security sign-off.
-
-## 5. Remediation state
-
-| Item | Branch state | Verification state |
+| Item | Current branch state | Verification |
 |---|---|---|
-| Core dependency and composition boundaries | Implemented in Core CI | Previous run passed; latest source increment pending |
-| SecurityCodeScan project path | Corrected to explicit test project | New workflow run pending |
-| MobSF scanner dependency | Replaced with pinned 1.1.0 package and Python 3.13 | New workflow run pending; mobile source not yet present |
-| Contrast placeholder | Converted to manual-only artifact/secret validation | Not run; requires real artifact and secrets |
+| Core purity/composition + 119 NUnit | Implemented | PASS — run 41329400470 |
+| Merge branch with current main | Synchronized; no behind commits | Compare status: ahead only |
+| CodeQL C# + Actions | Corrected | PASS — run 41329697491 |
+| MobSF scanner runtime | Corrected and source-path scoped | PASS — run 41329727360; no app source to certify |
+| SecurityCodeScan project targeting | Corrected | Analyzer build PASS; SARIF converter replacement pending verification |
+| Contrast placeholder | Manual-only and validated | Not run; credentials/artifact required |
+| NowSecure template | Manual-only and validated | Not run; credentials/artifact required |
+| Debricked template | Manual-only | Not run; token required |
+| Frogbot automation | Manual-only | Not run; JFrog account required |
 | Unity/FishNet security verification | Not implemented | Not verified |
 
-## 6. Source references
+## 5. Delivery boundary
 
-- MobSF scanner release 1.1.0 and CLI documentation: official MobSF/mobsfscan project and PyPI release.
-- SecurityCodeScan workflow changes are on the feature branch and have not been merged to `main`.
-- Contrast workflow is intentionally manual-only until an actual artifact and account credentials are available.
+All workflow corrections are on the Draft PR branch. They have not been merged to `main`. PR #6 remains unmerged. Do not claim the default branch is repaired until the PR is reviewed and merged.
 
-**Status:** root causes are identified and branch-level workflow corrections have been prepared. Do not mark any of the three scanner workflows green until their revised versions complete successfully.
+**Status:** Core CI is green for the verified source increment. CodeQL and MobSF replacement runs have passed within their stated scope. SecurityCodeScan's analyzer build passes, but its revised SARIF upload still needs verification. Account-backed scanners remain optional/manual until valid secrets and artifacts exist.
