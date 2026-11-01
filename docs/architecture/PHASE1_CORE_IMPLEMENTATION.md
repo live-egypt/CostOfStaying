@@ -1,6 +1,6 @@
 # Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 181/181 NUnit on commit `c33faf84aa39856d46181ccc1c9decbfba2777d2`; the broader Core scope remains incomplete.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 181/181 NUnit on commit `8a193190fb5f2e10c05773fb0789171011bfd2eb`; the broader Core scope remains incomplete.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 10 / NUnit 3.14  
@@ -115,8 +115,8 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated transp
 ## Verification evidence
 
 The latest Core CI run:
-- Run: `41332989910` — SUCCESS.
-- Source commit: `c33faf84aa39856d46181ccc1c9decbfba2777d2`.
+- Run: `41333575156` — SUCCESS.
+- Source commit: `8a193190fb5f2e10c05773fb0789171011bfd2eb`.
 - Core dependency boundary and composition-root checks: PASS.
 - .NET 10 Release restore/build: PASS.
 - NUnit: 181 passed, 0 failed, 0 skipped.
