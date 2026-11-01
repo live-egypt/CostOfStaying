@@ -207,12 +207,12 @@ Status definitions:
 |---|---|---|---|
 | Contracts/IVitalityAccount.cs | Pure vitality contract | VitalityAccountTests | IMPLEMENTED |
 | Contracts/IBetrayalLedger.cs | Betrayal ledger contract | BetrayalLedgerTests | IMPLEMENTED |
-| Domain/Identifiers.cs | ActorId, VictimId, EventSequenceId | IdentifierTests | IMPLEMENTED |
+| Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId | IdentifierTests | IMPLEMENTED |
 | Domain/VitalityAccount.cs | Bounded vitality; Alive → Spirit; explicit Resurrect / Eliminate | VitalityAccountTests | IMPLEMENTED |
 | Domain/BetrayalLedger.cs | Monotonic event sequence, replay rejection, score | BetrayalLedgerTests | IMPLEMENTED |
-| CoreComposition.cs | Single Core composition root | CoreCompositionTests | PROPOSED |
+| Result.cs | Result / Result<T> and CoreErrorCode | ResultTests | IMPLEMENTED; latest CI pending |\n| CoreComposition.cs | Single Core composition root | CoreCompositionTests | PROPOSED |
 | Result.cs / ResultT.cs | Consistent success/failure contracts | ResultTests | PROPOSED |
-| PlayerId.cs / SessionId.cs | Canonical player/session IDs | IdentifierTests | PROPOSED; reconcile ActorId naming |
+| MatchId / SessionId | Typed match/session IDs; ActorId remains canonical player actor ID | IdentifierTests | IMPLEMENTED |
 | ServerTick.cs / StateRevision.cs | Server tick and revision values | TimeAndRevisionTests | PROPOSED |
 | Position2.cs / MovementInput.cs | Engine-independent movement values | MovementValueTests | PROPOSED |
 | PlayerState.cs / MatchState.cs / WorldState.cs | Authoritative domain state | Corresponding state tests | PROPOSED |
