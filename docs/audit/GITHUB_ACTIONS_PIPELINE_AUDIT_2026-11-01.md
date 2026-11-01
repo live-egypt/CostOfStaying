@@ -10,12 +10,14 @@
 
 ### Core CI baseline
 
-- Run `41329400470` — SUCCESS.
-- Source commit: `a0cc96c02ce163691456bc2a02dbbc9c57cd1d12`.
+- Run `41330975856` — SUCCESS.
+- Source commit: `5648aaf232dd247a0af52317f8ddd363a0441f0c`.
 - Core dependency boundary and composition-root guards: PASS.
-- .NET 10 Release restore/build: PASS.
-- NUnit: **119 passed, 0 failed, 0 skipped**.
-- TRX artifact: `13092811803`.
+- .NET 10 SDK restore/build: PASS.
+- Core target: .NET Standard 2.1; test target: .NET 10.
+- NUnit: **134 passed, 0 failed, 0 skipped**.
+- TRX artifact: `13092889041`.
+- Artifact SHA-256: `2b13f11e173414f7b232a89ef1ec0389d1d237686cc9137f5efa9662a8d1ee67`.
 
 A later Core CI push run `41329723500` also completed successfully on merge-synced branch commit `e6478390b52f70c7fa29a6736a10078cd76a6e21`; its detailed NUnit result is retained in that run. Core CI verifies only standalone Core.
 
@@ -45,7 +47,7 @@ The review branch now contains these corrections:
 - Enforces the Core dependency boundary (no UnityEngine/FishNet references).
 - Enforces CoreComposition as the construction root; the bounded queue may own its private sequence tracker.
 - Uses the active feature branch trigger, .NET 10, Release builds, NUnit and TRX artifact retention.
-- Latest source CI passed 119 tests; the merge-synced source-only follow-up also passed.
+- Latest Core CI run `41330975856` passed 134 tests on the synchronized branch.
 
 ### CodeQL
 - Explicitly analyzes `csharp` and `actions` rather than an empty matrix.
@@ -76,23 +78,23 @@ These changes prevent unconfigured external account integrations from creating a
 
 ## 3. Verification and security policy
 
-- A successful scanner job means the scanner ran and uploaded its report; it does not mean zero vulnerabilities.
+- A successful scanner job means the scanner ran and produced/preserved its report; it does not mean zero vulnerabilities.
 - SARIF findings must be triaged and dispositioned; upload is not security sign-off.
 - MobSF must be evaluated against real mobile source or a built APK/IPA before mobile security is certified.
 - Contrast and NowSecure require real artifacts and provisioned account credentials.
 - Debricked and Frogbot require valid service tokens.
-- CodeQL and SecurityCodeScan results must be reviewed for actual alerts, not just workflow conclusion.
+- CodeQL alerts must be triaged. SecurityCodeScan's raw SARIF 1.0.0 artifact must be retained and reviewed; it is not uploaded to GitHub Code Scanning.
 - Core CI does not verify Unity, FishNet, Android, transport authentication, Host/Dedicated Server, persistence or production deployment.
 
 ## 4. Remediation state
 
 | Item | Current branch state | Verification |
 |---|---|---|
-| Core purity/composition + 119 NUnit | Implemented | PASS — run 41329400470 |
+| Core purity/composition + 134 NUnit | Implemented | PASS — run 41330975856 |
 | Merge branch with current main | Synchronized; no behind commits | Compare status: ahead only |
-| CodeQL C# + Actions | Corrected | PASS — run 41329697491 |
+| CodeQL C# + Actions | Corrected | PASS — run 41330669137 |
 | MobSF scanner runtime | Corrected and source-path scoped | PASS — run 41329727360; no app source to certify |
-| SecurityCodeScan project targeting | Corrected | Analyzer build PASS; SARIF converter replacement pending verification |
+| SecurityCodeScan project targeting | Corrected | PASS — run 41330871497; 2 native SARIF reports retained, 0 findings reported |
 | Contrast placeholder | Manual-only and validated | Not run; credentials/artifact required |
 | NowSecure template | Manual-only and validated | Not run; credentials/artifact required |
 | Debricked template | Manual-only | Not run; token required |
@@ -103,4 +105,4 @@ These changes prevent unconfigured external account integrations from creating a
 
 All workflow corrections are on the Draft PR branch. They have not been merged to `main`. PR #6 remains unmerged. Do not claim the default branch is repaired until the PR is reviewed and merged.
 
-**Status:** Core CI is green for the verified source increment. CodeQL and MobSF replacement runs have passed within their stated scope. SecurityCodeScan's analyzer build and native report retention now pass (run 41330871497); raw SARIF 1.0.0 is retained as an artifact, not uploaded to GitHub Code Scanning. Account-backed scanners remain optional/manual until valid secrets and artifacts exist.
+**Status:** Core CI is green for the verified source increment. CodeQL and MobSF replacement runs have passed within their stated scope. SecurityCodeScan's analyzer build and native report retention pass (run 41330871497); two raw SARIF 1.0.0 reports with zero reported findings are retained as an artifact, not uploaded to GitHub Code Scanning. Account-backed scanners remain optional/manual until valid secrets and artifacts exist.
