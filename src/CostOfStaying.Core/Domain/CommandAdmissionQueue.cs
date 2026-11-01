@@ -12,15 +12,14 @@ namespace CostOfStaying.Core.Domain
         private readonly Queue<CommandEnvelope<TCommand>> _pending;
         private readonly CommandSequenceTracker _sequenceTracker;
 
-        public CommandAdmissionQueue(
-            ulong maximumSequenceJump,
-            int maximumTrackedSessions,
-            int capacity)
+        public CommandAdmissionQueue(CommandSequenceTracker sequenceTracker, int capacity)
         {
+            if (sequenceTracker is null)
+                throw new System.ArgumentNullException(nameof(sequenceTracker));
             if (capacity <= 0)
                 throw new System.ArgumentOutOfRangeException(nameof(capacity), "Queue capacity must be positive.");
 
-            _sequenceTracker = new CommandSequenceTracker(maximumSequenceJump, maximumTrackedSessions);
+            _sequenceTracker = sequenceTracker;
             _pending = new Queue<CommandEnvelope<TCommand>>(capacity);
             Capacity = capacity;
         }
