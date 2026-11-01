@@ -45,11 +45,11 @@ ADR-007 has been resolved in favor of the earlier owner-approved model and reaff
 - Ordinary Restore never resurrects; only explicit Resurrect can transition Spirit → Alive.
 - The v2.1 `Alive → Dead` lifecycle text is superseded; maintained player-lifecycle specifications follow ADR-007.
 
-The Core source and NUnit tests have been updated on `feature/core-lifecycle-resolution`. Core CI run 41329400470 verified Core source commit a0cc96c02ce163691456bc2a02dbbc9c57cd1d12: dependency-boundary and CoreComposition construction-root scans, Release build and 119/119 NUnit passed. This includes lifecycle, Result, typed IDs, MatchLifecycle, CoreComposition, time/revision values, command envelope, bounded sequence tracker and bounded FIFO command queue. The Core API does not implement authorization, costs, cooldowns or match-phase policy; those remain server application responsibilities.
+The Core source and NUnit tests have been updated on `feature/core-lifecycle-resolution`. Core CI run 41329893768 verified Core source commit 6bf2d61f56e37ea54f93cfa42d2dc72e4b2a78b4: dependency-boundary and CoreComposition construction-root scans, Release build and 119/119 NUnit passed. This includes lifecycle, Result, typed IDs, MatchLifecycle, CoreComposition, time/revision values, command envelope, bounded sequence tracker and bounded FIFO command queue. The Core API does not implement authorization, costs, cooldowns or match-phase policy; those remain server application responsibilities.
 
 ## 3. Verified evidence boundary
 
-The latest GitHub Actions Core CI run 41329400470 passed on source commit a0cc96c02ce163691456bc2a02dbbc9c57cd1d12: dependency-boundary and CoreComposition construction-root scans, Release restore/build succeeded; NUnit reported 119 passed, 0 failed, 0 skipped. TRX artifact 13092811803 is retained.
+The latest GitHub Actions Core CI run 41329893768 passed on source commit 6bf2d61f56e37ea54f93cfa42d2dc72e4b2a78b4: dependency-boundary and CoreComposition construction-root scans, Release restore/build succeeded; NUnit reported 119 passed, 0 failed, 0 skipped. TRX artifact 13092503957 is retained.
 
 This verifies only the source and tests exercised by that workflow. It does **not** verify:
 
@@ -127,12 +127,12 @@ Concurrency cancels obsolete in-progress runs for the same workflow/ref. Job tim
 
 Dependabot is configured in `.github/dependabot.yml` for weekly NuGet and GitHub Actions update pull requests. Dependency updates are proposals: they must pass CI and receive review before merge. Automatic dependency PR creation is enabled; automatic merging is not.
 
-**Current Core verification state (2026-11-01):** Core CI run `41329400470` completed successfully against source commit `a0cc96c02ce163691456bc2a02dbbc9c57cd1d12`: dependency-boundary and CoreComposition construction-root scans, Release restore/build/test succeeded; NUnit reported 119 passed, 0 failed, 0 skipped; TRX artifact `13092811803` was uploaded. This verifies standalone Core only, not Unity/FishNet. The three inherited scanner workflows failed due configuration/toolchain defects; branch-level replacements are prepared but not yet verified or merged.
+**Current Core verification state (2026-11-01):** Core CI run `41329893768` completed successfully against source commit `6bf2d61f56e37ea54f93cfa42d2dc72e4b2a78b4`: dependency-boundary and CoreComposition construction-root scans, Release restore/build/test succeeded; NUnit reported 119 passed, 0 failed, 0 skipped; TRX artifact `13092503957` was uploaded. This verifies standalone Core only, not Unity/FishNet. The inherited security workflows contained template/configuration defects. The branch now contains scoped replacements for CodeQL, MobSF, SecurityCodeScan, Contrast, NowSecure, Debricked and Frogbot. CodeQL and MobSF replacement runs have passed; SecurityCodeScan's latest SARIF upload revision is running; account-backed services remain manual-only and unverified until credentials/artifacts exist.
 
 
 ## 9. Latest CI and security-scanner audit
 
-The latest Core CI run `41329400470` passed on source commit `a0cc96c02ce163691456bc2a02dbbc9c57cd1d12`: dependency-boundary and CoreComposition construction-root scans, Release restore/build succeeded; NUnit reported 119 passed, 0 failed, 0 skipped. Artifact `13092811803` was retained. This verifies standalone Core only, not Unity/FishNet.
+The latest Core CI run `41329893768` passed on source commit `6bf2d61f56e37ea54f93cfa42d2dc72e4b2a78b4`: dependency-boundary and CoreComposition construction-root scans, Release restore/build succeeded; NUnit reported 119 passed, 0 failed, 0 skipped. Artifact `13092503957` was retained. This verifies standalone Core only, not Unity/FishNet.
 
 The existing MobSF, SecurityCodeScan and Contrast Scan workflows failed before producing completed security-analysis results:
 - MobSF: pinned `semgrep==0.50.1` dependency could not be installed.
