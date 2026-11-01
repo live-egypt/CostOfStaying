@@ -33,8 +33,12 @@ namespace CostOfStaying.Core.Services
             if (lookup.IsFailure)
                 return Result.Failure(lookup.ErrorCode);
 
-            if (lookup.Value.State != SessionState.Authenticated)
+            if (lookup.Value.State != SessionState.Authenticated ||
+                !lookup.Value.ActorId.HasValue ||
+                !lookup.Value.ActorId.Value.IsValid)
+            {
                 return Result.Failure(CoreErrorCode.Unauthorized);
+            }
 
             return _queue.TryEnqueue(envelope);
         }
