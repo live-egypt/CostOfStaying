@@ -22,9 +22,9 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
 | Pure Core project | VERIFIED | .NET 8 Release build and 77 NUnit tests passed in run 41326831611 for commit a235b99712bbe635ec71832647af9592e117a121; Core dependency-boundary scan also passed |
-| Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41326574904: 77/77 NUnit passed |
+| Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41326831611: 77/77 NUnit passed |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
-| Core unit tests | VERIFIED | 77 passed; 0 failed; 0 skipped in run 41326574904; TRX artifact 13091806116 retained |
+| Core unit tests | VERIFIED | 77 passed; 0 failed; 0 skipped in run 41326831611; TRX artifact 13091612088 retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
 | Match/session lifecycle | PARTIAL | Match phase state machine implemented and verified; session lifecycle and aggregate membership not implemented |
 | Command admission / queue / pipeline | NOT IMPLEMENTED | Ordering and bounds require decisions |
@@ -465,7 +465,7 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 
 ## 12. Exact current implementation status
 
-**Current implementation status:** ADR-007 is APPROVED. Core CI run 41326574904 passed 77/77 NUnit tests on source commit 17566c5234f65270ccd33d70f8d9dcccb4d2d044. Later branch commits have updated documentation only.
+**Current implementation status:** ADR-007 is APPROVED. Core CI run 41326831611 passed the Core dependency-boundary scan, Release build and 77/77 NUnit tests on commit a235b99712bbe635ec71832647af9592e117a121. Later branch commits have updated documentation only.
 
 | Item | Status |
 |---|---|
