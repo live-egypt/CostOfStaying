@@ -8,7 +8,8 @@
 **Identifier/ledger ADR:** ADR-006 (PROPOSED; approval status must be confirmed before freezing policy)  
 **Player lifecycle ADR:** ADR-007 (APPROVED: Alive / Spirit / Eliminated)  
 **Command ingress ADR:** ADR-008 (PROPOSED; policy owner review pending)
-**Match membership ADR:** ADR-009 (PROPOSED; capacity/reconnect policy owner review pending)  
+**Match membership ADR:** ADR-009 (PROPOSED; capacity/reconnect policy owner review pending)
+**Session lifecycle ADR:** ADR-010 (PROPOSED; timeout/reconnect/multi-session policy owner review pending)  
 **Unity/FishNet:** NOT IMPLEMENTED / NOT VERIFIED.
 
 ## Implemented Core source
