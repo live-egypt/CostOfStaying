@@ -45,7 +45,7 @@
 
 ## ADR-008 — Command envelope and sequence admission
 
-ADR-008 is PROPOSED. The implementation and tests exist, but the policy is not yet owner-approved. Open policy items include production MaximumSequenceJump, maximum tracked sessions, queue capacity, reconnect/session continuity, rate limiting and command timeout. Queue-full behavior and safe reset semantics passed Core CI run 41330344616. The current implementation consumes an accepted sequence before later gameplay-rule validation; this is explicitly recorded in ADR-008 and awaits review.
+ADR-008 is PROPOSED. The implementation and tests exist, but the policy is not yet owner-approved. Open policy items include production MaximumSequenceJump, maximum tracked sessions, queue capacity, reconnect/session continuity, rate limiting and command timeout. Queue-full behavior and safe reset semantics passed Core CI run 41330344616 (132 NUnit tests). The current implementation consumes an accepted sequence before later gameplay-rule validation; this is explicitly recorded in ADR-008 and awaits review.
 
 
 ## ADR-009 — Match-scoped player registry
