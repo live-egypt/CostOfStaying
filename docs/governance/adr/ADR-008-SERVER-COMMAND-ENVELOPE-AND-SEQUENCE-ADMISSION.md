@@ -21,10 +21,10 @@ The server must convert a network intent into a trusted Core command envelope. C
 9. Reset clears one session's sequence state only after that authenticated session is permanently removed and its queued commands have drained. Reconnect policy must decide whether a new SessionId is issued.
 10. The tracker is single-writer/server-serialized and is not thread-safe. It is in-memory and is not a durable anti-replay store.
 11. The `CommandAdmissionService<TCommand>` validates the envelope, resolves its SessionId in the server-owned SessionRegistry, and requires the session to be Authenticated with a valid ActorId before it delegates to the queue. Unknown sessions and unauthenticated/malformed actor bindings are rejected before sequence consumption. It does not perform gameplay payload validation.\n11. The command admission queue is FIFO and has an explicit positive capacity. When full, it returns CapacityExceeded before consuming the command sequence; the sender may retry the same envelope after backpressure clears.
-12. A session's replay state can be reset through the queue only when no queued command remains for that session; invalid reset requests fail without mutation.
-13. `StateRevision` zero represents initial state. Advancing increments by one; advancing at ulong.MaxValue fails without wrapping.
-14. No default MaximumSequenceJump, maximum tracked-session count or queue capacity is selected. The host must supply all three positive configured values.
-15. The tracker has a hard maximum number of tracked sessions. New session admission returns CapacityExceeded at the limit; existing sessions may continue; Reset releases the slot.
+13. A session's replay state can be reset through the queue only when no queued command remains for that session; invalid reset requests fail without mutation.
+14. `StateRevision` zero represents initial state. Advancing increments by one; advancing at ulong.MaxValue fails without wrapping.
+15. No default MaximumSequenceJump, maximum tracked-session count or queue capacity is selected. The host must supply all three positive configured values.
+16. The tracker has a hard maximum number of tracked sessions. New session admission returns CapacityExceeded at the limit; existing sessions may continue; Reset releases the slot.
 
 ## Implementation scope
 
