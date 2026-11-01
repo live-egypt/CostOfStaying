@@ -12,6 +12,7 @@
 - [ADR-009 — Match-Scoped Player Registry](governance/adr/ADR-009-MATCH-SCOPED-PLAYER-REGISTRY.md)
 - [تدقيق CI لتسلسل الأوامر وCommandEnvelope](audit/COMMAND_SEQUENCE_CORE_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق CI لطابور الأوامر المحدود وسعة الجلسات](audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md)
+- [تدقيق CI لسجل لاعبي المباراة](audit/CORE_MATCH_PLAYER_REGISTRY_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق CI لعزل Core وفرض CoreComposition](audit/CORE_CI_COMPOSITION_ENFORCEMENT_2026-11-01.md)
 - [ميثاق المشروع](00_PROJECT_CHARTER.md)
 - [Game Design Document](01_GAME_DESIGN_DOCUMENT.md)
