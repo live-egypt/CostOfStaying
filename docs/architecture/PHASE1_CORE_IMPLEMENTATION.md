@@ -13,6 +13,8 @@
 - Engine-independent .NET Standard 2.1 Core project.
 - Strongly typed numeric wrappers: `ActorId`, `MatchId`, `SessionId`, `VictimId`, `EventSequenceId` (ulong). ActorId remains the single canonical player-actor identity; no duplicate PlayerId wrapper is introduced.
 - Shared `Result` / `Result<T>` value contracts with stable `CoreErrorCode` categories and safe default-failure semantics.
+- `IMatchLifecycle` / `MatchLifecycle` with explicit, tested match-phase transitions.
+- `CoreComposition` as the Core construction root: one match-scoped Betrayal ledger and factories for player vitality accounts and match lifecycle aggregates.
 - `IVitalityAccount` and `IBetrayalLedger` contracts.
 - `VitalityAccount` with bounded vitality and canonical `Alive / Spirit / Eliminated` lifecycle.
 - `BetrayalLedger` with monotonic event sequence, exact replay handling and actor score accumulation.
@@ -39,6 +41,21 @@
 - Spirit abilities, connection/authentication state, match membership and spectator projection are separate concerns.
 - No resurrection cost/cooldown or other unapproved gameplay constant is embedded in Core.
 
+## Match lifecycle semantics
+
+- New matches start in Created.
+- Allowed transitions are Created → Waiting → Starting → Running; Running → VoteOpen or Ending; VoteOpen → Running or Ending; Ending → Completed.
+- Completed is terminal; undefined enum values and undocumented transitions are rejected without state mutation.
+- Player-count, timers, vote outcomes, end conditions and other policy preconditions are not embedded in this phase state machine; server application services must validate them before requesting a transition.
+
+## Composition root
+
+- Create a CoreComposition through `CoreComposition.Create()`.
+- One composition instance owns one match-scoped `IBetrayalLedger`.
+- It creates per-player `IVitalityAccount` and per-match `IMatchLifecycle` aggregates.
+- Separate compositions do not share ledger state.
+- The composition root is the only production construction point for Core services; tests may construct primitives directly for isolated unit tests.
+
 ## Betrayal ledger semantics
 
 - ActorId, VictimId and EventSequenceId are numeric ulong wrappers.
@@ -56,7 +73,8 @@
 ## Deliberate exclusions / remaining Core scope
 
 The following are not yet implemented and must not be represented as complete:
-- Session and match lifecycle services and state transitions.
+- Session lifecycle service and connection/authentication state transitions.
+- Full match aggregate, player registry, membership and world-state ownership.
 - CoreComposition as the single service-composition root.
 - Player aggregate and match/world state ownership.
 - ServerTick / StateRevision.
