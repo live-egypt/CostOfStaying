@@ -80,7 +80,9 @@
 - [ADR-008: Server Command Envelope and Sequence Admission](governance/adr/ADR-008-SERVER-COMMAND-ENVELOPE-AND-SEQUENCE-ADMISSION.md)
 - [ADR-009: Match-Scoped Player Registry](governance/adr/ADR-009-MATCH-SCOPED-PLAYER-REGISTRY.md)
 - [ADR-010: Server Session Lifecycle](governance/adr/ADR-010-SERVER-SESSION-LIFECYCLE.md)
-- [ADR-011: Bounded Server Session Registry](governance/adr/ADR-011-BOUNDED-SESSION-REGISTRY.md)\n- [ADR-012: Authenticated Command Admission](governance/adr/ADR-012-AUTHENTICATED-COMMAND-ADMISSION.md)\n- [ADR-013: Safe Session Cleanup](governance/adr/ADR-013-SAFE-SESSION-CLEANUP.md)
+- [ADR-011: Bounded Server Session Registry](governance/adr/ADR-011-BOUNDED-SESSION-REGISTRY.md)
+- [ADR-012: Authenticated Command Admission](governance/adr/ADR-012-AUTHENTICATED-COMMAND-ADMISSION.md)
+- [ADR-013: Safe Session Cleanup](governance/adr/ADR-013-SAFE-SESSION-CLEANUP.md)
 
 ## حالات الوثائق
 - **PROPOSED:** مقترح لم يعتمد.
