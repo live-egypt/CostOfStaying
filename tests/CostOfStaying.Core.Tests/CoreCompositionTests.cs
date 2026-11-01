@@ -38,6 +38,16 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void CreateSessionRegistry_UsesExplicitCapacity()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var registry = composition.CreateSessionRegistry(16);
+
+            Assert.That(registry.Capacity, Is.EqualTo(16));
+            Assert.That(registry.Count, Is.Zero);
+        }
+
+        [Test]
         public void CreateCommandSequenceTracker_UsesConfiguredMaximumJump()
         {
             CoreComposition composition = CoreComposition.Create();
