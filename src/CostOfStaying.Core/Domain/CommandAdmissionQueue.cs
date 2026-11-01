@@ -1,7 +1,6 @@
 namespace CostOfStaying.Core.Domain
 {
     using System.Collections.Generic;
-    using CostOfStaying.Core.Domain;
     using CostOfStaying;
 
     /// <summary>
