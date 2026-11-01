@@ -62,11 +62,6 @@ namespace CostOfStaying.Core
             return new SessionCleanupService<TCommand>(sessions, queue);
         }
 
-        public CommandSequenceTracker CreateCommandSequenceTracker(ulong maximumSequenceJump, int maximumTrackedSessions)
-        {
-            return new CommandSequenceTracker(maximumSequenceJump, maximumTrackedSessions);
-        }
-
         public CommandAdmissionQueue<TCommand> CreateCommandAdmissionQueue<TCommand>(
             ulong maximumSequenceJump,
             int maximumTrackedSessions,
