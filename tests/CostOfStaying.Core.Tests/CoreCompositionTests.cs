@@ -48,6 +48,16 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void CreateCommandAdmissionQueue_UsesExplicitBounds()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var queue = composition.CreateCommandAdmissionQueue<string>(12, 16, 32);
+
+            Assert.That(queue.Capacity, Is.EqualTo(32));
+            Assert.That(queue.PendingCount, Is.Zero);
+        }
+
+        [Test]
         public void CreateMatchLifecycle_UsesRequestedMatchId()
         {
             CoreComposition composition = CoreComposition.Create();
