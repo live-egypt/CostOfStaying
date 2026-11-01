@@ -21,7 +21,7 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Area | Status | Meaning |
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
-| Pure Core project | VERIFIED | .NET 8 Release build and 77 NUnit tests passed in run 41326574904 for source commit 17566c5234f65270ccd33d70f8d9dcccb4d2d044 |
+| Pure Core project | VERIFIED | .NET 8 Release build and 77 NUnit tests passed in run 41326831611 for commit a235b99712bbe635ec71832647af9592e117a121; Core dependency-boundary scan also passed |
 | Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41326574904: 77/77 NUnit passed |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
 | Core unit tests | VERIFIED | 77 passed; 0 failed; 0 skipped in run 41326574904; TRX artifact 13091806116 retained |
