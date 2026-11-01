@@ -211,7 +211,7 @@ Status definitions:
 | Domain/VitalityAccount.cs | Bounded vitality; Alive → Spirit; explicit Resurrect / Eliminate | VitalityAccountTests | IMPLEMENTED |
 | Domain/BetrayalLedger.cs | Monotonic event sequence, replay rejection, score | BetrayalLedgerTests | IMPLEMENTED |
 | Result.cs | Result / Result<T> and CoreErrorCode | ResultTests | IMPLEMENTED; latest CI pending |\n| CoreComposition.cs | Single Core composition root | CoreCompositionTests | PROPOSED |
-| Result.cs / ResultT.cs | Consistent success/failure contracts | ResultTests | PROPOSED |
+| Result.cs | Consistent success/failure contracts | ResultTests | IMPLEMENTED; latest CI pending |
 | MatchId / SessionId | Typed match/session IDs; ActorId remains canonical player actor ID | IdentifierTests | IMPLEMENTED |
 | ServerTick.cs / StateRevision.cs | Server tick and revision values | TimeAndRevisionTests | PROPOSED |
 | Position2.cs / MovementInput.cs | Engine-independent movement values | MovementValueTests | PROPOSED |
