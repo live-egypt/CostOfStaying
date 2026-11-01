@@ -1,6 +1,6 @@
 # Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY IMPLEMENTED — the existing baseline passed Core CI; the bounded command-queue and session-capacity increment is awaiting its own CI run.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 119/119 NUnit on commit `a0cc96c02ce163691456bc2a02dbbc9c57cd1d12`; the broader Core scope remains incomplete.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 8 / NUnit 3.14  
@@ -102,15 +102,17 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated transp
 
 ## Verification evidence
 
-The last completed Core CI baseline before the latest queue/capacity changes:
-- Run: `41327543734` — SUCCESS.
-- Source commit: `c8a914970029c249081fd5cf6e48990d1a3cfaca`.
-- Dependency boundary and CoreComposition construction-root checks: PASS.
+The latest Core CI run:
+- Run: `41329400470` — SUCCESS.
+- Source commit: `a0cc96c02ce163691456bc2a02dbbc9c57cd1d12`.
+- Core dependency boundary and composition-root checks: PASS.
 - .NET 8 Release restore/build: PASS.
-- NUnit: 103 passed, 0 failed, 0 skipped.
-- TRX artifact: `13091687045`.
+- NUnit: 119 passed, 0 failed, 0 skipped.
+- TRX artifact: `13092811803`.
+- Artifact SHA-256: `91eeceebd7a30581bc2958d798daa12c8a9be625dbf841c87043dcf9d5311fdf`.
+- Detailed evidence: [Bounded command queue and session replay capacity CI](../audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md).
 
-**Important:** the queue, bounded-session-capacity and workflow corrections added after that source commit have not yet been covered by that run. They require a new CI result before being marked VERIFIED. See [Core CI purity and composition enforcement](../audit/CORE_CI_COMPOSITION_ENFORCEMENT_2026-11-01.md) for the exact baseline evidence.
+This run verifies the latest Core queue/capacity increment. It does not verify the unimplemented Core systems or Unity/FishNet.
 
 ## Next implementation order
 
