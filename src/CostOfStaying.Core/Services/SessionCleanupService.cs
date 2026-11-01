@@ -15,7 +15,7 @@ namespace CostOfStaying.Core.Services
         private readonly SessionRegistry _sessions;
         private readonly CommandAdmissionQueue<TCommand> _queue;
 
-        public SessionCleanupService(SessionRegistry sessions, CommandAdmissionQueue<TCommand> queue)
+        internal SessionCleanupService(SessionRegistry sessions, CommandAdmissionQueue<TCommand> queue)
         {
             _sessions = sessions ?? throw new ArgumentNullException(nameof(sessions));
             _queue = queue ?? throw new ArgumentNullException(nameof(queue));
