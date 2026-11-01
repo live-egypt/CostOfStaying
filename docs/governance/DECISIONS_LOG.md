@@ -14,6 +14,7 @@
 | ADR-007 | دورة حياة اللاعب وVitality | APPROVED | تأكيد القرار السابق: Alive / Spirit / Eliminated؛ الصفر ينقل إلى Spirit؛ Resurrect وEliminate عمليتان صريحتان وخادميتان؛ Eliminated نهائية |
 | ADR-008 | Server Command Envelope وSequence Admission | PROPOSED | عقد خادمي للهوية/التوقيت/التسلسل ومنع replay؛ قيم الحدود وسياسة reconnect ما زالت TBD |
 | ADR-009 | Match-Scoped Player Registry | PROPOSED | سجل عضوية bounded لكل MatchId؛ سعة اللاعبين وسياسة spectator/reconnect ما زالت TBD |
+| ADR-010 | Server Session Lifecycle | PROPOSED | Pending/Authenticated/Disconnected/Closed؛ reconnect/timeout/multi-session policy ما زالت TBD |
 
 ## قرارات نطاق ومبادئ
 - MVP لأربعة لاعبين وخريطة واحدة: نطاق المنتج المستهدف في ميثاق المشروع، ويعاد تقييمه عبر قرار موثق إذا تغير.
