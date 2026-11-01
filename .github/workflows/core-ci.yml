@@ -8,22 +8,30 @@ on:
     paths:
       - "src/CostOfStaying.Core/**"
       - "tests/CostOfStaying.Core.Tests/**"
-      - ".github/workflows/core-ci.yml"
+      - ".github/workflows/**"
   pull_request:
     branches:
       - main
     paths:
       - "src/CostOfStaying.Core/**"
       - "tests/CostOfStaying.Core.Tests/**"
-      - ".github/workflows/core-ci.yml"
+      - ".github/workflows/**"
+  workflow_dispatch:
+  schedule:
+    - cron: "23 3 * * 1"
 
 permissions:
   contents: read
+
+concurrency:
+  group: core-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   core-tests:
     name: Build and test standalone Core
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,6 +40,8 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
+          cache: true
+          cache-dependency-path: tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj
 
       - name: Restore
         run: dotnet restore tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj
@@ -39,8 +49,11 @@ jobs:
       - name: Build Core
         run: dotnet build src/CostOfStaying.Core/CostOfStaying.Core.csproj --configuration Release --no-restore
 
+      - name: Build test project
+        run: dotnet build tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-restore
+
       - name: Run NUnit tests
-        run: dotnet test tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-restore --logger "trx;LogFileName=core-tests.trx" --results-directory artifacts/test-results
+        run: dotnet test tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-build --no-restore --logger "trx;LogFileName=core-tests.trx" --results-directory artifacts/test-results
 
       - name: Upload test results
         if: always()
