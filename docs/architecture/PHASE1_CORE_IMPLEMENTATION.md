@@ -1,6 +1,6 @@
 # Phase 1 Core — Implemented Contracts and Primitives
 
-**Status:** PARTIAL — source implemented on `feature/core-lifecycle-resolution`; CI verification pending for this lifecycle revision.  
+**Status:** PARTIALLY VERIFIED — ADR-007 lifecycle source passed Core CI (45/45 NUnit) on commit `48ee4d47d5f63b89b3210b59e8a289dd4ee8ba05`; remaining Core scope is not implemented.  
 **Architecture ADR:** ADR-005 (APPROVED)  
 **Lifecycle ADR:** ADR-007 (APPROVED: Alive / Spirit / Eliminated)  
 **Identifier/ledger ADR:** ADR-006 (PROPOSED — do not treat as owner-approved)  
@@ -71,9 +71,15 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated connec
 
 ## Verification evidence
 
-Previous baseline CI run `41312765519` passed the earlier Core source: Release build succeeded and NUnit reported 38 passed, 0 failed, 0 skipped. That run predates the ADR-007 lifecycle rewrite and does **not** verify this revision.
+- **Tested source commit:** `48ee4d47d5f63b89b3210b59e8a289dd4ee8ba05`
+- **Core CI run:** `41325988534` — SUCCESS
+- **Release restore/build:** PASS
+- **NUnit:** 45 passed, 0 failed, 0 skipped
+- **TRX artifact:** `core-test-results`, ID `13091132468`
+- **Artifact SHA-256:** `f45d6d749463f2401906659e8c9f534977a392e2df3b0107be270186529ba783`
+- **Detailed evidence:** [ADR-007 lifecycle CI verification](../audit/ADR007_LIFECYCLE_CI_VERIFICATION_2026-11-01.md)
 
-The current lifecycle branch must pass the Core CI workflow on its exact head commit before this revision is marked VERIFIED. Unity/FishNet, Android, performance and production security remain outside the standalone Core CI scope.
+The lifecycle implementation is VERIFIED for the standalone Core scope at that exact source commit. Subsequent commits to this branch have changed documentation only. Unity/FishNet, Android, performance and production security remain outside this standalone Core CI scope.
 
 ## Next implementation order
 
