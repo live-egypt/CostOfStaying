@@ -9,7 +9,7 @@
 
 - Core dependency boundary: PASS — no UnityEngine/FishNet references in Core source/project files.
 - Core composition root: PASS — aggregate and queue construction is centralized in CoreComposition; the queue owns its private sequence tracker.
-- .NET 8 restore: PASS.
+- .NET 10 restore: PASS.
 - Core Release build: PASS.
 - NUnit test project Release build: PASS.
 - NUnit: **119 passed, 0 failed, 0 skipped**.
