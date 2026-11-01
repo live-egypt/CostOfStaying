@@ -28,7 +28,7 @@ namespace CostOfStaying.Core.Tests
         public void Constructor_RejectsZeroCapacity()
         {
             Assert.Throws<System.ArgumentOutOfRangeException>(() =>
-                new CommandAdmissionQueue<TestCommand>(new CommandSequenceTracker(4, 2), 0));
+                CreateQueue(4, 2, 0));
         }
 
         [Test]
