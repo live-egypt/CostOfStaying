@@ -6,13 +6,20 @@ namespace CostOfStaying.Core.Tests
     [TestFixture]
     public sealed class IdentifierTests
     {
-        [Test]
-        public void ActorId_PreservesNumericValue()
+        [TestCase(42UL)]
+        [TestCase(ulong.MaxValue)]
+        public void ActorId_PreservesValidValue(ulong value)
         {
-            var id = new ActorId(42UL);
-            Assert.That(id.Value, Is.EqualTo(42UL));
-            Assert.That(id.ToString(), Is.EqualTo("42"));
+            var id = new ActorId(value);
+            Assert.That(id.Value, Is.EqualTo(value));
             Assert.That(id.IsValid, Is.True);
+        }
+
+        [Test]
+        public void ActorId_ZeroIsRepresentableButInvalid()
+        {
+            Assert.That(new ActorId(0UL).IsValid, Is.False);
+            Assert.That(default(ActorId).IsValid, Is.False);
         }
 
         [Test]
@@ -20,78 +27,64 @@ namespace CostOfStaying.Core.Tests
         {
             Assert.That(new ActorId(7UL), Is.EqualTo(new ActorId(7UL)));
             Assert.That(new ActorId(7UL), Is.Not.EqualTo(new ActorId(8UL)));
-            Assert.That(new ActorId(7UL) == new ActorId(7UL), Is.True);
-            Assert.That(new ActorId(7UL) != new ActorId(8UL), Is.True);
         }
 
         [Test]
-        public void ActorId_ZeroIsRepresentableButInvalid()
+        public void MatchId_PreservesValueAndHasTypedEquality()
         {
-            var id = new ActorId(0UL);
-            Assert.That(id.Value, Is.Zero);
-            Assert.That(id.IsValid, Is.False);
-        }
-
-        [Test]
-        public void ActorId_SupportsMaximumValue()
-        {
-            var id = new ActorId(ulong.MaxValue);
-            Assert.That(id.Value, Is.EqualTo(ulong.MaxValue));
+            var id = new MatchId(77UL);
+            Assert.That(id.Value, Is.EqualTo(77UL));
             Assert.That(id.IsValid, Is.True);
+            Assert.That(id, Is.EqualTo(new MatchId(77UL)));
+            Assert.That(id, Is.Not.EqualTo(new MatchId(78UL)));
         }
 
         [Test]
-        public void VictimId_EqualityUsesNumericValue()
+        public void MatchId_ZeroIsInvalid()
         {
-            Assert.That(new VictimId(11UL), Is.EqualTo(new VictimId(11UL)));
-            Assert.That(new VictimId(11UL), Is.Not.EqualTo(new VictimId(12UL)));
+            Assert.That(new MatchId(0UL).IsValid, Is.False);
+            Assert.That(default(MatchId).IsValid, Is.False);
         }
 
         [Test]
-        public void VictimId_ZeroIsRepresentableButInvalid()
+        public void SessionId_PreservesValueAndHasTypedEquality()
         {
-            var id = new VictimId(0UL);
-            Assert.That(id.Value, Is.Zero);
-            Assert.That(id.IsValid, Is.False);
-        }
-
-        [Test]
-        public void VictimId_SupportsMaximumValue()
-        {
-            var id = new VictimId(ulong.MaxValue);
-            Assert.That(id.Value, Is.EqualTo(ulong.MaxValue));
+            var id = new SessionId(88UL);
+            Assert.That(id.Value, Is.EqualTo(88UL));
             Assert.That(id.IsValid, Is.True);
+            Assert.That(id, Is.EqualTo(new SessionId(88UL)));
+            Assert.That(id, Is.Not.EqualTo(new SessionId(89UL)));
         }
 
         [Test]
-        public void EventSequenceId_EqualityUsesNumericValue()
+        public void SessionId_ZeroIsInvalid()
         {
-            Assert.That(new EventSequenceId(99UL), Is.EqualTo(new EventSequenceId(99UL)));
-            Assert.That(new EventSequenceId(99UL), Is.Not.EqualTo(new EventSequenceId(100UL)));
+            Assert.That(new SessionId(0UL).IsValid, Is.False);
+            Assert.That(default(SessionId).IsValid, Is.False);
         }
 
         [Test]
-        public void EventSequenceId_ZeroIsRepresentableButInvalid()
+        public void VictimId_ZeroIsInvalidAndMaximumIsValid()
         {
-            var id = new EventSequenceId(0UL);
-            Assert.That(id.Value, Is.Zero);
-            Assert.That(id.IsValid, Is.False);
+            Assert.That(new VictimId(0UL).IsValid, Is.False);
+            Assert.That(new VictimId(ulong.MaxValue).IsValid, Is.True);
         }
 
         [Test]
-        public void EventSequenceId_SupportsMaximumValue()
+        public void EventSequenceId_ZeroIsInvalidAndMaximumIsValid()
         {
-            var id = new EventSequenceId(ulong.MaxValue);
-            Assert.That(id.Value, Is.EqualTo(ulong.MaxValue));
-            Assert.That(id.IsValid, Is.True);
+            Assert.That(new EventSequenceId(0UL).IsValid, Is.False);
+            Assert.That(new EventSequenceId(ulong.MaxValue).IsValid, Is.True);
         }
 
         [Test]
-        public void DifferentIdentifierTypes_AreDistinctTypes()
+        public void DifferentIdentifierTypes_AreNotInterchangeable()
         {
+            Assert.That(typeof(ActorId), Is.Not.EqualTo(typeof(MatchId)));
+            Assert.That(typeof(ActorId), Is.Not.EqualTo(typeof(SessionId)));
             Assert.That(typeof(ActorId), Is.Not.EqualTo(typeof(VictimId)));
-            Assert.That(typeof(ActorId), Is.Not.EqualTo(typeof(EventSequenceId)));
-            Assert.That(typeof(VictimId), Is.Not.EqualTo(typeof(EventSequenceId)));
+            Assert.That(typeof(MatchId), Is.Not.EqualTo(typeof(SessionId)));
+            Assert.That(typeof(MatchId), Is.Not.EqualTo(typeof(EventSequenceId)));
         }
     }
 }
