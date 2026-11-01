@@ -48,6 +48,17 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void CreateMatchPlayerRegistry_UsesRequestedMatchAndCapacity()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var registry = composition.CreateMatchPlayerRegistry(new MatchId(8), 12);
+
+            Assert.That(registry.MatchId, Is.EqualTo(new MatchId(8)));
+            Assert.That(registry.Capacity, Is.EqualTo(12));
+            Assert.That(registry.Count, Is.Zero);
+        }
+
+        [Test]
         public void CreateCommandAdmissionQueue_UsesExplicitBounds()
         {
             CoreComposition composition = CoreComposition.Create();
