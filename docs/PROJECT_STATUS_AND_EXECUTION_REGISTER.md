@@ -45,7 +45,7 @@ ADR-007 has been resolved in favor of the earlier owner-approved model and reaff
 - Ordinary Restore never resurrects; only explicit Resurrect can transition Spirit → Alive.
 - The v2.1 `Alive → Dead` lifecycle text is superseded and must be reconciled in every maintained specification.
 
-The Core source and NUnit tests have been updated on `feature/core-lifecycle-resolution`. Core CI run 41325988534 verified the lifecycle implementation (45/45), and run 41326574904 verified the Result, typed-ID, MatchLifecycle and CoreComposition increment (77/77) on source commit 17566c5234f65270ccd33d70f8d9dcccb4d2d044. The Core API does not implement authorization, costs, cooldowns or match-phase policy; those remain server application responsibilities.
+The Core source and NUnit tests have been updated on `feature/core-lifecycle-resolution`. Core CI run 41327308752 verified the latest Core source on commit ce995ff0dfab7bacd012ca9a472cf9040cd6fa84: dependency-boundary scan and Release build passed; NUnit 103/103 passed. This includes lifecycle, Result, typed IDs, MatchLifecycle, CoreComposition, time/revision values, command envelope and sequence tracker. The Core API does not implement authorization, costs, cooldowns or match-phase policy; those remain server application responsibilities.
 
 ## 3. Verified evidence boundary
 
