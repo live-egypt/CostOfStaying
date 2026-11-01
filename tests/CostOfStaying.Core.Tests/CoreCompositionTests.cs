@@ -3,6 +3,7 @@ namespace CostOfStaying.Core.Tests
     using CostOfStaying;
     using CostOfStaying.Core.Domain;
     using CostOfStaying.Core.Contracts;
+    using CostOfStaying.Core.Services;
     using NUnit.Framework;
 
     [TestFixture]
