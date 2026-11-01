@@ -1,5 +1,7 @@
 name: Core CI
 
+# CI policy revision: 2026-11-01
+
 on:
   push:
     branches:
