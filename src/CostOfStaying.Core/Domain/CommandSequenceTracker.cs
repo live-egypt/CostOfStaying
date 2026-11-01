@@ -12,15 +12,20 @@ namespace CostOfStaying.Core.Domain
     {
         private readonly Dictionary<SessionId, ulong> _lastAccepted = new Dictionary<SessionId, ulong>();
 
-        public CommandSequenceTracker(ulong maximumSequenceJump)
+        public CommandSequenceTracker(ulong maximumSequenceJump, int maximumTrackedSessions)
         {
             if (maximumSequenceJump == 0UL)
                 throw new ArgumentOutOfRangeException(nameof(maximumSequenceJump), "Maximum sequence jump must be positive.");
+            if (maximumTrackedSessions <= 0)
+                throw new ArgumentOutOfRangeException(nameof(maximumTrackedSessions), "Maximum tracked sessions must be positive.");
 
             MaximumSequenceJump = maximumSequenceJump;
+            MaximumTrackedSessions = maximumTrackedSessions;
         }
 
         public ulong MaximumSequenceJump { get; }
+        public int MaximumTrackedSessions { get; }
+        public int TrackedSessionCount => _lastAccepted.Count;
 
         /// <summary>
         /// Accepts a strictly newer sequence if its gap from the last accepted value (zero for a new session)
@@ -42,6 +47,9 @@ namespace CostOfStaying.Core.Domain
             ulong jump = sequenceId.Value - previous;
             if (jump > MaximumSequenceJump)
                 return Result.Failure(CoreErrorCode.OutOfRange);
+
+            if (!_lastAccepted.ContainsKey(sessionId) && _lastAccepted.Count >= MaximumTrackedSessions)
+                return Result.Failure(CoreErrorCode.CapacityExceeded);
 
             _lastAccepted[sessionId] = sequenceId.Value;
             return Result.Success();
