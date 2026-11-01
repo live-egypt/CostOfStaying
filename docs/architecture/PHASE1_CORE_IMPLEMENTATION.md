@@ -113,7 +113,7 @@ The latest Core CI run:
 - .NET 10 Release restore/build: PASS.
 - NUnit: 148 passed, 0 failed, 0 skipped.
 - TRX artifact: `13093536721`.
-- Artifact SHA-256: `2b13f11e173414f7b232a89ef1ec0389d1d237686cc9137f5efa9662a8d1ee67`.
+- Artifact SHA-256: `b4067bbd6c6b0492a245dea4c8970acca23d7196d398018f5266da42709b4295`.
 - Detailed evidence: [Bounded command queue and session replay capacity CI](../audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md).
 
 This run verifies the latest Core queue/capacity increment. It does not verify the unimplemented Core systems or Unity/FishNet.
