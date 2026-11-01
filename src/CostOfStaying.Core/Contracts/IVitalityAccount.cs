@@ -9,11 +9,13 @@ namespace CostOfStaying.Core.Contracts
     public interface IVitalityAccount
     {
         ActorId PlayerId { get; }
-        PlayerVitalityState State { get; }
+        PlayerLifecycleState State { get; }
         uint Current { get; }
         uint Maximum { get; }
 
         void Lose(uint amount);
         void Restore(uint amount);
+        bool TryResurrect(uint requestedVitality);
+        bool TryEliminate();
     }
 }
