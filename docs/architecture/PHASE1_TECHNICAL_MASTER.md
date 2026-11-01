@@ -324,7 +324,8 @@ Unity behaviours are thin adapters; authoritative rules do not belong in MonoBeh
 | CorePipelineTests.cs | Deterministic tick | PROPOSED |
 | SnapshotTests.cs | Immutability and revision | PROPOSED |
 | SecurityInvariantTests.cs | Authority, replay, identity spoofing | PROPOSED |
-| IdentifierTests.cs | Numeric value semantics and type separation for current IDs | IMPLEMENTED / NOT EXECUTED |\n| VitalityAccountTests.cs | Current Vitality primitive | IMPLEMENTED / NOT EXECUTED |
+| IdentifierTests.cs | Numeric value semantics, validity and type separation for current IDs | IMPLEMENTED / NOT EXECUTED |
+| VitalityAccountTests.cs | Current Vitality primitive | IMPLEMENTED / NOT EXECUTED |
 | BetrayalLedgerTests.cs | Current ledger primitive | IMPLEMENTED / NOT EXECUTED |
 
 ### 6.10 Unity/FishNet integration tests
