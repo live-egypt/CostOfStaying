@@ -33,7 +33,7 @@ namespace CostOfStaying.Core.Domain
         /// A full queue rejects before consuming the sequence so the sender may retry after backpressure clears.
         /// Once admitted, the sequence is consumed even if later gameplay validation rejects the command.
         /// </summary>
-        public Result TryEnqueue(CommandEnvelope<TCommand> envelope)
+        internal Result TryEnqueue(CommandEnvelope<TCommand> envelope)
         {
             if (!envelope.IsValid)
                 return Result.Failure(CoreErrorCode.InvalidArgument);
@@ -70,7 +70,7 @@ namespace CostOfStaying.Core.Domain
         }
 
         /// <summary>Removes the oldest pending command. Returns false and default when the queue is empty.</summary>
-        public bool TryDequeue(out CommandEnvelope<TCommand> envelope)
+        internal bool TryDequeue(out CommandEnvelope<TCommand> envelope)
         {
             if (_pending.Count == 0)
             {
