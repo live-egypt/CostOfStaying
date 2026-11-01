@@ -56,7 +56,7 @@ namespace CostOfStaying.Core.Domain
                 : Result<ISessionLifecycle>.Failure(CoreErrorCode.NotFound);
         }
 
-        public Result Remove(SessionId sessionId)
+        internal Result RemoveClosedSession(SessionId sessionId)
         {
             if (!sessionId.IsValid)
                 return Result.Failure(CoreErrorCode.InvalidArgument);
