@@ -1,34 +1,43 @@
-# ADR-010 — Server Session Lifecycle Primitive
+# ADR-010 — Server Session Lifecycle
 
-**Status:** PROPOSED — implementation and tests exist; owner review required  
+**Status:** PROPOSED — deterministic Core primitive and NUnit coverage exist; session/reconnect policy requires owner review  
 **Date:** 2026-11-01  
-**Related:** ADR-002, ADR-005, ADR-008, `ISessionLifecycle`, `SessionLifecycle`
+**Related:** ADR-005, ADR-008, `ISessionLifecycle`, `SessionLifecycle`
 
 ## Context
 
-Core needs a deterministic representation of one server-issued session after the transport/application layer has created it. Authentication credentials, connection handles, expiry, reconnect tokens and authorization are not domain responsibilities. The player lifecycle (ADR-007) is independent of session connectivity.
+Transport connection state, authenticated actor identity and player gameplay lifecycle are distinct concerns. The server must own the session identity and the association between an authenticated session and an ActorId. Session state must not be conflated with Alive/Spirit/Eliminated player state.
 
-## Proposed state model
+## Proposed contract
 
-`Pending → Authenticated → Disconnected → Closed`
+1. Every session is created with a server-issued, non-zero SessionId.
+2. A new session starts Pending and has no ActorId association.
+3. Only trusted server authentication code may call TryAuthenticate after credentials/identity have been validated outside Core.
+4. Pending → Authenticated associates exactly one non-zero ActorId.
+5. A session can be authenticated only once. A second association attempt fails without replacing the original ActorId.
+6. Authenticated → Disconnected is explicit. Pending cannot be disconnected.
+7. A Disconnected session cannot be re-authenticated or reactivated. Reconnect must create a new SessionId and pass through trusted authentication again.
+8. TryClose moves Pending, Authenticated or Disconnected to terminal Closed. Repeated close and all later state transitions fail.
+9. The ActorId association is retained after Disconnected/Closed for server-side audit/correlation; retention duration and log redaction are application policy.
+10. Core stores no credentials, transport objects, timers, tokens or client-controlled identity.
+11. SessionLifecycle is deterministic, in-memory, single-writer/server-serialized and not thread-safe.
+12. This primitive does not enforce global SessionId uniqueness, one-session-per-actor policy, session capacity, expiration timeouts, reconnect grace periods or persistence.
 
-A Pending session may also be Closed before authentication. An Authenticated session may be Closed directly. Disconnected sessions may be Closed. Closed is terminal.
+## Implementation
 
-- A session is constructed with one valid non-zero SessionId and starts Pending.
-- `TryAuthenticate(ActorId)` associates one valid non-zero actor with a Pending session exactly once.
-- `TryDisconnect()` succeeds only from Authenticated.
-- `TryClose()` succeeds from Pending, Authenticated or Disconnected.
-- Actor association is retained after disconnect/close for server-side audit and cleanup correlation.
-- A disconnected or closed SessionId cannot be re-authenticated or rebound to another actor.
-- Reconnect policy, token continuity, grace period, expiry, concurrent-session policy and authentication mechanisms remain application/backend decisions. A reconnect must not be inferred by this primitive.
+- `ISessionLifecycle` and `SessionLifecycle`.
+- `SessionState`: Pending, Authenticated, Disconnected, Closed.
+- `CoreComposition.CreateSessionLifecycle(sessionId)`.
+- NUnit coverage for constructor validation, authentication, invalid/repeated association, disconnect, close, terminal behavior and instance isolation.
 
-## Implementation boundary
+## Open policy items
 
-- `ISessionLifecycle` and `SessionLifecycle` are pure C#.
-- No network connection, credentials, wall clock, timers, persistence or Unity/FishNet references.
-- Single-writer/server-serialized; no thread-safety promise.
-- CoreComposition is the construction root.
+- Whether multiple active sessions may bind to the same ActorId.
+- Whether disconnected sessions remain registered during a reconnect grace period.
+- Session expiration and timeout source.
+- Global session capacity and cleanup policy.
+- Persistence/recovery and audit-retention period.
 
-## Verification
+## Verification boundary
 
-NUnit tests cover constructor validation, initial state, actor binding, invalid/duplicate authentication, disconnect guards, association retention, terminal close and independent sessions. Passing tests verify only this primitive, not authentication security or reconnect behavior.
+CI verifies the deterministic session state machine only. It does not verify credential validation, identity provider integration, connection-to-session binding, transport security, replay handling across process restarts or production reconnect behavior.
