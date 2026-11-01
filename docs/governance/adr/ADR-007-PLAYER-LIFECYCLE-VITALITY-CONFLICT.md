@@ -1,68 +1,70 @@
-# ADR-007 — Player Lifecycle and Vitality Zero-Transition Conflict
+# ADR-007 — Canonical Player Lifecycle and Vitality Semantics
 
-**Status:** DECISION REQUIRED — proposed options; no replacement decision approved  
-**Date:** 2026-11-01  
-**Related:** ADR-004, ADR-005, docs/02_GAME_RULES_SPECIFICATION.md, docs/architecture/PHASE1_TECHNICAL_MASTER.md
+**Status:** APPROVED — earlier owner-approved Phase 1 decision reaffirmed 2026-11-01  
+**Decision recorded:** 2026-11-01  
+**Supersedes:** the conflicting player-lifecycle statements in gameplay proposal v2.1 only  
+**Related:** ADR-004, ADR-005, ADR-006, `docs/02_GAME_RULES_SPECIFICATION.md`
 
 ## Context
 
-The project history contains an explicit owner-approved Phase 1 lifecycle decision dated 2026-10-31 12:28 UTC:
+The project history contains an explicit owner-approved Phase 1 decision dated 2026-10-31 12:28 UTC:
 
-- Player-state matrix: Alive / Spirit / Eliminated.
-- Vitality reaching zero automatically transitions the player to Spirit.
-- Resurrect and Eliminate are explicit operations.
-- Numeric IDs use ulong.
+- Player lifecycle states are `Alive`, `Spirit`, and `Eliminated`.
+- Vitality reaching zero automatically transitions `Alive → Spirit`.
+- `Resurrect` and `Eliminate` are explicit server-authoritative operations.
+- Numeric identifiers use `ulong`.
 - The server owns event ordering; Core does not promise thread safety.
 - NUnit tests are required.
 
-The current repository v2.1 gameplay proposal and the Phase 1 implementation branch describe a different lifecycle:
+The later v2.1 proposal and the initial executable `VitalityAccount` used `Alive → Dead`, with no revival. That implementation contradicted the earlier owner-approved lifecycle and did not revoke it. The Core-boundary approval in ADR-005 did not authorize changing gameplay lifecycle semantics.
 
-- Vitality reaching zero transitions Alive → Dead.
-- MVP has no Dead → Alive revival operation.
-- Spirit is a separate post-death role/projection, not a player vitality/lifecycle state.
+## Decision
 
-These contracts cannot both be the canonical player lifecycle. The current VitalityAccount and its NUnit tests implement the second model. ADR-005 approves the pure-Core boundary and first-slice approach, but the project history does not establish that the earlier explicit lifecycle approval was deliberately revoked.
+**Option A is canonical.** The earlier owner-approved `Alive / Spirit / Eliminated` lifecycle is reaffirmed. The v2.1 `Alive → Dead` lifecycle is not the canonical player lifecycle. v2.1 remains a proposed gameplay baseline for all rules that do not contradict this ADR.
 
-## Decision required
+### Canonical transition matrix
 
-The owner must choose which lifecycle contract is canonical. Until then, the current VitalityAccount behavior is code-verified but gameplay-provisional.
+| Current state | Operation | Preconditions | Next state | Vitality result |
+|---|---|---|---|---|
+| Alive | Lose(amount > 0), result > 0 | Valid account | Alive | Decreases, clamped at zero |
+| Alive | Lose(amount > 0), result = 0 | Valid account | Spirit | Exactly zero |
+| Alive | Lose(0) | Any | Alive | Unchanged |
+| Alive | Restore(amount > 0) | Alive only | Alive | Increases, capped at Maximum |
+| Spirit | Lose / Restore | Any | Spirit | Unchanged; zero |
+| Spirit | Resurrect(amount > 0) | Explicit server-authorized operation | Alive | Set to min(amount, Maximum) |
+| Alive or Spirit | Eliminate | Explicit server-authorized operation | Eliminated | Set to zero |
+| Eliminated | Any lifecycle/vitality mutation | Any | Eliminated | Zero; terminal |
 
-### Option A — Preserve the earlier owner-approved matrix
+### Domain/API semantics
 
-- Player lifecycle states are Alive, Spirit and Eliminated.
-- Reaching zero Vitality automatically transitions Alive → Spirit.
-- Resurrect and Eliminate are explicit server-authoritative operations.
-- The contract must define who may resurrect, under what conditions, whether Vitality is restored, costs/cooldowns, and how Spirit can be eliminated.
-- Vitality amount/state and player participation state must be modelled separately where necessary; do not overload one enum without a transition table.
+1. `PlayerLifecycleState` is the single lifecycle enum: `Alive`, `Spirit`, `Eliminated`. Do not retain a competing `Dead` state.
+2. Vitality is bounded by `0..Maximum`; Maximum must be positive. The initial value is Maximum.
+3. Reaching zero through `Lose` automatically changes `Alive` to `Spirit`.
+4. `Restore` is not resurrection. It affects only an Alive player.
+5. Resurrection is explicit. It succeeds only from Spirit and requires a positive requested vitality amount; the resulting amount is capped at Maximum. It is not triggered by Restore.
+6. Elimination is explicit, valid from Alive or Spirit, sets vitality to zero and is terminal.
+7. Repeating a transition that is no longer valid returns false from the corresponding `Try...` operation; it does not mutate state.
+8. The Core primitive validates domain state and values, not user permissions. Only the server application layer may invoke Resurrect or Eliminate after checking authorization, match phase, gameplay costs/cooldowns and other policy.
+9. No resurrection cost, cooldown, actor permission matrix, Spirit abilities, or balance constants are invented here. Those remain application/gameplay policy inputs until approved by a separate rule decision.
+10. Core remains single-writer/server-serialized; thread safety and persistence are not promised.
 
-### Option B — Adopt the current v2.1 proposal
+### Separation of concerns
 
-- Vitality reaching zero transitions Alive → Dead.
-- Dead is terminal for the MVP; no resurrection operation exists.
-- Spirit is a separate post-death role/projection and does not participate as an Alive/Spirit/Eliminated state in the Vitality account.
-- Any previous Resurrect/Eliminate operations are explicitly withdrawn from the MVP scope.
+- `PlayerLifecycleState` describes participation lifecycle.
+- Vitality is a numeric resource owned by the account.
+- Connection/authentication state is separate and must not be inferred from lifecycle.
+- Match membership and spectator/presentation projections are separate.
+- Spirit abilities and scoring are outside this primitive.
 
-## Required acceptance criteria
+## Consequences
 
-Before changing the Core lifecycle API:
+- The initial `Alive → Dead` implementation is replaced by the approved `Alive → Spirit → Alive/Eliminated` lifecycle.
+- A player reaching zero remains a Spirit, not a Dead player.
+- Spirit cannot be revived by ordinary Restore; only the explicit Resurrect operation can do so.
+- Eliminated is terminal.
+- v2.1 RULE-01 and RULE-04 must be reconciled with this ADR before they are described as an internally consistent final gameplay specification.
+- All lifecycle tests must cover every matrix row, rejected operation and no-partial-mutation case.
 
-1. Record the selected option as APPROVED in this ADR.
-2. Publish one canonical player lifecycle transition matrix.
-3. Define the relationship between VitalityState, ParticipationState, SpiritRole, MatchMembership and ConnectionState.
-4. Define the exact zero-Vitality transition and whether the transition is automatic.
-5. Define Resurrect and Eliminate command permissions, preconditions, effects, idempotency and failure behavior if Option A is selected.
-6. Update docs/02_GAME_RULES_SPECIFICATION.md, the system documents, ADR-004 and the technical master consistently.
-7. Update IVitalityAccount and related Core types only after the contract is approved.
-8. Add tests for every transition and rejected transition, including no partial mutation.
-9. Re-run standalone Core CI and retain the new commit/test evidence.
+## Verification gate
 
-## Current implementation and verification
-
-- VitalityAccount currently implements Option B.
-- Its build and 38 NUnit tests passed in GitHub Actions run 41255553487 for commit e86880a318df49164aa61fe5e43c7a47f9c44560.
-- That PASS is limited to the implementation currently in source. It does not approve Option B or supersede the earlier owner-approved Option A.
-- No lifecycle migration or source rewrite is authorized by this proposed ADR.
-
-## Recommendation for governance
-
-Until the owner explicitly approves a replacement, preserve the earlier explicit owner-approved matrix as the controlling gameplay decision. Treat the current Option B implementation as provisional and do not merge it as the final lifecycle implementation.
+The lifecycle implementation is considered verified only when the Core Release build and all NUnit tests pass on the commit containing this ADR and implementation. This does not verify Unity/FishNet integration or gameplay balance.
