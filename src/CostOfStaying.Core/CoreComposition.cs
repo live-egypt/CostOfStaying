@@ -32,6 +32,11 @@ namespace CostOfStaying.Core
             return new MatchLifecycle(matchId);
         }
 
+        public ISessionLifecycle CreateSessionLifecycle(SessionId sessionId)
+        {
+            return new SessionLifecycle(sessionId);
+        }
+
         public IMatchPlayerRegistry CreateMatchPlayerRegistry(MatchId matchId, int capacity)
         {
             return new MatchPlayerRegistry(matchId, capacity);
