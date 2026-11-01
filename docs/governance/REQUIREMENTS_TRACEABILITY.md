@@ -20,7 +20,8 @@
 | CORE-SEQ-001 | Per-session command sequence is monotonic and bounded by configured maximum jump | CORE-SEQ-CTRL-001 | CommandSequenceTrackerTests | Core CI run 41331236864; 148 NUnit passed |
 | CORE-SESSION-001 | Session identity is server-issued; authentication association occurs once; disconnect/close are explicit and closed is terminal | CORE-SESSION-CTRL-001 | SessionLifecycleTests | Core CI run 41331236864; 148 NUnit passed; ADR-010 PROPOSED |
 | CORE-ROSTER-001 | Match membership is bounded per MatchId; duplicate ActorId rejected; removal does not mutate player lifecycle; snapshots preserve registration order | CORE-ROSTER-CTRL-001 | MatchPlayerRegistryTests | Core CI run 41331236864; 148 NUnit passed; ADR-009 PROPOSED |
-| CORE-SESSION-001 | One server-issued SessionId follows Pending → Authenticated → Disconnected → Closed; ActorId binding is immutable; Closed is terminal | CORE-SESSION-CTRL-001 | SessionLifecycleTests | Core CI run 41331236864; 148 NUnit passed; ADR-010 PROPOSED; credentials/reconnect are outside scope |\n| CORE-QUEUE-001 | Command admission uses bounded FIFO; full queue rejects without consuming sequence; session replay state resets only after queued commands drain | CORE-QUEUE-CTRL-001 | CommandAdmissionQueueTests | Core CI run 41331236864; 148 NUnit passed |
+| CORE-SESSION-001 | One server-issued SessionId follows Pending → Authenticated → Disconnected → Closed; ActorId binding is immutable; Closed is terminal | CORE-SESSION-CTRL-001 | SessionLifecycleTests | Core CI run 41331236864; 148 NUnit passed; ADR-010 PROPOSED; credentials/reconnect are outside scope |
+| CORE-QUEUE-001 | Command admission uses bounded FIFO; full queue rejects without consuming sequence; session replay state resets only after queued commands drain | CORE-QUEUE-CTRL-001 | CommandAdmissionQueueTests | Core CI run 41331236864; 148 NUnit passed |
 | PERF-001 | أداء Android ضمن ميزانية معتمدة | PERF-CTRL-001 | PERF-ANDROID-001 | تقرير جهاز فعلي |
 
 ## قواعد التتبع
@@ -41,7 +42,7 @@
 - Eliminated حالة نهائية.
 - Restore لا يحيي Spirit ولا يعيد لاعباً Eliminated.
 
-اختبارات القبول المضافة تغطي الانتقالات والرفض والحالات النهائية. حالة هذه الاختبارات: VERIFIED في Core CI run 41331236864 على commit 08b68e68a6cf393c6177b6b54ecd53d6ffff5496.
+اختبارات القبول المضافة تغطي الانتقالات والرفض والحالات النهائية. حالة هذه الاختبارات: VERIFIED في Core CI run 41331236864 على commit be67d8a3399f99c2c0e05a37eec8ffa0cb2abb13.
 
 
 ## ADR-008 — Command envelope and sequence admission
@@ -49,6 +50,10 @@
 ADR-008 is PROPOSED. The implementation and tests exist, but the policy is not yet owner-approved. Open policy items include production MaximumSequenceJump, maximum tracked sessions, queue capacity, reconnect/session continuity, rate limiting and command timeout. Queue-full behavior and safe reset semantics passed Core CI run 41331236864 (148 NUnit tests). The current implementation consumes an accepted sequence before later gameplay-rule validation; this is explicitly recorded in ADR-008 and awaits review.
 
 
-## ADR-010 — Server session lifecycle\n\nADR-010 is PROPOSED. The pure Core session lifecycle primitive and tests cover Pending, Authenticated, Disconnected and Closed states, immutable ActorId binding and terminal closure. Core CI run 41331236864 passed 148 NUnit tests. This does not verify credential validation, connection-to-session mapping, global session limits, reconnect tokens or timeout policy.\n\n## ADR-009 — Match-scoped player registry
+## ADR-009 — Match-scoped player registry
 
 ADR-009 is PROPOSED. The bounded registry, deterministic insertion order, immutable player-ID snapshot and membership-only removal passed Core CI run 41331236864 with 148 NUnit tests. Production match capacity, spectator/Spirit slot treatment, reconnect grace period and post-match retention remain owner/application policy.
+
+## ADR-010 — Server session lifecycle
+
+ADR-010 is PROPOSED. The pure Core session lifecycle primitive and tests cover Pending, Authenticated, Disconnected and Closed states, immutable ActorId binding and terminal closure. Core CI run 41331236864 passed 148 NUnit tests. This does not verify credential validation, connection-to-session mapping, global session limits, reconnect tokens or timeout policy.
