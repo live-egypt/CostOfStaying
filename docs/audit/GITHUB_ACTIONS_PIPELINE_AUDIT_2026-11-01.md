@@ -13,7 +13,7 @@
 - Run `41329400470` — SUCCESS.
 - Source commit: `a0cc96c02ce163691456bc2a02dbbc9c57cd1d12`.
 - Core dependency boundary and composition-root guards: PASS.
-- .NET 8 Release restore/build: PASS.
+- .NET 10 Release restore/build: PASS.
 - NUnit: **119 passed, 0 failed, 0 skipped**.
 - TRX artifact: `13092811803`.
 
@@ -43,7 +43,7 @@ The review branch now contains these corrections:
 ### Core CI
 - Enforces the Core dependency boundary (no UnityEngine/FishNet references).
 - Enforces CoreComposition as the construction root; the bounded queue may own its private sequence tracker.
-- Uses the active feature branch trigger, .NET 8, Release builds, NUnit and TRX artifact retention.
+- Uses the active feature branch trigger, .NET 10, Release builds, NUnit and TRX artifact retention.
 - Latest source CI passed 119 tests; the merge-synced source-only follow-up also passed.
 
 ### CodeQL
