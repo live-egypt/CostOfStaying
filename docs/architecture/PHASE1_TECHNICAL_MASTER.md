@@ -205,19 +205,20 @@ Status definitions:
 
 | File | Responsibility | Required test | Status |
 |---|---|---|---|
-| Contracts/IVitalityAccount.cs | Pure vitality contract | VitalityAccountTests | IMPLEMENTED |
-| Contracts/IBetrayalLedger.cs | Betrayal ledger contract | BetrayalLedgerTests | IMPLEMENTED |
-| Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId | IdentifierTests | IMPLEMENTED |
-| Domain/VitalityAccount.cs | Bounded vitality; Alive → Spirit; explicit Resurrect / Eliminate | VitalityAccountTests | IMPLEMENTED |
-| Domain/BetrayalLedger.cs | Monotonic event sequence, replay rejection, score | BetrayalLedgerTests | IMPLEMENTED |
-| Result.cs | Result / Result<T> and CoreErrorCode | ResultTests | VERIFIED — 55 NUnit passed |\n| CoreComposition.cs | Single Core composition root | CoreCompositionTests | PROPOSED |
-| Result.cs | Consistent success/failure contracts | ResultTests | IMPLEMENTED; latest CI pending |
-| MatchId / SessionId | Typed match/session IDs; ActorId remains canonical player actor ID | IdentifierTests | VERIFIED — 55 NUnit passed |
+| Contracts/IVitalityAccount.cs | Pure vitality/lifecycle contract | VitalityAccountTests | VERIFIED — lifecycle tests passed |
+| Contracts/IBetrayalLedger.cs | Betrayal ledger contract | BetrayalLedgerTests | VERIFIED — ledger tests passed |
+| Contracts/IMatchLifecycle.cs | Match phase contract | MatchLifecycleTests | VERIFIED — match transition tests passed |
+| Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId | IdentifierTests | VERIFIED — typed identifier tests passed |
+| Domain/VitalityAccount.cs | Bounded vitality; Alive → Spirit; explicit Resurrect / Eliminate | VitalityAccountTests | VERIFIED |
+| Domain/BetrayalLedger.cs | Monotonic event sequence, replay rejection, score | BetrayalLedgerTests | VERIFIED |
+| Domain/MatchLifecycle.cs | Validated match phase transitions | MatchLifecycleTests | VERIFIED |
+| Result.cs | Result / Result<T> and CoreErrorCode | ResultTests | VERIFIED |
+| CoreComposition.cs | Single Core construction root and match-scoped ledger | CoreCompositionTests | VERIFIED |
 | ServerTick.cs / StateRevision.cs | Server tick and revision values | TimeAndRevisionTests | PROPOSED |
 | Position2.cs / MovementInput.cs | Engine-independent movement values | MovementValueTests | PROPOSED |
 | PlayerState.cs / MatchState.cs / WorldState.cs | Authoritative domain state | Corresponding state tests | PROPOSED |
 
-Naming rule: do not create PlayerId as a second identity type if ActorId is retained. Select one canonical name in a reviewed contract change before adding duplicates.
+Naming rule: `ActorId` is the canonical player-actor identity in the current Core contract. Do not add a parallel `PlayerId` wrapper unless a reviewed contract change explicitly replaces ActorId. MatchId and SessionId are separate strongly typed ulong identities. Zero is an invalid sentinel for all three.
 
 ### 6.2 Rules
 
@@ -253,7 +254,7 @@ Client payloads must not choose authoritative sender identity, SessionId, server
 |---|---|---|---|
 | PlayerSession.cs | Authenticated player/session association | PlayerSessionTests | PROPOSED |
 | SessionLifecycle.cs | Pending/auth/disconnect transitions | SessionLifecycleTests | PROPOSED |
-| MatchLifecycle.cs | Lobby/running/ending transitions | MatchLifecycleTests | PROPOSED |
+| MatchLifecycle.cs | Lobby/running/ending transitions | MatchLifecycleTests | VERIFIED |
 | MatchPhase.cs | Match phase enumeration | MatchPhaseTests | PROPOSED |
 | AdmissionResult.cs | Admission decision value | AdmissionResultTests | PROPOSED |
 | ReconnectPolicy.cs | Reconnect eligibility and identity continuity | ReconnectPolicyTests | TBD; retention/token model unspecified |
