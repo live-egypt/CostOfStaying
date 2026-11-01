@@ -38,6 +38,15 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void CreateCommandSequenceTracker_UsesConfiguredMaximumJump()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var tracker = composition.CreateCommandSequenceTracker(12);
+
+            Assert.That(tracker.MaximumSequenceJump, Is.EqualTo(12UL));
+        }
+
+        [Test]
         public void CreateMatchLifecycle_UsesRequestedMatchId()
         {
             CoreComposition composition = CoreComposition.Create();
