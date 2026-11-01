@@ -3,26 +3,23 @@ namespace CostOfStaying.Core.Domain
     using System;
     using CostOfStaying.Core.Contracts;
 
-    /// <summary>
-    /// Vitality lifecycle only. Spirit is a separate post-death role/projection
-    /// and must not be represented as a Vitality state.
-    /// </summary>
+    /// <summary>Vitality lifecycle only. Spirit is a separate post-death role/projection.</summary>
     public enum PlayerVitalityState
     {
         Alive = 0,
         Dead = 1
     }
 
-    /// <summary>
-    /// Deterministic, engine-independent vitality account.
-    /// Reaching zero is terminal for the MVP: no resurrection transition exists.
-    /// </summary>
+    /// <summary>Deterministic, engine-independent vitality account with terminal death.</summary>
     public sealed class VitalityAccount : IVitalityAccount
     {
         public const uint DefaultMaximum = 100;
 
         public VitalityAccount(ActorId playerId, uint maximum = DefaultMaximum)
         {
+            if (!playerId.IsValid)
+                throw new ArgumentException("Player identity must be non-zero.", nameof(playerId));
+
             if (maximum == 0)
                 throw new ArgumentOutOfRangeException(nameof(maximum), "Maximum vitality must be positive.");
 

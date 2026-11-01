@@ -10,9 +10,9 @@ namespace CostOfStaying.Core.Tests
         public void ActorId_PreservesNumericValue()
         {
             var id = new ActorId(42UL);
-
             Assert.That(id.Value, Is.EqualTo(42UL));
             Assert.That(id.ToString(), Is.EqualTo("42"));
+            Assert.That(id.IsValid, Is.True);
         }
 
         [Test]
@@ -25,10 +25,19 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
-        public void ActorId_SupportsZeroAndMaximumValues()
+        public void ActorId_ZeroIsRepresentableButInvalid()
         {
-            Assert.That(new ActorId(0UL).Value, Is.Zero);
-            Assert.That(new ActorId(ulong.MaxValue).Value, Is.EqualTo(ulong.MaxValue));
+            var id = new ActorId(0UL);
+            Assert.That(id.Value, Is.Zero);
+            Assert.That(id.IsValid, Is.False);
+        }
+
+        [Test]
+        public void ActorId_SupportsMaximumValue()
+        {
+            var id = new ActorId(ulong.MaxValue);
+            Assert.That(id.Value, Is.EqualTo(ulong.MaxValue));
+            Assert.That(id.IsValid, Is.True);
         }
 
         [Test]
@@ -39,10 +48,19 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
-        public void VictimId_SupportsZeroAndMaximumValues()
+        public void VictimId_ZeroIsRepresentableButInvalid()
         {
-            Assert.That(new VictimId(0UL).Value, Is.Zero);
-            Assert.That(new VictimId(ulong.MaxValue).Value, Is.EqualTo(ulong.MaxValue));
+            var id = new VictimId(0UL);
+            Assert.That(id.Value, Is.Zero);
+            Assert.That(id.IsValid, Is.False);
+        }
+
+        [Test]
+        public void VictimId_SupportsMaximumValue()
+        {
+            var id = new VictimId(ulong.MaxValue);
+            Assert.That(id.Value, Is.EqualTo(ulong.MaxValue));
+            Assert.That(id.IsValid, Is.True);
         }
 
         [Test]
@@ -53,10 +71,19 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
-        public void EventSequenceId_SupportsZeroAndMaximumValues()
+        public void EventSequenceId_ZeroIsRepresentableButInvalid()
         {
-            Assert.That(new EventSequenceId(0UL).Value, Is.Zero);
-            Assert.That(new EventSequenceId(ulong.MaxValue).Value, Is.EqualTo(ulong.MaxValue));
+            var id = new EventSequenceId(0UL);
+            Assert.That(id.Value, Is.Zero);
+            Assert.That(id.IsValid, Is.False);
+        }
+
+        [Test]
+        public void EventSequenceId_SupportsMaximumValue()
+        {
+            var id = new EventSequenceId(ulong.MaxValue);
+            Assert.That(id.Value, Is.EqualTo(ulong.MaxValue));
+            Assert.That(id.IsValid, Is.True);
         }
 
         [Test]

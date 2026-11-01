@@ -55,9 +55,7 @@
 - [ADR-003: Backend والاستضافة](governance/adr/ADR-003-BACKEND-AND-HOSTING.md)
 - [ADR-004: خط أساس قواعد اللعب](governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md)
 - [ADR-005: حدود Core التنفيذي](governance/adr/ADR-005-CORE-EXECUTABLE-BOUNDARY.md)
-- [نطاق MVP](roadmap/MVP_SCOPE.md)
-- [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
-- [خطة التسليم](roadmap/DELIVERY_PLAN.md)
+- [ADR-006: ثوابت معرفات Core وسجل Betrayal](governance/adr/ADR-006-CORE-IDENTIFIER-AND-LEDGER-INVARIANTS.md)
 
 ## حالات الوثائق
 - **PROPOSED:** مقترح لم يعتمد.

@@ -8,6 +8,15 @@ namespace CostOfStaying.Core.Domain
     {
         public BetrayalEvent(EventSequenceId sequenceId, ActorId actorId, VictimId victimId, ulong serverTick)
         {
+            if (!sequenceId.IsValid)
+                throw new ArgumentOutOfRangeException(nameof(sequenceId), "Event sequence must be non-zero.");
+            if (!actorId.IsValid)
+                throw new ArgumentException("Actor identity must be non-zero.", nameof(actorId));
+            if (!victimId.IsValid)
+                throw new ArgumentException("Victim identity must be non-zero.", nameof(victimId));
+            if (actorId.Value == victimId.Value)
+                throw new ArgumentException("Actor and victim must differ.", nameof(victimId));
+
             SequenceId = sequenceId;
             ActorId = actorId;
             VictimId = victimId;
@@ -18,6 +27,14 @@ namespace CostOfStaying.Core.Domain
         public ActorId ActorId { get; }
         public VictimId VictimId { get; }
         public ulong ServerTick { get; }
+
+        // Default(struct) bypasses the constructor; callers must validate this value.
+        // ServerTick is metadata, not the ledger ordering key.
+        public bool IsValid =>
+            SequenceId.IsValid &&
+            ActorId.IsValid &&
+            VictimId.IsValid &&
+            ActorId.Value != VictimId.Value;
 
         public bool Equals(BetrayalEvent other) =>
             SequenceId == other.SequenceId &&
@@ -37,18 +54,27 @@ namespace CostOfStaying.Core.Domain
     {
         private readonly Dictionary<EventSequenceId, BetrayalEvent> _events =
             new Dictionary<EventSequenceId, BetrayalEvent>();
-
         private readonly Dictionary<ActorId, ulong> _scores =
             new Dictionary<ActorId, ulong>();
 
         private bool _hasSequence;
         private ulong _lastSequence;
 
-        public ulong ScoreFor(ActorId actorId) =>
-            _scores.TryGetValue(actorId, out ulong score) ? score : 0UL;
+        public ulong ScoreFor(ActorId actorId)
+        {
+            if (!actorId.IsValid)
+                throw new ArgumentException("Actor identity must be non-zero.", nameof(actorId));
+
+            return _scores.TryGetValue(actorId, out ulong score) ? score : 0UL;
+        }
 
         public bool TryRecord(BetrayalEvent betrayalEvent)
         {
+            // A default struct can bypass BetrayalEvent's validating constructor.
+            if (!betrayalEvent.IsValid)
+                throw new ArgumentException("Betrayal event is invalid.", nameof(betrayalEvent));
+
+            // Resolve exact replays before enforcing the sequence high-water mark.
             if (_events.TryGetValue(betrayalEvent.SequenceId, out BetrayalEvent existing))
             {
                 if (existing.Equals(betrayalEvent))

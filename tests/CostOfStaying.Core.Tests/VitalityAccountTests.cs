@@ -88,6 +88,13 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void Constructor_RejectsInvalidPlayerId()
+        {
+            Assert.Throws<System.ArgumentException>(() =>
+                new VitalityAccount(new ActorId(0)));
+        }
+
+        [Test]
         public void DeadStateCannotBeRevivedByRestore()
         {
             var account = new VitalityAccount(new ActorId(1));
@@ -95,6 +102,14 @@ namespace CostOfStaying.Core.Tests
             account.Restore(uint.MaxValue);
             Assert.That(account.State, Is.EqualTo(PlayerVitalityState.Dead));
             Assert.That(account.Current, Is.Zero);
+        }
+
+        [Test]
+        public void CustomMaximum_IsRespected()
+        {
+            var account = new VitalityAccount(new ActorId(1), 250);
+            Assert.That(account.Maximum, Is.EqualTo(250u));
+            Assert.That(account.Current, Is.EqualTo(250u));
         }
     }
 }
