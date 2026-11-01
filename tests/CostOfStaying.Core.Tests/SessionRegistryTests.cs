@@ -1,7 +1,7 @@
 namespace CostOfStaying.Core.Tests
 {
     using CostOfStaying;
-    using CostOfStaying.Core.Domain;
+    using CostOfStaying.Core.Contracts;\n    using CostOfStaying.Core.Domain;
     using NUnit.Framework;
 
     [TestFixture]
