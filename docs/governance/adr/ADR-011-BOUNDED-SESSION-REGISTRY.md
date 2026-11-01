@@ -16,7 +16,7 @@ The Core has a deterministic lifecycle primitive for one SessionId. A server pro
 4. Duplicate SessionId registration returns Conflict without replacing the existing session.
 5. Capacity exhaustion returns CapacityExceeded without mutation.
 6. Lookup rejects invalid IDs and returns NotFound for absent IDs.
-7. Removal is allowed only after the registered session reaches Closed; active sessions cannot be silently dropped.
+7. Removal is allowed only after the registered session reaches Closed; active sessions cannot be silently dropped. The application must first drain all queued commands for that session and reset its replay state; the registry cannot observe or enforce queue state itself.
 8. Removal releases one registry capacity slot.
 9. Snapshots preserve registration order and are immutable copies.
 10. The registry does not enforce uniqueness of ActorId or decide multi-session policy; that remains an application/backend decision.
