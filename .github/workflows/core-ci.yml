@@ -49,8 +49,8 @@ jobs:
       - name: Enforce Core composition root
         shell: bash
         run: |
-          aggregate_violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|CommandAdmissionQueue)(\\(|<)' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
-          tracker_violations="$(grep -R -n -E 'new CommandSequenceTracker\\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(CoreComposition|CommandAdmissionQueue)\\.cs:' || true)"
+          aggregate_violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|CommandAdmissionQueue)(\(|<)' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
+          tracker_violations="$(grep -R -n -E 'new CommandSequenceTracker\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(CoreComposition|CommandAdmissionQueue)\.cs:' || true)"
           if [ -n "$aggregate_violations$tracker_violations" ]; then
             printf '%s\n%s\n' "$aggregate_violations" "$tracker_violations"
             echo "::error::Core service and aggregate construction must be centralized in CoreComposition; the queue may own its private sequence tracker."
