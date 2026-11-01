@@ -1,6 +1,6 @@
 # Phase 1 Core — Implemented Contracts and Primitives
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed dependency-boundary scan, Release build and 77/77 NUnit on commit `a235b99712bbe635ec71832647af9592e117a121`; remaining Core scope is not implemented.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed dependency-boundary scan, Release build and 103/103 NUnit on commit `ce995ff0dfab7bacd012ca9a472cf9040cd6fa84`; remaining Core scope is not implemented.  
 **Architecture ADR:** ADR-005 (APPROVED)  
 **Lifecycle ADR:** ADR-007 (APPROVED: Alive / Spirit / Eliminated)  
 **Identifier/ledger ADR:** ADR-006 (PROPOSED — do not treat as owner-approved)  
@@ -106,19 +106,20 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated connec
 
 ## Verification evidence
 
-- **Latest tested commit:** `a235b99712bbe635ec71832647af9592e117a121`
-- **Latest Core CI run:** `41326831611` — SUCCESS
+- **Latest tested commit:** `ce995ff0dfab7bacd012ca9a472cf9040cd6fa84`
+- **Latest Core CI run:** `41327308752` — SUCCESS
 - **Core dependency boundary scan:** PASS — no UnityEngine/FishNet references in Core source/project files
 - **Release restore/build:** PASS
-- **NUnit:** 77 passed, 0 failed, 0 skipped
-- **TRX artifact:** `core-test-results`, ID `13091612088`
-- **Artifact SHA-256:** `c2be10347842448f2bf3ece1c70525a65d279e5b6527e8a6683f54126f6e88bf`
-- **Detailed evidence:** [Core CI dependency boundary and baseline](../audit/CORE_CI_BOUNDARY_AND_BASELINE_2026-11-01.md)
+- **NUnit:** 103 passed, 0 failed, 0 skipped
+- **TRX artifact:** `core-test-results`, ID `13091746610`
+- **Artifact SHA-256:** `7b4e306d63d34a52e65c0e71888cf39915dcb25db5b1da4320862c67f1f9593f`
+- **Detailed evidence:** [Command sequence Core CI verification](../audit/COMMAND_SEQUENCE_CORE_CI_VERIFICATION_2026-11-01.md)
+- **Previous boundary baseline:** [Core CI dependency boundary and baseline](../audit/CORE_CI_BOUNDARY_AND_BASELINE_2026-11-01.md)
 - **Match lifecycle/composition detail:** [Match lifecycle and composition CI verification](../audit/MATCH_LIFECYCLE_COMPOSITION_CI_VERIFICATION_2026-11-01.md)
 - **Previous 55-test evidence:** [Core foundations CI verification](../audit/CORE_FOUNDATIONS_CI_VERIFICATION_2026-11-01.md)
 - **Earlier lifecycle-only evidence:** [ADR-007 lifecycle CI verification](../audit/ADR007_LIFECYCLE_CI_VERIFICATION_2026-11-01.md)
 
-The lifecycle, Result contracts, typed identifiers, match phase state machine and CoreComposition are VERIFIED for the standalone Core scope at the exact source commit above. Subsequent commits to this branch have changed documentation only. Unity/FishNet, Android, performance and production security remain outside this standalone Core CI scope.
+The lifecycle, Result contracts, typed identifiers, match phase state machine, CoreComposition, time/revision values, server-side command envelope and bounded per-session sequence tracker are VERIFIED for the standalone Core scope at the exact source commit above. The command-admission policy remains PROPOSED under ADR-008. Subsequent commits to this branch have changed documentation only. Unity/FishNet, Android, performance and production security remain outside this standalone Core CI scope.
 
 ## Next implementation order
 
