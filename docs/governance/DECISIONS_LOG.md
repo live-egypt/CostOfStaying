@@ -18,6 +18,7 @@
 | ADR-011 | Bounded Server Session Registry | PROPOSED | سعة صريحة؛ تسجيل Pending فقط؛ الإزالة بعد Closed وبعد تفريغ أوامر الجلسة؛ سياسة تعدد الجلسات لكل لاعب تبقى TBD |
 | ADR-012 | Authenticated Command Admission Gate | PROPOSED | قبول الأمر من Session مسجلة وAuthenticated ومرتبطة بـ ActorId صالح؛ إعادة التحقق عند dequeue |
 | ADR-013 | Safe Session Cleanup and Replay-State Release | PROPOSED | خدمة واحدة تنظّم إغلاق الجلسة وتفريغ الطابور وإعادة ضبط replay ثم إزالة التسجيل |
+| ADR-014 | Victim Scope | PROPOSED | تأجيل حسم فئات الضحايا؛ الإبقاء على VictimId دون تغيير؛ دعم NPCs غير معتمد؛ فئات الضحايا TBD. |
 
 ## قرارات نطاق ومبادئ
 - MVP لأربعة لاعبين وخريطة واحدة: نطاق المنتج المستهدف في ميثاق المشروع، ويعاد تقييمه عبر قرار موثق إذا تغير.
