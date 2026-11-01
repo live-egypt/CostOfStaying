@@ -10,7 +10,10 @@
 - [تدقيق Core CI وفحص عزل Unity/FishNet](audit/CORE_CI_BOUNDARY_AND_BASELINE_2026-11-01.md)
 - [ADR-008 — Server Command Envelope and Sequence Admission](governance/adr/ADR-008-SERVER-COMMAND-ENVELOPE-AND-SEQUENCE-ADMISSION.md)
 - [ADR-009 — Match-Scoped Player Registry](governance/adr/ADR-009-MATCH-SCOPED-PLAYER-REGISTRY.md)
-- [ADR-010 — Server Session Lifecycle](governance/adr/ADR-010-SERVER-SESSION-LIFECYCLE.md)\n- [ADR-011 — Bounded Server Session Registry](governance/adr/ADR-011-BOUNDED-SESSION-REGISTRY.md)\n- [ADR-012 — Authenticated Command Admission](governance/adr/ADR-012-AUTHENTICATED-COMMAND-ADMISSION.md)\n- [ADR-013 — Safe Session Cleanup](governance/adr/ADR-013-SAFE-SESSION-CLEANUP.md)
+- [ADR-010 — Server Session Lifecycle](governance/adr/ADR-010-SERVER-SESSION-LIFECYCLE.md)
+- [ADR-011 — Bounded Server Session Registry](governance/adr/ADR-011-BOUNDED-SESSION-REGISTRY.md)
+- [ADR-012 — Authenticated Command Admission](governance/adr/ADR-012-AUTHENTICATED-COMMAND-ADMISSION.md)
+- [ADR-013 — Safe Session Cleanup](governance/adr/ADR-013-SAFE-SESSION-CLEANUP.md)
 - [تدقيق CI لتسلسل الأوامر وCommandEnvelope](audit/COMMAND_SEQUENCE_CORE_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق CI لطابور الأوامر المحدود وسعة الجلسات](audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق CI لسجل لاعبي المباراة](audit/CORE_MATCH_PLAYER_REGISTRY_CI_VERIFICATION_2026-11-01.md)
@@ -73,7 +76,11 @@
 - [ADR-004: خط أساس قواعد اللعب](governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md)
 - [ADR-005: حدود Core التنفيذي](governance/adr/ADR-005-CORE-EXECUTABLE-BOUNDARY.md)
 - [ADR-006: ثوابت معرفات Core وسجل Betrayal](governance/adr/ADR-006-CORE-IDENTIFIER-AND-LEDGER-INVARIANTS.md)
-- [ADR-007: تعارض دورة حياة اللاعب وVitality](governance/adr/ADR-007-PLAYER-LIFECYCLE-VITALITY-CONFLICT.md)\n- [ADR-008: Server Command Envelope and Sequence Admission](governance/adr/ADR-008-SERVER-COMMAND-ENVELOPE-AND-SEQUENCE-ADMISSION.md)\n- [ADR-009: Match-Scoped Player Registry](governance/adr/ADR-009-MATCH-SCOPED-PLAYER-REGISTRY.md)\n- [ADR-010: Server Session Lifecycle](governance/adr/ADR-010-SERVER-SESSION-LIFECYCLE.md)\n- [ADR-011: Bounded Server Session Registry](governance/adr/ADR-011-BOUNDED-SESSION-REGISTRY.md)
+- [ADR-007: تعارض دورة حياة اللاعب وVitality](governance/adr/ADR-007-PLAYER-LIFECYCLE-VITALITY-CONFLICT.md)
+- [ADR-008: Server Command Envelope and Sequence Admission](governance/adr/ADR-008-SERVER-COMMAND-ENVELOPE-AND-SEQUENCE-ADMISSION.md)
+- [ADR-009: Match-Scoped Player Registry](governance/adr/ADR-009-MATCH-SCOPED-PLAYER-REGISTRY.md)
+- [ADR-010: Server Session Lifecycle](governance/adr/ADR-010-SERVER-SESSION-LIFECYCLE.md)
+- [ADR-011: Bounded Server Session Registry](governance/adr/ADR-011-BOUNDED-SESSION-REGISTRY.md)\n- [ADR-012: Authenticated Command Admission](governance/adr/ADR-012-AUTHENTICATED-COMMAND-ADMISSION.md)\n- [ADR-013: Safe Session Cleanup](governance/adr/ADR-013-SAFE-SESSION-CLEANUP.md)
 
 ## حالات الوثائق
 - **PROPOSED:** مقترح لم يعتمد.
@@ -85,5 +92,8 @@
 
 لا تستخدم IMPLEMENTED أو VERIFIED لمجرد وجود تصميم أو وثيقة.
 
-- [تقرير خط أساس Core النهائي — 134 اختباراً](audit/CORE_CI_FINAL_BASELINE_2026-11-01.md)\n- [تدقيق دورة حياة جلسة الخادم — 148 اختباراً](audit/CORE_SESSION_LIFECYCLE_CI_VERIFICATION_2026-11-01.md)\n- [تدقيق سجل الجلسات المحدود — 161 اختباراً](audit/CORE_SESSION_REGISTRY_CI_VERIFICATION_2026-11-01.md)\n- [تدقيق الإغلاق الآمن للجلسات — 177 اختباراً](audit/CORE_SESSION_CLEANUP_CI_VERIFICATION_2026-11-01.md)
+- [تقرير خط أساس Core النهائي — 177 اختباراً](audit/CORE_CI_FINAL_BASELINE_2026-11-01.md)
+- [تدقيق دورة حياة جلسة الخادم — 148 اختباراً](audit/CORE_SESSION_LIFECYCLE_CI_VERIFICATION_2026-11-01.md)
+- [تدقيق سجل الجلسات المحدود — 161 اختباراً](audit/CORE_SESSION_REGISTRY_CI_VERIFICATION_2026-11-01.md)
+- [تدقيق الإغلاق الآمن للجلسات — 177 اختباراً](audit/CORE_SESSION_CLEANUP_CI_VERIFICATION_2026-11-01.md)
 - [تقرير Core CI بعد استكمال SessionLifecycle — 148 اختباراً](audit/CORE_CI_SESSION_LIFECYCLE_BASELINE_2026-11-01.md)
