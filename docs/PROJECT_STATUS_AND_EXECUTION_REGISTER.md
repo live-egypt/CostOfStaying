@@ -116,7 +116,7 @@ A status must always be accompanied by its scope and evidence.
 The Core workflow `.github/workflows/core-ci.yml` is configured to run for relevant Core/test/workflow changes on pushes to `main` and `feature/core-lifecycle-resolution`, and pull requests targeting `main`. It also supports manual dispatch and a weekly scheduled verification on the default branch (the schedule will not run from an unmerged feature branch).
 
 The workflow performs:
-1. .NET 8 SDK setup with NuGet cache.
+1. .NET 10 SDK setup with NuGet cache.
 2. Restore of the NUnit test project and its Core dependency.
 3. Release build of the pure-C# Core.
 4. Release build of the test project.
