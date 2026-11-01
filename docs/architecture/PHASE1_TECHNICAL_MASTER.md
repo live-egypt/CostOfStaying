@@ -485,7 +485,7 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 | BetrayalLedger primitive | VERIFIED |
 | MatchLifecycle phase state machine | VERIFIED |
 | CoreComposition | VERIFIED for the implemented scope |
-| NUnit tests | VERIFIED — 103 passed, 0 failed, 0 skipped |
+| NUnit tests | VERIFIED — 119 passed, 0 failed, 0 skipped |
 | Session lifecycle and authentication state | NOT IMPLEMENTED |
 | Full match/player/world aggregates and membership | NOT IMPLEMENTED |
 | ServerTick / StateRevision | VERIFIED in Core CI baseline — 103 NUnit passed |
