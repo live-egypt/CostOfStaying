@@ -49,7 +49,7 @@ jobs:
       - name: Enforce Core composition root
         shell: bash
         run: |
-          violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|CommandSequenceTracker|CommandAdmissionQueue)\\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
+          violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|CommandSequenceTracker|CommandAdmissionQueue)\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
           if [ -n "$violations" ]; then
             echo "$violations"
             echo "::error::Core service and aggregate construction must be centralized in CoreComposition."
