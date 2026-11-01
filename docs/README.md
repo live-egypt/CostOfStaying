@@ -86,3 +86,4 @@
 لا تستخدم IMPLEMENTED أو VERIFIED لمجرد وجود تصميم أو وثيقة.
 
 - [تقرير خط أساس Core النهائي — 134 اختباراً](audit/CORE_CI_FINAL_BASELINE_2026-11-01.md)\n- [تدقيق دورة حياة جلسة الخادم — 148 اختباراً](audit/CORE_SESSION_LIFECYCLE_CI_VERIFICATION_2026-11-01.md)
+- [تقرير Core CI بعد استكمال SessionLifecycle — 148 اختباراً](audit/CORE_CI_SESSION_LIFECYCLE_BASELINE_2026-11-01.md)
