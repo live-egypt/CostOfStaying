@@ -12,10 +12,10 @@ namespace CostOfStaying.Core.Services
     /// </summary>
     public sealed class SessionCleanupService<TCommand> : ISessionCleanupService<TCommand>
     {
-        private readonly ISessionRegistry _sessions;
+        private readonly SessionRegistry _sessions;
         private readonly CommandAdmissionQueue<TCommand> _queue;
 
-        public SessionCleanupService(ISessionRegistry sessions, CommandAdmissionQueue<TCommand> queue)
+        public SessionCleanupService(SessionRegistry sessions, CommandAdmissionQueue<TCommand> queue)
         {
             _sessions = sessions ?? throw new ArgumentNullException(nameof(sessions));
             _queue = queue ?? throw new ArgumentNullException(nameof(queue));
@@ -37,7 +37,7 @@ namespace CostOfStaying.Core.Services
             if (reset.IsFailure && reset.ErrorCode != CoreErrorCode.NotFound)
                 return reset;
 
-            return _sessions.Remove(sessionId);
+            return _sessions.RemoveClosedSession(sessionId);
         }
     }
 }
