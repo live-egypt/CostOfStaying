@@ -51,8 +51,9 @@ Existing ADR identifiers are occupied:
 - ADR-003: backend and hosting.
 - ADR-004: gameplay rules baseline.
 - ADR-005: executable Core boundary.
+- ADR-006: Core identifier and Betrayal ledger invariants (PROPOSED; pending owner approval).
 
-Do not create duplicate ADR-001 through ADR-005 using the historical transcript's suggested titles. New decisions use the next available ADR number and must be added to docs/governance/DECISIONS_LOG.md.
+Do not create duplicate ADR-001 through ADR-006 using the historical transcript's suggested titles. New decisions use the next available ADR number and must be added to docs/governance/DECISIONS_LOG.md.
 
 ## 3. Non-negotiable architecture
 
@@ -365,7 +366,7 @@ Do not create placeholder manifests or locks that imply an installed Unity/FishN
 
 ## 7. Required future ADRs
 
-The historical transcript suggested new ADRs numbered 001–006, which conflict with the existing register. These topics are candidates for ADR-006 onward; create each only when the decision is ready for review.
+The historical transcript suggested new ADRs numbered 001–006, which conflict with the existing register. ADR-006 is assigned to Core identifier and Betrayal ledger invariants. The following topics are candidates for ADR-007 onward; create each only when the decision is ready for review.
 
 | Candidate topic | Decision required | Gate |
 |---|---|---|
