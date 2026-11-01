@@ -19,7 +19,7 @@ The default branch is `main`. The implementation and consolidation work is isola
 | Unity source-package static review | PR #5 branch | Audit checkpoint | Does not claim the ZIP/binary package was uploaded |
 | Unity project and FishNet integration | Not present in reviewed tree | NOT IMPLEMENTED | Requires actual project/package files and exact-version verification |
 
-PR #4 is the primary consolidated Core/documentation review. PR #5 is a separate source-package audit checkpoint. PR #2 and PR #3 are superseded by PR #4; do not continue parallel implementation on them.
+PR #6 is the consolidated Core/documentation review and supersedes PR #4, which is closed to avoid duplicate delivery. PR #5 is a separate source-package audit checkpoint. PR #2 and PR #3 are superseded by PR #4; do not continue parallel implementation on them.
 
 ## 2. Decision authority and conflict control
 
