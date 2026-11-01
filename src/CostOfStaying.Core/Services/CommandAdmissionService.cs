@@ -24,25 +24,6 @@ namespace CostOfStaying.Core.Services
             _queue = queue ?? throw new ArgumentNullException(nameof(queue));
         }
 
-        public Result TryRemoveClosedSession(SessionId sessionId)
-        {
-            if (!sessionId.IsValid)
-                return Result.Failure(CoreErrorCode.InvalidArgument);
-
-            Result<ISessionLifecycle> lookup = _sessions.Get(sessionId);
-            if (lookup.IsFailure)
-                return Result.Failure(lookup.ErrorCode);
-
-            if (lookup.Value.State != SessionState.Closed)
-                return Result.Failure(CoreErrorCode.InvalidState);
-
-            Result reset = _queue.ResetSession(sessionId);
-            if (reset.IsFailure && reset.ErrorCode != CoreErrorCode.NotFound)
-                return reset;
-
-            return _sessions.Remove(sessionId);
-        }
-
         public Result TryAdmit(CommandEnvelope<TCommand> envelope)
         {
             if (!envelope.IsValid)
