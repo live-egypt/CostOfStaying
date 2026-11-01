@@ -1,6 +1,6 @@
 # Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 177/177 NUnit on commit `26a77dcf1394d35d3db48ea0f5b7cde4c118998f`; the broader Core scope remains incomplete.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 181/181 NUnit on commit `c33faf84aa39856d46181ccc1c9decbfba2777d2`; the broader Core scope remains incomplete.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 10 / NUnit 3.14  
@@ -10,6 +10,9 @@
 **Command ingress ADR:** ADR-008 (PROPOSED; policy owner review pending)
 **Match membership ADR:** ADR-009 (PROPOSED; capacity/reconnect policy owner review pending)
 **Session lifecycle ADR:** ADR-010 (PROPOSED; timeout/reconnect/multi-session policy owner review pending)  
+**Session registry ADR:** ADR-011 (PROPOSED; capacity and multi-session policy owner review pending)  
+**Authenticated admission ADR:** ADR-012 (PROPOSED; transport identity and gameplay authorization remain outside Core)  
+**Session cleanup ADR:** ADR-013 (PROPOSED; in-flight handler completion remains an application responsibility)  
 **Unity/FishNet:** NOT IMPLEMENTED / NOT VERIFIED.
 
 ## Implemented Core source
@@ -27,7 +30,9 @@
 - `ServerTick` and `StateRevision` value objects; zero is the initial value and revision advance refuses overflow.
 - `CommandEnvelope<TCommand>` for server-resolved session identity, sequence, receive tick and command intent. It is not a client wire DTO.
 - `CommandSequenceTracker` with strictly increasing per-session sequences, explicit maximum jump, explicit maximum tracked sessions, duplicate/stale rejection and bounded in-memory state.
-- `CommandAdmissionQueue<TCommand>` with explicit bounded FIFO capacity, replay-aware enqueue and safe session reset only after that session's queued commands have drained.
+- `CommandAdmissionQueue<TCommand>` with explicit bounded FIFO capacity, replay-aware enqueue and internal replay reset restricted to session cleanup.
+- `ICommandAdmissionService<TCommand>` / `CommandAdmissionService<TCommand>` validates envelope, registered session, Authenticated state and ActorId binding before admission; `TryTakeNext` revalidates the session and returns `AuthenticatedCommand<TCommand>` with server-resolved ActorId, discarding stale commands after disconnect/close.
+- `ISessionCleanupService<TCommand>` / `SessionCleanupService<TCommand>` is the only public cleanup path; it requires Closed state, drained queue, replay-state reset, then internal registry removal.
 - `ICommandAdmissionService<TCommand>` / `CommandAdmissionService<TCommand>` validates envelope and requires a registered Authenticated session with a valid ActorId before queue admission; gameplay payload rules remain downstream.
 - `ISessionCleanupService<TCommand>` / `SessionCleanupService<TCommand>` drains pending queue state, resets replay state and removes a Closed session in one server-serialized cleanup path.
 - NUnit coverage for the implemented primitives and invariants.
@@ -110,11 +115,11 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated transp
 ## Verification evidence
 
 The latest Core CI run:
-- Run: `41332755494` — SUCCESS.
-- Source commit: `26a77dcf1394d35d3db48ea0f5b7cde4c118998f`.
+- Run: `41332989910` — SUCCESS.
+- Source commit: `c33faf84aa39856d46181ccc1c9decbfba2777d2`.
 - Core dependency boundary and composition-root checks: PASS.
 - .NET 10 Release restore/build: PASS.
-- NUnit: 177 passed, 0 failed, 0 skipped.
+- NUnit: 181 passed, 0 failed, 0 skipped.
 - TRX artifact: `13092964341`.
 - Artifact SHA-256: `b4067bbd6c6b0492a245dea4c8970acca23d7196d398018f5266da42709b4295`.
 - Detailed evidence: [Bounded command queue and session replay capacity CI](../audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md).
@@ -123,7 +128,7 @@ This run verifies the latest Core queue/capacity increment. It does not verify t
 
 ## Next implementation order
 
-1. Session lifecycle contract and service, separated from player lifecycle.
+1. Session lifecycle, bounded registry and safe cleanup primitives are implemented; transport connection mapping, credentials and reconnect policy remain incomplete.
 2. Match/player aggregate ownership and authoritative state revision integration.
 3. Command payload validation and application handlers around the bounded queue.
 4. Movement command/rules/simulation.
