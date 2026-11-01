@@ -14,7 +14,9 @@
 - Strongly typed numeric wrappers: `ActorId`, `MatchId`, `SessionId`, `VictimId`, `EventSequenceId` (ulong). ActorId remains the single canonical player-actor identity; no duplicate PlayerId wrapper is introduced.
 - Shared `Result` / `Result<T>` value contracts with stable `CoreErrorCode` categories and safe default-failure semantics.
 - `IMatchLifecycle` / `MatchLifecycle` with explicit, tested match-phase transitions.
-- `CoreComposition` as the Core construction root: one match-scoped Betrayal ledger and factories for player vitality accounts and match lifecycle aggregates.
+- `CoreComposition` as the Core construction root: one match-scoped Betrayal ledger and factories for player vitality accounts, match lifecycle aggregates and command sequence trackers.
+- `ServerTick` and `StateRevision` immutable values; zero is the initial value and revision advance is overflow-safe.
+- `CommandEnvelope<TCommand>` server-side envelope and `CommandSequenceTracker` with per-session bounded sequence admission.
 - `IVitalityAccount` and `IBetrayalLedger` contracts.
 - `VitalityAccount` with bounded vitality and canonical `Alive / Spirit / Eliminated` lifecycle.
 - `BetrayalLedger` with monotonic event sequence, exact replay handling and actor score accumulation.
