@@ -1,6 +1,6 @@
 # Phase 1 Core — Implemented Contracts and Primitives
 
-**Status:** PARTIALLY VERIFIED — Core CI passed 77/77 NUnit on source commit `17566c5234f65270ccd33d70f8d9dcccb4d2d044`; remaining Core scope is not implemented.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed dependency-boundary scan, Release build and 77/77 NUnit on commit `a235b99712bbe635ec71832647af9592e117a121`; remaining Core scope is not implemented.  
 **Architecture ADR:** ADR-005 (APPROVED)  
 **Lifecycle ADR:** ADR-007 (APPROVED: Alive / Spirit / Eliminated)  
 **Identifier/ledger ADR:** ADR-006 (PROPOSED — do not treat as owner-approved)  
@@ -89,13 +89,15 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated connec
 
 ## Verification evidence
 
-- **Latest tested source commit:** `17566c5234f65270ccd33d70f8d9dcccb4d2d044`
-- **Latest Core CI run:** `41326574904` — SUCCESS
+- **Latest tested commit:** `a235b99712bbe635ec71832647af9592e117a121`
+- **Latest Core CI run:** `41326831611` — SUCCESS
+- **Core dependency boundary scan:** PASS — no UnityEngine/FishNet references in Core source/project files
 - **Release restore/build:** PASS
 - **NUnit:** 77 passed, 0 failed, 0 skipped
-- **TRX artifact:** `core-test-results`, ID `13091806116`
-- **Artifact SHA-256:** `092b521653c95717ebfe81030c120ab98e2ce9df7c83e02309dcec113bf826d0`
-- **Detailed evidence:** [Match lifecycle and composition CI verification](../audit/MATCH_LIFECYCLE_COMPOSITION_CI_VERIFICATION_2026-11-01.md)
+- **TRX artifact:** `core-test-results`, ID `13091612088`
+- **Artifact SHA-256:** `c2be10347842448f2bf3ece1c70525a65d279e5b6527e8a6683f54126f6e88bf`
+- **Detailed evidence:** [Core CI dependency boundary and baseline](../audit/CORE_CI_BOUNDARY_AND_BASELINE_2026-11-01.md)
+- **Match lifecycle/composition detail:** [Match lifecycle and composition CI verification](../audit/MATCH_LIFECYCLE_COMPOSITION_CI_VERIFICATION_2026-11-01.md)
 - **Previous 55-test evidence:** [Core foundations CI verification](../audit/CORE_FOUNDATIONS_CI_VERIFICATION_2026-11-01.md)
 - **Earlier lifecycle-only evidence:** [ADR-007 lifecycle CI verification](../audit/ADR007_LIFECYCLE_CI_VERIFICATION_2026-11-01.md)
 
