@@ -22,7 +22,7 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
 | Pure Core project | VERIFIED | .NET 8 Release build passed in GitHub Actions runs 41255553487 and 41255769742 |
-| Vitality primitive | VERIFIED — code/test only | CI passed for the current v2.1 implementation; canonical lifecycle is blocked by ADR-007 |
+| Vitality and player lifecycle primitive | IMPLEMENTED — verification pending for this branch commit | ADR-007 now selects Alive / Spirit / Eliminated; CI rerun required |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
 | Core unit tests | VERIFIED | 38 passed; 0 failed; 0 skipped in run 41255553487; latest workflow run 41255769742 also passed and retained a TRX artifact |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
@@ -52,7 +52,7 @@ Existing ADR identifiers are occupied:
 - ADR-004: gameplay rules baseline.
 - ADR-005: executable Core boundary.
 - ADR-006: Core identifier and Betrayal ledger invariants (PROPOSED; pending owner approval).
-- ADR-007: player lifecycle and Vitality zero-transition conflict (DECISION REQUIRED).
+- ADR-007: canonical player lifecycle (APPROVED: Alive / Spirit / Eliminated).
 
 Do not create duplicate ADR-001 through ADR-007 using the historical transcript's suggested titles. New decisions use the next available ADR number and must be added to docs/governance/DECISIONS_LOG.md.
 
@@ -87,28 +87,29 @@ Every public state transition, rule decision, command admission path and determi
 
 ## 4. Canonical domain decisions
 
-### 4.1 Vitality and Spirit lifecycle — decision blocked by ADR-007
-The repository's v2.1 gameplay specification currently proposes that Vitality reaching zero transitions to Dead, with no MVP revival and Spirit represented separately. However, an earlier explicit owner-approved Phase 1 decision (2026-10-31) specified the player-state matrix Alive / Spirit / Eliminated, automatic transition to Spirit at zero Vitality, and explicit Resurrect / Eliminate operations. These are incompatible lifecycle contracts.
+### 4.1 Canonical player lifecycle — ADR-007 APPROVED
 
-The current VitalityAccount implementation and its passing tests implement the repository's v2.1 proposal only. They do not establish that this proposal superseded the earlier owner-approved matrix. ADR-007 records the conflict and blocks final lifecycle approval.
+The controlling decision is the earlier owner-approved Phase 1 matrix, reaffirmed in ADR-007:
+- Player lifecycle states are `Alive`, `Spirit`, and `Eliminated`.
+- Vitality reaching zero automatically transitions `Alive → Spirit`.
+- `Resurrect` and `Eliminate` are explicit server-authoritative operations.
+- `Eliminated` is terminal.
+- The v2.1 `Alive → Dead` lifecycle is superseded and must not be implemented as a competing state model.
 
-Until ADR-007 is resolved:
-- Do not treat Alive / Dead as the final player lifecycle.
-- Do not add Spirit, Resurrect or Eliminate behavior by inference.
-- Keep Vitality value bounds and arithmetic isolated from player participation/lifecycle state.
-- Treat Restore-on-Dead as behavior of the current provisional implementation, not a final gameplay decision.
-- The standalone Core CI result verifies source behavior, not the unresolved gameplay contract.
+The current Core implementation now exposes `PlayerLifecycleState` and explicit `TryResurrect` / `TryEliminate` operations. A successful Core build/test on the new branch is still required before calling it VERIFIED.
 
-### 4.2 Vitality — current v2.1 proposal only; not canonical until ADR-007
-The following describes the current repository proposal and implementation, not an approved final lifecycle:
-- Proposed default maximum: 100, as stated in v2.1.
-- Proposed loss behavior: applies only while Alive.
-- Proposed bounds: Vitality is clamped to [0, Maximum].
-- Proposed zero transition: Alive → Dead; no MVP revival.
-- Current VitalityAccount implements this proposal and is CI-verified as code behavior only.
-- The earlier owner-approved Alive / Spirit / Eliminated matrix remains unresolved against this proposal. Do not use this subsection as authorization to extend lifecycle behavior.
+### 4.2 Vitality semantics — canonical domain contract
+
+- Default Maximum is 100; custom positive maxima are supported.
+- Initial state is Alive with Current = Maximum.
+- `Lose` affects Alive only, clamps at zero, and automatically enters Spirit at zero.
+- `Restore` affects Alive only and is capped at Maximum; it never resurrects.
+- `TryResurrect` succeeds only from Spirit and requires a positive requested vitality amount, capped at Maximum.
+- `TryEliminate` succeeds from Alive or Spirit, sets vitality to zero, and enters terminal Eliminated.
+- Invalid/repeated Try operations return false without mutation.
+- Core validates domain invariants only. Authorization, match phase, resurrection cost/cooldown and other policy checks belong to the server application layer and must be performed before invoking these methods.
+- Spirit abilities, score, and connection/match membership are separate systems.
 - Decay rate and Collapse increments remain configuration/TBD until playtest evidence.
-- Only server-side simulation may call mutation methods.
 
 ### 4.3 Betrayal / Debuff transfer
 Proposed v2.1 preconditions:
@@ -126,11 +127,23 @@ On rejection, no player state, Debuff, cooldown, score or event ledger mutation.
 
 Cooldown duration, capacity, Debuff duration, decay modifier and eligible-selection tie-break remain TBD unless explicitly defined in the current gameplay specification. Do not invent constants.
 
-### 4.4 Match and player lifecycle
+### 4.4 Match, player and connection lifecycle separation
+
 Match phases in v2.1:
 Created → Waiting → Starting → Running → VoteOpen → Running or Ending → Completed.
 
-Player flow is unresolved between the prior owner-approved Alive / Spirit / Eliminated matrix and the later v2.1 proposal Alive → Dead with Spirit as a separate role. ADR-007 must decide the canonical transition table, including Resurrect and Eliminate semantics. Keep connection/authentication lifecycle, match membership, Vitality, Spirit role and spectator state separate until that decision is recorded.
+Player participation lifecycle is controlled by ADR-007:
+Alive → Spirit → (Alive through explicit Resurrect, or Eliminated through explicit Eliminate).
+Eliminated is terminal.
+
+Do not collapse these independent concepts into one enum:
+- PlayerLifecycleState: Alive / Spirit / Eliminated.
+- Vitality: bounded numeric resource.
+- ConnectionState: transport/authentication connectivity.
+- MatchMembership: membership in a match.
+- Spectator/presentation projection: view and interaction permissions.
+
+Disconnect/reconnect policy, Spirit command permissions, resurrection costs/cooldowns and match-phase preconditions remain separate decisions. Do not infer them from connection state or embed them in VitalityAccount.
 
 ### 4.5 Movement
 The server computes authoritative movement. Client messages are inputs/intents only. Final speed, acceleration, input normalization, collision, tick rate and anti-cheat thresholds are not established by the current baseline. Keep them configurable/TBD until a prototype and measurement exist.
