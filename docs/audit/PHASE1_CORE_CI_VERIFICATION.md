@@ -64,3 +64,18 @@ This evidence does not establish:
 - production security or release readiness.
 
 Do not generalize this PASS result beyond the standalone Core build and the 38 NUnit tests in the specified commit.
+
+## Subsequent CI rerun
+
+A later workflow run re-executed the same Core build/test workflow after the lifecycle conflict and governance documentation were recorded:
+
+- Run ID: 41255769742
+- Commit checked out by the workflow: 0d075cd87baeb1cc556c8fd56dedcf51c677d24f
+- Branch: feature/phase1-technical-consolidation
+- Job: 124698484685 — Build and test standalone Core
+- Conclusion: success
+- Restore, Release build, NUnit test step and artifact upload: all succeeded
+- Artifact: core-test-results, ID 13062794038
+- Artifact SHA-256: 0bde0d9330d20060823bf356d22a853dbe7d39395dd6341877d6b392dc3e8cd3
+
+This rerun does not supersede the detailed 38-test count above because the retained run summary in this audit records that count for run 41255553487. It does independently confirm the later workflow's build and test steps succeeded. The branch head after that run contains governance/documentation changes only; no Core source changes were made after the tested source.
