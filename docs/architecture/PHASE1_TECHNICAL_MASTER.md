@@ -473,7 +473,7 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 | Core .NET project | VERIFIED for earlier baseline; current lifecycle branch verification pending |
 | Numeric identifiers and identifier value-semantics tests | VERIFIED on earlier baseline |
 | Betrayal ledger primitive | VERIFIED on earlier baseline |
-| Vitality contract and primitive | VERIFIED — 45 NUnit passed on commit 48ee4d47d5f63b89b3210b59e8a289dd4fc8a2b8 |
+| Vitality contract and primitive | VERIFIED — 45 NUnit passed on commit 48ee4d47d5f63b89b3210b59e8a289dd4ee8ba05 |
 | Result / Result<T> | NOT IMPLEMENTED |
 | CoreComposition | NOT IMPLEMENTED |
 | Match/session lifecycle and state | NOT IMPLEMENTED |
