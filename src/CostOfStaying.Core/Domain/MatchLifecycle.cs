@@ -21,7 +21,7 @@ namespace CostOfStaying.Core.Domain
     /// </summary>
     public sealed class MatchLifecycle : Contracts.IMatchLifecycle
     {
-        public MatchLifecycle(MatchId matchId)
+        internal MatchLifecycle(MatchId matchId)
         {
             if (!matchId.IsValid)
                 throw new ArgumentException("Match identity must be non-zero.", nameof(matchId));
