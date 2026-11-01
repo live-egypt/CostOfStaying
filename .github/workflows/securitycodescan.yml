@@ -44,38 +44,15 @@ jobs:
       - name: Build Core test project with analyzers
         run: dotnet build tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-restore
 
-      - name: Combine analyzer SARIF reports
-        if: always()
-        shell: bash
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-
-          reports = sorted(Path(".").rglob("analysis.sarif"))
-          if not reports:
-              print("No SARIF report was emitted by SecurityCodeScan.")
-              raise SystemExit(0)
-
-          merged = {"version": "2.1.0", "$schema": "https://json.schemastore.org/sarif-2.1.0.json", "runs": []}
-          for report in reports:
-              raw = report.read_text(encoding="utf-8-sig")
-              payload = json.loads(raw)
-              print(f"Inspecting {report}: size={report.stat().st_size}, version={payload.get('version')!r}, keys={list(payload.keys())}")
-              if not isinstance(payload.get("runs"), list):
-                  raise SystemExit(f"SARIF report has no runs array: {report}")
-              merged["runs"].extend(payload["runs"])
-
-          Path("artifacts").mkdir(exist_ok=True)
-          Path("artifacts/securitycodescan.sarif").write_text(
-              json.dumps(merged, ensure_ascii=False),
-              encoding="utf-8"
-          )
-          print(f"Combined {len(reports)} SARIF report(s) into artifacts/securitycodescan.sarif")
-          PY
+      - name: Convert SARIF 1.0 to GitHub SARIF 2.1
+        uses: security-code-scan/security-code-scan-results-action@cdb3d5e639054395e45bf401cba8688fcaf7a687
+        env:
+          DOTNET_ROLL_FORWARD: Major
+        with:
+          sarif_directory: artifacts/securitycodescan
 
       - name: Upload SARIF
-        if: always() && hashFiles('artifacts/securitycodescan.sarif') != ''
+        if: always() && hashFiles('artifacts/securitycodescan/*.sarif') != ''
         uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: artifacts/securitycodescan.sarif
+          sarif_file: artifacts/securitycodescan
