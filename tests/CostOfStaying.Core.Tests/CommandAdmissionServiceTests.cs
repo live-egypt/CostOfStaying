@@ -145,6 +145,58 @@ namespace CostOfStaying.Core.Tests
             Assert.That(service.TryAdmit(envelope).IsSuccess, Is.True);
         }
 
+        [Test]
+        public void TryRemoveClosedSession_RejectsInvalidAndUnknownIds()
+        {
+            var service = CreateService(out _, out _);
+
+            Assert.That(service.TryRemoveClosedSession(default).ErrorCode, Is.EqualTo(CoreErrorCode.InvalidArgument));
+            Assert.That(service.TryRemoveClosedSession(new SessionId(99)).ErrorCode, Is.EqualTo(CoreErrorCode.NotFound));
+        }
+
+        [Test]
+        public void TryRemoveClosedSession_RequiresClosedState()
+        {
+            var service = CreateService(out SessionRegistry sessions, out _);
+            var session = new SessionLifecycle(new SessionId(10));
+            sessions.Register(session);
+
+            Assert.That(service.TryRemoveClosedSession(session.SessionId).ErrorCode, Is.EqualTo(CoreErrorCode.InvalidState));
+            Assert.That(sessions.Get(session.SessionId).IsSuccess, Is.True);
+        }
+
+        [Test]
+        public void TryRemoveClosedSession_WaitsForPendingCommandsToDrain()
+        {
+            var service = CreateService(out SessionRegistry sessions, out CommandAdmissionQueue<string> queue);
+            var session = new SessionLifecycle(new SessionId(10));
+            sessions.Register(session);
+            session.TryAuthenticate(new ActorId(1));
+            var envelope = new CommandEnvelope<string>(session.SessionId, new CommandSequenceId(1), new ServerTick(1), "move");
+            Assert.That(service.TryAdmit(envelope).IsSuccess, Is.True);
+            session.TryClose();
+
+            Assert.That(service.TryRemoveClosedSession(session.SessionId).ErrorCode, Is.EqualTo(CoreErrorCode.InvalidState));
+            Assert.That(sessions.Get(session.SessionId).IsSuccess, Is.True);
+
+            Assert.That(queue.TryDequeue(out _), Is.True);
+            Assert.That(service.TryRemoveClosedSession(session.SessionId).IsSuccess, Is.True);
+            Assert.That(sessions.Get(session.SessionId).ErrorCode, Is.EqualTo(CoreErrorCode.NotFound));
+            Assert.That(queue.ResetSession(session.SessionId).ErrorCode, Is.EqualTo(CoreErrorCode.NotFound));
+        }
+
+        [Test]
+        public void TryRemoveClosedSession_AllowsClosedSessionWithoutPriorCommands()
+        {
+            var service = CreateService(out SessionRegistry sessions, out _);
+            var session = new SessionLifecycle(new SessionId(10));
+            sessions.Register(session);
+            session.TryClose();
+
+            Assert.That(service.TryRemoveClosedSession(session.SessionId).IsSuccess, Is.True);
+            Assert.That(sessions.Get(session.SessionId).ErrorCode, Is.EqualTo(CoreErrorCode.NotFound));
+        }
+
         private static CommandAdmissionService<string> CreateService(out SessionRegistry sessions, out CommandAdmissionQueue<string> queue)
         {
             sessions = new SessionRegistry(4);
