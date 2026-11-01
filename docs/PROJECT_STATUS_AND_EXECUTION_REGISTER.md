@@ -14,12 +14,12 @@ The default branch is `main`. The implementation and consolidation work is isola
 | Workstream | Current location | State | Delivery interpretation |
 |---|---|---|---|
 | Reorganized v2.1 design documentation | PR #1 / historical branch | Superseded by consolidated work where noted | Do not reintroduce legacy files |
-| Uploaded transcript audit | PR #4 branch | Included in consolidated review | Audit evidence, not executable source |
+| Uploaded transcript audit | PR #6 branch | Included in consolidated review | Audit evidence, not executable source |
 | Standalone pure-C# Core and NUnit tests | PR #4 branch | CI-verified within stated scope | Not yet merged to `main`; lifecycle remains provisional |
 | Unity source-package static review | PR #5 branch | Audit checkpoint | Does not claim the ZIP/binary package was uploaded |
 | Unity project and FishNet integration | Not present in reviewed tree | NOT IMPLEMENTED | Requires actual project/package files and exact-version verification |
 
-PR #6 is the consolidated Core/documentation review and supersedes PR #4, which is closed to avoid duplicate delivery. PR #5 is a separate source-package audit checkpoint. PR #2 and PR #3 are superseded by PR #4; do not continue parallel implementation on them.
+PR #6 is the consolidated Core/documentation review and supersedes PR #4, which is closed to avoid duplicate delivery. PR #5 is a separate source-package audit checkpoint. PR #2, PR #3 and PR #4 are superseded; do not continue parallel implementation on them.
 
 ## 2. Decision authority and conflict control
 
@@ -45,11 +45,11 @@ ADR-007 has been resolved in favor of the earlier owner-approved model and reaff
 - Ordinary Restore never resurrects; only explicit Resurrect can transition Spirit → Alive.
 - The v2.1 `Alive → Dead` lifecycle text is superseded and must be reconciled in every maintained specification.
 
-The Core source and NUnit tests have been updated on `feature/core-lifecycle-resolution`. CI verification for this exact revision is pending. The Core API does not implement authorization, costs, cooldowns or match-phase policy; those remain server application responsibilities.
+The Core source and NUnit tests have been updated on `feature/core-lifecycle-resolution`. Core CI run 41325988534 verified the lifecycle implementation (45/45), and run 41326574904 verified the Result, typed-ID, MatchLifecycle and CoreComposition increment (77/77) on source commit 17566c5234f65270ccd33d70f8d9dcccb4d2d044. The Core API does not implement authorization, costs, cooldowns or match-phase policy; those remain server application responsibilities.
 
 ## 3. Verified evidence boundary
 
-The recorded GitHub Actions runs `41255553487` and `41255769742` passed the standalone Core workflow. The recorded test result is 38 passed, 0 failed, 0 skipped.
+The latest GitHub Actions Core CI run 41326574904 passed on source commit 17566c5234f65270ccd33d70f8d9dcccb4d2d044: Release restore/build succeeded and NUnit reported 77 passed, 0 failed, 0 skipped. TRX artifact 13091806116 is retained.
 
 This verifies only the source and tests exercised by that workflow. It does **not** verify:
 
