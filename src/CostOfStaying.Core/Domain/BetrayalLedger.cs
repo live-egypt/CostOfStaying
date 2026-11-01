@@ -52,6 +52,10 @@ namespace CostOfStaying.Core.Domain
     /// </summary>
     public sealed class BetrayalLedger : IBetrayalLedger
     {
+        internal BetrayalLedger()
+        {
+        }
+
         private readonly Dictionary<EventSequenceId, BetrayalEvent> _events =
             new Dictionary<EventSequenceId, BetrayalEvent>();
         private readonly Dictionary<ActorId, ulong> _scores =
