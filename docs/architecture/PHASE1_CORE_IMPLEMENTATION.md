@@ -1,6 +1,6 @@
 # Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 148/148 NUnit on commit `be67d8a3399f99c2c0e05a37eec8ffa0cb2abb13`; the broader Core scope remains incomplete.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 148/148 NUnit on commit `94c5789b0e82493290ca85133fc692e83ffd9884`; the broader Core scope remains incomplete.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 10 / NUnit 3.14  
@@ -107,12 +107,12 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated transp
 ## Verification evidence
 
 The latest Core CI run:
-- Run: `41331236864` — SUCCESS.
-- Source commit: `be67d8a3399f99c2c0e05a37eec8ffa0cb2abb13`.
+- Run: `41331400978` — SUCCESS.
+- Source commit: `94c5789b0e82493290ca85133fc692e83ffd9884`.
 - Core dependency boundary and composition-root checks: PASS.
 - .NET 10 Release restore/build: PASS.
 - NUnit: 148 passed, 0 failed, 0 skipped.
-- TRX artifact: `13093536721`.
+- TRX artifact: `13092964341`.
 - Artifact SHA-256: `b4067bbd6c6b0492a245dea4c8970acca23d7196d398018f5266da42709b4295`.
 - Detailed evidence: [Bounded command queue and session replay capacity CI](../audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md).
 
