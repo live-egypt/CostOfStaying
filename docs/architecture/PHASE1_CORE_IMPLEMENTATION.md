@@ -1,6 +1,6 @@
 # Phase 1 Core — Implemented Contracts and Primitives
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed dependency-boundary scan, Release build and 103/103 NUnit on commit `ce995ff0dfab7bacd012ca9a472cf9040cd6fa84`; remaining Core scope is not implemented.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed dependency-boundary and composition-root scans, Release build and 103/103 NUnit on commit `c8a914970029c249081fd5cf6e48990d1a3cfaca`; remaining Core scope is not implemented.  
 **Architecture ADR:** ADR-005 (APPROVED)  
 **Lifecycle ADR:** ADR-007 (APPROVED: Alive / Spirit / Eliminated)  
 **Identifier/ledger ADR:** ADR-006 (PROPOSED — do not treat as owner-approved)  
@@ -106,14 +106,16 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated connec
 
 ## Verification evidence
 
-- **Latest tested commit:** `ce995ff0dfab7bacd012ca9a472cf9040cd6fa84`
-- **Latest Core CI run:** `41327308752` — SUCCESS
+- **Latest tested commit:** `c8a914970029c249081fd5cf6e48990d1a3cfaca`
+- **Latest Core CI run:** `41327543734` — SUCCESS
 - **Core dependency boundary scan:** PASS — no UnityEngine/FishNet references in Core source/project files
+- **CoreComposition construction-root scan:** PASS — production construction centralized in CoreComposition
 - **Release restore/build:** PASS
 - **NUnit:** 103 passed, 0 failed, 0 skipped
-- **TRX artifact:** `core-test-results`, ID `13091746610`
-- **Artifact SHA-256:** `7b4e306d63d34a52e65c0e71888cf39915dcb25db5b1da4320862c67f1f9593f`
-- **Detailed evidence:** [Command sequence Core CI verification](../audit/COMMAND_SEQUENCE_CORE_CI_VERIFICATION_2026-11-01.md)
+- **TRX artifact:** `core-test-results`, ID `13091687045`
+- **Artifact SHA-256:** `1b5eb3259eb9207b8ca5fcbf6abce110be257ad32ee1449c12d115124ac798ed`
+- **Detailed evidence:** [Core CI purity and composition enforcement](../audit/CORE_CI_COMPOSITION_ENFORCEMENT_2026-11-01.md)
+- **Command sequence details:** [Command sequence Core CI verification](../audit/COMMAND_SEQUENCE_CORE_CI_VERIFICATION_2026-11-01.md)
 - **Previous boundary baseline:** [Core CI dependency boundary and baseline](../audit/CORE_CI_BOUNDARY_AND_BASELINE_2026-11-01.md)
 - **Match lifecycle/composition detail:** [Match lifecycle and composition CI verification](../audit/MATCH_LIFECYCLE_COMPOSITION_CI_VERIFICATION_2026-11-01.md)
 - **Previous 55-test evidence:** [Core foundations CI verification](../audit/CORE_FOUNDATIONS_CI_VERIFICATION_2026-11-01.md)
