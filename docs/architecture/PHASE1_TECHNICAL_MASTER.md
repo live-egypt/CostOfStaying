@@ -27,7 +27,7 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Core unit tests | VERIFIED | 77 passed; 0 failed; 0 skipped in run 41326831611; TRX artifact 13091612088 retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
 | Match/session lifecycle | PARTIAL | Match phase state machine implemented and verified; session lifecycle and aggregate membership not implemented |
-| Command envelope and sequence admission | PARTIAL | Server-side envelope and per-session bounded sequence tracker implemented; queue/backpressure and ADR-008 approval pending |
+| Command envelope and sequence admission | PARTIAL | Envelope and tracker verified by CI; ADR-008 policy review, command validation and queue/backpressure remain pending |
 | Snapshots | NOT IMPLEMENTED | Projection/revision semantics pending |
 | FishNet / Unity adapters | NOT IMPLEMENTED | Requires actual Unity project and pinned package |
 | Unity project settings / manifests | NOT CREATED | No project metadata exists in repository |
@@ -209,13 +209,13 @@ Status definitions:
 | Contracts/IVitalityAccount.cs | Pure vitality/lifecycle contract | VitalityAccountTests | VERIFIED — lifecycle tests passed |
 | Contracts/IBetrayalLedger.cs | Betrayal ledger contract | BetrayalLedgerTests | VERIFIED — ledger tests passed |
 | Contracts/IMatchLifecycle.cs | Match phase contract | MatchLifecycleTests | VERIFIED — match transition tests passed |
-| Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId, CommandSequenceId | IdentifierTests | VERIFIED — typed identifier tests passed |
+| Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId, CommandSequenceId | IdentifierTests | VERIFIED — 103 NUnit passed |
 | Domain/VitalityAccount.cs | Bounded vitality; Alive → Spirit; explicit Resurrect / Eliminate | VitalityAccountTests | VERIFIED |
 | Domain/BetrayalLedger.cs | Monotonic event sequence, replay rejection, score | BetrayalLedgerTests | VERIFIED |
 | Domain/MatchLifecycle.cs | Validated match phase transitions | MatchLifecycleTests | VERIFIED |
 | Result.cs | Result / Result<T> and CoreErrorCode | ResultTests | VERIFIED |
-| CoreComposition.cs | Single Core construction root; match-scoped ledger and factories for aggregates/sequence tracker | CoreCompositionTests | IMPLEMENTED; latest CI pending |
-| Domain/TimeValues.cs | ServerTick and StateRevision; zero initial values; overflow-safe revision advance | TimeValueTests | IMPLEMENTED; latest CI pending |
+| CoreComposition.cs | Single Core construction root; match-scoped ledger and factories for aggregates/sequence tracker | CoreCompositionTests | VERIFIED — 103 NUnit passed |
+| Domain/TimeValues.cs | ServerTick and StateRevision; zero initial values; overflow-safe revision advance | TimeValueTests | VERIFIED — 103 NUnit passed |
 | Position2.cs / MovementInput.cs | Engine-independent movement values | MovementValueTests | PROPOSED |
 | PlayerState.cs / MatchState.cs / WorldState.cs | Authoritative domain state | Corresponding state tests | PROPOSED |
 
@@ -236,12 +236,12 @@ Naming rule: `ActorId` is the canonical player-actor identity in the current Cor
 
 | File | Responsibility | Required test | Status |
 |---|---|---|---|
-| Domain/CommandEnvelope.cs | Server-derived session, sequence and receive tick; not a client wire DTO | CommandEnvelopeTests | IMPLEMENTED; ADR-008 PROPOSED |
+| Domain/CommandEnvelope.cs | Server-derived session, sequence and receive tick; not a client wire DTO | CommandEnvelopeTests | VERIFIED — 103 NUnit passed; ADR-008 PROPOSED |
 | CommandKind.cs | Supported command kinds | CommandKindTests | PROPOSED |
 | MovementCommand.cs | Client movement intent only | MovementCommandTests | PROPOSED |
 | BetrayalCommand.cs | Client transfer intent only | BetrayalCommandTests | PROPOSED |
 | CommandOutcome.cs | Accepted/rejected outcome projection | CommandOutcomeTests | PROPOSED |
-| Domain/CommandSequenceTracker.cs | Per-session monotonic sequence and max-jump enforcement | CommandSequenceTrackerTests | IMPLEMENTED; ADR-008 PROPOSED |
+| Domain/CommandSequenceTracker.cs | Per-session monotonic sequence and max-jump enforcement | CommandSequenceTrackerTests | VERIFIED — 103 NUnit passed; ADR-008 PROPOSED |
 | CommandAdmission.cs | Initial validation before queue | CommandAdmissionTests | PROPOSED |
 | MovementCommandIngress.cs | Validate/enqueue movement intent | MovementIngressTests | PROPOSED |
 | BetrayalCommandIngress.cs | Validate/enqueue transfer intent | BetrayalIngressTests | PROPOSED |
@@ -465,7 +465,7 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 
 ## 12. Exact current implementation status
 
-**Current implementation status:** ADR-007 is APPROVED. Core CI run 41326831611 passed the Core dependency-boundary scan, Release build and 77/77 NUnit tests on commit a235b99712bbe635ec71832647af9592e117a121. Later branch commits have updated documentation only.
+**Current implementation status:** ADR-007 is APPROVED. Core CI run 41327308752 passed the Core dependency-boundary scan, Release build and 103/103 NUnit tests on commit ce995ff0dfab7bacd012ca9a472cf9040cd6fa84. Later branch commits have updated documentation only.
 
 | Item | Status |
 |---|---|
@@ -481,8 +481,8 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 | NUnit tests | VERIFIED — 77 passed, 0 failed, 0 skipped |
 | Session lifecycle and authentication state | NOT IMPLEMENTED |
 | Full match/player/world aggregates and membership | NOT IMPLEMENTED |
-| ServerTick / StateRevision | IMPLEMENTED; latest CI pending |
-| Command envelope and sequence tracker | IMPLEMENTED — ADR-008 PROPOSED; queue/admission pipeline remains NOT IMPLEMENTED |
+| ServerTick / StateRevision | VERIFIED — 103 NUnit passed |
+| Command envelope and sequence tracker | VERIFIED — 103 NUnit passed; ADR-008 PROPOSED; queue/admission pipeline remains NOT IMPLEMENTED |
 | Movement simulation | NOT IMPLEMENTED |
 | Debuff model and atomic transfer | NOT IMPLEMENTED |
 | Snapshot/projection and match outcome | NOT IMPLEMENTED |
