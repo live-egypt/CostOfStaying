@@ -15,7 +15,7 @@ The default branch is `main`. The implementation and consolidation work is isola
 |---|---|---|---|
 | Reorganized v2.1 design documentation | PR #1 / historical branch | Superseded by consolidated work where noted | Do not reintroduce legacy files |
 | Uploaded transcript audit | PR #6 branch | Included in consolidated review | Audit evidence, not executable source |
-| Standalone pure-C# Core and NUnit tests | PR #4 branch | CI-verified within stated scope | Not yet merged to `main`; lifecycle remains provisional |
+| Standalone pure-C# Core and NUnit tests | PR #6 branch | CI-verified within stated scope | Not yet merged to `main`; full Core remains partial |
 | Unity source-package static review | PR #5 branch | Audit checkpoint | Does not claim the ZIP/binary package was uploaded |
 | Unity project and FishNet integration | Not present in reviewed tree | NOT IMPLEMENTED | Requires actual project/package files and exact-version verification |
 
@@ -94,8 +94,9 @@ Do not skip a gate to make the project appear more complete. Keep deferred syste
 
 1. Re-run Core CI for the approved ADR-007 implementation and retain exact-commit evidence.
 2. Reconcile all remaining gameplay/system documents with ADR-007; keep ADR-004 PROPOSED FOR PLAYTEST until playtest evidence exists.
-3. Review PR #4 as the earlier baseline and PR #5 as static source audit only; do not represent the Unity source ZIP as uploaded.
-4. Continue missing Core foundations: Result, identifiers, CoreComposition, session/match lifecycle, command admission, movement, atomic transfer and snapshots.
+3. Review PR #6 as the consolidated technical baseline; it remains unmerged pending review.
+4. Keep PR #5 as static source audit only; do not represent the Unity source ZIP as uploaded.
+5. Continue missing Core foundations: session lifecycle, authoritative state ownership, ServerTick/StateRevision, command admission, movement, atomic transfer and snapshots.
 5. Keep Unity/FishNet integration gated on actual project metadata and exact package verification.
 
 ## 7. Status vocabulary
@@ -130,7 +131,7 @@ Dependabot is configured in `.github/dependabot.yml` for weekly NuGet and GitHub
 
 ## 9. Latest CI and security-scanner audit
 
-The latest observed PR workflow run confirms the new Core CI is operational: run `41312765519` passed and retained its NUnit TRX artifact. The test result was 38/38 passed.
+The latest Core CI run `41326574904` passed on source commit `17566c5234f65270ccd33d70f8d9dcccb4d2d044`: Release restore/build succeeded and NUnit reported 77 passed, 0 failed, 0 skipped. Artifact `13091806116` was retained. This verifies standalone Core only, not Unity/FishNet.
 
 The existing MobSF, SecurityCodeScan and Contrast Scan workflows failed before producing completed security-analysis results:
 - MobSF: pinned `semgrep==0.50.1` dependency could not be installed.
