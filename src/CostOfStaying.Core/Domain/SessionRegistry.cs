@@ -8,7 +8,7 @@ namespace CostOfStaying.Core.Domain
     /// <summary>
     /// Bounded, deterministic registry keyed only by server-issued SessionId.
     /// It does not impose per-actor multi-session policy or own connection mapping.
-    /// A session must be Closed before removal. Single-writer/server-serialized.
+    /// A session must be Closed before removal; the caller must first drain queued commands and reset replay state. Single-writer/server-serialized.
     /// </summary>
     public sealed class SessionRegistry : ISessionRegistry
     {
