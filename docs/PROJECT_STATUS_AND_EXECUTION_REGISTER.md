@@ -49,7 +49,7 @@ The Core source and NUnit tests have been updated on `feature/core-lifecycle-res
 
 ## 3. Verified evidence boundary
 
-The latest GitHub Actions Core CI run 41327308752 passed on source commit ce995ff0dfab7bacd012ca9a472cf9040cd6fa84: dependency-boundary scan and Release restore/build succeeded; NUnit reported 103 passed, 0 failed, 0 skipped. TRX artifact 13091746610 is retained.
+The latest GitHub Actions Core CI run 41327543734 passed on source commit c8a914970029c249081fd5cf6e48990d1a3cfaca: dependency-boundary and CoreComposition construction-root scans, Release restore/build succeeded; NUnit reported 103 passed, 0 failed, 0 skipped. TRX artifact 13091687045 is retained.
 
 This verifies only the source and tests exercised by that workflow. It does **not** verify:
 
