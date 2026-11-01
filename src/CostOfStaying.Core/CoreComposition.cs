@@ -3,6 +3,7 @@ namespace CostOfStaying.Core
     using System;
     using CostOfStaying.Core.Contracts;
     using CostOfStaying.Core.Domain;
+    using CostOfStaying.Core.Services;
 
     /// <summary>
     /// Composition root for one server-owned Core simulation scope.
@@ -45,6 +46,13 @@ namespace CostOfStaying.Core
         public IMatchPlayerRegistry CreateMatchPlayerRegistry(MatchId matchId, int capacity)
         {
             return new MatchPlayerRegistry(matchId, capacity);
+        }
+
+        public ICommandAdmissionService<TCommand> CreateCommandAdmissionService<TCommand>(
+            ISessionRegistry sessions,
+            CommandAdmissionQueue<TCommand> queue)
+        {
+            return new CommandAdmissionService<TCommand>(sessions, queue);
         }
 
         public CommandSequenceTracker CreateCommandSequenceTracker(ulong maximumSequenceJump, int maximumTrackedSessions)
