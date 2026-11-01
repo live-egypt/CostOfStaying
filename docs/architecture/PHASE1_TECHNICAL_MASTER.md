@@ -24,7 +24,7 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Pure Core project | VERIFIED | .NET 10 Release build and 177 NUnit tests passed in run 41332755494 for commit 26a77dcf1394d35d3db48ea0f5b7cde4c118998f; Core dependency-boundary and composition-root scans passed |
 | Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41332755494: 177/177 NUnit passed |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
-| Core unit tests | VERIFIED | 177 passed; 0 failed; 0 skipped in run 41332755494; TRX artifact 13092964341 retained |
+| Core unit tests | VERIFIED | 177 passed; 0 failed; 0 skipped in run 41332755494; TRX artifact 13093413196 retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
 | Match/session lifecycle | PARTIAL | Match phase state machine, bounded match registry and per-session lifecycle primitive verified; global session registry, transport authentication and reconnect policy remain unimplemented |
 | Command envelope and sequence admission | PARTIAL | Authenticated-session admission gate, bounded tracker and bounded FIFO queue passed 177-test Core CI; gameplay payload validation and ADR-008 policy review remain pending |
@@ -56,7 +56,9 @@ Existing ADR identifiers are occupied:
 - ADR-008: server command envelope and sequence admission (PROPOSED).
 - ADR-009: match-scoped bounded player registry (PROPOSED; capacity/spectator/reconnect policy remains open).
 - ADR-010: server session lifecycle primitive (PROPOSED; transport authentication and reconnect policy remain outside Core).
-- ADR-011: bounded server session registry (PROPOSED; capacity and per-actor multi-session policy remain open).\n- ADR-012: authenticated command admission gate (PROPOSED; gameplay payload validation remains downstream).\n- ADR-013: safe session cleanup and replay-state release (PROPOSED).
+- ADR-011: bounded server session registry (PROPOSED; capacity and per-actor multi-session policy remain open).
+- ADR-012: authenticated command admission gate (PROPOSED; gameplay payload validation remains downstream).
+- ADR-013: safe session cleanup and replay-state release (PROPOSED).
 
 Do not create duplicate ADR-001 through ADR-007 using the historical transcript's suggested titles. New decisions use the next available ADR number and must be added to docs/governance/DECISIONS_LOG.md.
 
