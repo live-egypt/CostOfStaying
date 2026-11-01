@@ -14,7 +14,7 @@
 - Source commit: `be67d8a3399f99c2c0e05a37eec8ffa0cb2abb13`.
 - Core dependency boundary and composition-root guards: PASS.
 - .NET 10 SDK restore/build: PASS.
-- Core target: .NET Standard 2.1; test target: .NET 10.
+- Core target: .NET Standard 2.1; test target: .NET 10.\n- SessionLifecycle and CoreComposition factory: included in this run.
 - NUnit: **148 passed, 0 failed, 0 skipped**.
 - TRX artifact: `13093536721`.
 - Artifact SHA-256: `2b13f11e173414f7b232a89ef1ec0389d1d237686cc9137f5efa9662a8d1ee67`.
@@ -47,7 +47,7 @@ The review branch now contains these corrections:
 - Enforces the Core dependency boundary (no UnityEngine/FishNet references).
 - Enforces CoreComposition as the construction root; the bounded queue may own its private sequence tracker.
 - Uses the active feature branch trigger, .NET 10, Release builds, NUnit and TRX artifact retention.
-- Latest Core CI run `41331236864` passed 134 tests on the synchronized branch.
+- Latest Core CI run `41331236864` passed 148 tests on the synchronized branch.
 
 ### CodeQL
 - Explicitly analyzes `csharp` and `actions` rather than an empty matrix.
@@ -90,7 +90,7 @@ These changes prevent unconfigured external account integrations from creating a
 
 | Item | Current branch state | Verification |
 |---|---|---|
-| Core purity/composition + 148 NUnit | Implemented | PASS — run 41331236864 |
+| Core purity/composition/session lifecycle + 148 NUnit | Implemented | PASS — run 41331236864 |
 | Merge branch with current main | Synchronized; no behind commits | Compare status: ahead only |
 | CodeQL C# + Actions | Corrected | PASS — run 41330669137 |
 | MobSF scanner runtime | Corrected and source-path scoped | PASS — run 41329727360; no app source to certify |
