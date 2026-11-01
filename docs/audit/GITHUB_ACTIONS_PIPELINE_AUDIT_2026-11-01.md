@@ -26,9 +26,10 @@ A later Core CI push run `41329723500` also completed successfully on merge-sync
 | MobSF legacy action | 41327877519 | FAIL | Legacy action dependency requested unavailable `semgrep==0.50.1`; scan never began |
 | MobSF replacement | 41329727360 | PASS | Pinned `mobsfscan==1.1.0` installed and ran; repository still has no Android/iOS application source, so this is scanner-execution evidence, not mobile-app security certification |
 | SecurityCodeScan inherited | 41327877574 | FAIL | Root-level `dotnet restore` failed with MSB1003 because no root solution/project exists |
-| SecurityCodeScan replacement attempt | 41329697483 | FAIL | Explicit Core test project restore and analyzer build succeeded, but the legacy SARIF converter required .NET Core 3.1, which is absent/EOL on the runner; no final SARIF upload |
+| SecurityCodeScan replacement attempts | 41329697483 / 41329900099 / 41330344606 | FAIL | Project restore/build succeeded; legacy .NET 3.1 converter, strict SARIF 2.1 check and converter schema assumptions failed in sequence |
+| SecurityCodeScan final replacement | 41330871497 | PASS | Analyzer build passed; two native SARIF 1.0.0 reports preserved as artifact 13093401456; both reported 0 findings |
 | CodeQL inherited | 41329615128 | FAIL | Inherited workflow had an empty language matrix and created no analysis jobs |
-| CodeQL corrected | 41329697491 | PASS | Explicit C# and GitHub Actions analysis jobs both completed successfully and uploaded results |
+| CodeQL corrected | 41329697491 and 41330669137 | PASS | Explicit C# and GitHub Actions analysis jobs both completed successfully and uploaded results |
 | Contrast inherited | 41327877553 | FAIL | Template artifact path was `mypath/target/myartifact.jar`; required organization secret was absent |
 | Debricked inherited | 41329618006 | FAIL | Scan initialization returned Unauthorized because no valid Debricked access token was supplied |
 | NowSecure inherited | 41329616589 | FAIL | Template workflow targeted a Gradle build and APK that do not exist in this repository; it also contained an unresolved group-ID placeholder |
@@ -54,9 +55,11 @@ The review branch now contains these corrections:
 ### SecurityCodeScan
 - Targets `tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj` explicitly; this restores/builds the referenced Core project too.
 - The analyzer build passed in run `41329697483`.
-- The old SARIF conversion action was removed because it depends on the retired .NET Core 3.1 runtime.
-- The replacement combines SARIF 2.1.0 reports using Python's standard JSON library and uploads through CodeQL Action v4.
-- **The new SARIF-combination/upload revision still requires a successful CI run.** Do not mark SecurityCodeScan verified until it passes and findings are reviewed.
+- The old SARIF conversion action depended on the retired .NET Core 3.1 runtime. A custom conversion attempt also failed because the analyzer emits native SARIF 1.0.0 and the legacy converter expected fields that were absent in empty reports.
+- The final replacement preserves the analyzer's native SARIF 1.0.0 reports as a dedicated workflow artifact instead of uploading an invalid schema to GitHub Code Scanning.
+- Run `41330871497` completed successfully: Core and test project analyzer builds passed; two native SARIF reports were retained; each reported 0 findings.
+- Artifact: `securitycodescan-sarif`, ID `13093401456`, SHA-256 `83db1d8b22a5cb1bc694910d840f205d904e57432cbf8b1de867ae4cb22823c0`.
+- This is a successful analyzer run with zero reported findings in those reports, not a GitHub Code Scanning SARIF upload. The reports remain downloadable for manual review.
 
 ### MobSF
 - Replaced the obsolete action dependency chain with pinned `mobsfscan==1.1.0` on Python 3.13.
@@ -100,4 +103,4 @@ These changes prevent unconfigured external account integrations from creating a
 
 All workflow corrections are on the Draft PR branch. They have not been merged to `main`. PR #6 remains unmerged. Do not claim the default branch is repaired until the PR is reviewed and merged.
 
-**Status:** Core CI is green for the verified source increment. CodeQL and MobSF replacement runs have passed within their stated scope. SecurityCodeScan's analyzer build passes, but its revised SARIF upload still needs verification. Account-backed scanners remain optional/manual until valid secrets and artifacts exist.
+**Status:** Core CI is green for the verified source increment. CodeQL and MobSF replacement runs have passed within their stated scope. SecurityCodeScan's analyzer build and native report retention now pass (run 41330871497); raw SARIF 1.0.0 is retained as an artifact, not uploaded to GitHub Code Scanning. Account-backed scanners remain optional/manual until valid secrets and artifacts exist.
