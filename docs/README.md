@@ -83,3 +83,5 @@
 - **TBD:** لم يحسم بعد.
 
 لا تستخدم IMPLEMENTED أو VERIFIED لمجرد وجود تصميم أو وثيقة.
+
+- [تقرير خط أساس Core النهائي — 134 اختباراً](audit/CORE_CI_FINAL_BASELINE_2026-11-01.md)
