@@ -21,13 +21,13 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Area | Status | Meaning |
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
-| Pure Core project | VERIFIED | .NET 10 Release build and 132 NUnit tests passed in run 41330344616 for commit 08b68e68a6cf393c6177b6b54ecd53d6ffff5496; Core dependency-boundary and composition-root scans passed |
-| Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41330344616: 132/132 NUnit passed |
+| Pure Core project | VERIFIED | .NET 10 Release build and 132 NUnit tests passed in run 41330975856 for commit 5648aaf232dd247a0af52317f8ddd363a0441f0c; Core dependency-boundary and composition-root scans passed |
+| Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41330975856: 134/134 NUnit passed |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
-| Core unit tests | VERIFIED | 132 passed; 0 failed; 0 skipped in run 41330344616; TRX artifact 13093370056 retained |
+| Core unit tests | VERIFIED | 134 passed; 0 failed; 0 skipped in run 41330975856; TRX artifact 13092889041 retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
 | Match/session lifecycle | PARTIAL | Match phase state machine and bounded match membership registry implemented and verified; authenticated session lifecycle/reconnect policy not implemented |
-| Command envelope and sequence admission | PARTIAL | Envelope, bounded tracker and bounded FIFO queue passed 132-test Core CI; application validation and ADR-008 policy review remain pending |
+| Command envelope and sequence admission | PARTIAL | Envelope, bounded tracker and bounded FIFO queue passed 134-test Core CI; application validation and ADR-008 policy review remain pending |
 | Snapshots | NOT IMPLEMENTED | Projection/revision semantics pending |
 | FishNet / Unity adapters | NOT IMPLEMENTED | Requires actual Unity project and pinned package |
 | Unity project settings / manifests | NOT CREATED | No project metadata exists in repository |
@@ -97,7 +97,7 @@ The controlling decision is the earlier owner-approved Phase 1 matrix, reaffirme
 - `Eliminated` is terminal.
 - The v2.1 `Alive → Dead` lifecycle is superseded and must not be implemented as a competing state model.
 
-The current Core implementation exposes `PlayerLifecycleState` and explicit `TryResurrect` / `TryEliminate` operations. Lifecycle semantics are covered by the successful 132-test Core CI run.
+The current Core implementation exposes `PlayerLifecycleState` and explicit `TryResurrect` / `TryEliminate` operations. Lifecycle semantics are covered by the successful 134-test Core CI run.
 
 ### 4.2 Vitality semantics — canonical domain contract
 
@@ -216,14 +216,14 @@ Status definitions:
 | Contracts/IVitalityAccount.cs | Pure vitality/lifecycle contract | VitalityAccountTests | VERIFIED — lifecycle tests passed |
 | Contracts/IBetrayalLedger.cs | Betrayal ledger contract | BetrayalLedgerTests | VERIFIED — ledger tests passed |
 | Contracts/IMatchLifecycle.cs | Match phase contract | MatchLifecycleTests | VERIFIED — match transition tests passed |
-| Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId, CommandSequenceId | IdentifierTests | VERIFIED — 132 NUnit passed |
+| Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId, CommandSequenceId | IdentifierTests | VERIFIED — 134 NUnit passed |
 | Domain/VitalityAccount.cs | Bounded vitality; Alive → Spirit; explicit Resurrect / Eliminate | VitalityAccountTests | VERIFIED |
 | Domain/BetrayalLedger.cs | Monotonic event sequence, replay rejection, score | BetrayalLedgerTests | VERIFIED |
 | Domain/MatchLifecycle.cs | Validated match phase transitions | MatchLifecycleTests | VERIFIED |
-| Contracts/IMatchPlayerRegistry.cs + Domain/MatchPlayerRegistry.cs | Bounded match-scoped player membership; immutable ordered ID snapshot; membership-only removal | MatchPlayerRegistryTests | VERIFIED — 132 NUnit passed; ADR-009 PROPOSED |
+| Contracts/IMatchPlayerRegistry.cs + Domain/MatchPlayerRegistry.cs | Bounded match-scoped player membership; immutable ordered ID snapshot; membership-only removal | MatchPlayerRegistryTests | VERIFIED — 134 NUnit passed; ADR-009 PROPOSED |
 | Result.cs | Result / Result<T> and CoreErrorCode | ResultTests | VERIFIED |
-| CoreComposition.cs | Single Core construction root; match-scoped ledger and factories for player registry, aggregates, tracker and bounded queue | CoreCompositionTests | VERIFIED — 132 NUnit passed |
-| Domain/TimeValues.cs | ServerTick and StateRevision; zero initial values; overflow-safe revision advance | TimeValueTests | VERIFIED — 132 NUnit passed |
+| CoreComposition.cs | Single Core construction root; match-scoped ledger and factories for player registry, aggregates, tracker and bounded queue | CoreCompositionTests | VERIFIED — 134 NUnit passed |
+| Domain/TimeValues.cs | ServerTick and StateRevision; zero initial values; overflow-safe revision advance | TimeValueTests | VERIFIED — 134 NUnit passed |
 | Position2.cs / MovementInput.cs | Engine-independent movement values | MovementValueTests | PROPOSED |
 | PlayerState.cs / MatchState.cs / WorldState.cs | Authoritative domain state | Corresponding state tests | PROPOSED |
 
@@ -244,16 +244,16 @@ Naming rule: `ActorId` is the canonical player-actor identity in the current Cor
 
 | File | Responsibility | Required test | Status |
 |---|---|---|---|
-| Domain/CommandEnvelope.cs | Server-derived session, sequence and receive tick; not a client wire DTO | CommandEnvelopeTests | VERIFIED — 132 NUnit passed; ADR-008 PROPOSED |
+| Domain/CommandEnvelope.cs | Server-derived session, sequence and receive tick; not a client wire DTO | CommandEnvelopeTests | VERIFIED — 134 NUnit passed; ADR-008 PROPOSED |
 | CommandKind.cs | Supported command kinds | CommandKindTests | PROPOSED |
 | MovementCommand.cs | Client movement intent only | MovementCommandTests | PROPOSED |
 | BetrayalCommand.cs | Client transfer intent only | BetrayalCommandTests | PROPOSED |
 | CommandOutcome.cs | Accepted/rejected outcome projection | CommandOutcomeTests | PROPOSED |
-| Domain/CommandSequenceTracker.cs | Per-session monotonic sequence, max jump and maximum tracked-session count | CommandSequenceTrackerTests | VERIFIED — 132 NUnit passed; ADR-008 PROPOSED |
+| Domain/CommandSequenceTracker.cs | Per-session monotonic sequence, max jump and maximum tracked-session count | CommandSequenceTrackerTests | VERIFIED — 134 NUnit passed; ADR-008 PROPOSED |
 | CommandAdmission.cs | Initial validation before queue | CommandAdmissionTests | PROPOSED |
 | MovementCommandIngress.cs | Validate/enqueue movement intent | MovementIngressTests | PROPOSED |
 | BetrayalCommandIngress.cs | Validate/enqueue transfer intent | BetrayalIngressTests | PROPOSED |
-| Domain/CommandAdmissionQueue.cs | Bounded FIFO, replay-aware enqueue and safe session reset after drain | CommandAdmissionQueueTests | VERIFIED — 132 NUnit passed; production capacity TBD |
+| Domain/CommandAdmissionQueue.cs | Bounded FIFO, replay-aware enqueue and safe session reset after drain | CommandAdmissionQueueTests | VERIFIED — 134 NUnit passed; production capacity TBD |
 
 Client payloads must not choose authoritative sender identity, SessionId, server tick or state revision.
 
@@ -473,7 +473,7 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 
 ## 12. Exact current implementation status
 
-**Current implementation status:** ADR-007 is APPROVED. Core CI run 41330344616 passed the Core dependency-boundary scan, CoreComposition construction-root scan, Release build and 132/132 NUnit tests on source commit 08b68e68a6cf393c6177b6b54ecd53d6ffff5496. The bounded command queue and tracked-session capacity are included in this verification.
+**Current implementation status:** ADR-007 is APPROVED. Core CI run 41330975856 passed the Core dependency-boundary scan, CoreComposition construction-root scan, Release build and 134/134 NUnit tests on source commit 5648aaf232dd247a0af52317f8ddd363a0441f0c. The bounded command queue and tracked-session capacity are included in this verification.
 
 | Item | Status |
 |---|---|
@@ -489,9 +489,9 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 | NUnit tests | VERIFIED — 132 passed, 0 failed, 0 skipped |
 | Session lifecycle and authentication state | NOT IMPLEMENTED |
 | Full match/player/world aggregates and membership | NOT IMPLEMENTED |
-| ServerTick / StateRevision | VERIFIED in Core CI baseline — 132 NUnit passed |
-| Command envelope and sequence tracker | VERIFIED — 132 NUnit passed; ADR-008 PROPOSED |
-| Bounded command admission queue | VERIFIED — 132 NUnit passed; production capacity TBD |
+| ServerTick / StateRevision | VERIFIED in Core CI baseline — 134 NUnit passed |
+| Command envelope and sequence tracker | VERIFIED — 134 NUnit passed; ADR-008 PROPOSED |
+| Bounded command admission queue | VERIFIED — 134 NUnit passed; production capacity TBD |
 | Movement simulation | NOT IMPLEMENTED |
 | Debuff model and atomic transfer | NOT IMPLEMENTED |
 | Snapshot/projection and match outcome | NOT IMPLEMENTED |
