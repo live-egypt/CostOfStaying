@@ -71,7 +71,7 @@ namespace CostOfStaying.Core.Domain
         }
 
         /// <summary>Clears replay state when the owning authenticated session is permanently removed.</summary>
-        public bool Reset(SessionId sessionId)
+        internal bool Reset(SessionId sessionId)
         {
             if (!sessionId.IsValid)
                 throw new ArgumentException("Session identity must be non-zero.", nameof(sessionId));
