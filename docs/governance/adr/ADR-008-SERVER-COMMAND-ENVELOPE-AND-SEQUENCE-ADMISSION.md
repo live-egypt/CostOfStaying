@@ -32,15 +32,16 @@ The current Core branch includes:
 - ServerTick and StateRevision value objects.
 - CommandSequenceId.
 - CommandEnvelope<TCommand>.
-- CommandSequenceTracker.
-- CoreComposition factory for a tracker with explicit MaximumSequenceJump.
+- CommandSequenceTracker with explicit maximum jump and tracked-session capacity.
+- CommandAdmissionQueue<TCommand> with bounded FIFO capacity, replay-aware enqueue and safe session-state release after queued commands drain.
+- CoreComposition factories for tracker and queue creation with explicit limits.
 - NUnit tests for invalid inputs, duplicate/stale sequences, excessive jumps, per-session isolation, reset, trusted metadata and overflow.
 
 ## Open decisions
 
-- Production values for MaximumSequenceJump and maximum tracked sessions (the latter should align with the match/session capacity policy).
+- Production values for MaximumSequenceJump, maximum tracked sessions and queue capacity (aligned with match/player limits and expected burst behavior).
 - Whether sequence state survives reconnects (requires stable authenticated session identity or persistence).
-- Queue capacity, backpressure, rate limiting and command timeout policy.
+- Rate limiting and command timeout policy. Queue-full backpressure is implemented as CapacityExceeded without consuming the sequence; production capacity remains a configuration decision.
 - Whether a command may be admitted before all payload validation is complete.
 
 These remain configuration/application policy; no production constants are embedded in Core.
