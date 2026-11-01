@@ -1,0 +1,114 @@
+# Project Status and Execution Register
+
+**Revision:** 2026-11-01  
+**Status:** ACTIVE CONTROL DOCUMENT  
+**Applies to:** repository-wide documentation, Core, Unity and networking work  
+**Related:** [Technical Master](architecture/PHASE1_TECHNICAL_MASTER.md), [ADR-007](governance/adr/ADR-007-PLAYER-LIFECYCLE-VITALITY-CONFLICT.md), [Requirements Traceability](governance/REQUIREMENTS_TRACEABILITY.md)
+
+> This register coordinates work and verification. It does not override an approved ADR or owner decision, and it does not convert a proposal into an implementation.
+
+## 1. Repository delivery state
+
+The default branch is `main`. The implementation and consolidation work is isolated in review branches and must not be treated as delivered to the default branch until its pull request is reviewed and merged.
+
+| Workstream | Current location | State | Delivery interpretation |
+|---|---|---|---|
+| Reorganized v2.1 design documentation | PR #1 / historical branch | Superseded by consolidated work where noted | Do not reintroduce legacy files |
+| Uploaded transcript audit | PR #4 branch | Included in consolidated review | Audit evidence, not executable source |
+| Standalone pure-C# Core and NUnit tests | PR #4 branch | CI-verified within stated scope | Not yet merged to `main`; lifecycle remains provisional |
+| Unity source-package static review | PR #5 branch | Audit checkpoint | Does not claim the ZIP/binary package was uploaded |
+| Unity project and FishNet integration | Not present in reviewed tree | NOT IMPLEMENTED | Requires actual project/package files and exact-version verification |
+
+PR #4 is the primary consolidated Core/documentation review. PR #5 is a separate source-package audit checkpoint. PR #2 and PR #3 are superseded by PR #4; do not continue parallel implementation on them.
+
+## 2. Decision authority and conflict control
+
+Use this precedence when documents or code disagree:
+
+1. Explicit owner-approved decisions and approved ADRs.
+2. Current approved gameplay rules and system specifications.
+3. Security and trust-boundary requirements.
+4. Technical Master and requirements traceability.
+5. Implementation and test evidence.
+6. Historical conversation transcript and superseded drafts.
+
+An implementation or passing test cannot silently revoke an owner-approved gameplay decision.
+
+### Blocking decision: player lifecycle
+
+ADR-007 records an unresolved conflict:
+
+- Earlier owner-approved model: `Alive → Spirit` automatically at zero Vitality; `Resurrect` and `Eliminate` are explicit server-authoritative operations; `Eliminated` is terminal.
+- Current v2.1 proposal and current VitalityAccount: `Alive → Dead`, no MVP revival, Spirit separate.
+
+These are incompatible. Until the owner explicitly selects the canonical contract:
+
+- Keep ADR-007 at `DECISION REQUIRED`.
+- Do not change lifecycle APIs or add inferred Spirit/Resurrect/Eliminate behavior.
+- Do not describe the current VitalityAccount as the final gameplay lifecycle.
+- Continue only work that is independent of the disputed transition semantics.
+- Preserve both historical records; do not delete either side of the conflict.
+
+If the earlier owner-approved model is reaffirmed, document its full transition matrix and command preconditions before changing code. If the v2.1 model is selected instead, record the explicit withdrawal/replacement of the earlier decision.
+
+## 3. Verified evidence boundary
+
+The recorded GitHub Actions runs `41255553487` and `41255769742` passed the standalone Core workflow. The recorded test result is 38 passed, 0 failed, 0 skipped.
+
+This verifies only the source and tests exercised by that workflow. It does **not** verify:
+
+- Unity Editor import or compilation.
+- Unity EditMode or PlayMode tests.
+- FishNet 4.7.4R API compatibility or serialization.
+- Host mode or Dedicated Server behavior.
+- Authentication, connection/session mapping or production security.
+- Android builds, device compatibility, performance or release readiness.
+
+Never widen a verification claim beyond its actual command, commit, environment and retained evidence.
+
+## 4. Canonical work sequence
+
+| Order | Work package | Entry condition | Exit evidence |
+|---:|---|---|---|
+| 0 | Preserve and index historical material | Source inventory available | Transcript audit, no blind bulk-copy |
+| 1 | Resolve lifecycle and gameplay ADR conflicts | Owner decision | Approved ADR, canonical state/transition table |
+| 2 | Freeze Core vocabulary and contracts | ADRs reconciled | One definition per type, namespace and ownership register |
+| 3 | Implement Core composition, results, identity, time and state | Contracts approved | Pure-C# build and focused NUnit tests |
+| 4 | Implement command admission and deterministic simulation | State/ordering contracts approved | Replay, ordering, rejection and no-partial-mutation tests |
+| 5 | Implement atomic transfer and snapshots if in approved scope | Transaction/persistence decisions approved | Failure-injection and deterministic round-trip tests |
+| 6 | Create/pin Unity project and assemblies | Exact Unity version available | Editor import/compile and EditMode evidence |
+| 7 | Integrate FishNet adapters | Exact installed FishNet source/version available | Compile, serialization, Host and Dedicated Server tests |
+| 8 | Validate Android, security and performance | Integrated build available | Device matrix, threat tests, measured budgets and release evidence |
+
+Do not skip a gate to make the project appear more complete. Keep deferred systems explicitly marked NOT IMPLEMENTED or TBD.
+
+## 5. Repository hygiene rules
+
+- Maintain one canonical implementation for each type and one source of truth for each decision.
+- Do not create `PlayerId` beside `ActorId`, or parallel `Result` / lifecycle / composition abstractions, without a reviewed naming decision.
+- Keep Core free of UnityEngine and FishNet dependencies.
+- Keep server-authoritative identity, ticks, revisions and state mutation outside client-controlled payloads.
+- Do not add speculative package versions, API signatures, gameplay constants or security claims.
+- Do not delete a document until its unique decisions and requirements have been migrated, links updated, and references checked.
+- Preserve Git history; remove obsolete files through reviewed commits rather than history rewriting.
+- Every implementation change must include tests and update the requirement traceability.
+- Work on a dedicated branch and PR. Do not push directly to `main` or merge without explicit authorization.
+
+## 6. Immediate next actions
+
+1. Obtain the owner's explicit ADR-007 lifecycle decision.
+2. Review PR #4 as the consolidated technical baseline; retain it unmerged while the lifecycle blocker is open.
+3. Keep PR #5 clearly labeled as static source audit only; do not represent its source ZIP as uploaded.
+4. After ADR-007 is resolved, reconcile ADR-004, gameplay specification, Spirit/Betrayal system documents, Technical Master, Core contracts and tests in one controlled change set.
+5. Only then proceed to missing Core foundations and Unity/FishNet integration.
+
+## 7. Status vocabulary
+
+- `PROPOSED`: design suggested, not approved.
+- `DECISION REQUIRED`: incompatible choices remain unresolved.
+- `NOT IMPLEMENTED`: no corresponding source implementation exists.
+- `IMPLEMENTED`: source exists in a named branch/commit.
+- `VERIFIED`: a named reproducible check passed for that exact scope.
+- `PARTIAL`: some subcomponents exist, but the complete requirement is not met.
+
+A status must always be accompanied by its scope and evidence.
