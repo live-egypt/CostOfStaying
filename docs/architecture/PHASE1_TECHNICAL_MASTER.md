@@ -465,7 +465,7 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 
 ## 12. Exact current implementation status
 
-**Current implementation status:** ADR-007 is APPROVED. Core CI run 41327308752 passed the Core dependency-boundary scan, Release build and 103/103 NUnit tests on commit ce995ff0dfab7bacd012ca9a472cf9040cd6fa84. Later branch commits have updated documentation only.
+**Current implementation status:** ADR-007 is APPROVED. Core CI run 41327543734 passed the Core dependency-boundary scan, CoreComposition construction-root scan, Release build and 103/103 NUnit tests on commit c8a914970029c249081fd5cf6e48990d1a3cfaca. Later branch commits have updated documentation only.
 
 | Item | Status |
 |---|---|
