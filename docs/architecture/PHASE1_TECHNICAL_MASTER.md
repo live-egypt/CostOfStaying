@@ -262,7 +262,7 @@ Client payloads must not choose authoritative sender identity, SessionId, server
 | File | Responsibility | Required test | Status |
 |---|---|---|---|
 | PlayerSession.cs | Authenticated player/session association | PlayerSessionTests | PROPOSED |
-| SessionLifecycle.cs | Pending/auth/disconnect transitions | SessionLifecycleTests | PROPOSED |
+| SessionLifecycle.cs | Pending/auth/disconnect/close transitions; reconnect requires a new SessionId | SessionLifecycleTests | VERIFIED — 134 NUnit passed; ADR-010 PROPOSED |
 | MatchLifecycle.cs | Lobby/running/ending transitions | MatchLifecycleTests | VERIFIED |
 | AdmissionResult.cs | Admission decision value | AdmissionResultTests | PROPOSED |
 | ReconnectPolicy.cs | Reconnect eligibility and identity continuity | ReconnectPolicyTests | TBD; retention/token model unspecified |
