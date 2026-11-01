@@ -18,6 +18,7 @@
 | CORE-TIME-001 | ServerTick zero is valid; StateRevision advances without overflow | CORE-TIME-CTRL-001 | TimeValueTests | Core CI run 41330975856; 134 NUnit passed |
 | CORE-CMD-001 | CommandEnvelope uses server-resolved SessionId and server receive tick | CORE-CMD-CTRL-001 | CommandEnvelopeTests | Core CI run 41330975856; 134 NUnit passed |
 | CORE-SEQ-001 | Per-session command sequence is monotonic and bounded by configured maximum jump | CORE-SEQ-CTRL-001 | CommandSequenceTrackerTests | Core CI run 41330975856; 134 NUnit passed |
+| CORE-SESSION-001 | Session identity is server-issued; authentication association occurs once; disconnect/close are explicit and closed is terminal | CORE-SESSION-CTRL-001 | SessionLifecycleTests | Core CI run 41330975856; 134 NUnit passed; ADR-010 PROPOSED |
 | CORE-ROSTER-001 | Match membership is bounded per MatchId; duplicate ActorId rejected; removal does not mutate player lifecycle; snapshots preserve registration order | CORE-ROSTER-CTRL-001 | MatchPlayerRegistryTests | Core CI run 41330975856; 134 NUnit passed; ADR-009 PROPOSED |
 | CORE-QUEUE-001 | Command admission uses bounded FIFO; full queue rejects without consuming sequence; session replay state resets only after queued commands drain | CORE-QUEUE-CTRL-001 | CommandAdmissionQueueTests | Core CI run 41330975856; 134 NUnit passed |
 | PERF-001 | أداء Android ضمن ميزانية معتمدة | PERF-CTRL-001 | PERF-ANDROID-001 | تقرير جهاز فعلي |
