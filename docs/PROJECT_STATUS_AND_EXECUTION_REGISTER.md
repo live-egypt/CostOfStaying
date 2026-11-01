@@ -131,7 +131,7 @@ Dependabot is configured in `.github/dependabot.yml` for weekly NuGet and GitHub
 
 ## 9. Latest CI and security-scanner audit
 
-The latest Core CI run `41326574904` passed on source commit `17566c5234f65270ccd33d70f8d9dcccb4d2d044`: Release restore/build succeeded and NUnit reported 77 passed, 0 failed, 0 skipped. Artifact `13091806116` was retained. This verifies standalone Core only, not Unity/FishNet.
+The latest Core CI run `41327308752` passed on source commit `ce995ff0dfab7bacd012ca9a472cf9040cd6fa84`: dependency-boundary scan and Release restore/build succeeded; NUnit reported 103 passed, 0 failed, 0 skipped. Artifact `13091746610` was retained. This verifies standalone Core only, not Unity/FishNet.
 
 The existing MobSF, SecurityCodeScan and Contrast Scan workflows failed before producing completed security-analysis results:
 - MobSF: pinned `semgrep==0.50.1` dependency could not be installed.
