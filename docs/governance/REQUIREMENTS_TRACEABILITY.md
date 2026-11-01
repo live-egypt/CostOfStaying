@@ -1,7 +1,7 @@
 # تتبع المتطلبات — v2.1
-**الحالة: PARTIALLY VERIFIED | Lifecycle, results, identifiers, match lifecycle and composition verified; command admission CI pending**
+**الحالة: PARTIALLY VERIFIED | Lifecycle, results, identifiers, match lifecycle, composition and command/time primitives verified; ADR-008 policy remains proposed**
 
-الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. Core CI run 41326831611 passed the dependency-boundary scan, Release build and 77 NUnit tests for the previously completed Core increment. The new command/time/sequence increment is under test; CI evidence is required before marking it VERIFIED. Core CI does not verify Unity/FishNet.
+الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. Core CI run 41326831611 passed the dependency-boundary scan, Release build and 77 NUnit tests for the previously completed Core increment. The command/time/sequence increment passed Core CI run 41327308752 with 103 NUnit tests and the Core dependency-boundary scan. Core CI does not verify Unity/FishNet.
 
 | Requirement ID | المتطلب | Control ID | Test ID المقترح | الدليل المطلوب |
 |---|---|---|---|---|
@@ -15,7 +15,7 @@
 | CORE-ID-001 | معرفات اللاعب والهدف غير صفرية عند دخول Domain Core | CORE-CTRL-001 | IdentifierTests / VitalityAccountTests | CI run 41326831611; 77 NUnit passed |
 | BET-002 | يمنع self-target وdefault BetrayalEvent قبل mutation | BET-CTRL-002 | BetrayalLedgerTests | CI run 41326831611; 77 NUnit passed |
 | BET-003 | ترتيب ledger يعتمد EventSequenceId لا ServerTick | BET-CTRL-003 | BetrayalLedgerTests | CI run 41255553487؛ latest workflow run 41255769742 passed |
-| CORE-TIME-001 | ServerTick zero is valid; StateRevision advances without overflow | CORE-TIME-CTRL-001 | TimeValueTests | Core CI run for command/time increment pending |
+| CORE-TIME-001 | ServerTick zero is valid; StateRevision advances without overflow | CORE-TIME-CTRL-001 | TimeValueTests | Core CI run 41327308752; 103 NUnit passed |
 | CORE-CMD-001 | CommandEnvelope uses server-resolved SessionId and server receive tick | CORE-CMD-CTRL-001 | CommandEnvelopeTests | Core CI run for command/time increment pending |
 | CORE-SEQ-001 | Per-session command sequence is monotonic and bounded by configured maximum jump | CORE-SEQ-CTRL-001 | CommandSequenceTrackerTests | Core CI run for command/time increment pending |
 | PERF-001 | أداء Android ضمن ميزانية معتمدة | PERF-CTRL-001 | PERF-ANDROID-001 | تقرير جهاز فعلي |
