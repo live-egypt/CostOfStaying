@@ -1,0 +1,87 @@
+name: Core CI
+
+# CI policy revision: 2026-11-01
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/CostOfStaying.Core/**"
+      - "tests/CostOfStaying.Core.Tests/**"
+      - ".github/workflows/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "src/CostOfStaying.Core/**"
+      - "tests/CostOfStaying.Core.Tests/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+  schedule:
+    - cron: "23 3 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: core-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core-tests:
+    name: Build and test standalone Core
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Enforce Core dependency boundary
+        shell: bash
+        run: |
+          if grep -R -n -E 'using (UnityEngine|FishNet)(\.|;)|UnityEngine\.|FishNet\.' src/CostOfStaying.Core --include='*.cs' --include='*.csproj'; then
+            echo "::error::Core must not reference UnityEngine or FishNet."
+            exit 1
+          fi
+
+      - name: Enforce Core composition root
+        shell: bash
+        run: |
+          aggregate_violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|SessionLifecycle|SessionRegistry|MatchPlayerRegistry|CommandAdmissionQueue|CommandAdmissionService|SessionCleanupService|MatchRosterSnapshotBuilder)(\(|<)' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
+          tracker_violations="$(grep -R -n -E 'new CommandSequenceTracker\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CommandAdmissionQueue.cs:' || true)"
+          cleanup_violations="$(grep -R -n -E '(ResetSession|RemoveClosedSession)\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(SessionCleanupService|CommandAdmissionQueue|SessionRegistry)\.cs:' || true)"
+          queue_access_violations="$(grep -R -n -E '\.Try(Enqueue|Dequeue)\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CommandAdmissionService.cs:' || true)"
+          snapshot_violations="$(grep -R -n -E 'new (MatchRosterSnapshot|PlayerStateSnapshot)\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'MatchRosterSnapshotBuilder.cs:' || true)"
+          if [ -n "$aggregate_violations$tracker_violations$cleanup_violations$queue_access_violations$snapshot_violations" ]; then
+            printf '%s\n%s\n%s\n%s\n%s\n' "$aggregate_violations" "$tracker_violations" "$cleanup_violations" "$queue_access_violations" "$snapshot_violations"
+            echo "::error::Core construction must be centralized in CoreComposition; command queue access, session cleanup and snapshot construction must use their designated services."
+            exit 1
+          fi
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+          cache: true
+          cache-dependency-path: tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj
+
+      - name: Restore
+        run: dotnet restore tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj
+
+      - name: Build Core
+        run: dotnet build src/CostOfStaying.Core/CostOfStaying.Core.csproj --configuration Release --no-restore
+
+      - name: Build test project
+        run: dotnet build tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-restore
+
+      - name: Run NUnit tests
+        run: dotnet test tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-build --no-restore --logger "trx;LogFileName=core-tests.trx" --results-directory artifacts/test-results
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: core-test-results
+          path: artifacts/test-results/*.trx
+          if-no-files-found: warn

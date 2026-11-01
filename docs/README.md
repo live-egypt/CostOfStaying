@@ -3,6 +3,23 @@
 هذه الوثائق تصف التصميم المقترح وخطط التحقق. لا تعني أن أي نظام منفذ أو مختبر ما لم يذكر دليل قابل للمراجعة.
 
 ## ابدأ هنا
+- [سجل حالة المشروع وتسلسل التنفيذ والتحقق](PROJECT_STATUS_AND_EXECUTION_REGISTER.md)
+- [تدقيق تحقق دورة حياة اللاعب ADR-007](audit/ADR007_LIFECYCLE_CI_VERIFICATION_2026-11-01.md)
+- [تدقيق تحقق أساسيات Core ونتائج الاختبارات](audit/CORE_FOUNDATIONS_CI_VERIFICATION_2026-11-01.md)
+- [تدقيق تحقق MatchLifecycle وCoreComposition](audit/MATCH_LIFECYCLE_COMPOSITION_CI_VERIFICATION_2026-11-01.md)
+- [تدقيق Core CI وفحص عزل Unity/FishNet](audit/CORE_CI_BOUNDARY_AND_BASELINE_2026-11-01.md)
+- [ADR-008 — Server Command Envelope and Sequence Admission](governance/adr/ADR-008-SERVER-COMMAND-ENVELOPE-AND-SEQUENCE-ADMISSION.md)
+- [ADR-009 — Match-Scoped Player Registry](governance/adr/ADR-009-MATCH-SCOPED-PLAYER-REGISTRY.md)
+- [ADR-010 — Server Session Lifecycle](governance/adr/ADR-010-SERVER-SESSION-LIFECYCLE.md)
+- [ADR-011 — Bounded Server Session Registry](governance/adr/ADR-011-BOUNDED-SESSION-REGISTRY.md)
+- [ADR-012 — Authenticated Command Admission](governance/adr/ADR-012-AUTHENTICATED-COMMAND-ADMISSION.md)
+- [ADR-013 — Safe Session Cleanup](governance/adr/ADR-013-SAFE-SESSION-CLEANUP.md)
+- [ADR-014 — Victim Scope](governance/adr/ADR-014-VICTIM-SCOPE.md) — PROPOSED
+- [ADR-015: هوية الأمر و Idempotency](governance/adr/ADR-015-COMMAND-IDENTITY-AND-IDEMPOTENCY.md) — PROPOSED
+- [تدقيق CI لتسلسل الأوامر وCommandEnvelope](audit/COMMAND_SEQUENCE_CORE_CI_VERIFICATION_2026-11-01.md)
+- [تدقيق CI لطابور الأوامر المحدود وسعة الجلسات](audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md)
+- [تدقيق CI لسجل لاعبي المباراة](audit/CORE_MATCH_PLAYER_REGISTRY_CI_VERIFICATION_2026-11-01.md)
+- [تدقيق CI لعزل Core وفرض CoreComposition](audit/CORE_CI_COMPOSITION_ENFORCEMENT_2026-11-01.md)
 - [ميثاق المشروع](00_PROJECT_CHARTER.md)
 - [Game Design Document](01_GAME_DESIGN_DOCUMENT.md)
 - [مواصفات قواعد اللعبة](02_GAME_RULES_SPECIFICATION.md)
@@ -18,6 +35,8 @@
 - [Endgame](systems/ENDGAME_SYSTEM.md)
 
 ## المعمارية
+- [المواصفة التقنية الموحدة لـ Phase 1](architecture/PHASE1_TECHNICAL_MASTER.md)
+- [حالة تنفيذ Core في Phase 1](architecture/PHASE1_CORE_IMPLEMENTATION.md)
 - [المعمارية التقنية](architecture/TECHNICAL_ARCHITECTURE.md)
 - [معمارية الشبكة](architecture/NETWORK_ARCHITECTURE.md)
 - [Backend والاستضافة](architecture/BACKEND_AND_HOSTING.md)
@@ -31,6 +50,11 @@
 - [إدارة الأسرار](security/SECRETS_MANAGEMENT.md)
 - [خصوصية البيانات](security/DATA_PRIVACY.md)
 - [الاستجابة للحوادث](security/INCIDENT_RESPONSE.md)
+
+## التدقيق وأدلة التحقق
+- [تدقيق مصدر Phase 1 المرفوع](audit/UPLOADED_PHASE1_SOURCE_AUDIT.md)
+- [دليل تحقق Core عبر GitHub Actions](audit/PHASE1_CORE_CI_VERIFICATION.md)
+- [تدقيق تشغيل CI ومشكلات ماسحات الأمان](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md)
 
 ## الجودة والاختبار
 - [استراتيجية الاختبار](quality/TEST_STRATEGY.md)
@@ -52,9 +76,17 @@
 - [ADR-002: سلطة الخادم](governance/adr/ADR-002-SERVER-AUTHORITY.md)
 - [ADR-003: Backend والاستضافة](governance/adr/ADR-003-BACKEND-AND-HOSTING.md)
 - [ADR-004: خط أساس قواعد اللعب](governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md)
-- [نطاق MVP](roadmap/MVP_SCOPE.md)
-- [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
-- [خطة التسليم](roadmap/DELIVERY_PLAN.md)
+- [ADR-005: حدود Core التنفيذي](governance/adr/ADR-005-CORE-EXECUTABLE-BOUNDARY.md)
+- [ADR-006: ثوابت معرفات Core وسجل Betrayal](governance/adr/ADR-006-CORE-IDENTIFIER-AND-LEDGER-INVARIANTS.md)
+- [ADR-007: تعارض دورة حياة اللاعب وVitality](governance/adr/ADR-007-PLAYER-LIFECYCLE-VITALITY-CONFLICT.md)
+- [ADR-008: Server Command Envelope and Sequence Admission](governance/adr/ADR-008-SERVER-COMMAND-ENVELOPE-AND-SEQUENCE-ADMISSION.md)
+- [ADR-009: Match-Scoped Player Registry](governance/adr/ADR-009-MATCH-SCOPED-PLAYER-REGISTRY.md)
+- [ADR-010: Server Session Lifecycle](governance/adr/ADR-010-SERVER-SESSION-LIFECYCLE.md)
+- [ADR-011: Bounded Server Session Registry](governance/adr/ADR-011-BOUNDED-SESSION-REGISTRY.md)
+- [ADR-012: Authenticated Command Admission](governance/adr/ADR-012-AUTHENTICATED-COMMAND-ADMISSION.md)
+- [ADR-013: Safe Session Cleanup](governance/adr/ADR-013-SAFE-SESSION-CLEANUP.md)
+- [ADR-014: نطاق الضحية (Victim Scope)](governance/adr/ADR-014-VICTIM-SCOPE.md) — PROPOSED
+- [ADR-015: هوية الأمر و Idempotency](governance/adr/ADR-015-COMMAND-IDENTITY-AND-IDEMPOTENCY.md) — PROPOSED
 
 ## حالات الوثائق
 - **PROPOSED:** مقترح لم يعتمد.
@@ -65,3 +97,9 @@
 - **TBD:** لم يحسم بعد.
 
 لا تستخدم IMPLEMENTED أو VERIFIED لمجرد وجود تصميم أو وثيقة.
+
+- [تقرير خط أساس Core النهائي — 177 اختباراً](audit/CORE_CI_FINAL_BASELINE_2026-11-01.md)
+- [تدقيق دورة حياة جلسة الخادم — 148 اختباراً](audit/CORE_SESSION_LIFECYCLE_CI_VERIFICATION_2026-11-01.md)
+- [تدقيق سجل الجلسات المحدود — 161 اختباراً](audit/CORE_SESSION_REGISTRY_CI_VERIFICATION_2026-11-01.md)
+- [تدقيق الإغلاق الآمن للجلسات والتحقق عند dequeue — 181 اختباراً](audit/CORE_SESSION_CLEANUP_CI_VERIFICATION_2026-11-01.md)
+- [تقرير Core CI بعد استكمال SessionLifecycle — 148 اختباراً](audit/CORE_CI_SESSION_LIFECYCLE_BASELINE_2026-11-01.md)

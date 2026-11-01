@@ -1,41 +1,82 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# This workflow integrates SecurityCodeScan with GitHub's Code Scanning feature
-# SecurityCodeScan is a vulnerability patterns detector for C# and VB.NET
-
 name: SecurityCodeScan
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
+    paths:
+      - "src/**/*.cs"
+      - "tests/**/*.cs"
+      - ".github/workflows/securitycodescan.yml"
+      - ".github/workflows/core-ci.yml"
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main" ]
-  schedule:
-    - cron: '45 6 * * 3'
+    branches: [main]
+    paths:
+      - "src/**/*.cs"
+      - "tests/**/*.cs"
+      - ".github/workflows/securitycodescan.yml"
+      - ".github/workflows/core-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  SCS:
+  security-code-scan:
+    name: Static analysis for C# source
     runs-on: windows-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: nuget/setup-nuget@04b0c2b8d1b97922f67eca497d7cf0bf17b8ffe1
-      - uses: microsoft/setup-msbuild@v1.0.2
+      - name: Checkout
+        uses: actions/checkout@v7
 
-      - name: Set up projects for analysis
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Add SecurityCodeScan analyzer
         uses: security-code-scan/security-code-scan-add-action@f8ff4f2763ed6f229eded80b1f9af82ae7f32a0d
 
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Restore Core test project
+        run: dotnet restore tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj
 
-      - name: Build
-        run: dotnet build --no-restore
+      - name: Build Core test project with analyzers
+        run: dotnet build tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-restore
 
-      - name: Convert sarif for uploading to GitHub
-        uses: security-code-scan/security-code-scan-results-action@cdb3d5e639054395e45bf401cba8688fcaf7a687
+      - name: Preserve and summarize native SecurityCodeScan SARIF
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
 
-      - name: Upload sarif
-        uses: github/codeql-action/upload-sarif@v3
+          reports = sorted(Path(".").rglob("analysis.sarif"))
+          if not reports:
+              raise SystemExit("SecurityCodeScan emitted no analysis.sarif report.")
+
+          output = Path("artifacts/securitycodescan")
+          output.mkdir(parents=True, exist_ok=True)
+
+          for index, report in enumerate(reports):
+              payload = json.loads(report.read_text(encoding="utf-8-sig"))
+              if payload.get("version") != "1.0.0" or not isinstance(payload.get("runs"), list):
+                  raise SystemExit(f"Unexpected native SecurityCodeScan SARIF format: {report}")
+
+              result_count = sum(len(run.get("results", [])) for run in payload["runs"])
+              print(f"{report}: SARIF {payload['version']}; runs={len(payload['runs'])}; findings={result_count}")
+
+              safe_name = report.parent.name.replace("/", "_").replace("\\", "_") or "root"
+              destination = output / f"{index}-{safe_name}.sarif"
+              destination.write_text(report.read_text(encoding="utf-8-sig"), encoding="utf-8")
+
+          print(f"Preserved {len(reports)} native SecurityCodeScan SARIF report(s).")
+          PY
+
+      - name: Upload native SecurityCodeScan SARIF artifact
+        if: always() && hashFiles('artifacts/securitycodescan/*.sarif') != ''
+        uses: actions/upload-artifact@v7
+        with:
+          name: securitycodescan-sarif
+          path: artifacts/securitycodescan/*.sarif
+          if-no-files-found: error
