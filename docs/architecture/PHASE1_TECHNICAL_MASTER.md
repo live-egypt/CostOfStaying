@@ -208,7 +208,7 @@ Status definitions:
 | Contracts/IVitalityAccount.cs | Pure vitality contract | VitalityAccountTests | IMPLEMENTED |
 | Contracts/IBetrayalLedger.cs | Betrayal ledger contract | BetrayalLedgerTests | IMPLEMENTED |
 | Domain/Identifiers.cs | ActorId, VictimId, EventSequenceId | IdentifierTests | IMPLEMENTED |
-| Domain/VitalityAccount.cs | Bounded vitality; terminal Alive → Dead | VitalityAccountTests | IMPLEMENTED |
+| Domain/VitalityAccount.cs | Bounded vitality; Alive → Spirit; explicit Resurrect / Eliminate | VitalityAccountTests | IMPLEMENTED |
 | Domain/BetrayalLedger.cs | Monotonic event sequence, replay rejection, score | BetrayalLedgerTests | IMPLEMENTED |
 | CoreComposition.cs | Single Core composition root | CoreCompositionTests | PROPOSED |
 | Result.cs / ResultT.cs | Consistent success/failure contracts | ResultTests | PROPOSED |
@@ -226,7 +226,7 @@ Naming rule: do not create PlayerId as a second identity type if ActorId is reta
 | MatchRules.cs | Match capacity and phase invariants | MatchRulesTests | PROPOSED |
 | MovementRules.cs | Movement constraints and configured parameters | MovementRulesTests | PROPOSED; tuning TBD |
 | BetrayalRules.cs | Transfer eligibility, 2m range, cooldown/capacity | BetrayalRulesTests | PROPOSED |
-| VitalityRules.cs | Vitality bounds and owner-approved lifecycle transition | VitalityRulesTests | PROPOSED; lifecycle blocked by ADR-007 |
+| VitalityRules.cs | Vitality bounds and owner-approved lifecycle transition | VitalityRulesTests | PROPOSED; gameplay parameters remain TBD |
 | AdmissionRules.cs | Command admission conditions | AdmissionRulesTests | PROPOSED |
 | PhaseRules.cs | Command-to-phase permissions | PhaseRulesTests | PROPOSED |
 
@@ -464,15 +464,23 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 
 ## 12. Exact current implementation status
 
-**Lifecycle warning:** the CI-tested VitalityAccount implements the current repository v2.1 proposal. The earlier owner-approved Alive / Spirit / Eliminated matrix with automatic Spirit and explicit Resurrect / Eliminate remains in conflict; see ADR-007. Do not treat the Vitality API as final until the owner decision is reconciled.
+**Lifecycle status:** ADR-007 is APPROVED and the source has been updated to implement Alive / Spirit / Eliminated. The current branch's lifecycle revision still requires a fresh Core CI run; the earlier 38-test CI result predates this rewrite and is not evidence for it.
 
 | Item | Status |
 |---|---|
 | ADR-005 approval | APPROVED |
-| Core .NET project | VERIFIED — CI Release build passed |
-| Numeric identifiers and identifier value-semantics tests | VERIFIED — included in 38 passing tests |
-| Vitality contract and primitive | VERIFIED — CI build and tests passed |
-| Vitality terminal state aligned with v2.1 | VERIFIED against current v2.1 draft only; canonical gameplay lifecycle pending ADR-007 |
+| ADR-007 lifecycle decision | APPROVED — Alive / Spirit / Eliminated |
+| Core .NET project | VERIFIED for earlier baseline; current lifecycle branch verification pending |
+| Numeric identifiers and identifier value-semantics tests | VERIFIED on earlier baseline |
+| Betrayal ledger primitive | VERIFIED on earlier baseline |
+| Vitality contract and primitive | IMPLEMENTED on lifecycle branch; CI verification pending |
+| Result / Result<T> | NOT IMPLEMENTED |
+| CoreComposition | NOT IMPLEMENTED |
+| Match/session lifecycle and state | NOT IMPLEMENTED |
+| Command envelope/admission/sequence tracking | NOT IMPLEMENTED |
+| Movement simulation | NOT IMPLEMENTED |
+| Debuff model and atomic transfer | NOT IMPLEMENTED |
+| Snapshot/projection and match outcome | NOT IMPLEMENTED |
 | Betrayal ledger contract and primitive | VERIFIED — CI build and tests passed |
 | Identifier, Vitality and ledger NUnit tests | VERIFIED — 38 passed, 0 failed, 0 skipped |
 | Unity project/package lock | NOT CREATED |
