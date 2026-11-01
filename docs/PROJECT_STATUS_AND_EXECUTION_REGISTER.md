@@ -125,7 +125,7 @@ Concurrency cancels obsolete in-progress runs for the same workflow/ref. Job tim
 
 Dependabot is configured in `.github/dependabot.yml` for weekly NuGet and GitHub Actions update pull requests. Dependency updates are proposals: they must pass CI and receive review before merge. Automatic dependency PR creation is enabled; automatic merging is not.
 
-**Current verification state (2026-11-01):** Core CI run `41312765519` completed successfully against commit `308c8541ad75befb4ade2d0de6ef1f4dcbd3d8cc`: Release restore/build/test succeeded; NUnit reported 38 passed, 0 failed, 0 skipped; TRX artifact `13086610319` was uploaded. This verifies standalone Core only, not Unity/FishNet. The same PR merge commit also triggered three pre-existing scanner workflows that failed before completing analysis; see [GitHub Actions Pipeline Audit](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md).
+**Current verification state (2026-11-01):** Core CI run `41326574904` completed successfully against source commit `17566c5234f65270ccd33d70f8d9dcccb4d2d044`: Release restore/build/test succeeded; NUnit reported 77 passed, 0 failed, 0 skipped; TRX artifact `13091806116` was uploaded. This verifies standalone Core only, not Unity/FishNet. The inherited MobSF, SecurityCodeScan and Contrast Scan workflows are separate and have known configuration failures; see [GitHub Actions Pipeline Audit](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md).
 
 
 ## 9. Latest CI and security-scanner audit
