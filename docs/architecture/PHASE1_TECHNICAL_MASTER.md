@@ -21,12 +21,12 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Area | Status | Meaning |
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
-| Pure Core project | VERIFIED | .NET 8 Release build passed in GitHub Actions runs 41255553487 and 41255769742 |
-| Vitality and player lifecycle primitive | VERIFIED | ADR-007 lifecycle implementation passed Core CI run 41325988534: 45/45 NUnit |
+| Pure Core project | VERIFIED | .NET 8 Release build and 77 NUnit tests passed in run 41326574904 for source commit 17566c5234f65270ccd33d70f8d9dcccb4d2d044 |
+| Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41326574904: 77/77 NUnit passed |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
-| Core unit tests | VERIFIED | 38 passed; 0 failed; 0 skipped in run 41255553487; latest workflow run 41255769742 also passed and retained a TRX artifact |
+| Core unit tests | VERIFIED | 77 passed; 0 failed; 0 skipped in run 41326574904; TRX artifact 13091806116 retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
-| Match/session lifecycle | NOT IMPLEMENTED | Authoritative identity/lifecycle contracts pending |
+| Match/session lifecycle | PARTIAL | Match phase state machine implemented and verified; session lifecycle and aggregate membership not implemented |
 | Command admission / queue / pipeline | NOT IMPLEMENTED | Ordering and bounds require decisions |
 | Snapshots | NOT IMPLEMENTED | Projection/revision semantics pending |
 | FishNet / Unity adapters | NOT IMPLEMENTED | Requires actual Unity project and pinned package |
@@ -465,29 +465,31 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 
 ## 12. Exact current implementation status
 
-**Lifecycle status:** ADR-007 is APPROVED and the source has been updated to implement Alive / Spirit / Eliminated. The current branch's lifecycle revision still requires a fresh Core CI run; the earlier 38-test CI result predates this rewrite and is not evidence for it.
+**Current implementation status:** ADR-007 is APPROVED. Core CI run 41326574904 passed 77/77 NUnit tests on source commit 17566c5234f65270ccd33d70f8d9dcccb4d2d044. Later branch commits have updated documentation only.
 
 | Item | Status |
 |---|---|
-| ADR-005 approval | APPROVED |
-| ADR-007 lifecycle decision | APPROVED — Alive / Spirit / Eliminated |
-| Core .NET project | VERIFIED for earlier baseline; current lifecycle branch verification pending |
-| Numeric identifiers and identifier value-semantics tests | VERIFIED on earlier baseline |
-| Betrayal ledger primitive | VERIFIED on earlier baseline |
-| Vitality contract and primitive | VERIFIED — 45 NUnit passed on commit 48ee4d47d5f63b89b3210b59e8a289dd4ee8ba05 |
-| Result / Result<T> | NOT IMPLEMENTED |
-| CoreComposition | NOT IMPLEMENTED |
-| Match/session lifecycle and state | NOT IMPLEMENTED |
+| ADR-005 Core boundary | APPROVED |
+| ADR-007 lifecycle | APPROVED and VERIFIED in Core |
+| Pure .NET Standard 2.1 Core build | VERIFIED |
+| ActorId / MatchId / SessionId / VictimId / EventSequenceId | VERIFIED |
+| Result / Result<T> / CoreErrorCode | VERIFIED |
+| VitalityAccount Alive / Spirit / Eliminated | VERIFIED |
+| BetrayalLedger primitive | VERIFIED |
+| MatchLifecycle phase state machine | VERIFIED |
+| CoreComposition | VERIFIED for the implemented scope |
+| NUnit tests | VERIFIED — 77 passed, 0 failed, 0 skipped |
+| Session lifecycle and authentication state | NOT IMPLEMENTED |
+| Full match/player/world aggregates and membership | NOT IMPLEMENTED |
+| ServerTick / StateRevision | NOT IMPLEMENTED |
 | Command envelope/admission/sequence tracking | NOT IMPLEMENTED |
 | Movement simulation | NOT IMPLEMENTED |
 | Debuff model and atomic transfer | NOT IMPLEMENTED |
 | Snapshot/projection and match outcome | NOT IMPLEMENTED |
-| Betrayal ledger contract and primitive | VERIFIED — CI build and tests passed |
-| Identifier, Vitality and ledger NUnit tests | VERIFIED — 38 passed, 0 failed, 0 skipped |
 | Unity project/package lock | NOT CREATED |
 | FishNet version | ASSUMPTION ONLY |
 | Network/session adapters | NOT IMPLEMENTED |
-| Full Phase 1 inventory | NOT IMPLEMENTED |
+| Full Phase 1 Core | PARTIAL — see remaining scope in PHASE1_CORE_IMPLEMENTATION.md |
 | Gameplay baseline | PROPOSED FOR PLAYTEST |
 
 **This document does not claim compilation, runtime integration, security verification, or completion of all Phase 1 files.**
