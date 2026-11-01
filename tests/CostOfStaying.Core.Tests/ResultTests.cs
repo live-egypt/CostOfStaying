@@ -40,6 +40,13 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void Result_FailureRejectsUndefinedErrorCode()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Result.Failure((CoreErrorCode)int.MaxValue));
+        }
+
+        [Test]
         public void ResultT_SuccessCarriesValue()
         {
             Result<int> result = Result<int>.Success(42);
@@ -70,6 +77,13 @@ namespace CostOfStaying.Core.Tests
         public void ResultT_FailureRejectsNoneErrorCode()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => Result<int>.Failure(CoreErrorCode.None));
+        }
+
+        [Test]
+        public void ResultT_FailureRejectsUndefinedErrorCode()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Result<int>.Failure((CoreErrorCode)int.MaxValue));
         }
 
         [Test]
