@@ -12,7 +12,7 @@ namespace CostOfStaying.Core.Domain
     {
         private readonly Dictionary<SessionId, ulong> _lastAccepted = new Dictionary<SessionId, ulong>();
 
-        public CommandSequenceTracker(ulong maximumSequenceJump, int maximumTrackedSessions)
+        internal CommandSequenceTracker(ulong maximumSequenceJump, int maximumTrackedSessions)
         {
             if (maximumSequenceJump == 0UL)
                 throw new ArgumentOutOfRangeException(nameof(maximumSequenceJump), "Maximum sequence jump must be positive.");
