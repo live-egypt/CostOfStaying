@@ -21,7 +21,7 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Area | Status | Meaning |
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
-| Pure Core project | VERIFIED | .NET 8 Release build and 119 NUnit tests passed in run 41330344616 for commit 08b68e68a6cf393c6177b6b54ecd53d6ffff5496; Core dependency-boundary and composition-root scans passed |
+| Pure Core project | VERIFIED | .NET 8 Release build and 132 NUnit tests passed in run 41330344616 for commit 08b68e68a6cf393c6177b6b54ecd53d6ffff5496; Core dependency-boundary and composition-root scans passed |
 | Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41330344616: 132/132 NUnit passed |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
 | Core unit tests | VERIFIED | 132 passed; 0 failed; 0 skipped in run 41330344616; TRX artifact 13093370056 retained |
@@ -216,13 +216,14 @@ Status definitions:
 | Contracts/IVitalityAccount.cs | Pure vitality/lifecycle contract | VitalityAccountTests | VERIFIED — lifecycle tests passed |
 | Contracts/IBetrayalLedger.cs | Betrayal ledger contract | BetrayalLedgerTests | VERIFIED — ledger tests passed |
 | Contracts/IMatchLifecycle.cs | Match phase contract | MatchLifecycleTests | VERIFIED — match transition tests passed |
-| Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId, CommandSequenceId | IdentifierTests | VERIFIED — 103 NUnit passed |
+| Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId, CommandSequenceId | IdentifierTests | VERIFIED — 132 NUnit passed |
 | Domain/VitalityAccount.cs | Bounded vitality; Alive → Spirit; explicit Resurrect / Eliminate | VitalityAccountTests | VERIFIED |
 | Domain/BetrayalLedger.cs | Monotonic event sequence, replay rejection, score | BetrayalLedgerTests | VERIFIED |
 | Domain/MatchLifecycle.cs | Validated match phase transitions | MatchLifecycleTests | VERIFIED |
+| Contracts/IMatchPlayerRegistry.cs + Domain/MatchPlayerRegistry.cs | Bounded match-scoped player membership; immutable ordered ID snapshot; membership-only removal | MatchPlayerRegistryTests | VERIFIED — 132 NUnit passed; ADR-009 PROPOSED |
 | Result.cs | Result / Result<T> and CoreErrorCode | ResultTests | VERIFIED |
-| CoreComposition.cs | Single Core construction root; match-scoped ledger and factories for aggregates, tracker and bounded queue | CoreCompositionTests | VERIFIED — 132 NUnit passed |
-| Domain/TimeValues.cs | ServerTick and StateRevision; zero initial values; overflow-safe revision advance | TimeValueTests | VERIFIED — 103 NUnit passed |
+| CoreComposition.cs | Single Core construction root; match-scoped ledger and factories for player registry, aggregates, tracker and bounded queue | CoreCompositionTests | VERIFIED — 132 NUnit passed |
+| Domain/TimeValues.cs | ServerTick and StateRevision; zero initial values; overflow-safe revision advance | TimeValueTests | VERIFIED — 132 NUnit passed |
 | Position2.cs / MovementInput.cs | Engine-independent movement values | MovementValueTests | PROPOSED |
 | PlayerState.cs / MatchState.cs / WorldState.cs | Authoritative domain state | Corresponding state tests | PROPOSED |
 
@@ -243,7 +244,7 @@ Naming rule: `ActorId` is the canonical player-actor identity in the current Cor
 
 | File | Responsibility | Required test | Status |
 |---|---|---|---|
-| Domain/CommandEnvelope.cs | Server-derived session, sequence and receive tick; not a client wire DTO | CommandEnvelopeTests | VERIFIED in prior Core CI; ADR-008 PROPOSED |
+| Domain/CommandEnvelope.cs | Server-derived session, sequence and receive tick; not a client wire DTO | CommandEnvelopeTests | VERIFIED — 132 NUnit passed; ADR-008 PROPOSED |
 | CommandKind.cs | Supported command kinds | CommandKindTests | PROPOSED |
 | MovementCommand.cs | Client movement intent only | MovementCommandTests | PROPOSED |
 | BetrayalCommand.cs | Client transfer intent only | BetrayalCommandTests | PROPOSED |
