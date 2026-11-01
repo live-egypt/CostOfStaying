@@ -21,7 +21,7 @@ namespace CostOfStaying.Core.Domain
     /// </summary>
     public sealed class SessionLifecycle : ISessionLifecycle
     {
-        public SessionLifecycle(SessionId sessionId)
+        internal SessionLifecycle(SessionId sessionId)
         {
             if (!sessionId.IsValid)
                 throw new ArgumentException("Session identity must be non-zero.", nameof(sessionId));
