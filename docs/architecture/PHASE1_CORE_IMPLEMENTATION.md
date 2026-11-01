@@ -1,6 +1,6 @@
 # Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 177/177 NUnit on commit `94c5789b0e82493290ca85133fc692e83ffd9884`; the broader Core scope remains incomplete.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 177/177 NUnit on commit `26a77dcf1394d35d3db48ea0f5b7cde4c118998f`; the broader Core scope remains incomplete.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 10 / NUnit 3.14  
@@ -20,13 +20,16 @@
 - `IVitalityAccount` / `VitalityAccount` implementing ADR-007 lifecycle and bounded vitality.
 - `IBetrayalLedger` / `BetrayalLedger` enforcing non-zero IDs, no self-target, monotonic event sequence, replay handling and actor score accumulation.
 - `IMatchLifecycle` / `MatchLifecycle` deterministic match-phase state machine.
-- `ISessionLifecycle` / `SessionLifecycle` server-owned Pending → Authenticated → Disconnected → Closed state machine (ADR-010 PROPOSED).\n- `ISessionRegistry` / `SessionRegistry` bounded by explicit capacity, keyed by SessionId, accepts Pending sessions and removes only Closed sessions (ADR-011 PROPOSED).
+- `ISessionLifecycle` / `SessionLifecycle` server-owned Pending → Authenticated → Disconnected → Closed state machine (ADR-010 PROPOSED).
+- `ISessionRegistry` / `SessionRegistry` bounded by explicit capacity, keyed by SessionId, accepts Pending sessions; public removal is unavailable and cleanup service is required (ADR-011 PROPOSED).
 - `IMatchPlayerRegistry` / `MatchPlayerRegistry` bounded per-match membership with deterministic insertion order, immutable ID snapshots and membership-only removal (ADR-009 PROPOSED).
 - `CoreComposition` as the production construction root for the match-scoped ledger and factories for player vitality, match lifecycle, sequence tracker and command queue.
 - `ServerTick` and `StateRevision` value objects; zero is the initial value and revision advance refuses overflow.
 - `CommandEnvelope<TCommand>` for server-resolved session identity, sequence, receive tick and command intent. It is not a client wire DTO.
 - `CommandSequenceTracker` with strictly increasing per-session sequences, explicit maximum jump, explicit maximum tracked sessions, duplicate/stale rejection and bounded in-memory state.
-- `CommandAdmissionQueue<TCommand>` with explicit bounded FIFO capacity, replay-aware enqueue and safe session reset only after that session's queued commands have drained.\n- `ICommandAdmissionService<TCommand>` / `CommandAdmissionService<TCommand>` validates envelope and requires a registered Authenticated session with a valid ActorId before queue admission; gameplay payload rules remain downstream.\n- `ISessionCleanupService<TCommand>` / `SessionCleanupService<TCommand>` drains pending queue state, resets replay state and removes a Closed session in one server-serialized cleanup path.
+- `CommandAdmissionQueue<TCommand>` with explicit bounded FIFO capacity, replay-aware enqueue and safe session reset only after that session's queued commands have drained.
+- `ICommandAdmissionService<TCommand>` / `CommandAdmissionService<TCommand>` validates envelope and requires a registered Authenticated session with a valid ActorId before queue admission; gameplay payload rules remain downstream.
+- `ISessionCleanupService<TCommand>` / `SessionCleanupService<TCommand>` drains pending queue state, resets replay state and removes a Closed session in one server-serialized cleanup path.
 - NUnit coverage for the implemented primitives and invariants.
 
 ## Canonical player lifecycle — ADR-007
@@ -107,8 +110,8 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated transp
 ## Verification evidence
 
 The latest Core CI run:
-- Run: `41331400978` — SUCCESS.
-- Source commit: `94c5789b0e82493290ca85133fc692e83ffd9884`.
+- Run: `41332755494` — SUCCESS.
+- Source commit: `26a77dcf1394d35d3db48ea0f5b7cde4c118998f`.
 - Core dependency boundary and composition-root checks: PASS.
 - .NET 10 Release restore/build: PASS.
 - NUnit: 177 passed, 0 failed, 0 skipped.
