@@ -1,0 +1,51 @@
+name: Core CI
+
+on:
+  push:
+    branches:
+      - main
+      - feature/phase1-technical-consolidation
+    paths:
+      - "src/CostOfStaying.Core/**"
+      - "tests/CostOfStaying.Core.Tests/**"
+      - ".github/workflows/core-ci.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "src/CostOfStaying.Core/**"
+      - "tests/CostOfStaying.Core.Tests/**"
+      - ".github/workflows/core-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  core-tests:
+    name: Build and test standalone Core
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj
+
+      - name: Build Core
+        run: dotnet build src/CostOfStaying.Core/CostOfStaying.Core.csproj --configuration Release --no-restore
+
+      - name: Run NUnit tests
+        run: dotnet test tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-restore --logger "trx;LogFileName=core-tests.trx" --results-directory artifacts/test-results
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-test-results
+          path: artifacts/test-results/*.trx
+          if-no-files-found: warn
