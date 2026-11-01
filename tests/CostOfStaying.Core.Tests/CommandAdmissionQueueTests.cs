@@ -99,6 +99,43 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void ResetSession_IsRejectedWhileCommandsRemainQueued()
+        {
+            var queue = new CommandAdmissionQueue<TestCommand>(4, 1, 4);
+            var envelope = new CommandEnvelope<TestCommand>(
+                new SessionId(1), new CommandSequenceId(1), new ServerTick(1), new TestCommand(1));
+            Assert.That(queue.TryEnqueue(envelope).IsSuccess, Is.True);
+
+            Result result = queue.ResetSession(new SessionId(1));
+
+            Assert.That(result.ErrorCode, Is.EqualTo(CoreErrorCode.InvalidState));
+            Assert.That(queue.PendingCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ResetSession_ReleasesCapacityAfterQueueDrains()
+        {
+            var queue = new CommandAdmissionQueue<TestCommand>(4, 1, 4);
+            var first = new CommandEnvelope<TestCommand>(
+                new SessionId(1), new CommandSequenceId(1), new ServerTick(1), new TestCommand(1));
+            var second = new CommandEnvelope<TestCommand>(
+                new SessionId(2), new CommandSequenceId(1), new ServerTick(2), new TestCommand(2));
+
+            Assert.That(queue.TryEnqueue(first).IsSuccess, Is.True);
+            Assert.That(queue.TryDequeue(out _), Is.True);
+            Assert.That(queue.ResetSession(new SessionId(1)).IsSuccess, Is.True);
+            Assert.That(queue.TryEnqueue(second).IsSuccess, Is.True);
+        }
+
+        [Test]
+        public void ResetSession_RejectsInvalidOrUnknownSession()
+        {
+            var queue = new CommandAdmissionQueue<TestCommand>(4, 1, 4);
+            Assert.That(queue.ResetSession(default).ErrorCode, Is.EqualTo(CoreErrorCode.InvalidArgument));
+            Assert.That(queue.ResetSession(new SessionId(99)).ErrorCode, Is.EqualTo(CoreErrorCode.NotFound));
+        }
+
+        [Test]
         public void TrackedSessionCapacity_IsEnforcedAcrossQueueLifetime()
         {
             var queue = new CommandAdmissionQueue<TestCommand>(4, 1, 4);
