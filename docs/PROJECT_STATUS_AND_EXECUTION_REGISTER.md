@@ -34,22 +34,18 @@ Use this precedence when documents or code disagree:
 
 An implementation or passing test cannot silently revoke an owner-approved gameplay decision.
 
-### Blocking decision: player lifecycle
+### Resolved decision: player lifecycle (ADR-007 APPROVED)
 
-ADR-007 records an unresolved conflict:
+ADR-007 has been resolved in favor of the earlier owner-approved model and reaffirmed on 2026-11-01:
 
-- Earlier owner-approved model: `Alive → Spirit` automatically at zero Vitality; `Resurrect` and `Eliminate` are explicit server-authoritative operations; `Eliminated` is terminal.
-- Current v2.1 proposal and current VitalityAccount: `Alive → Dead`, no MVP revival, Spirit separate.
+- Canonical states: `Alive`, `Spirit`, `Eliminated`.
+- Vitality reaching zero automatically transitions `Alive → Spirit`.
+- `Resurrect` and `Eliminate` are explicit server-authoritative operations.
+- `Eliminated` is terminal.
+- Ordinary Restore never resurrects; only explicit Resurrect can transition Spirit → Alive.
+- The v2.1 `Alive → Dead` lifecycle text is superseded and must be reconciled in every maintained specification.
 
-These are incompatible. Until the owner explicitly selects the canonical contract:
-
-- Keep ADR-007 at `DECISION REQUIRED`.
-- Do not change lifecycle APIs or add inferred Spirit/Resurrect/Eliminate behavior.
-- Do not describe the current VitalityAccount as the final gameplay lifecycle.
-- Continue only work that is independent of the disputed transition semantics.
-- Preserve both historical records; do not delete either side of the conflict.
-
-If the earlier owner-approved model is reaffirmed, document its full transition matrix and command preconditions before changing code. If the v2.1 model is selected instead, record the explicit withdrawal/replacement of the earlier decision.
+The Core source and NUnit tests have been updated on `feature/core-lifecycle-resolution`. CI verification for this exact revision is pending. The Core API does not implement authorization, costs, cooldowns or match-phase policy; those remain server application responsibilities.
 
 ## 3. Verified evidence boundary
 
@@ -96,11 +92,11 @@ Do not skip a gate to make the project appear more complete. Keep deferred syste
 
 ## 6. Immediate next actions
 
-1. Obtain the owner's explicit ADR-007 lifecycle decision.
-2. Review PR #4 as the consolidated technical baseline; retain it unmerged while the lifecycle blocker is open.
-3. Keep PR #5 clearly labeled as static source audit only; do not represent its source ZIP as uploaded.
-4. After ADR-007 is resolved, reconcile ADR-004, gameplay specification, Spirit/Betrayal system documents, Technical Master, Core contracts and tests in one controlled change set.
-5. Only then proceed to missing Core foundations and Unity/FishNet integration.
+1. Re-run Core CI for the approved ADR-007 implementation and retain exact-commit evidence.
+2. Reconcile all remaining gameplay/system documents with ADR-007; keep ADR-004 PROPOSED FOR PLAYTEST until playtest evidence exists.
+3. Review PR #4 as the earlier baseline and PR #5 as static source audit only; do not represent the Unity source ZIP as uploaded.
+4. Continue missing Core foundations: Result, identifiers, CoreComposition, session/match lifecycle, command admission, movement, atomic transfer and snapshots.
+5. Keep Unity/FishNet integration gated on actual project metadata and exact package verification.
 
 ## 7. Status vocabulary
 
