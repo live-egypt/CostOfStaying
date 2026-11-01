@@ -48,6 +48,13 @@ namespace CostOfStaying.Core
             return new MatchPlayerRegistry(matchId, capacity);
         }
 
+        public IMatchRosterSnapshotBuilder CreateMatchRosterSnapshotBuilder(
+            IMatchLifecycle match,
+            IMatchPlayerRegistry players)
+        {
+            return new MatchRosterSnapshotBuilder(match, players);
+        }
+
         public ICommandAdmissionService<TCommand> CreateCommandAdmissionService<TCommand>(
             ISessionRegistry sessions,
             CommandAdmissionQueue<TCommand> queue)
