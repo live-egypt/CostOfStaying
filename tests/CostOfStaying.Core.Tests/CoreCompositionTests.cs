@@ -2,6 +2,7 @@ namespace CostOfStaying.Core.Tests
 {
     using CostOfStaying;
     using CostOfStaying.Core.Domain;
+    using CostOfStaying.Core.Contracts;
     using NUnit.Framework;
 
     [TestFixture]
@@ -76,6 +77,23 @@ namespace CostOfStaying.Core.Tests
             Assert.That(registry.MatchId, Is.EqualTo(new MatchId(8)));
             Assert.That(registry.Capacity, Is.EqualTo(12));
             Assert.That(registry.Count, Is.Zero);
+        }
+
+        [Test]
+        public void CreateCommandAdmissionService_UsesProvidedSessionRegistryAndQueue()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var sessions = composition.CreateSessionRegistry(4);
+            var queue = composition.CreateCommandAdmissionQueue<string>(8, 4, 8);
+            ICommandAdmissionService<string> service = composition.CreateCommandAdmissionService(sessions, queue);
+
+            var session = composition.CreateSessionLifecycle(new SessionId(10));
+            sessions.Register(session);
+            session.TryAuthenticate(new ActorId(1));
+            var envelope = new CommandEnvelope<string>(session.SessionId, new CommandSequenceId(1), new ServerTick(0), "command");
+
+            Assert.That(service.TryAdmit(envelope).IsSuccess, Is.True);
+            Assert.That(queue.PendingCount, Is.EqualTo(1));
         }
 
         [Test]
