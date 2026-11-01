@@ -21,7 +21,8 @@ The server must convert a network intent into a trusted Core command envelope. C
 9. Reset clears one session's sequence state when that authenticated session is permanently removed. Reconnect policy must decide whether a new SessionId is issued.
 10. The tracker is single-writer/server-serialized and is not thread-safe. It is in-memory and is not a durable anti-replay store.
 11. `StateRevision` zero represents initial state. Advancing increments by one; advancing at ulong.MaxValue fails without wrapping.
-12. No default MaximumSequenceJump is selected. The host must supply a positive configured value.
+12. No default MaximumSequenceJump or maximum tracked-session count is selected. The host must supply both positive configured values.
+13. The tracker has a hard maximum number of tracked sessions. New session admission returns CapacityExceeded at the limit; existing sessions may continue; Reset releases the slot.
 
 ## Implementation scope
 
@@ -35,7 +36,7 @@ The current Core branch includes:
 
 ## Open decisions
 
-- Production value for MaximumSequenceJump.
+- Production values for MaximumSequenceJump and maximum tracked sessions (the latter should align with the match/session capacity policy).
 - Whether sequence state survives reconnects (requires stable authenticated session identity or persistence).
 - Queue capacity, backpressure, rate limiting and command timeout policy.
 - Whether a command may be admitted before all payload validation is complete.
