@@ -13,26 +13,34 @@ namespace CostOfStaying.Core.Tests
             public int Value { get; }
         }
 
+        private static CommandAdmissionQueue<TestCommand> CreateQueue(
+            ulong maximumSequenceJump,
+            int maximumTrackedSessions,
+            int capacity)
+        {
+            return new CommandAdmissionQueue<TestCommand>(
+                new CommandSequenceTracker(maximumSequenceJump, maximumTrackedSessions),
+                capacity);
+        }
+
         [Test]
         public void Constructor_RejectsZeroCapacity()
         {
             Assert.Throws<System.ArgumentOutOfRangeException>(() =>
-                new CommandAdmissionQueue<TestCommand>(4, 2, 0));
+                new CommandAdmissionQueue<TestCommand>(new CommandSequenceTracker(4, 2), 0));
         }
 
         [Test]
         public void Constructor_RejectsInvalidSequenceConfiguration()
         {
-            Assert.Throws<System.ArgumentOutOfRangeException>(() =>
-                new CommandAdmissionQueue<TestCommand>(0, 2, 1));
-            Assert.Throws<System.ArgumentOutOfRangeException>(() =>
-                new CommandAdmissionQueue<TestCommand>(4, 0, 1));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => new CommandSequenceTracker(0, 2));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => new CommandSequenceTracker(4, 0));
         }
 
         [Test]
         public void TryEnqueue_RejectsDefaultEnvelope()
         {
-            var queue = new CommandAdmissionQueue<TestCommand>(4, 2, 2);
+            var queue = CreateQueue(4, 2, 2);
             Result result = queue.TryEnqueue(default);
 
             Assert.That(result.ErrorCode, Is.EqualTo(CoreErrorCode.InvalidArgument));
@@ -42,7 +50,7 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void TryEnqueue_AndTryDequeue_PreserveFifoOrder()
         {
-            var queue = new CommandAdmissionQueue<TestCommand>(4, 2, 3);
+            var queue = CreateQueue(4, 2, 3);
             var first = new CommandEnvelope<TestCommand>(
                 new SessionId(1), new CommandSequenceId(1), new ServerTick(5), new TestCommand(10));
             var second = new CommandEnvelope<TestCommand>(
@@ -63,7 +71,7 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void FullQueue_RejectsWithoutConsumingSequence()
         {
-            var queue = new CommandAdmissionQueue<TestCommand>(4, 2, 1);
+            var queue = CreateQueue(4, 2, 1);
             var first = new CommandEnvelope<TestCommand>(
                 new SessionId(1), new CommandSequenceId(1), new ServerTick(1), new TestCommand(1));
             var second = new CommandEnvelope<TestCommand>(
@@ -78,7 +86,7 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void DuplicateSequence_IsRejected()
         {
-            var queue = new CommandAdmissionQueue<TestCommand>(4, 2, 4);
+            var queue = CreateQueue(4, 2, 4);
             var envelope = new CommandEnvelope<TestCommand>(
                 new SessionId(1), new CommandSequenceId(1), new ServerTick(1), new TestCommand(1));
 
@@ -90,7 +98,7 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void ExcessiveSequenceJump_IsRejectedWithoutQueueMutation()
         {
-            var queue = new CommandAdmissionQueue<TestCommand>(2, 2, 4);
+            var queue = CreateQueue(2, 2, 4);
             var envelope = new CommandEnvelope<TestCommand>(
                 new SessionId(1), new CommandSequenceId(3), new ServerTick(1), new TestCommand(1));
 
@@ -101,7 +109,7 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void ResetSession_IsRejectedWhileCommandsRemainQueued()
         {
-            var queue = new CommandAdmissionQueue<TestCommand>(4, 1, 4);
+            var queue = CreateQueue(4, 1, 4);
             var envelope = new CommandEnvelope<TestCommand>(
                 new SessionId(1), new CommandSequenceId(1), new ServerTick(1), new TestCommand(1));
             Assert.That(queue.TryEnqueue(envelope).IsSuccess, Is.True);
@@ -115,7 +123,7 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void ResetSession_ReleasesCapacityAfterQueueDrains()
         {
-            var queue = new CommandAdmissionQueue<TestCommand>(4, 1, 4);
+            var queue = CreateQueue(4, 1, 4);
             var first = new CommandEnvelope<TestCommand>(
                 new SessionId(1), new CommandSequenceId(1), new ServerTick(1), new TestCommand(1));
             var second = new CommandEnvelope<TestCommand>(
@@ -130,7 +138,7 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void ResetSession_RejectsInvalidOrUnknownSession()
         {
-            var queue = new CommandAdmissionQueue<TestCommand>(4, 1, 4);
+            var queue = CreateQueue(4, 1, 4);
             Assert.That(queue.ResetSession(default).ErrorCode, Is.EqualTo(CoreErrorCode.InvalidArgument));
             Assert.That(queue.ResetSession(new SessionId(99)).ErrorCode, Is.EqualTo(CoreErrorCode.NotFound));
         }
@@ -138,7 +146,7 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void TrackedSessionCapacity_IsEnforcedAcrossQueueLifetime()
         {
-            var queue = new CommandAdmissionQueue<TestCommand>(4, 1, 4);
+            var queue = CreateQueue(4, 1, 4);
             var first = new CommandEnvelope<TestCommand>(
                 new SessionId(1), new CommandSequenceId(1), new ServerTick(1), new TestCommand(1));
             var second = new CommandEnvelope<TestCommand>(
