@@ -1,0 +1,60 @@
+name: Mobile Source Security Scan
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "android/**"
+      - "**/AndroidManifest.xml"
+      - "**/*.gradle"
+      - "**/*.gradle.kts"
+      - "**/*.java"
+      - "**/*.kt"
+      - "**/*.swift"
+      - "**/*.m"
+      - "**/*.mm"
+      - ".github/workflows/mobsf.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "android/**"
+      - "**/AndroidManifest.xml"
+      - "**/*.gradle"
+      - "**/*.gradle.kts"
+      - "**/*.java"
+      - "**/*.kt"
+      - "**/*.swift"
+      - "**/*.m"
+      - "**/*.mm"
+      - ".github/workflows/mobsf.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  mobsfscan:
+    name: MobSF static analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install pinned MobSF scanner
+        run: python -m pip install --disable-pip-version-check mobsfscan==1.1.0
+
+      - name: Scan mobile source
+        run: mobsfscan . --sarif --output results.sarif --no-fail
+
+      - name: Upload SARIF
+        if: always() && hashFiles('results.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: results.sarif
