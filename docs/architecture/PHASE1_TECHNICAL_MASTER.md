@@ -256,7 +256,6 @@ Client payloads must not choose authoritative sender identity, SessionId, server
 | PlayerSession.cs | Authenticated player/session association | PlayerSessionTests | PROPOSED |
 | SessionLifecycle.cs | Pending/auth/disconnect transitions | SessionLifecycleTests | PROPOSED |
 | MatchLifecycle.cs | Lobby/running/ending transitions | MatchLifecycleTests | VERIFIED |
-| MatchPhase.cs | Match phase enumeration | MatchPhaseTests | PROPOSED |
 | AdmissionResult.cs | Admission decision value | AdmissionResultTests | PROPOSED |
 | ReconnectPolicy.cs | Reconnect eligibility and identity continuity | ReconnectPolicyTests | TBD; retention/token model unspecified |
 
