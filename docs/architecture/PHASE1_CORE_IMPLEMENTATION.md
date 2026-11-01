@@ -1,6 +1,6 @@
 # Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 134/134 NUnit on commit `5648aaf232dd247a0af52317f8ddd363a0441f0c`; the broader Core scope remains incomplete.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 134/148 NUnit on commit `be67d8a3399f99c2c0e05a37eec8ffa0cb2abb13`; the broader Core scope remains incomplete.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 10 / NUnit 3.14  
@@ -92,7 +92,7 @@ Completed is terminal. Undefined enum values and all undocumented transitions fa
 
 The following remain unimplemented and must not be represented as complete:
 
-1. Global session registry, connection-to-session map, credential validation and reconnect/timeout orchestration (the per-session lifecycle primitive is implemented).
+1. Global session registry, connection-to-session map, credential validation and reconnect/timeout orchestration (the per-session lifecycle primitive is implemented and verified).
 2. Full match aggregate, player registry, membership and world-state ownership.
 3. Player aggregate and cross-system state coordination.
 4. Command payload validation, application handlers and end-to-end authoritative admission pipeline.
@@ -107,12 +107,12 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated transp
 ## Verification evidence
 
 The latest Core CI run:
-- Run: `41330975856` — SUCCESS.
-- Source commit: `5648aaf232dd247a0af52317f8ddd363a0441f0c`.
+- Run: `41331236864` — SUCCESS.
+- Source commit: `be67d8a3399f99c2c0e05a37eec8ffa0cb2abb13`.
 - Core dependency boundary and composition-root checks: PASS.
 - .NET 10 Release restore/build: PASS.
-- NUnit: 134 passed, 0 failed, 0 skipped.
-- TRX artifact: `13092889041`.
+- NUnit: 148 passed, 0 failed, 0 skipped.
+- TRX artifact: `13093536721`.
 - Artifact SHA-256: `2b13f11e173414f7b232a89ef1ec0389d1d237686cc9137f5efa9662a8d1ee67`.
 - Detailed evidence: [Bounded command queue and session replay capacity CI](../audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md).
 
