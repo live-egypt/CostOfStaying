@@ -1,8 +1,8 @@
 # Core CI — Consolidated Standalone Core Baseline
 
 **Date:** 2026-11-01  
-**Source commit:** `21682e9af7285013ac17524097fffbebc69bf293`  
-**Workflow run:** `41332141494` — SUCCESS  
+**Source commit:** `26a77dcf1394d35d3db48ea0f5b7cde4c118998f`  
+**Workflow run:** `41332755494` — SUCCESS  
 **Branch:** `feature/core-lifecycle-resolution`
 
 ## Verification
@@ -12,9 +12,9 @@
 - .NET 10 SDK restore: PASS.
 - Core Release build: PASS — target framework .NET Standard 2.1.
 - NUnit test project Release build: PASS — target framework .NET 10.
-- NUnit: **173 passed, 0 failed, 0 skipped**.
-- TRX artifact: `13093412354`.
-- Artifact SHA-256: `9fef72d79dce1f86e96558896d6cb25946079a7cca3d5286b45f465d706e31eb`.
+- NUnit: **177 passed, 0 failed, 0 skipped**.
+- TRX artifact: `13093413196`.
+- Artifact SHA-256: `7320747a7a78878879a651882467800b2c5514fac93cb0b480e996aa1545b39f`.
 
 ## Verified Core inventory
 
@@ -28,7 +28,7 @@
 - ServerTick and overflow-safe StateRevision.
 - Server-side CommandEnvelope.
 - Bounded per-session CommandSequenceTracker.
-- Bounded FIFO CommandAdmissionQueue with replay-aware admission and safe session-state reset after queue drain.\n- CommandAdmissionService: requires a registered Authenticated session with valid ActorId before enqueuing; tests verify unauthorized sessions do not consume sequences.
+- Bounded FIFO CommandAdmissionQueue with replay-aware admission and safe session-state reset after queue drain.\n- CommandAdmissionService: requires a registered Authenticated session with valid ActorId before enqueuing; tests verify unauthorized sessions do not consume sequences.\n- SessionCleanupService: requires Closed, drains the queue, internally resets replay state and removes the session; direct registry removal and replay reset are internal-only.
 
 ## Verification boundary
 
