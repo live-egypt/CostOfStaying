@@ -1,6 +1,6 @@
 # Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 119/119 NUnit on commit `6bf2d61f56e37ea54f93cfa42d2dc72e4b2a78b4`; the broader Core scope remains incomplete.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 132/132 NUnit on commit `08b68e68a6cf393c6177b6b54ecd53d6ffff5496`; the broader Core scope remains incomplete.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 8 / NUnit 3.14  
