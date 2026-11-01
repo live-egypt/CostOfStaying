@@ -23,9 +23,11 @@ SessionRegistry removal and command replay-state release are separate operations
 ## Implementation
 
 - `ISessionCleanupService<TCommand>` / `SessionCleanupService<TCommand>`.
-- `CoreComposition.CreateSessionCleanupService(sessions, queue)`.\n- Public registry contract has no removal method; replay reset and closed-session removal are internal to Core and coordinated only by the cleanup service.
+- `CoreComposition.CreateSessionCleanupService(sessions, queue)`.
+- The public registry contract does not expose removal; queue replay reset and registry removal are internal-only and coordinated by this service.
+- Public registry contract has no removal method; replay reset and closed-session removal are internal to Core and coordinated only by the cleanup service.
 - NUnit coverage for invalid/unknown IDs, Closed-state requirement, pending-queue rejection, successful cleanup, replay-capacity release and sessions with no admitted commands.
 
 ## Verification boundary
 
-A passing Core CI run verifies this in-memory cleanup order only. The server application remains responsible for ensuring dequeued commands have finished before invoking cleanup.
+Core CI run `41332755494` passed **177 NUnit tests (0 failed, 0 skipped)**. It verifies this in-memory cleanup order only. The server application remains responsible for ensuring dequeued commands have finished before invoking cleanup.
