@@ -43,7 +43,7 @@ ADR-007 has been resolved in favor of the earlier owner-approved model and reaff
 - `Resurrect` and `Eliminate` are explicit server-authoritative operations.
 - `Eliminated` is terminal.
 - Ordinary Restore never resurrects; only explicit Resurrect can transition Spirit → Alive.
-- The v2.1 `Alive → Dead` lifecycle text is superseded and must be reconciled in every maintained specification.
+- The v2.1 `Alive → Dead` lifecycle text is superseded; maintained player-lifecycle specifications follow ADR-007.
 
 The Core source and NUnit tests have been updated on `feature/core-lifecycle-resolution`. Core CI run 41327543734 verified the latest Core source on commit c8a914970029c249081fd5cf6e48990d1a3cfaca: dependency-boundary and CoreComposition construction-root scans, Release build and 103/103 NUnit passed. This includes lifecycle, Result, typed IDs, MatchLifecycle, CoreComposition, time/revision values, command envelope and sequence tracker. The Core API does not implement authorization, costs, cooldowns or match-phase policy; those remain server application responsibilities.
 
