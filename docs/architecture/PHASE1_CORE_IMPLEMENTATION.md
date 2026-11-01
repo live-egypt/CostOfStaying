@@ -105,13 +105,13 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated transp
 ## Verification evidence
 
 The latest Core CI run:
-- Run: `41329893768` — SUCCESS.
-- Source commit: `6bf2d61f56e37ea54f93cfa42d2dc72e4b2a78b4`.
+- Run: `41330344616` — SUCCESS.
+- Source commit: `08b68e68a6cf393c6177b6b54ecd53d6ffff5496`.
 - Core dependency boundary and composition-root checks: PASS.
 - .NET 8 Release restore/build: PASS.
 - NUnit: 132 passed, 0 failed, 0 skipped.
-- TRX artifact: `13092503957`.
-- Artifact SHA-256: `bd80302f06e057c041c9ed418dbf7f64a98f86a145edfa7864eabe541af31bf5`.
+- TRX artifact: `13093370056`.
+- Artifact SHA-256: `19eeb3b4395035c5b8cae9051a10b69bddd3d5c15db6a4fe248340e46e3f88b7`.
 - Detailed evidence: [Bounded command queue and session replay capacity CI](../audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md).
 
 This run verifies the latest Core queue/capacity increment. It does not verify the unimplemented Core systems or Unity/FishNet.
