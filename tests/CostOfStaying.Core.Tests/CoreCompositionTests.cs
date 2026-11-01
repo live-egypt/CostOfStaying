@@ -48,6 +48,16 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void CreateSessionLifecycle_UsesRequestedSessionId()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var session = composition.CreateSessionLifecycle(new SessionId(77));
+
+            Assert.That(session.SessionId, Is.EqualTo(new SessionId(77)));
+            Assert.That(session.State, Is.EqualTo(SessionState.Pending));
+        }
+
+        [Test]
         public void CreateMatchPlayerRegistry_UsesRequestedMatchAndCapacity()
         {
             CoreComposition composition = CoreComposition.Create();
