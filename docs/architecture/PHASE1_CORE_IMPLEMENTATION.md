@@ -1,6 +1,6 @@
 # Phase 1 Core — Implemented Contracts and Primitives
 
-**Status:** PARTIALLY VERIFIED — Core CI passed 55/55 NUnit on source commit `64630225b2680fadcc412878b6ecf7ab76e23c11`; remaining Core scope is not implemented.  
+**Status:** PARTIALLY VERIFIED — Core CI passed 77/77 NUnit on source commit `17566c5234f65270ccd33d70f8d9dcccb4d2d044`; remaining Core scope is not implemented.  
 **Architecture ADR:** ADR-005 (APPROVED)  
 **Lifecycle ADR:** ADR-007 (APPROVED: Alive / Spirit / Eliminated)  
 **Identifier/ledger ADR:** ADR-006 (PROPOSED — do not treat as owner-approved)  
@@ -89,16 +89,17 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated connec
 
 ## Verification evidence
 
-- **Tested source commit:** `64630225b2680fadcc412878b6ecf7ab76e23c11`
-- **Core CI run:** `41326282217` — SUCCESS (job rerun completed successfully)
+- **Latest tested source commit:** `17566c5234f65270ccd33d70f8d9dcccb4d2d044`
+- **Latest Core CI run:** `41326574904` — SUCCESS
 - **Release restore/build:** PASS
-- **NUnit:** 55 passed, 0 failed, 0 skipped
-- **TRX artifact:** `core-test-results`, ID `13091282585`
-- **Artifact SHA-256:** `dd8f338a9915be5aa61c26730b2f28d3d7f13f2f4bdc03cf16f83760de7a4912`
-- **Detailed evidence:** [Core foundations CI verification](../audit/CORE_FOUNDATIONS_CI_VERIFICATION_2026-11-01.md)
+- **NUnit:** 77 passed, 0 failed, 0 skipped
+- **TRX artifact:** `core-test-results`, ID `13091806116`
+- **Artifact SHA-256:** `092b521653c95717ebfe81030c120ab98e2ce9df7c83e02309dcec113bf826d0`
+- **Detailed evidence:** [Match lifecycle and composition CI verification](../audit/MATCH_LIFECYCLE_COMPOSITION_CI_VERIFICATION_2026-11-01.md)
+- **Previous 55-test evidence:** [Core foundations CI verification](../audit/CORE_FOUNDATIONS_CI_VERIFICATION_2026-11-01.md)
 - **Earlier lifecycle-only evidence:** [ADR-007 lifecycle CI verification](../audit/ADR007_LIFECYCLE_CI_VERIFICATION_2026-11-01.md)
 
-The lifecycle, Result contracts and typed identifiers are VERIFIED for the standalone Core scope at that exact source commit. Subsequent commits to this branch have changed documentation only. Unity/FishNet, Android, performance and production security remain outside this standalone Core CI scope.
+The lifecycle, Result contracts, typed identifiers, match phase state machine and CoreComposition are VERIFIED for the standalone Core scope at the exact source commit above. Subsequent commits to this branch have changed documentation only. Unity/FishNet, Android, performance and production security remain outside this standalone Core CI scope.
 
 ## Next implementation order
 
