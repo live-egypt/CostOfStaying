@@ -1,55 +1,77 @@
-# GitHub Actions Pipeline Audit
+# GitHub Actions Pipeline Audit and Remediation
 
 **Audit date:** 2026-11-01  
-**Commit under test:** `308c8541ad75befb4ade2d0de6ef1f4dcbd3d8cc`  
-**Pull request:** [#4 — Technical Consolidation](https://github.com/live-egypt/CostOfStaying/pull/4)  
-**Scope:** workflow execution evidence for the PR merge commit; this is an operational pipeline audit, not a source-code security certification.
+**Repository:** `live-egypt/CostOfStaying`  
+**PR:** #6 — `feature/core-lifecycle-resolution`  
+**Scope:** Core CI and inherited static-analysis workflows. This is an operational workflow audit, not a source-code security certification.
 
-## 1. Execution summary
+## 1. Latest observed run before workflow remediation
 
-| Workflow | Run ID | Result | Evidence |
+PR head at the time of the run: `0734b194bb7434a20873601c4f3d6033ac5d5f49`.
+
+| Workflow | Run ID | Result | Actual failure / evidence |
 |---|---:|---|---|
-| Core CI | 41312765519 | PASS | Restore, Core Release build, test-project Release build, NUnit and artifact upload all succeeded |
-| MobSF | 41312765557 | FAIL — scanner setup | MobSF action dependency installation failed before scanning |
-| SecurityCodeScan | 41312765504 | FAIL — project discovery | `dotnet restore` ran at repository root where no solution/project file exists |
-| Contrast Scan | 41312765456 | FAIL — configuration | Required organization ID was absent; configured artifact path is still a template placeholder |
+| Core CI | 41327877562 | PASS | Core dependency boundary, composition-root check, Release build and test job passed |
+| MobSF | 41327877519 | FAIL | Legacy action attempted to install `semgrep==0.50.1`, which pip could not resolve |
+| Contrast Scan | 41327877553 | FAIL | Placeholder artifact `mypath/target/myartifact.jar`; required Contrast Organization ID secret absent |
+| SecurityCodeScan | 41327877574 | FAIL | `dotnet restore` executed at repository root; no solution/project file exists there (MSB1003) |
 
-Core CI ran against the PR head commit listed above. Its NUnit result was **38 passed, 0 failed, 0 skipped**. The TRX artifact `core-test-results` was uploaded successfully (artifact ID `13086610319`, SHA-256 `ad27e2309320fd9c2430bf09eca0b9728968c6f14a807f959da8f4ddcf9d9383`).
+The green Core CI result verifies only the standalone Core slice. Failed scanners are not clean scans and provide no evidence that the source is vulnerability-free.
 
-## 2. Failure analysis
+## 2. Root-cause analysis
 
 ### MobSF
 
-The pinned `MobSF/mobsfscan` action failed while installing its Python requirements. Its dependency set requests `semgrep==0.50.1`, which pip could not resolve from the package index used by the runner. The scan step exited before producing a SARIF report; therefore this run gives no mobile-security findings.
+The inherited `MobSF/mobsfscan` action was pinned to a legacy action revision whose requirements attempted to install `semgrep==0.50.1`. That dependency could not be resolved by the runner's package index, so scanning never began and no SARIF report was produced.
 
-**Required action:** select and pin a currently supported scanner release/dependency set, then verify it on the actual Android/mobile source tree. Do not suppress the dependency error or mark the scan as passed.
+**Branch remediation:** replace the legacy action with a pinned `mobsfscan==1.1.0` installation on Python 3.13, invoke the documented CLI, and restrict automatic triggers to mobile source changes. This avoids executing a mobile scanner for documentation/Core-only commits. The new workflow still requires a real mobile source tree and a successful run before mobile security can be marked verified.
 
 ### SecurityCodeScan
 
-The workflow invokes `dotnet restore` and `dotnet build` from the repository root. The repository has no root-level solution or project file, so restore fails with MSB1003 before compilation or analysis.
+The inherited workflow ran `dotnet restore` at the repository root. There is no root-level solution or project, so MSBuild returned MSB1003 before the analyzer build.
 
-**Required action:** point restore and build explicitly to `tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj` (or introduce a reviewed solution file if one becomes the canonical entry point). Re-run the scanner and inspect its SARIF output. This is a workflow path defect, not evidence of a code vulnerability.
+**Branch remediation:** target `tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj` explicitly for restore and Release build. The test project references the Core project, so the analyzer build includes the current Core C# source. SARIF upload is conditional on a generated report. A successful scanner run and review of findings are still required.
 
 ### Contrast Scan
 
-The action reports: `Organization ID is required but not present`. The workflow also still specifies `mypath/target/myartifact.jar`, a template path rather than a real build artifact. The project currently has no Java artifact build stage, and the required Contrast account secrets are not available to this run.
+The inherited workflow was an unconfigured template: it used a non-existent Java JAR path and required secrets that were not provisioned. The action failed because Organization ID was absent.
 
-**Required action:** do not enable this scan as a required check until a supported real artifact, valid account configuration and secret provisioning are in place. If the project remains .NET-only, configure the action for the actual .NET artifact after the build pipeline exists, or remove/disable this unused template workflow through a separately reviewed change.
+**Branch remediation:** make this a manual-only workflow requiring an explicit artifact path and validate all three required secrets before invoking the action. It is not an automatic required check. It can only be used after a real supported artifact has been built and Contrast credentials have been configured in repository secrets.
 
-## 3. Security interpretation
+## 3. Core CI workflow hardening
 
-- A failed scanner is **not** a clean scan.
-- These failures are configuration/toolchain failures; they do not establish that the source is vulnerable or vulnerability-free.
-- No SARIF security result was uploaded by the failed scanner steps.
-- The green Core CI result verifies only the standalone Core build and NUnit tests; it is not a security audit and does not verify Unity, FishNet, Android, authentication or production deployment.
-- Existing third-party scanning workflows are inherited from the default branch and are separate from the newly added Core CI workflow.
+The Core workflow includes:
+- A source scan that rejects UnityEngine/FishNet references in Core.
+- A composition-root scan that rejects direct production construction of Core aggregates/services outside `CoreComposition.cs`.
+- .NET 8 restore, Release builds and NUnit.
+- TRX artifact retention even when tests fail.
+- Read-only repository permissions and a bounded job timeout.
 
-## 4. Recommended remediation order
+The branch trigger was corrected to the active branch name, and the composition-root check was extended to include the bounded command-admission queue. The exact latest source increment still needs a new CI result.
 
-1. Fix SecurityCodeScan project/solution targeting and rerun it.
-2. Replace or upgrade the obsolete MobSF scanner dependency chain with a supported, pinned release; validate on actual mobile source.
-3. Decide whether Contrast is applicable. If yes, build the real artifact and configure secrets outside source control; if not, remove the placeholder workflow in a reviewed change.
-4. Reassess required status checks only after each scanner produces a valid completed result.
-5. Keep the lifecycle conflict in ADR-007 as a separate gameplay decision gate.
+## 4. Verification policy
 
-**Status:** Core CI verified for the exact commit and scope above. The three additional scanner workflows remain unverified due to the failures documented here.
+- A failed scanner is not a clean scan.
+- A scanner setup/configuration failure is not itself proof of a source vulnerability.
+- A successful Core CI run does not verify Unity, FishNet, Android, authentication, host/dedicated-server behavior or production security.
+- MobSF findings must only be interpreted against actual Android/iOS source.
+- Contrast must not be reported as passed unless a real artifact is scanned with valid credentials.
+- Static-analysis findings must be triaged; merely uploading SARIF is not a security sign-off.
+
+## 5. Remediation state
+
+| Item | Branch state | Verification state |
+|---|---|---|
+| Core dependency and composition boundaries | Implemented in Core CI | Previous run passed; latest source increment pending |
+| SecurityCodeScan project path | Corrected to explicit test project | New workflow run pending |
+| MobSF scanner dependency | Replaced with pinned 1.1.0 package and Python 3.13 | New workflow run pending; mobile source not yet present |
+| Contrast placeholder | Converted to manual-only artifact/secret validation | Not run; requires real artifact and secrets |
+| Unity/FishNet security verification | Not implemented | Not verified |
+
+## 6. Source references
+
+- MobSF scanner release 1.1.0 and CLI documentation: official MobSF/mobsfscan project and PyPI release.
+- SecurityCodeScan workflow changes are on the feature branch and have not been merged to `main`.
+- Contrast workflow is intentionally manual-only until an actual artifact and account credentials are available.
+
+**Status:** root causes are identified and branch-level workflow corrections have been prepared. Do not mark any of the three scanner workflows green until their revised versions complete successfully.
