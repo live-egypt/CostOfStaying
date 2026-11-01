@@ -1,6 +1,6 @@
 # Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 148/148 NUnit on commit `94c5789b0e82493290ca85133fc692e83ffd9884`; the broader Core scope remains incomplete.  
+**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 161/161 NUnit on commit `94c5789b0e82493290ca85133fc692e83ffd9884`; the broader Core scope remains incomplete.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 10 / NUnit 3.14  
@@ -20,7 +20,7 @@
 - `IVitalityAccount` / `VitalityAccount` implementing ADR-007 lifecycle and bounded vitality.
 - `IBetrayalLedger` / `BetrayalLedger` enforcing non-zero IDs, no self-target, monotonic event sequence, replay handling and actor score accumulation.
 - `IMatchLifecycle` / `MatchLifecycle` deterministic match-phase state machine.
-- `ISessionLifecycle` / `SessionLifecycle` server-owned Pending → Authenticated → Disconnected/Closed state machine; reconnect creates a new SessionId (ADR-010 PROPOSED).
+- `ISessionLifecycle` / `SessionLifecycle` server-owned Pending → Authenticated → Disconnected → Closed state machine (ADR-010 PROPOSED).\n- `ISessionRegistry` / `SessionRegistry` bounded by explicit capacity, keyed by SessionId, accepts Pending sessions and removes only Closed sessions (ADR-011 PROPOSED).
 - `IMatchPlayerRegistry` / `MatchPlayerRegistry` bounded per-match membership with deterministic insertion order, immutable ID snapshots and membership-only removal (ADR-009 PROPOSED).
 - `CoreComposition` as the production construction root for the match-scoped ledger and factories for player vitality, match lifecycle, sequence tracker and command queue.
 - `ServerTick` and `StateRevision` value objects; zero is the initial value and revision advance refuses overflow.
@@ -92,7 +92,7 @@ Completed is terminal. Undefined enum values and all undocumented transitions fa
 
 The following remain unimplemented and must not be represented as complete:
 
-1. Global session registry, connection-to-session map, credential validation and reconnect/timeout orchestration (the per-session lifecycle primitive is implemented and verified).
+1. Transport connection-to-session mapping, credential validation and reconnect/timeout orchestration (the bounded Core session registry and per-session lifecycle primitive are implemented and verified).
 2. Full match aggregate, world-state ownership and cross-aggregate coordination (bounded match membership registry is implemented).
 3. Player aggregate and cross-system state coordination.
 4. Command payload validation, application handlers and end-to-end authoritative admission pipeline.
@@ -111,7 +111,7 @@ The latest Core CI run:
 - Source commit: `94c5789b0e82493290ca85133fc692e83ffd9884`.
 - Core dependency boundary and composition-root checks: PASS.
 - .NET 10 Release restore/build: PASS.
-- NUnit: 148 passed, 0 failed, 0 skipped.
+- NUnit: 161 passed, 0 failed, 0 skipped.
 - TRX artifact: `13092964341`.
 - Artifact SHA-256: `b4067bbd6c6b0492a245dea4c8970acca23d7196d398018f5266da42709b4295`.
 - Detailed evidence: [Bounded command queue and session replay capacity CI](../audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md).
