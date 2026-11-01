@@ -9,7 +9,7 @@
 
 - Core dependency boundary: PASS — no UnityEngine/FishNet references in Core.
 - CoreComposition construction-root guard: PASS — registry construction is centralized.
-- .NET 8 restore: PASS.
+- .NET 10 restore: PASS.
 - Core Release build: PASS.
 - NUnit test project Release build: PASS.
 - NUnit: **132 passed, 0 failed, 0 skipped**.
