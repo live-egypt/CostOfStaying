@@ -209,12 +209,12 @@ Status definitions:
 | Contracts/IVitalityAccount.cs | Pure vitality/lifecycle contract | VitalityAccountTests | VERIFIED — lifecycle tests passed |
 | Contracts/IBetrayalLedger.cs | Betrayal ledger contract | BetrayalLedgerTests | VERIFIED — ledger tests passed |
 | Contracts/IMatchLifecycle.cs | Match phase contract | MatchLifecycleTests | VERIFIED — match transition tests passed |
-| Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId | IdentifierTests | VERIFIED — typed identifier tests passed |
+| Domain/Identifiers.cs | ActorId, MatchId, SessionId, VictimId, EventSequenceId, CommandSequenceId | IdentifierTests | VERIFIED — typed identifier tests passed |
 | Domain/VitalityAccount.cs | Bounded vitality; Alive → Spirit; explicit Resurrect / Eliminate | VitalityAccountTests | VERIFIED |
 | Domain/BetrayalLedger.cs | Monotonic event sequence, replay rejection, score | BetrayalLedgerTests | VERIFIED |
 | Domain/MatchLifecycle.cs | Validated match phase transitions | MatchLifecycleTests | VERIFIED |
 | Result.cs | Result / Result<T> and CoreErrorCode | ResultTests | VERIFIED |
-| CoreComposition.cs | Single Core construction root and match-scoped ledger | CoreCompositionTests | VERIFIED |
+| CoreComposition.cs | Single Core construction root; match-scoped ledger and factories for aggregates/sequence tracker | CoreCompositionTests | IMPLEMENTED; latest CI pending |
 | Domain/TimeValues.cs | ServerTick and StateRevision; zero initial values; overflow-safe revision advance | TimeValueTests | IMPLEMENTED; latest CI pending |
 | Position2.cs / MovementInput.cs | Engine-independent movement values | MovementValueTests | PROPOSED |
 | PlayerState.cs / MatchState.cs / WorldState.cs | Authoritative domain state | Corresponding state tests | PROPOSED |
@@ -266,7 +266,7 @@ Client payloads must not choose authoritative sender identity, SessionId, server
 |---|---|---|---|
 | MovementSystem.cs | Server-side movement simulation | MovementSystemTests | PROPOSED |
 | BetrayalSystem.cs | Validate and atomically apply Debuff transfer | BetrayalSystemTests | PROPOSED |
-| VitalitySystem.cs | Server-side decay and death transition | VitalitySystemTests | PROPOSED; rates TBD |
+| VitalitySystem.cs | Server-side decay and Alive → Spirit transition | VitalitySystemTests | PROPOSED; rates TBD |
 | CooldownSystem.cs | Tick-based cooldown evaluation | CooldownSystemTests | PROPOSED |
 | MatchSystem.cs | Match end conditions/outcomes | MatchSystemTests | PROPOSED |
 | CommandProcessor.cs | Execute one admitted command | CommandProcessorTests | PROPOSED |
