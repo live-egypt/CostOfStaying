@@ -53,7 +53,9 @@ Existing ADR identifiers are occupied:
 - ADR-005: executable Core boundary.
 - ADR-006: Core identifier and Betrayal ledger invariants (PROPOSED; pending owner approval).
 - ADR-007: canonical player lifecycle (APPROVED: Alive / Spirit / Eliminated).
-- ADR-008: server command envelope and sequence admission (PROPOSED).\n- ADR-009: match-scoped bounded player registry (PROPOSED; capacity/spectator/reconnect policy remains open).\n- ADR-010: server session lifecycle primitive (PROPOSED; transport authentication and reconnect policy remain outside Core).
+- ADR-008: server command envelope and sequence admission (PROPOSED).
+- ADR-009: match-scoped bounded player registry (PROPOSED; capacity/spectator/reconnect policy remains open).
+- ADR-010: server session lifecycle primitive (PROPOSED; transport authentication and reconnect policy remain outside Core).
 
 Do not create duplicate ADR-001 through ADR-007 using the historical transcript's suggested titles. New decisions use the next available ADR number and must be added to docs/governance/DECISIONS_LOG.md.
 
