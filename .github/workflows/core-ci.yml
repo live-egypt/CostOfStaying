@@ -48,13 +48,14 @@ jobs:
       - name: Enforce Core composition root
         shell: bash
         run: |
-          aggregate_violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|SessionLifecycle|SessionRegistry|MatchPlayerRegistry|CommandAdmissionQueue|CommandAdmissionService|SessionCleanupService)(\(|<)' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
+          aggregate_violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|SessionLifecycle|SessionRegistry|MatchPlayerRegistry|CommandAdmissionQueue|CommandAdmissionService|SessionCleanupService|MatchRosterSnapshotBuilder)(\(|<)' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
           tracker_violations="$(grep -R -n -E 'new CommandSequenceTracker\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CommandAdmissionQueue.cs:' || true)"
           cleanup_violations="$(grep -R -n -E '(ResetSession|RemoveClosedSession)\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(SessionCleanupService|CommandAdmissionQueue|SessionRegistry)\.cs:' || true)"
           queue_access_violations="$(grep -R -n -E '\.Try(Enqueue|Dequeue)\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CommandAdmissionService.cs:' || true)"
-          if [ -n "$aggregate_violations$tracker_violations$cleanup_violations$queue_access_violations" ]; then
-            printf '%s\n%s\n%s\n%s\n' "$aggregate_violations" "$tracker_violations" "$cleanup_violations" "$queue_access_violations"
-            echo "::error::Core construction must be centralized in CoreComposition; only CommandAdmissionService may enqueue/dequeue and only SessionCleanupService may reset/remove sessions."
+          snapshot_violations="$(grep -R -n -E 'new (MatchRosterSnapshot|PlayerStateSnapshot)\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'MatchRosterSnapshotBuilder.cs:' || true)"
+          if [ -n "$aggregate_violations$tracker_violations$cleanup_violations$queue_access_violations$snapshot_violations" ]; then
+            printf '%s\n%s\n%s\n%s\n%s\n' "$aggregate_violations" "$tracker_violations" "$cleanup_violations" "$queue_access_violations" "$snapshot_violations"
+            echo "::error::Core construction must be centralized in CoreComposition; command queue access, session cleanup and snapshot construction must use their designated services."
             exit 1
           fi
 
