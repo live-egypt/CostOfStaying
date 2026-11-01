@@ -21,10 +21,10 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Area | Status | Meaning |
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
-| Pure Core project | IMPLEMENTED / NOT VERIFIED | Source committed; no successful build evidence |
-| Vitality primitive | IMPLEMENTED / NOT VERIFIED | Terminal Alive → Dead semantics aligned to v2.1 |
-| Betrayal ledger primitive | IMPLEMENTED / NOT VERIFIED | Event sequencing and replay handling implemented |
-| Core unit tests | IMPLEMENTED / NOT EXECUTED | Test source exists; no successful run evidence |
+| Pure Core project | VERIFIED | .NET 8 Release build passed in GitHub Actions run 41255553487 |
+| Vitality primitive | VERIFIED | Included in successful Core build and NUnit run |
+| Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
+| Core unit tests | VERIFIED | 38 passed; 0 failed; 0 skipped; TRX artifact retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
 | Match/session lifecycle | NOT IMPLEMENTED | Authoritative identity/lifecycle contracts pending |
 | Command admission / queue / pipeline | NOT IMPLEMENTED | Ordering and bounds require decisions |
@@ -324,9 +324,9 @@ Unity behaviours are thin adapters; authoritative rules do not belong in MonoBeh
 | CorePipelineTests.cs | Deterministic tick | PROPOSED |
 | SnapshotTests.cs | Immutability and revision | PROPOSED |
 | SecurityInvariantTests.cs | Authority, replay, identity spoofing | PROPOSED |
-| IdentifierTests.cs | Numeric value semantics, validity and type separation for current IDs | IMPLEMENTED / NOT EXECUTED |
-| VitalityAccountTests.cs | Current Vitality primitive | IMPLEMENTED / NOT EXECUTED |
-| BetrayalLedgerTests.cs | Current ledger primitive | IMPLEMENTED / NOT EXECUTED |
+| IdentifierTests.cs | Numeric value semantics, validity and type separation for current IDs | VERIFIED in CI |
+| VitalityAccountTests.cs | Current Vitality primitive | VERIFIED in CI |
+| BetrayalLedgerTests.cs | Current ledger primitive | VERIFIED in CI |
 
 ### 6.10 Unity/FishNet integration tests
 
@@ -427,6 +427,9 @@ dotnet test tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --con
 
 After a real Unity project and exact package lock exist, run EditMode and PlayMode tests in batchmode and retain XML results. Read Unity version from ProjectSettings/ProjectVersion.txt and FishNet version from resolved package metadata. Assumed versions are not verification evidence.
 
+### Current Core verification evidence
+The standalone Core build and NUnit suite passed in GitHub Actions. See docs/audit/PHASE1_CORE_CI_VERIFICATION.md for the exact commit, workflow run, job, test totals and retained TRX artifact. This verifies only the standalone .NET Core slice; it does not verify Unity, FishNet, networking, gameplay balance or production security.
+
 ### Evidence required for VERIFIED
 - exact commit SHA;
 - exact Unity/.NET/FishNet versions;
@@ -450,12 +453,12 @@ After a real Unity project and exact package lock exist, run EditMode and PlayMo
 | Item | Status |
 |---|---|
 | ADR-005 approval | APPROVED |
-| Core .NET project | IMPLEMENTED / NOT VERIFIED |
-| Numeric identifiers and identifier value-semantics tests | IMPLEMENTED / NOT VERIFIED |
-| Vitality contract and primitive | IMPLEMENTED / NOT VERIFIED |
-| Vitality terminal state aligned with v2.1 | IMPLEMENTED / NOT VERIFIED |
-| Betrayal ledger contract and primitive | IMPLEMENTED / NOT VERIFIED |
-| Identifier, Vitality and ledger NUnit tests | IMPLEMENTED / NOT EXECUTED |
+| Core .NET project | VERIFIED — CI Release build passed |
+| Numeric identifiers and identifier value-semantics tests | VERIFIED — included in 38 passing tests |
+| Vitality contract and primitive | VERIFIED — CI build and tests passed |
+| Vitality terminal state aligned with v2.1 | VERIFIED — covered by VitalityAccountTests |
+| Betrayal ledger contract and primitive | VERIFIED — CI build and tests passed |
+| Identifier, Vitality and ledger NUnit tests | VERIFIED — 38 passed, 0 failed, 0 skipped |
 | Unity project/package lock | NOT CREATED |
 | FishNet version | ASSUMPTION ONLY |
 | Network/session adapters | NOT IMPLEMENTED |

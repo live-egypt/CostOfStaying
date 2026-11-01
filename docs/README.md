@@ -34,6 +34,10 @@
 - [خصوصية البيانات](security/DATA_PRIVACY.md)
 - [الاستجابة للحوادث](security/INCIDENT_RESPONSE.md)
 
+## التدقيق وأدلة التحقق
+- [تدقيق مصدر Phase 1 المرفوع](audit/UPLOADED_PHASE1_SOURCE_AUDIT.md)
+- [دليل تحقق Core عبر GitHub Actions](audit/PHASE1_CORE_CI_VERIFICATION.md)
+
 ## الجودة والاختبار
 - [استراتيجية الاختبار](quality/TEST_STRATEGY.md)
 - [خطة الاختبارات الأمنية](quality/SECURITY_TEST_PLAN.md)

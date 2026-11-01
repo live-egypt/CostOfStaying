@@ -1,6 +1,6 @@
 # Phase 1 Core — Initial Contracts and Primitives
 
-**Status:** Source committed — NOT VERIFIED  
+**Status:** VERIFIED — standalone .NET Core build and NUnit tests passed in CI  
 **Architecture ADR:** ADR-005 (APPROVED 2026-11-01)  
 **Identifier/ledger ADR:** ADR-006 (PROPOSED — pending owner approval)  
 **Technical register:** docs/architecture/PHASE1_TECHNICAL_MASTER.md  
@@ -16,6 +16,7 @@
 - VitalityAccount with bounded vitality and terminal Alive → Dead behavior.
 - BetrayalLedger with monotonic event sequence, exact replay rejection and actor score accumulation.
 - Standalone NUnit tests targeting .NET 8, including identifier value-semantics coverage.
+- GitHub Actions workflow that restores, builds and tests the standalone Core project.
 
 ## Vitality semantics
 
@@ -26,7 +27,7 @@ The v2.1 gameplay specification defines zero Vitality as Dead and prohibits Dead
 | Alive | Apply; reaching zero transitions to Dead | Apply, capped at Maximum |
 | Dead | No-op | No-op; cannot revive |
 
-Spirit is a separate post-death role/projection. It is not a Vitality state. The earlier Alive / Spirit / Eliminated Vitality draft is superseded by this implementation.
+Spirit is a separate post-death role/projection. It is not a Vitality state. The earlier Alive / Spirit / Eliminated Vitality draft is superseded by ADR-005 and the current v2.1 baseline.
 
 The account rejects an invalid/default ActorId(0) player identity at construction. The numeric wrapper can still represent zero so default(ActorId) remains detectable; IsValid is the explicit validity check.
 
@@ -47,13 +48,23 @@ The account rejects an invalid/default ActorId(0) player identity at constructio
 
 No Unity project, Unity assemblies, FishNet adapters, connection identity mapping, command transport, server tick scheduler, Debuff model, atomic transfer system, persistence, or backend has been added. IdentifierTests covers numeric preservation, validity, equality/inequality, zero sentinel behavior, maximum values and separation between identifier types. Zero is representable but invalid for runtime identities. No tuning values beyond default Vitality maximum 100 have been invented.
 
-## Verification status
+## Verification evidence
 
-- Source files and NUnit test cases: **IMPLEMENTED** (committed to feature branch).
-- Static review of new guards and test cases: **REVIEWED, NOT EXECUTED**.
-- Compilation: **NOT VERIFIED** — the available environment reports dotnet: command not found.
-- NUnit execution: **NOT VERIFIED** — no reproducible test run is available.
+- **Commit tested:** e86880a318df49164aa61fe5e43c7a47f9c44560
+- **GitHub Actions workflow:** Core CI
+- **Workflow run:** 41255553487 — completed successfully
+- **Job:** Build and test standalone Core — success
+- **Build:** .NET 8 Release build of CostOfStaying.Core — success
+- **Tests:** 38 passed, 0 failed, 0 skipped
+- **Test duration:** 21 ms
+- **Artifact:** core-test-results, artifact ID 13062876559 (TRX result retained by GitHub Actions)
+- **Evidence report:** docs/audit/PHASE1_CORE_CI_VERIFICATION.md
+
+This is VERIFIED for the standalone Core build/test scope only. It does not verify Unity import, FishNet integration, server authority across a live network, gameplay balance, dedicated-server operation, or production security.
+
+## Remaining status
+
 - Unity/FishNet integration: **NOT IMPLEMENTED**.
+- FishNet 4.7.4R compatibility: **NOT VERIFIED**.
 - Gameplay rules: remain **PROPOSED FOR PLAYTEST**.
-
-Do not mark this slice VERIFIED until a .NET SDK environment runs the build and test project successfully and retains the logs.
+- ADR-006: remains **PROPOSED** pending owner approval.
