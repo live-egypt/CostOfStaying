@@ -21,10 +21,10 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Area | Status | Meaning |
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
-| Pure Core project | VERIFIED | .NET 10 Release build and 181 NUnit tests passed in run 41332989910 for commit c33faf84aa39856d46181ccc1c9decbfba2777d2; Core dependency-boundary and composition-root scans passed |
-| Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41332989910: 181/181 NUnit passed |
+| Pure Core project | VERIFIED | .NET 10 Release build and 181 NUnit tests passed in run 41333575156 for commit 8a193190fb5f2e10c05773fb0789171011bfd2eb; Core dependency-boundary and composition-root scans passed |
+| Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41333575156: 181/181 NUnit passed |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
-| Core unit tests | VERIFIED | 181 passed; 0 failed; 0 skipped in run 41332989910; TRX artifact 13093814339 retained |
+| Core unit tests | VERIFIED | 181 passed; 0 failed; 0 skipped in run 41333575156; TRX artifact 13094535795 retained |
 | Movement / Debuff transfer | NOT IMPLEMENTED | Contracts and tests required first |
 | Match/session lifecycle | PARTIAL | Match phase state machine, bounded match registry and per-session lifecycle primitive verified; global session registry, transport authentication and reconnect policy remain unimplemented |
 | Command envelope and sequence admission | PARTIAL | Authenticated-session admission gate, bounded tracker and bounded FIFO queue passed 181-test Core CI; gameplay payload validation and ADR-008 policy review remain pending |
@@ -483,7 +483,7 @@ The standalone Core build and NUnit suite passed in GitHub Actions. See docs/aud
 
 ## 12. Exact current implementation status
 
-**Current implementation status:** ADR-007 is APPROVED; ADR-010 through ADR-013 remain PROPOSED. Core CI run 41332989910 passed the Core dependency-boundary scan, CoreComposition construction-root scan, Release build and 181/181 NUnit tests on source commit c33faf84aa39856d46181ccc1c9decbfba2777d2. The bounded command queue and tracked-session capacity are included in this verification.
+**Current implementation status:** ADR-007 is APPROVED; ADR-010 through ADR-013 remain PROPOSED. Core CI run 41333575156 passed the Core dependency-boundary scan, CoreComposition construction-root scan, Release build and 181/181 NUnit tests on source commit 8a193190fb5f2e10c05773fb0789171011bfd2eb. The bounded command queue and tracked-session capacity are included in this verification.
 
 | Item | Status |
 |---|---|
