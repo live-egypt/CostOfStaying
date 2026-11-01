@@ -8,7 +8,7 @@
 **Unity target:** 6000.3 LTS — assumption, not verified by a Unity project  
 **FishNet target:** 4.7.4R — provisional assumption only; not pinned or verified  
 **Core target:** .NET Standard 2.1  
-**Standalone tests:** .NET 8 / NUnit 3.14
+**Standalone tests:** .NET 10 / NUnit 3.14
 
 > This document replaces the 85k-line conversation transcript as the maintained technical index. The transcript is historical design evidence only, not a source tree; do not bulk-copy it.
 
@@ -21,7 +21,7 @@ The repository currently has a standalone pure-C# Core project and an NUnit test
 | Area | Status | Meaning |
 |---|---|---|
 | ADR-005 Core boundary | APPROVED | Architecture and first-slice scope accepted |
-| Pure Core project | VERIFIED | .NET 8 Release build and 132 NUnit tests passed in run 41330344616 for commit 08b68e68a6cf393c6177b6b54ecd53d6ffff5496; Core dependency-boundary and composition-root scans passed |
+| Pure Core project | VERIFIED | .NET 10 Release build and 132 NUnit tests passed in run 41330344616 for commit 08b68e68a6cf393c6177b6b54ecd53d6ffff5496; Core dependency-boundary and composition-root scans passed |
 | Vitality and player lifecycle primitive | VERIFIED | Included in Core CI run 41330344616: 132/132 NUnit passed |
 | Betrayal ledger primitive | VERIFIED | Included in successful Core build and NUnit run |
 | Core unit tests | VERIFIED | 132 passed; 0 failed; 0 skipped in run 41330344616; TRX artifact 13093370056 retained |
@@ -438,7 +438,7 @@ Each slice requires a PR, tests, review and updated status register. Do not merg
 
 ### Standalone Core
 
-With the .NET 8 SDK installed:
+With the .NET 10 SDK installed:
 
 ~~~bash
 dotnet restore tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj
