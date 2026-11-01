@@ -50,10 +50,10 @@ jobs:
         run: |
           aggregate_violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|SessionLifecycle|SessionRegistry|MatchPlayerRegistry|CommandAdmissionQueue|CommandAdmissionService|SessionCleanupService)(\(|<)' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
           tracker_violations="$(grep -R -n -E 'new CommandSequenceTracker\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(CoreComposition|CommandAdmissionQueue)\.cs:' || true)"
-          cleanup_violations="$(grep -R -n -E '(ResetSession|RemoveClosedSession)\\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(SessionCleanupService|CommandAdmissionQueue|SessionRegistry)\\.cs:' || true)"
+          cleanup_violations="$(grep -R -n -E '(ResetSession|RemoveClosedSession)\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(SessionCleanupService|CommandAdmissionQueue|SessionRegistry)\.cs:' || true)"
           if [ -n "$aggregate_violations$tracker_violations$cleanup_violations" ]; then
-            printf '%s\n%s\n' "$aggregate_violations" "$tracker_violations"
-            echo "::error::Core service and aggregate construction must be centralized in CoreComposition; the queue may own its private sequence tracker."
+            printf '%s\n%s\n%s\n' "$aggregate_violations" "$tracker_violations" "$cleanup_violations"
+            echo "::error::Core construction must be centralized in CoreComposition; replay reset and closed-session removal must be coordinated only by SessionCleanupService."
             exit 1
           fi
 
