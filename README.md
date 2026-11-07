@@ -2,17 +2,17 @@
 
 **حزمة التوثيق: v2.1 — حالة المشروع: Pre-production**
 
-لعبة بقاء نفسي جماعية؛ كل ثانية تستنزف Vitality، ونقل المعاناة يؤخر الانهيار لكنه يضيف كلفة Betrayal، والموت ينقل اللاعب إلى دور Spirit.
+لعبة بقاء نفسي جماعية؛ كل ثانية تستنزف Vitality، ونقل المعاناة يؤخر الانهيار لكنه يضيف كلفة Betrayal، ووصول Vitality إلى الصفر ينقل اللاعب إلى حالة Spirit وفق ADR-007.
 
 ## الحالة الحالية
 - المنصة المستهدفة أولاً: Android.
 - نطاق MVP: مباراة مكتملة لأربعة لاعبين وخريطة واحدة.
-- حالة التنفيذ: لا يوجد في هذا التغيير تنفيذ برمجي أو Unity project أو Dedicated Server أو CI أو اختبارات منفذة.
-- حالة قواعد اللعب: خط أساس PROPOSED FOR PLAYTEST، وليس اعتماداً نهائياً.
-- حالة التكدس التقني: PROPOSED، باستثناء مبدأ سلطة الخادم المعتمد تصميمياً وغير المثبت تنفيذياً.
+- حالة التنفيذ: توجد نواة Core مستقلة ومشروع NUnit على فرع التطوير. اجتاز البناء والاختبارات 38/38 في GitHub Actions run 41255553487، وأعاد تشغيل CI الأحدث 41255769742 النجاح مع حفظ artifact. هذا لا يثبت تكامل Unity/FishNet. لا يوجد Unity project أو FishNet integration أو Dedicated Server.
+- حالة قواعد اللعب: خط أساس PROPOSED FOR PLAYTEST، وليس اعتماداً نهائياً. حُسم تعارض دورة الحياة في ADR-007 لصالح Alive / Spirit / Eliminated؛ Vitality عند الصفر تنقل اللاعب تلقائياً إلى Spirit، والإحياء والإقصاء عمليتان صريحتان.
+- حالة التكدس التقني: ADR-001 ما زال PROPOSED؛ مبدأ سلطة الخادم APPROVED تصميمياً عبر ADR-002؛ حدود Core التنفيذي APPROVED عبر ADR-005. لا يعني ذلك اكتمال التكامل أو التحقق.
 
 ## نقطة البداية
-ابدأ من [فهرس الوثائق](docs/README.md)، ثم [ميثاق المشروع](docs/00_PROJECT_CHARTER.md)، [قواعد اللعبة](docs/02_GAME_RULES_SPECIFICATION.md)، و[خطة الاختبار](docs/quality/TEST_STRATEGY.md).
+ابدأ من [فهرس الوثائق](docs/README.md)، وراجع [المواصفة التقنية الموحدة لـ Phase 1](docs/architecture/PHASE1_TECHNICAL_MASTER.md) و[حالة تنفيذ Core](docs/architecture/PHASE1_CORE_IMPLEMENTATION.md)، ثم [ميثاق المشروع](docs/00_PROJECT_CHARTER.md)، [قواعد اللعبة](docs/02_GAME_RULES_SPECIFICATION.md)، و[خطة الاختبار](docs/quality/TEST_STRATEGY.md).
 
 ## مبادئ العمل
 1. لا قرار معماري مهم بلا ADR.
