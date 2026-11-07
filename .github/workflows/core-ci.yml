@@ -13,6 +13,7 @@ on:
   pull_request:
     branches:
       - main
+      - feature/core-lifecycle-resolution
     paths:
       - "src/CostOfStaying.Core/**"
       - "tests/CostOfStaying.Core.Tests/**"
