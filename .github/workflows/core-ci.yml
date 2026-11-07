@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - feature/hotfix-cs0246
     paths:
       - "src/CostOfStaying.Core/**"
       - "tests/CostOfStaying.Core.Tests/**"

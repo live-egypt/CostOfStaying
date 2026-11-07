@@ -2,6 +2,7 @@ namespace CostOfStaying.Core.Tests
 {
     using System;
     using System.Collections.Generic;
+    using CostOfStaying.Core;
     using CostOfStaying;
     using CostOfStaying.Core.Contracts;
     using CostOfStaying.Core.Domain;
@@ -113,9 +114,10 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void Build_RejectsInvalidMatchPhase()
         {
+            CoreComposition composition = CoreComposition.Create();
             var match = new InvalidMatchLifecycle(new MatchId(9));
             var roster = new MatchPlayerRegistry(new MatchId(9), 2);
-            var builder = new MatchRosterSnapshotBuilder(match, roster);
+            IMatchRosterSnapshotBuilder builder = composition.CreateMatchRosterSnapshotBuilder(match, roster);
 
             Assert.That(builder.Build(new ServerTick(0), new StateRevision(0)).ErrorCode,
                 Is.EqualTo(CoreErrorCode.InvalidState));
