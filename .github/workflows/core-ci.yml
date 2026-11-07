@@ -7,6 +7,7 @@ on:
     branches:
       - main
       - feature/hotfix-cs0246
+      - feature/core-lifecycle-resolution
     paths:
       - "src/CostOfStaying.Core/**"
       - "tests/CostOfStaying.Core.Tests/**"
