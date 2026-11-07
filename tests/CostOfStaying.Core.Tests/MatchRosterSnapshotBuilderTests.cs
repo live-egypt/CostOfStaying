@@ -2,6 +2,7 @@ namespace CostOfStaying.Core.Tests
 {
     using System;
     using System.Collections.Generic;
+    using CostOfStaying.Core;
     using CostOfStaying;
     using CostOfStaying.Core.Contracts;
     using CostOfStaying.Core.Domain;
