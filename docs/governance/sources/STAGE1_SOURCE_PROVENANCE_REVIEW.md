@@ -8,7 +8,7 @@
 
 ## 1. Executive result
 
-Stage 1 has advanced from an earlier five-attachment inventory to a current snapshot of **15 distinct Project attachment records**, each materialized through the authorized Project-file path and assigned a raw-byte SHA-256 digest. The recursive Project Library listing contains **35 file records and one folder**, inventoried at metadata level.
+Stage 1 has advanced from an earlier five-attachment inventory to a current snapshot of **15 distinct Project attachment records**, each materialized through the authorized Project-file path and assigned a raw-byte SHA-256 digest. The recursive Project Library listing contains **40 file records and one folder**, inventoried at metadata level.
 
 This is a material improvement in source provenance, but it does not establish complete recovery of all Project conversations or original audit documents. Stage 1 therefore remains **PARTIAL** and its closure gate is not met.
 
@@ -20,7 +20,7 @@ This is a material improvement in source provenance, but it does not establish c
 | Current attachment bytes | 15 materialized raw files | Authorized Project attachment materialization. |
 | Attachment SHA-256 | 15 digests calculated | Exact materialized bytes; values in SOURCE_INVENTORY. |
 | Same-basename reports | Four `2 استكمال المحادثة.txt` records are distinct | Separate file IDs, sizes, contents, and digests. |
-| Project Library inventory | 35 file records + one folder | Fresh recursive Library metadata listing. |
+| Project Library inventory | 40 file records + one folder | Fresh recursive Library metadata listing. |
 | Repository identity | `live-egypt/CostOfStaying`, default branch `main` | Read-only GitHub repository search. |
 | Branch relationship | Feature branch HEAD `2820285...`; main HEAD `3dd9cfc...`; feature 441 ahead / 0 behind | Read-only GitHub compare. |
 | PR #6 | Open Draft, not merged | Read-only GitHub PR search. |
@@ -47,7 +47,7 @@ These checks verify the bounded inventory statements above. They do not verify t
 2. Earlier reports mention 5 and 9 attachments. These counts may represent different dates or surfaces; they are not automatically contradictory.
 3. Four same-basename continuation reports are distinct source artifacts. Their identities and raw-byte digests are now individually recorded.
 4. Two `00.txt` attachments are also distinct records with separate IDs and hashes.
-5. The Project Library count remains 35 file records plus one folder; its contents are not treated as raw-byte verified.
+5. The current Project Library listing returns 40 file records plus one folder; this corrects the earlier 35-file snapshot in the prior inventory report. Its contents are not treated as raw-byte verified.
 6. The feature branch `feature/core-lifecycle-resolution` is 441 commits ahead of `main` and contains the existing mixed-scope PR #6 work. The Stage 1 documentation branch is therefore based directly on the observed `main` SHA to isolate this docs-only PR.
 
 ## 5. Blocking gaps
@@ -68,7 +68,7 @@ These checks verify the bounded inventory statements above. They do not verify t
 |---|---|
 | Current exposed attachment surface enumerated | `PASS — CURRENT SNAPSHOT` |
 | Current attachment raw bytes hashed | `PASS — 15 RECORDS` |
-| Project Library metadata inventoried | `PASS — 35 FILES + 1 FOLDER` |
+| Project Library metadata inventoried | `PASS — 40 FILES + 1 FOLDER` |
 | Same-basename attachment identity reconciled | `PASS — DISTINCT RECORDS` |
 | Complete Project conversation index recovered | `BLOCKED — NOT EXPOSED` |
 | DeepSeek-origin chat contents recovered | `BLOCKED — SOURCE PENDING` |
