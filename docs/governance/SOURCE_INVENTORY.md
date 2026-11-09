@@ -23,8 +23,8 @@ For Library records, Stage 0 Negative Attestation remains binding: use accessibl
 
 | Reference | Evidence class | Current coverage | Limitation |
 |---|---|---|---|
-| Project conversation `1` | USER-ATTESTED | Existence and former DeepSeek association stated by user | Full thread, thread ID, and transcript not available through current Files surface |
-| Project conversation `2` | USER-ATTESTED | Existence and former DeepSeek association stated by user | Full thread and exact mapping to `محادثة 2.html` not established |
+| Project conversation `1` | USER-ATTESTED | Existence of Project chat labelled `1` is attested; origin label is disputed by surfaced records | Full thread, thread ID, transcript, and authoritative platform-origin evidence unavailable |
+| Project conversation `2` | USER-ATTESTED | Existence of Project chat labelled `2` is attested; origin label is disputed by surfaced records | Full thread, thread ID, transcript, and exact mapping to `محادثة 2.html` unavailable |
 | `استكمال المحادثة` | Context surfaced | Summary/context available | Full thread object not available |
 | `قسم · استكمال المحادثة` | Context surfaced | Summary/context available | Full thread object not available |
 | `2 استكمال المحادثة` | Context surfaced | Summary/context available | Not equivalent to the similarly named TXT report attachments |
@@ -32,7 +32,7 @@ For Library records, Stage 0 Negative Attestation remains binding: use accessibl
 | `مراجعة شاملة للمشروع` | Context surfaced | Summary/context available | Full thread object not available |
 | Current active thread | CURRENT CONTEXT | Current messages available | No separate full export generated |
 
-**Important:** The user clarified that chats `1` and `2` are conversations inside ChatGPT Project "لعبة" that were renamed after originating from DeepSeek. This is user-attested identity/origin, not independent verification of the external platform origin or complete content.
+**Origin-attribution conflict — OPEN:** Earlier provenance notes record chats `1` and `2` as formerly associated with DeepSeek. However, Project attachment `file_00000000343482109ecb2381153c4550` explicitly states: “المقصود هو محادثات ChatGPT داخل المشروع، وليس محادثات تطبيق DeepSeek.” The available evidence supports that `1` and `2` are Project conversation labels, but does not establish their original platform origin. Preserve both statements as conflicting source claims; do not label the chats DeepSeek-origin or DeepSeek-app transcripts until the exact source statement/thread metadata is recovered.
 
 ## 3. Current Project conversation attachments — raw-byte inventory
 
