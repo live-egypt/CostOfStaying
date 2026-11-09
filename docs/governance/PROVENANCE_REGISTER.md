@@ -53,7 +53,7 @@ Each record below was materialized individually from its Project file ID into `/
 
 ## 4. Library provenance — TEXT/METADATA ONLY
 
-All records listed in the Project Library inventory are subject to the Stage 0 limitation. The inventory returned 39 file records plus one folder under `/لعبة`. The current Library contains, among others:
+All records listed in the Project Library inventory are subject to the Stage 0 limitation. The inventory returned 40 file records plus one folder under `/لعبة`. The current Library contains, among others:
 - `SOURCE_INVENTORY.md`, `PROVENANCE_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`
 - `TBD_REGISTER.md`, `CONSISTENCY_MATRIX.md`, `DECISION_AND_CONFLICT_LOG.md`
 - `FULL_DOCUMENTS_REVIEW.md`, `REVIEW_INDEX.md`, `FINAL_REVIEW_REPORT.md`
