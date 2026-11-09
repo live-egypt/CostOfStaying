@@ -1,6 +1,6 @@
 # Project Status and Execution Register
 
-**Revision:** 2026-11-01  
+**Revision:** 2026-11-09 — source/provenance reconciliation checkpoint  
 **Status:** ACTIVE CONTROL DOCUMENT  
 **Applies to:** repository-wide documentation, Core, Unity and networking work  
 **Related:** [Technical Master](architecture/PHASE1_TECHNICAL_MASTER.md), [ADR-007](governance/adr/ADR-007-PLAYER-LIFECYCLE-VITALITY-CONFLICT.md), [Requirements Traceability](governance/REQUIREMENTS_TRACEABILITY.md)
@@ -144,3 +144,33 @@ Branch remediation and current evidence:
 - Frogbot is manual-only and requires JFrog credentials; no automated write workflow is run on pushes.
 
 See [GitHub Actions Pipeline Audit](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md) for exact run IDs, artifacts and scope limitations. These branch changes have not been merged to `main`; do not mark the default branch repaired until PR #6 is reviewed and merged.
+
+## 9. Source recovery and documentation reconciliation checkpoint — 2026-11-09
+
+A documentation-only branch `docs/source-provenance-reconciliation-2026-11-09` was created from `feature/core-lifecycle-resolution` at observed base SHA `2820285021b1a3d7ae9acd953b3bb65677c33512`. The development branch was 441 commits ahead of `main` and 0 behind at comparison time. No changes were made to `main`.
+
+New documentation registers:
+- `docs/governance/SOURCE_INVENTORY.md`
+- `docs/governance/PROVENANCE_REGISTER.md`
+- `docs/governance/DECISION_TRACEABILITY_REGISTER.md`
+- `docs/governance/DOCUMENT_CONTROL_REGISTER.md`
+- `docs/audit/RECONCILIATION_PROGRESS.md`
+
+The current Project Files surface supplied 15 distinct attachments. Each was materialized individually through the authorized raw-file path and SHA-256 hashed; the combined byte size is 140,975. Four files share the basename `2 استكمال المحادثة.txt` but have distinct file IDs and hashes.
+
+The recursive Project Library listing returned 40 file records plus one folder. These are Library metadata records, not raw-byte verification. Stage 0 Negative Attestation remains binding for the affected Library objects.
+
+### Evidence interpretation update
+
+A Project Library source record reports Core CI run `42383513646`, commit `2820285021b1a3d7ae9acd953b3bb65677c33512`, 187/187 tests, and artifact `13578582284`. This is currently recorded as a source-reported run pending direct workflow/artifact reconciliation in the repository evidence register. It does not supersede or combine with run `41333575156` (181/181 on commit `8a193190fb5f2e10c05773fb0789171011bfd2eb`). No tests were run as part of this documentation checkpoint.
+
+### Remaining boundaries
+
+- Complete Project chat/thread enumeration is not exposed by the current Files surface.
+- Direct content and thread IDs for user-attested Project chats `1` and `2` remain unavailable.
+- The exact mapping of `محادثة 2.html` to Project chat `2` remains unverified.
+- TBD-01…85 item-level source mapping is not complete.
+- Network/Security/Architecture reconciliation remains open.
+- Risk Register and Technical Debt Register remain deferred.
+- Stage 1 closure has not been declared; Stage 2 remains PARTIAL / closure gate BLOCKED in the current recorded status.
+- No ADR, Core, Net, Unity, or Tests files were changed. No merge was performed.
