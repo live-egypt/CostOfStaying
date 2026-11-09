@@ -79,6 +79,9 @@
 - [Source Traceability Register](governance/SOURCE_TRACEABILITY_REGISTER.md) — source mapping available for TBD-37, TBD-45, and TBD-59…85.
 - [Consistency Matrix](governance/CONSISTENCY_MATRIX.md) — 109-record matrix with 24 pending-source entries.
 - [Decision and Conflict Log](governance/DECISION_AND_CONFLICT_LOG.md) — original Stage 1 conflict record; CONFLICT-01/02 remain open.
+- [Source-to-Requirement Matrix](governance/SOURCE_TO_REQUIREMENT_MATRIX.md) — initial 85-row mapping with source events and unresolved source matches.
+- [TBD Cross-Reference Map](governance/TBD_CROSS_REFERENCE_MAP.md) — binding relationships and unresolved cross-reference issues.
+- [Requirement Evidence Matrix](governance/REQUIREMENT_EVIDENCE_MATRIX.md) — source/implementation/test/verification evidence scaffold.
 - [Reconciliation Progress](audit/RECONCILIATION_PROGRESS.md) — current checkpoint and remaining work.
 
 ## الحوكمة والتسليم
