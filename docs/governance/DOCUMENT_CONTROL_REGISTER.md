@@ -94,3 +94,18 @@ A repository document update does not alter the Project Library source record. A
 | DOC-CTRL-05 | Complete source-to-requirement mapping for TBD-01…85 | OPEN |
 | DOC-CTRL-06 | Reconcile Network/Security/Architecture source responsibilities | OPEN |
 | DOC-CTRL-07 | Build evidence register after claim/source reconciliation | DEFERRED |
+| DOC-CTRL-08 | Resolve DOC-PACKAGE-01 overlap between PR #8 and PR #9 | OPEN — OWNER REVIEW REQUIRED |
+
+
+## 8. Parallel Stage 1 documentation PR overlap
+
+A separate pre-existing documentation PR was discovered during final review:
+
+| PR | Base | Head branch | Scope | Current state |
+|---|---|---|---|---|
+| [#8](https://github.com/live-egypt/CostOfStaying/pull/8) | `main` | `docs/stage1-source-provenance-recovery` | Seven Stage 1 source/provenance documents under `docs/governance/sources/` plus README index | OPEN — not merged |
+| [#9](https://github.com/live-egypt/CostOfStaying/pull/9) | `feature/core-lifecycle-resolution` | `docs/source-provenance-reconciliation-2026-11-09` | Fourteen documentation files, including source/provenance registers and the 85-item TBD mapping package | OPEN — DRAFT — not merged |
+
+The two PRs overlap in source inventory, provenance, decision traceability, document control, and README indexing, but use different paths and base branches. PR #9 also contains the migrated 85-item TBD/traceability/consistency source records and initial evidence matrices.
+
+**DOC-PACKAGE-01 — OPEN:** canonical path and integration strategy for the overlapping Stage 1 source/provenance package are not selected. Do not merge either PR or create a third competing package until the owner chooses the canonical package/integration strategy. This is a document-package conflict, not CONFLICT-01 or CONFLICT-02.
