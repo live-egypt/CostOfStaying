@@ -39,7 +39,7 @@ The four records named `2 استكمال المحادثة.txt` are separate repo
 
 ## 3. Project Library inventory
 
-A fresh recursive Library listing returned **35 file records + 1 folder = 36 items** under `/لعبة`. This is a metadata inventory. Per the Stage 0 Negative Attestation, Library raw-byte export was not available through the current authorized path; no Library payload SHA-256, byte-level comparison, or ZIP-content claim is made here.
+A fresh recursive Library listing returned **40 file records + 1 folder = 41 items** under `/لعبة`. This is a metadata inventory. Per the Stage 0 Negative Attestation, Library raw-byte export was not available through the current authorized path; no Library payload SHA-256, byte-level comparison, or ZIP-content claim is made here.
 
 ### 3.1 Library file records
 
@@ -84,7 +84,7 @@ A fresh recursive Library listing returned **35 file records + 1 folder = 36 ite
 39. `ما هو CodeQL؟_2293753019127521858.md`
 40. `محادثة 2.html`
 
-**Correction:** the numbered list above contains 40 filenames because it includes the 35-file record set plus the separately observed folder-level context in the source list; the actual Library listing count is 35 files + 1 folder. The inventory response itself is authoritative for the count. A later pass must reconcile the filename enumeration against the exact returned item set before using this list as a machine-checkable manifest.
+The 40 filenames above correspond to the 40 file records returned by the current listing. The remaining item is the `/لعبة` folder itself. This corrects the earlier Library inventory report that recorded 35 file records + 1 folder; the current 40-file listing is the controlling snapshot for this document version.
 
 ### 3.2 Library families
 
@@ -127,7 +127,7 @@ The separate documentation branch is intentionally based on `main`, not on the e
 ## 6. Stage 1 inventory result
 
 - Current Project attachments: **15 distinct file records; 15 raw SHA-256 values calculated**.
-- Project Library: **35 file records + 1 folder**, metadata-only.
+- Project Library: **40 file records + 1 folder**, metadata-only.
 - Four same-basename continuation reports: distinct content identities confirmed.
 - Complete Project conversation enumeration: **not exposed**.
 - DeepSeek-related project chat contents: **not recovered**.
