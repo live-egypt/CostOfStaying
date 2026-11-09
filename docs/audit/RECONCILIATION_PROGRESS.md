@@ -71,7 +71,7 @@ Committed on the documentation branch and included in [PR #9](https://github.com
 ## 5. Next actions
 
 1. Review the new documents against source attachments and Library records.
-2. Reconcile the full `TBD_REGISTER.md` item-by-item; preserve all 85 IDs and unresolved fields.
+2. Reconcile the full `TBD_REGISTER.md` item-by-item; preserve all 85 IDs and unresolved fields. For TBD-01…20, resolve the discrepancy between the register's `PENDING SOURCE` label and the recovered D04 conversation evidence; retain the distinction between recovered conversation evidence and unresolved requirement content.
 3. Review all 109 Consistency Matrix records and its 24 pending-source items without treating the aggregate as complete verification.
 4. Reconcile RISK-013 collisions and all source risk identifiers before creating a central Risk Register.
 5. Reconcile Network, Security, Architecture, and Engineering source documents against the repository's existing docs.
