@@ -56,13 +56,17 @@ For each individual TBD, populate the following only when the evidence exists:
 | Reviewer / acceptance | Explicit acceptance event, if any |
 | Status | DOCUMENTED / SOURCE VERIFIED / IMPLEMENTED / TESTED / VERIFIED / NOT IMPLEMENTED / TBD |
 
-## 4. Existing evidence that must not be overgeneralized
+## 4. Repository traceability gap
+
+A read-only scan of the base-branch `docs/governance/REQUIREMENTS_TRACEABILITY.md` (76 lines) found zero explicit references to `TBD-01`…`TBD-85`. This means the 85-item TBD register is not directly mapped in that file. A recursive scan of all repository documentation, code, and tests has not yet been performed. Do not infer mappings from similar wording.
+
+## 5. Existing evidence that must not be overgeneralized
 
 - Core CI run `42383513646` is reported in a Library source record as 187/187 on commit `2820285021b1a3d7ae9acd953b3bb65677c33512`; direct workflow/artifact reconciliation remains pending in this documentation pass.
 - Core CI run `41333575156` is recorded in the repository status register as 181/181 on commit `8a193190fb5f2e10c05773fb0789171011bfd2eb`.
 - These are distinct commit/run pairs. Neither proves Unity compilation, FishNet integration, Android build, or Linux Dedicated Server operation.
 - The 109-record Consistency Matrix is a separate register from the 85 TBD requirements. Its 24 PENDING SOURCE records must not be added to or subtracted from the TBD count.
 
-## 5. Current result
+## 6. Current result
 
 No TBD is declared IMPLEMENTED, TESTED, VERIFIED, or RESOLVED by this scaffold. The matrix is ready for item-by-item code/test/evidence mapping after the source layer is accepted.
