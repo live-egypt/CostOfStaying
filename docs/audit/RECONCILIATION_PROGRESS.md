@@ -15,7 +15,7 @@ The owner approved sequential completion of the documentation/reconciliation pla
 |---:|---|---|---|
 | 1 | Source inventory and provenance | Inventory visible sources and label evidence limits | IN PROGRESS |
 | 2 | Decision and conflict traceability | Preserve decisions, source events, and open conflicts | IN PROGRESS |
-| 3 | Requirements source mapping | Match all 85 TBDs to original statements and source events | NOT STARTED |
+| 3 | Requirements source mapping | Match all 85 TBDs to original statements and source events | INITIAL MATRIX CREATED — SOURCE MATCHING PARTIAL |
 | 4 | Architecture / Network / Security mapping | Separate responsibilities and link design to implementation/evidence | NOT STARTED |
 | 5 | Evidence reconciliation | Bind claims to commit, run, environment, artifact, result, scope | NOT STARTED |
 | 6 | Document/package control | Map current documents before any final numbering or consolidation | INITIAL PASS |
@@ -34,6 +34,8 @@ The owner approved sequential completion of the documentation/reconciliation pla
 - Enumerated the Project Library root: 40 file records plus one folder.
 - Read the existing Library Stage 1 Source Inventory, Provenance Register, Stage 0 Negative Attestation, Stage 1 Progress Log, Decision and Conflict Log, Consistency Matrix, TBD Register, and Source Traceability Register.
 - Confirmed that Library-only Stage 1 source documents existed before this repository documentation transfer; imported extracted-text copies of the TBD Register, Source Traceability Register, Consistency Matrix, and Decision and Conflict Log into the repository.
+- Searched the original HTML export candidate for User turns 364, 368, 376, 380, and 384; mapped 85 register rows to their recorded approval/registration events while preserving pending original-source matches.
+- Created an initial 85-row Source-to-Requirement Matrix, binding cross-reference map, and requirement evidence scaffold.
 - Created this documentation branch from `feature/core-lifecycle-resolution`.
 
 ## 3. Important corrections and limitations
@@ -59,6 +61,9 @@ Committed on the documentation branch and included in [PR #9](https://github.com
 - `docs/governance/SOURCE_TRACEABILITY_REGISTER.md`
 - `docs/governance/CONSISTENCY_MATRIX.md`
 - `docs/governance/DECISION_AND_CONFLICT_LOG.md`
+- `docs/governance/SOURCE_TO_REQUIREMENT_MATRIX.md`
+- `docs/governance/TBD_CROSS_REFERENCE_MAP.md`
+- `docs/governance/REQUIREMENT_EVIDENCE_MATRIX.md`
 - `docs/README.md`
 - `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md`
 
@@ -76,8 +81,8 @@ Committed on the documentation branch and included in [PR #9](https://github.com
 
 - Pull request: #9 — OPEN / DRAFT / NOT MERGED.
 - Base: `feature/core-lifecycle-resolution` at `2820285021b1a3d7ae9acd953b3bb65677c33512`.
-- Changed files: 11 (9 added, 2 modified).
-- Current PR snapshot: 23 commits, 11 changed files, 1,207 additions, 2 deletions.
+- Changed files: 14 (12 added, 2 modified).
+- PR #9 is updated with the requirements-mapping checkpoint; exact current commit/file totals are tracked by the PR metadata.
 - No tests were run; documentation-only change.
 
 ## 7. Status
