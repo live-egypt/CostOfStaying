@@ -76,8 +76,8 @@ Committed on the documentation branch and included in [PR #9](https://github.com
 
 - Pull request: #9 — OPEN / DRAFT / NOT MERGED.
 - Base: `feature/core-lifecycle-resolution` at `2820285021b1a3d7ae9acd953b3bb65677c33512`.
-- Changed files: 7 (5 added, 2 modified).
-- Changes: 605 additions, 2 deletions at PR creation; progress log update is included in the same PR and may increase these totals.
+- Changed files: 11 (9 added, 2 modified).
+- Current PR snapshot: 23 commits, 11 changed files, 1,207 additions, 2 deletions.
 - No tests were run; documentation-only change.
 
 ## 7. Status
