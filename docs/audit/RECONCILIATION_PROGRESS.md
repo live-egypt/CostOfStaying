@@ -49,7 +49,7 @@ The owner approved sequential completion of the documentation/reconciliation pla
 
 ## 4. Files created/updated by this checkpoint
 
-Pending commit verification at the time of writing:
+Committed on the documentation branch and included in [PR #9](https://github.com/live-egypt/CostOfStaying/pull/9) (open, Draft; target: `feature/core-lifecycle-resolution`):
 - `docs/governance/SOURCE_INVENTORY.md`
 - `docs/governance/PROVENANCE_REGISTER.md`
 - `docs/governance/DECISION_TRACEABILITY_REGISTER.md`
@@ -68,7 +68,15 @@ Pending commit verification at the time of writing:
 6. Update requirements traceability only after item-level source matching.
 7. Commit the documentation checkpoint and open a review PR; do not merge automatically.
 
-## 6. Status
+## 6. Delivery record
+
+- Pull request: #9 — OPEN / DRAFT / NOT MERGED.
+- Base: `feature/core-lifecycle-resolution` at `2820285021b1a3d7ae9acd953b3bb65677c33512`.
+- Changed files: 7 (5 added, 2 modified).
+- Changes: 605 additions, 2 deletions at PR creation; progress log update is included in the same PR and may increase these totals.
+- No tests were run; documentation-only change.
+
+## 7. Status
 
 | Item | Status |
 |---|---|
