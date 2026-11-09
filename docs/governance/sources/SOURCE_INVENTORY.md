@@ -9,7 +9,7 @@
 
 This inventory records the sources exposed by the current Project Files surface and the read-only GitHub connector at the snapshot time. It is **not** a complete index of every ChatGPT Project conversation. The available Files interface exposes file attachments and Library records, but does not expose a complete Project chat-thread list or a direct read operation for every prior thread.
 
-The user has attested that two conversations originally associated with DeepSeek exist inside the ChatGPT Project and were renamed `1` and `2`. Their existence is recorded as `USER-ATTESTED`; their full conversation objects and exact export mapping remain unavailable.
+The user has attested that Project conversations labelled `1` and `2` exist. The original platform/origin description is conflicting: earlier notes associate them with DeepSeek, while attachment `file_00000000343482109ecb2381153c4550` explicitly says the relevant conversations are ChatGPT Project conversations, not conversations in the DeepSeek application. Their existence is `USER-ATTESTED`; their full contents, thread IDs, and original platform origin remain unresolved.
 
 ## 2. Current Project conversation attachments
 
