@@ -15,7 +15,7 @@ The owner approved sequential completion of the documentation/reconciliation pla
 |---:|---|---|---|
 | 1 | Source inventory and provenance | Inventory visible sources and label evidence limits | IN PROGRESS |
 | 2 | Decision and conflict traceability | Preserve decisions, source events, and open conflicts | IN PROGRESS |
-| 3 | Requirements source mapping | Match all 85 TBDs to original statements and source events | INITIAL MATRIX CREATED — SOURCE MATCHING PARTIAL |
+| 3 | Requirements source mapping | Match all 85 TBDs to original statements and source events | INITIAL MATRIX CREATED — SOURCE MATCHING PARTIAL; REPOSITORY ID LINK NOT FOUND IN REQUIREMENTS_TRACEABILITY.md |
 | 4 | Architecture / Network / Security mapping | Separate responsibilities and link design to implementation/evidence | NOT STARTED |
 | 5 | Evidence reconciliation | Bind claims to commit, run, environment, artifact, result, scope | NOT STARTED |
 | 6 | Document/package control | Map current documents before any final numbering or consolidation | INITIAL PASS |
@@ -35,6 +35,7 @@ The owner approved sequential completion of the documentation/reconciliation pla
 - Read the existing Library Stage 1 Source Inventory, Provenance Register, Stage 0 Negative Attestation, Stage 1 Progress Log, Decision and Conflict Log, Consistency Matrix, TBD Register, and Source Traceability Register.
 - Confirmed that Library-only Stage 1 source documents existed before this repository documentation transfer; imported extracted-text copies of the TBD Register, Source Traceability Register, Consistency Matrix, and Decision and Conflict Log into the repository.
 - Searched the original HTML export candidate for User turns 364, 368, 376, 380, and 384; mapped 85 register rows to their recorded approval/registration events while preserving pending original-source matches.
+- Inspected `docs/governance/REQUIREMENTS_TRACEABILITY.md` on the base branch: zero explicit references to TBD-01…85; recursive repository-wide traceability scan remains open.
 - Created an initial 85-row Source-to-Requirement Matrix, binding cross-reference map, and requirement evidence scaffold.
 - Created this documentation branch from `feature/core-lifecycle-resolution`.
 
