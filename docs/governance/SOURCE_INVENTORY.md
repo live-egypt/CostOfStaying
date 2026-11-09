@@ -111,7 +111,7 @@ No Library payload is raw-byte verified by this table.
 
 Repository: `live-egypt/CostOfStaying`  
 Default branch: `main`  
-Observed `main` SHA: `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`  
+Recorded `main` SHA from the prior source inventory snapshot: `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3` (not independently revalidated in this checkpoint).  
 Development branch: `feature/core-lifecycle-resolution`  
 Observed development branch HEAD: `2820285021b1a3d7ae9acd953b3bb65677c33512`  
 Comparison: development branch is 441 commits ahead of `main`, 0 behind at the time of the comparison.
