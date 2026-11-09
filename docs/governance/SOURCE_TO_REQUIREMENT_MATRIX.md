@@ -12,6 +12,8 @@ This matrix transcribes all 85 unique TBD register rows and associates them with
 
 The exact mapping of `محادثة 2.html` to the user's Project conversation titled `2` remains unverified. The matrix therefore treats the HTML as an **export candidate**, not as a proven complete Project conversation transcript.
 
+A read-only inspection of `docs/governance/REQUIREMENTS_TRACEABILITY.md` on the base branch found **zero explicit references** to IDs `TBD-01`…`TBD-85` (76-line file). This confirms that this particular repository traceability document does not directly map the 85-item TBD register. It does not prove that no references exist elsewhere in the repository; a recursive repository-wide mapping remains open.
+
 The source event records the approval/registration of a register item. It does not necessarily establish the original requirement statement that caused the item to be created. All 85 items remain subject to item-level original-source matching.
 
 ## 2. Interpretation rules
@@ -144,3 +146,14 @@ This matrix may be upgraded from INITIAL TRANSCRIPTION to SOURCE-RECONCILED only
 5. Conflicts retained or resolved by explicit owner evidence.
 
 No TBD is closed by this matrix.
+
+
+## 7. Repository traceability gap
+
+| Check | Result | Scope |
+|---|---|---|
+| `docs/governance/REQUIREMENTS_TRACEABILITY.md` explicit TBD-ID scan | 0 matches for `TBD-01`…`TBD-85` | Exact file content on base branch `feature/core-lifecycle-resolution`; 76 lines |
+| Direct mapping from the 85-item register to that repository matrix | NOT PRESENT | No ID-level cross-reference in that file |
+| Recursive scan of all repository docs/code/tests | NOT PERFORMED | Remains OPEN |
+
+Do not infer a relationship between a TBD and GAME-/CORE-/NET-/PERF- rows from semantic similarity alone.
