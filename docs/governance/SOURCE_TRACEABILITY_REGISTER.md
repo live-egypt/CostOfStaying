@@ -94,4 +94,4 @@
 - Source export: `محادثة 2.html`.
 - Review snapshot: `FULL_DOCUMENTS_REVIEW.md`, section `docs/governance/TBD_REGISTER.md` and embedded D05-A/D05-B/D06/D07 charters.
 - Extraction method: exact register rows for TBD-59…85; approval event mapping from User turns 376, 380, and 384.
-- This traceability register is a local Stage 1 artifact and is not a repository commit.
+- The source traceability artifact was prepared as a local Stage 1 record. A text-extracted repository copy was added on 2026-11-09; the original Project Library record remains unchanged, and raw-byte equality is not asserted.
