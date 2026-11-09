@@ -69,6 +69,14 @@
 - [المراقبة والسجلات](operations/MONITORING_AND_LOGGING.md)
 - [النسخ الاحتياطي والاستعادة](operations/BACKUP_AND_RECOVERY.md)
 
+## Source Recovery & Reconciliation
+
+- [Source Inventory](governance/SOURCE_INVENTORY.md) — current Project attachments, Library records, and repository snapshot.
+- [Provenance Register](governance/PROVENANCE_REGISTER.md) — source identity, raw attachment hashes, and evidence limitations.
+- [Decision Traceability Register](governance/DECISION_TRACEABILITY_REGISTER.md) — ADR states, owner decisions, and open conflicts.
+- [Document Control Register](governance/DOCUMENT_CONTROL_REGISTER.md) — initial authoritative-document mapping and change controls.
+- [Reconciliation Progress](audit/RECONCILIATION_PROGRESS.md) — current checkpoint and remaining work.
+
 ## الحوكمة والتسليم
 - [سجل القرارات](governance/DECISIONS_LOG.md)
 - [تتبع المتطلبات](governance/REQUIREMENTS_TRACEABILITY.md)
