@@ -53,7 +53,7 @@ Each record below was materialized individually from its Project file ID into `/
 
 ## 4. Library provenance — TEXT/METADATA ONLY
 
-All records listed in the Project Library inventory are subject to the Stage 0 limitation. The inventory returned 40 file records plus one folder under `/لعبة`. The current Library contains, among others:
+The current recursive listing returned 40 file records plus one folder under `/لعبة`. The inventory is metadata-level unless a specific record's extracted text or raw bytes were separately examined. Stage 0 Negative Attestation applies specifically to the three records identified in Section 4.1; it must not be generalized to every Library record. The current Library contains, among others:
 - `SOURCE_INVENTORY.md`, `PROVENANCE_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`
 - `TBD_REGISTER.md`, `CONSISTENCY_MATRIX.md`, `DECISION_AND_CONFLICT_LOG.md`
 - `FULL_DOCUMENTS_REVIEW.md`, `REVIEW_INDEX.md`, `FINAL_REVIEW_REPORT.md`
@@ -65,7 +65,12 @@ The exact Library record IDs and metadata are in the Project Library listing and
 
 ### 4.1 Binding Stage 0 limitations
 
-For the exact records named in `NEGATIVE_ATTESTATION_STAGE0.md`:
+The Stage 0 Negative Attestation applies specifically to these three records:
+- `PROGRESS_LOG(1).md`
+- `STAGE_2_CLOSURE_DECLARATION.md`
+- `CostOfStaying_STAGE2_LOCAL.zip`
+
+For those exact records:
 - Raw-byte materialization was unavailable through the current authorized path.
 - No accessible upload audit record was available.
 - The ZIP's internal contents were not inspected.
