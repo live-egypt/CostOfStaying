@@ -158,6 +158,8 @@ New documentation registers:
 
 The current Project Files surface supplied 15 distinct attachments. Each was materialized individually through the authorized raw-file path and SHA-256 hashed; the combined byte size is 140,975. Four files share the basename `2 استكمال المحادثة.txt` but have distinct file IDs and hashes.
 
+The following Library source registers were copied into the repository from extracted text, with provenance headers and without a claim of raw-byte equality: `TBD_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`, `CONSISTENCY_MATRIX.md`, and `DECISION_AND_CONFLICT_LOG.md`. The source Library records were not modified.
+
 The recursive Project Library listing returned 40 file records plus one folder. These are Library metadata records, not raw-byte verification. Stage 0 Negative Attestation remains binding for the affected Library objects.
 
 ### Evidence interpretation update
