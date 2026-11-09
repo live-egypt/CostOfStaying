@@ -26,16 +26,16 @@ The current conversation surface exposes these 15 records. Repeated display name
 | 3 | `2 استكمال المحادثة.txt` | `file_00000000ab5482109ff976a094c0b9fe` | Report 03 — Source Recovery & Consistency Audit; raw hash recorded in prior Stage 1 inventory |
 | 4 | `2 استكمال المحادثة.txt` | `file_0000000072e08210b2d34211cd183832` | Report 04 — Repository Forensic Audit; raw hash recorded in prior Stage 1 inventory |
 | 5 | `رفع الملفات على دفعات.txt` | `file_00000000e5b88210973c72a025e1cdb8` | Batch intake note; raw hash recorded in prior Stage 1 inventory |
-| 6 | `رفع الملفات على دفعات.txt` | `file_0000000075a882108078bf80ee654734` | Newly surfaced attachment; content classification pending |
-| 7 | `قسم · قسم · رفع الملفات على دفعات.txt` | `file_000000005bb4821095c73b6c4a99e6cf` | Newly surfaced attachment; content classification pending |
-| 8 | `قسم · قسم · قسم · استكمال المحادثة.txt` | `file_00000000f4588210afbd7b7c9b873a51` | Newly surfaced attachment; content classification pending |
-| 9 | `قسم · قسم · رفع الملفات على دفعات.txt` | `file_000000004f408210a23cc447faaf4aa8` | Newly surfaced attachment; content classification pending |
-| 10 | `قسم · قسم · رفع الملفات على دفعات.txt` | `file_00000000343482109ecb2381153c4550` | Newly surfaced attachment; content classification pending |
+| 6 | `رفع الملفات على دفعات.txt` | `file_0000000075a882108078bf80ee654734` | RECONCILIATION-01…06 direction log; governance direction, not source audit evidence |
+| 7 | `قسم · قسم · رفع الملفات على دفعات.txt` | `file_000000005bb4821095c73b6c4a99e6cf` | Security Audit reconciliation material; explicitly not a repository inspection result or original full Security Audit |
+| 8 | `قسم · قسم · قسم · استكمال المحادثة.txt` | `file_00000000f4588210afbd7b7c9b873a51` | Stage 1 source recovery report; reports earlier 5-attachment inventory and local-only outputs |
+| 9 | `قسم · قسم · رفع الملفات على دفعات.txt` | `file_000000004f408210a23cc447faaf4aa8` | Package Structure Reconciliation approval record; design-only scope, no repository changes |
+| 10 | `قسم · قسم · رفع الملفات على دفعات.txt` | `file_00000000343482109ecb2381153c4550` | Document Mapping / package structure reconciliation report; includes correction that source discussion concerns ChatGPT Project conversations, not the DeepSeek app |
 | 11 | `5.txt` | `file_00000000be5081f5b0278b728bd9a43e` | Security Audit reconciliation report (initial); not the original full Security Audit |
-| 12 | `00.txt` | `file_00000000333c8210889b5112bd178f0c` | Newly surfaced project audit/reconciliation text; detailed source classification pending |
-| 13 | `00.txt` | `file_000000004f3882108d820c554b6290b8` | Newly surfaced project audit/reconciliation text; distinct file ID; detailed classification pending |
-| 14 | `قسم · قسم · استكمال المحادثة.txt` | `file_00000000b4b48210ae17137a2377fb16` | Newly surfaced source inventory/reconciliation report |
-| 15 | `01.txt` | `file_00000000f2748210a36cd79959759fba` | Documentation governance / authorization planning text |
+| 12 | `00.txt` | `file_00000000333c8210889b5112bd178f0c` | Network/Security reconciliation and initial responsibility mapping; not original full audits |
+| 13 | `00.txt` | `file_000000004f3882108d820c554b6290b8` | Traceability reconciliation report; repeats prior source-reported implementation/CI claims, not fresh repository evidence |
+| 14 | `قسم · قسم · استكمال المحادثة.txt` | `file_00000000b4b48210ae17137a2377fb16` | Source inventory reconciliation report; identifies the earlier 9/5/11 count mismatch and original-source gaps |
+| 15 | `01.txt` | `file_00000000f2748210a36cd79959759fba` | Stage/Phase continuation and documentation governance plan; records the 85 TBD ranges and phased audit order |
 
 ### 2.1 Hash boundary
 
@@ -78,14 +78,15 @@ The Stage 0 Negative Attestation applies to these exact three records only: `PRO
 
 ## 4. Conversation and external-source provenance
 
-The existing Stage 1 records identify the following unresolved source-access limits:
+The existing Stage 1 records identify the following unresolved source-access limits. A newly surfaced attachment (`file_00000000343482109ecb2381153c4550`) explicitly states that the intended sources are ChatGPT conversations inside the Project, not conversations in the DeepSeek application. This conflicts with earlier notes that called chats `1` and `2` former DeepSeek-related conversations. Until the exact user source/turn or original thread metadata is available, retain the labels `1` and `2` without asserting a DeepSeek origin.
 
 | Source | Current supported statement | Status |
 |---|---|---|
-| Project conversation `1` | User-attested as a former DeepSeek-related conversation renamed `1`; full thread content and thread ID are not exposed by the available file listing | USER-ATTESTED — CONTENT NOT RECOVERED |
-| Project conversation `2` | User-attested as a former DeepSeek-related conversation renamed `2`; exact mapping to `محادثة 2.html` is not established | USER-ATTESTED — EXPORT MAPPING PENDING |
+| Project conversation `1` | User-attested as an existing Project conversation labelled `1`; its content and thread ID are not exposed by the available file listing. Its former platform/origin label is disputed by surfaced records. | USER-ATTESTED — CONTENT / ORIGIN PENDING |
+| Project conversation `2` | User-attested as an existing Project conversation labelled `2`; exact mapping to `محادثة 2.html` is not established. Its former platform/origin label is disputed by surfaced records. | USER-ATTESTED — EXPORT MAPPING / ORIGIN PENDING |
 | `محادثة 2.html` | Library record exists; indexed header identifies ChatGPT Shared Chat; it is a candidate source, not proven to be Project chat `2` | TEXT/METADATA VERIFIED; MAPPING TBD |
 | DeepSeek-native exports | No authenticated external DeepSeek export is identified in the currently listed files | SOURCE NOT RECOVERED |
+| Origin-label discrepancy | Earlier provenance notes describe chats `1` and `2` as former DeepSeek-related chats; attachment `file_00000000343482109ecb2381153c4550` explicitly corrects this to ChatGPT Project conversations, not chats in the DeepSeek app. The available evidence does not establish the original platform label. | OPEN — SOURCE ATTRIBUTION CONFLICT |
 | Gemini-native export | No Gemini-native export is identified in the current Library listing | SOURCE NOT RECOVERED |
 | Network Audit original | Reports describe a Network audit, but the original full source is not identified as a standalone current attachment | SOURCE PARTIAL |
 | Security Audit original | `5.txt` is an initial reconciliation report, not the original full Security Audit | SOURCE PARTIAL |
@@ -104,9 +105,9 @@ The Files surface does not expose a complete Project chat/thread index. Therefor
 
 ## 6. Required next actions within Stage 1
 
-1. Read and classify the ten newly surfaced attachments (rows 6–10 and 12–15) individually; do not group by basename.
+1. Continue source-level classification of the newly surfaced attachments and extract their specific cited primary-source references; do not treat these reconciliation reports as original Network/Security audits.
 2. Compare their claims against the current Library records and the accessible GitHub branch without treating derived reports as primary sources.
-3. Recover direct content/thread identity for Project conversations `1` and `2`, if the product exposes an authorized route; otherwise preserve the limitation.
+3. Resolve the conflicting origin descriptions for Project conversations `1` and `2`, then recover direct content/thread identity if the product exposes an authorized route; otherwise preserve the limitation.
 4. Map TBD-01…20 to original requirement sources. If no source is found, retain `SOURCE NOT RECOVERED` / `PENDING SOURCE`.
 5. Continue source validation for TBD-21…85 while preserving CONFLICT-01 and CONFLICT-02 as OPEN.
 6. Reconcile the Stage 1 Library-location inconsistency through an authenticated upload/audit trail if one becomes available. Do not rewrite history or attribute the upload.
