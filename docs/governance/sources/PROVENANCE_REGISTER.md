@@ -52,7 +52,7 @@ The full IDs, display names, sizes, line counts, and digests are in the companio
 
 ## 4. Project Library provenance
 
-The recursive Library listing returned 35 file records and one folder. The Library contains, among other records, `SOURCE_INVENTORY.md`, `PROVENANCE_REGISTER.md`, `REVIEW_INDEX.md`, `TBD_REGISTER.md`, `CONSISTENCY_MATRIX.md`, `STAGE_1.md`, `STAGE_2.md`, `STAGE_2_CLOSURE_DECLARATION.md`, several progress logs, ZIP archives, diffs, manifests, and `محادثة 2.html`.
+The recursive Library listing returned 40 file records and one folder. The Library contains, among other records, `SOURCE_INVENTORY.md`, `PROVENANCE_REGISTER.md`, `REVIEW_INDEX.md`, `TBD_REGISTER.md`, `CONSISTENCY_MATRIX.md`, `STAGE_1.md`, `STAGE_2.md`, `STAGE_2_CLOSURE_DECLARATION.md`, several progress logs, ZIP archives, diffs, manifests, and `محادثة 2.html`.
 
 ### Mandatory Library limitation
 
