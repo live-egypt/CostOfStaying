@@ -125,6 +125,8 @@ The following were inspected:
 
 PR #6 search metadata returned its title/body and identifies it as a Draft review of lifecycle/Core consolidation. The search wrapper did not return a populated state field in this inspection; do not infer PR state solely from that field. The development branch remains unmerged relative to `main` as shown by the 441-commit comparison.
 
+Two Stage 1 documentation PRs were found open during final review: PR #8 (`docs/stage1-source-provenance-recovery` → `main`) and PR #9 (`docs/source-provenance-reconciliation-2026-11-09` → `feature/core-lifecycle-resolution`). Their source/provenance package scopes overlap but their paths and base branches differ. See `docs/governance/DOCUMENT_CONTROL_REGISTER.md`, DOC-PACKAGE-01. Neither was merged or closed.
+
 ## 6. Existing repository documentation found
 
 The repository already contains:
