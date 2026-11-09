@@ -1,0 +1,93 @@
+# Document Control Register — Cost of Staying
+
+**Revision date:** 2026-11-09  
+**Status:** IMPLEMENTED — INITIAL CONTROL REGISTER  
+**Scope:** Initial source-of-truth mapping for the repository and Project Library documents inspected in this reconciliation. This is not yet a complete recursive repository document inventory.
+
+## 1. Control principles
+
+1. Each information type must have one authoritative home.
+2. Supporting audits may analyze and cross-reference an item but must not create competing definitions.
+3. Do not delete, rename, merge, or renumber documents before provenance and content mapping.
+4. Project Library records and repository files are separate objects until an explicit transfer/commit occurs.
+5. A document's existence does not prove its claims, implementation, or verification.
+6. Keep Stage 0–5 and Phase 1–3 separate.
+7. Preserve original IDs and historical references. Resolve collisions through a cross-reference map, not silent renumbering.
+
+## 2. Initial authoritative-document map
+
+| Information type | Current authoritative location | Supporting sources | Current control status |
+|---|---|---|---|
+| Project overview and navigation | `docs/README.md` | Repository docs | PRESENT |
+| Overall execution and evidence boundary | `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | CI reports, ADRs, audit reports | PRESENT — requires reconciliation against new source records |
+| Requirements traceability | `docs/governance/REQUIREMENTS_TRACEABILITY.md` | Library `TBD_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`, `CONSISTENCY_MATRIX.md` | PARTIAL — 85 TBD source matching not complete |
+| Architecture decisions | Individual `docs/governance/adr/ADR-*.md` files | `docs/governance/DECISIONS_LOG.md` | PRESENT — status remains ADR-specific |
+| Decision/owner source events | `docs/governance/DECISION_TRACEABILITY_REGISTER.md` | Original ChatGPT export candidate and supplied reports | INITIAL — source event revalidation open |
+| Source index | `docs/governance/SOURCE_INVENTORY.md` | Project attachments and Library listing | IMPLEMENTED — coverage partial |
+| Provenance | `docs/governance/PROVENANCE_REGISTER.md` | Stage 0 Negative Attestation and raw attachment hashes | IMPLEMENTED — Library provenance partial |
+| Conflict records | `docs/governance/DECISION_TRACEABILITY_REGISTER.md` (Section 5) | Library `DECISION_AND_CONFLICT_LOG.md` | OPEN — no owner conflict resolved |
+| Network architecture | `docs/architecture/NETWORK_ARCHITECTURE.md` | Network Audit source materials | DOCUMENT PRESENT — audit reconciliation open |
+| Security architecture and controls | `docs/security/*` | Security reconciliation material and security test plan | DOCUMENTS PRESENT — design/implementation/verification not implied |
+| Core CI evidence | Individual `docs/audit/*CI*.md` reports and `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | GitHub Actions runs/artifacts | RUN-SCOPED; no Unity/FishNet/Android/Linux inference |
+| Stage evidence | Project Library Stage 0–2 records | `STAGE_1.md`, `STAGE_2.md`, review and closure records | LIBRARY-ONLY unless separately committed |
+| Central risk register | Not created in repository | Gameplay, Psychology, Architecture, Engineering, Network, Security materials | DEFERRED pending source/ID reconciliation |
+| Technical debt register | Not created in repository | Engineering and repository audits | DEFERRED pending classification |
+| Final readiness assessment | Not issued | All audits and validation evidence | NOT ISSUED |
+
+## 3. Repository documents inspected in this pass
+
+- `docs/README.md`
+- `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md`
+- `docs/governance/REQUIREMENTS_TRACEABILITY.md`
+- `docs/governance/adr/ADR-015-COMMAND-IDENTITY-AND-IDEMPOTENCY.md)
+- `docs/architecture/NETWORK_ARCHITECTURE.md) — existence confirmed in prior repository read; content review remains scheduled.
+- Security documents listed in `docs/README.md`: `SECURITY_ARCHITECTURE.md`, `TRUST_BOUNDARIES.md`, `THREAT_MODEL.md`, `SECRETS_MANAGEMENT.md`, `DATA_PRIVACY.md`, `INCIDENT_RESPONSE.md`.
+- `docs/quality/SECURITY_TEST_PLAN.md).
+
+The list is the inspected subset, not a full repository tree inventory.
+
+## 4. Project Library-only documents requiring mapping
+
+The current Library includes source/review records such as:
+- `SOURCE_INVENTORY.md`, `PROVENANCE_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`
+- `TBD_REGISTER.md`, `CONSISTENCY_MATRIX.md`, `DECISION_AND_CONFLICT_LOG.md`
+- `FULL_DOCUMENTS_REVIEW.md`, `REVIEW_INDEX.md`, `FINAL_REVIEW_REPORT.md`
+- `STAGE_1.md`, `STAGE_2.md`, `STAGE_2_REVIEW.md`, `STAGE_2_CLOSURE_DECLARATION.md`
+- `PROGRESS_LOG.md`, `PROGRESS_LOG(1).md`, `PROVENANCE_RECONCILIATION_NOTE_STAGE0.md`, `NEGATIVE_ATTESTATION_STAGE0.md)
+- Diff files, checksum manifests, and review/CI archives.
+
+Library-only status is not equivalent to repository synchronization. The current branch now receives the source inventory and provenance records through this documentation branch; other Library-only files remain unmigrated unless explicitly listed in a later commit.
+
+## 5. Naming and numbering control
+
+- No final package numbering is established by this register.
+- The proposed hybrid package structure remains a working proposal until reviewed.
+- `RISK-013` appears in supplied materials for more than one description. Preserve source IDs and create a collision map before assigning canonical identities.
+- Threat IDs, requirement IDs, risk IDs, technical-debt IDs, test IDs, and evidence IDs must remain distinct namespaces.
+- `CONFLICT-01` and `CONFLICT-02` remain open.
+- Do not create a second authoritative risk register before source reconciliation is complete.
+
+## 6. Change control
+
+For every document change, record:
+- Path and document owner (or TBD).
+- Source/authority and affected IDs.
+- Prior and new revision.
+- Reason for change.
+- Related PR/commit.
+- Review status.
+- Whether the change affects design approval or merely records evidence.
+
+A repository document update does not alter the Project Library source record. A Library update does not update the repository. Keep the two surfaces distinct.
+
+## 7. Open control tasks
+
+| ID | Task | Status |
+|---|---|---|
+| DOC-CTRL-01 | Complete recursive repository docs inventory | OPEN |
+| DOC-CTRL-02 | Map all Library documents to repository documents | OPEN |
+| DOC-CTRL-03 | Reconcile Stage 0/1/2 evidence and path/version conflicts | OPEN |
+| DOC-CTRL-04 | Approve final hybrid package structure | PENDING OWNER REVIEW |
+| DOC-CTRL-05 | Complete source-to-requirement mapping for TBD-01…85 | OPEN |
+| DOC-CTRL-06 | Reconcile Network/Security/Architecture source responsibilities | OPEN |
+| DOC-CTRL-07 | Build evidence register after claim/source reconciliation | DEFERRED |
