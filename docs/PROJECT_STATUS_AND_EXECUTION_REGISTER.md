@@ -178,3 +178,8 @@ A Project Library source record reports Core CI run `42383513646`, commit `28202
 - Risk Register and Technical Debt Register remain deferred.
 - Stage 1 closure has not been declared; Stage 2 remains PARTIAL / closure gate BLOCKED in the current recorded status.
 - No ADR, Core, Net, Unity, or Tests files were changed. No merge was performed.
+
+
+### Documentation PR overlap — DOC-PACKAGE-01
+
+Final review found PR #8 already open for a Stage 1 source/provenance baseline on a docs branch based on `main`. PR #9 is the current expanded documentation branch based on `feature/core-lifecycle-resolution`. Their source/provenance categories overlap at different paths; PR #9 adds the 85-item TBD mapping package. Both remain unmerged. Canonical path and integration strategy require owner review before either PR is merged.
