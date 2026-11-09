@@ -32,8 +32,8 @@ The owner approved sequential completion of the documentation/reconciliation pla
 - Enumerated 15 Project conversation attachments and materialized each raw file individually.
 - Calculated SHA-256 for all 15 attachment byte streams; total 140,975 bytes.
 - Enumerated the Project Library root: 40 file records plus one folder.
-- Read the existing Library Stage 1 Source Inventory, Provenance Register, Stage 0 Negative Attestation, Stage 1 Progress Log, Decision and Conflict Log, and Consistency Matrix excerpts.
-- Confirmed that Library-only Stage 1 source documents existed before this repository documentation transfer.
+- Read the existing Library Stage 1 Source Inventory, Provenance Register, Stage 0 Negative Attestation, Stage 1 Progress Log, Decision and Conflict Log, Consistency Matrix, TBD Register, and Source Traceability Register.
+- Confirmed that Library-only Stage 1 source documents existed before this repository documentation transfer; imported extracted-text copies of the TBD Register, Source Traceability Register, Consistency Matrix, and Decision and Conflict Log into the repository.
 - Created this documentation branch from `feature/core-lifecycle-resolution`.
 
 ## 3. Important corrections and limitations
@@ -49,12 +49,16 @@ The owner approved sequential completion of the documentation/reconciliation pla
 
 ## 4. Files created/updated by this checkpoint
 
-Committed on the documentation branch and included in [PR #9](https://github.com/live-egypt/CostOfStaying/pull/9) (open, Draft; target: `feature/core-lifecycle-resolution`):
+Committed on the documentation branch and included in [PR #9](https://github.com/live-egypt/CostOfStaying/pull/9) (open, Draft; target: `feature/core-lifecycle-resolution`). The four source registers below were imported from Library extracted text; raw-byte equality is not asserted:
 - `docs/governance/SOURCE_INVENTORY.md`
 - `docs/governance/PROVENANCE_REGISTER.md`
 - `docs/governance/DECISION_TRACEABILITY_REGISTER.md`
 - `docs/governance/DOCUMENT_CONTROL_REGISTER.md`
 - `docs/audit/RECONCILIATION_PROGRESS.md`
+- `docs/governance/TBD_REGISTER.md`
+- `docs/governance/SOURCE_TRACEABILITY_REGISTER.md`
+- `docs/governance/CONSISTENCY_MATRIX.md`
+- `docs/governance/DECISION_AND_CONFLICT_LOG.md`
 - `docs/README.md`
 - `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md`
 
