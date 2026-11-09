@@ -20,7 +20,7 @@
 |---|---|---|---|
 | Project overview and navigation | `docs/README.md` | Repository docs | PRESENT |
 | Overall execution and evidence boundary | `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | CI reports, ADRs, audit reports | PRESENT — requires reconciliation against new source records |
-| Requirements traceability | `docs/governance/TBD_REGISTER.md` (85-item uncertainty register) and `docs/governance/REQUIREMENTS_TRACEABILITY.md` (gameplay/Core traceability) | `SOURCE_TRACEABILITY_REGISTER.md`, `CONSISTENCY_MATRIX.md` | PARTIAL — preserve distinction between the 85 TBDs and the separate 109-record consistency matrix |
+| Requirements traceability | `docs/governance/TBD_REGISTER.md` (85-item uncertainty register), `SOURCE_TO_REQUIREMENT_MATRIX.md`, and `REQUIREMENTS_TRACEABILITY.md` (gameplay/Core traceability) | `SOURCE_TRACEABILITY_REGISTER.md`, `TBD_CROSS_REFERENCE_MAP.md`, `CONSISTENCY_MATRIX.md` | PARTIAL — original source matching remains incomplete; keep the 85 TBDs separate from the 109-record consistency matrix |
 | Architecture decisions | Individual `docs/governance/adr/ADR-*.md` files | `docs/governance/DECISIONS_LOG.md` | PRESENT — status remains ADR-specific |
 | Decision/owner source events | `docs/governance/DECISION_TRACEABILITY_REGISTER.md` | `DECISION_AND_CONFLICT_LOG.md`, original ChatGPT export candidate, supplied reports | INITIAL — source event revalidation open |
 | Source index | `docs/governance/SOURCE_INVENTORY.md` | Project attachments and Library listing | IMPLEMENTED — coverage partial |
@@ -28,6 +28,7 @@
 | Conflict records | `docs/governance/DECISION_AND_CONFLICT_LOG.md` and `docs/governance/DECISION_TRACEABILITY_REGISTER.md` | Original owner-conflict source values | OPEN — no owner conflict resolved |
 | Network architecture | `docs/architecture/NETWORK_ARCHITECTURE.md` | Network Audit source materials | DOCUMENT PRESENT — audit reconciliation open |
 | Security architecture and controls | `docs/security/*` | Security reconciliation material and security test plan | DOCUMENTS PRESENT — design/implementation/verification not implied |
+| Requirement evidence mapping | `docs/governance/REQUIREMENT_EVIDENCE_MATRIX.md` | Source-to-Requirement Matrix, exact code/test/CI artifacts when mapped | INITIAL SCAFFOLD — implementation/test evidence not assessed item-by-item |
 | Core CI evidence | Individual `docs/audit/*CI*.md` reports and `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | GitHub Actions runs/artifacts | RUN-SCOPED; no Unity/FishNet/Android/Linux inference |
 | Stage evidence | Project Library Stage 0–2 records | `STAGE_1.md`, `STAGE_2.md`, review and closure records | LIBRARY-ONLY unless separately committed |
 | Central risk register | Not created in repository | Gameplay, Psychology, Architecture, Engineering, Network, Security materials | DEFERRED pending source/ID reconciliation |
