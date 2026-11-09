@@ -104,3 +104,10 @@ Committed on the documentation branch and included in [PR #9](https://github.com
 | Stage 1 closure | NOT DECLARED |
 | Stage 2 closure | BLOCKED (recorded) |
 | Final readiness verdict | NOT ISSUED |
+
+
+## 8. Newly discovered delivery conflict
+
+Final repository review found an existing open PR #8 (`docs/stage1-source-provenance-recovery` → `main`) that already provides a Stage 1 source/provenance package under `docs/governance/sources/`. The current PR #9 (`docs/source-provenance-reconciliation-2026-11-09` → `feature/core-lifecycle-resolution`) overlaps those document categories but uses different paths and contains additional 85-TBD mapping records.
+
+Both PRs are unmerged. No PR was closed or retargeted. The package/path/base-branch decision is recorded as `DOC-PACKAGE-01 — OPEN`. Do not merge either PR or create a third package until the owner selects the canonical integration strategy.
