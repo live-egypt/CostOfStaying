@@ -31,7 +31,7 @@ The owner approved sequential completion of the documentation/reconciliation pla
 - Confirmed development branch comparison: 441 commits ahead and 0 behind `main`.
 - Enumerated 15 Project conversation attachments and materialized each raw file individually.
 - Calculated SHA-256 for all 15 attachment byte streams; total 140,975 bytes.
-- Enumerated the Project Library root: 39 file records plus one folder.
+- Enumerated the Project Library root: 40 file records plus one folder.
 - Read the existing Library Stage 1 Source Inventory, Provenance Register, Stage 0 Negative Attestation, Stage 1 Progress Log, Decision and Conflict Log, and Consistency Matrix excerpts.
 - Confirmed that Library-only Stage 1 source documents existed before this repository documentation transfer.
 - Created this documentation branch from `feature/core-lifecycle-resolution`.
@@ -39,7 +39,7 @@ The owner approved sequential completion of the documentation/reconciliation pla
 ## 3. Important corrections and limitations
 
 1. The current conversation attachment surface contains 15 file records, not only the five records in an earlier Stage 1 snapshot. The 15 records are individually hashed in `docs/governance/SOURCE_INVENTORY.md` and `PROVENANCE_REGISTER.md`.
-2. The Project Library listing contains 39 file records plus one folder. Library records remain under Stage 0's TEXT/METADATA-ONLY limitation where raw-byte export is unavailable.
+2. The Project Library listing contains 40 file records plus one folder. Library records remain under Stage 0's TEXT/METADATA-ONLY limitation where raw-byte export is unavailable.
 3. Four attachments named `2 استكمال المحادثة.txt` are distinct files with different IDs and hashes; they are reports, not established original chat transcripts.
 4. The existing Library `SOURCE_INVENTORY.md` and `PROVENANCE_REGISTER.md` were not repository files before this branch. Their content is being reconciled into repository governance documents; Library records remain unchanged.
 5. Project chats `1` and `2` are user-attested, but their direct content and thread IDs are not available through the current Files surface.
