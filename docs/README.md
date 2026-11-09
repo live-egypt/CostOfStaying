@@ -75,6 +75,10 @@
 - [Provenance Register](governance/PROVENANCE_REGISTER.md) — source identity, raw attachment hashes, and evidence limitations.
 - [Decision Traceability Register](governance/DECISION_TRACEABILITY_REGISTER.md) — ADR states, owner decisions, and open conflicts.
 - [Document Control Register](governance/DOCUMENT_CONTROL_REGISTER.md) — initial authoritative-document mapping and change controls.
+- [TBD Register](governance/TBD_REGISTER.md) — preserved 85-item uncertainty register; unresolved states retained.
+- [Source Traceability Register](governance/SOURCE_TRACEABILITY_REGISTER.md) — source mapping available for TBD-37, TBD-45, and TBD-59…85.
+- [Consistency Matrix](governance/CONSISTENCY_MATRIX.md) — 109-record matrix with 24 pending-source entries.
+- [Decision and Conflict Log](governance/DECISION_AND_CONFLICT_LOG.md) — original Stage 1 conflict record; CONFLICT-01/02 remain open.
 - [Reconciliation Progress](audit/RECONCILIATION_PROGRESS.md) — current checkpoint and remaining work.
 
 ## الحوكمة والتسليم
