@@ -20,14 +20,18 @@ This matrix separates four independent evidence layers:
 | Range | Source register status | Source event mapping | Original requirement match | Implementation evidence | Test evidence | Verification evidence |
 |---|---|---|---|---|---|---|
 | TBD-01…20 | PENDING SOURCE | User turn 364 — register accepted | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
-| TBD-21…36 | RECORDED — SOURCE VALIDATION PENDING | User turn 364; relationship-specific event only where cited | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
+| TBD-21…33 | RECORDED — SOURCE VALIDATION PENDING | User turn 364 — register accepted | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
+| TBD-34 | RECORDED — SOURCE VALIDATION PENDING | User turn 364; User turn 368 clarifies prerequisite relationship with TBD-49 | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
+| TBD-35…36 | RECORDED — SOURCE VALIDATION PENDING | User turn 364 — register accepted | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
 | TBD-37 | RECORDED — SOURCE VALIDATION PENDING | User turn 364; User turn 368 clarifies requirement distinction | PENDING; owner conflict open | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
 | TBD-38…44 | RECORDED — SOURCE VALIDATION PENDING | User turn 364 — register accepted | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
 | TBD-45 | RECORDED — SOURCE VALIDATION PENDING | User turn 364; User turn 368 clarifies requirement distinction | PENDING; primary owner/split TBD | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
 | TBD-46…52 | RECORDED — SOURCE VALIDATION PENDING | User turn 364 — register accepted | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
 | TBD-53 | REGISTERED — SOURCE VALIDATION PENDING | User turn 364; User turn 368 confirms process/54 sub-tasks | 54 mappings pending | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
 | TBD-54 | REGISTERED — SOURCE VALIDATION PENDING | User turn 364 — register accepted | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
-| TBD-55…58 | REGISTERED — SOURCE VALIDATION PENDING | User turn 364; User turn 368 confirms mutual dependency for 55/58 | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
+| TBD-55 | REGISTERED — SOURCE VALIDATION PENDING | User turn 364; User turn 368 confirms mutual dependency with TBD-58 | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
+| TBD-56…57 | REGISTERED — SOURCE VALIDATION PENDING | User turn 364 — register accepted | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
+| TBD-58 | REGISTERED — SOURCE VALIDATION PENDING | User turn 364; User turn 368 confirms mutual dependency with TBD-55 | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
 | TBD-59…70 | REGISTERED — UNRESOLVED — SOURCE VERIFICATION PENDING | User turn 376 — D05 extension accepted | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
 | TBD-71…77 | REGISTERED — UNRESOLVED — SOURCE VERIFICATION PENDING | User turn 380 — D06 extension accepted | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
 | TBD-78…85 | REGISTERED — UNRESOLVED — SOURCE VERIFICATION PENDING | User turn 384 — D07 extension accepted | PENDING | NOT ASSESSED | NOT ASSESSED | NOT ASSESSED |
