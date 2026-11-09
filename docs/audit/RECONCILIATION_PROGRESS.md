@@ -45,7 +45,7 @@ The owner approved sequential completion of the documentation/reconciliation pla
 2. The Project Library listing contains 40 file records plus one folder. Library records remain under Stage 0's TEXT/METADATA-ONLY limitation where raw-byte export is unavailable.
 3. Four attachments named `2 استكمال المحادثة.txt` are distinct files with different IDs and hashes; they are reports, not established original chat transcripts.
 4. The existing Library `SOURCE_INVENTORY.md` and `PROVENANCE_REGISTER.md` were not repository files before this branch. Their content is being reconciled into repository governance documents; Library records remain unchanged.
-5. Project chats `1` and `2` are user-attested, but their direct content and thread IDs are not available through the current Files surface.
+5. Project chats `1` and `2` are user-attested, but their direct content and thread IDs are not available through the current Files surface. The original platform-origin descriptions conflict: earlier notes say DeepSeek-origin; attachment `file_00000000343482109ecb2381153c4550` says ChatGPT Project conversations, not the DeepSeek application. Origin remains unresolved.
 6. `محادثة 2.html` is a ChatGPT Shared Chat candidate; its exact mapping to Project chat `2` remains unverified.
 7. The current branch's Core CI evidence is run-specific. No test was executed in this documentation task.
 8. Stage 2 remains PARTIAL / closure gate BLOCKED in the current recorded status. No Stage or Phase closure is declared.
