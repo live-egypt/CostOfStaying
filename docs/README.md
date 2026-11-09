@@ -56,6 +56,15 @@
 - [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
 
+## استعادة المصادر والحوكمة
+
+- [جرد المصادر](governance/sources/SOURCE_INVENTORY.md)
+- [سجل Provenance](governance/sources/PROVENANCE_REGISTER.md)
+- [مصفوفة تتبع القرارات](governance/sources/DECISION_TRACEABILITY_MATRIX.md)
+- [سجل التعارضات](governance/sources/CONFLICT_REGISTER.md)
+- [ضبط الوثائق](governance/sources/DOCUMENT_CONTROL.md)
+- [مراجعة Stage 1 — Source & Provenance](governance/sources/STAGE1_SOURCE_PROVENANCE_REVIEW.md)
+
 ## حالات الوثائق
 - **PROPOSED:** مقترح لم يعتمد.
 - **PROPOSED FOR PLAYTEST:** خط أساس يحتاج جلسات اختبار قبل اعتماده.
