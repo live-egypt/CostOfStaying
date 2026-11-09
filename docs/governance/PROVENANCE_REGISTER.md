@@ -27,6 +27,8 @@
 
 Known surfaced titles include `استكمال المحادثة`, `قسم · استكمال المحادثة`, `2 استكمال المحادثة`, `رفع الملفات على دفعات`, and `مراجعة شاملة للمشروع`. This is not a complete Project chat index.
 
+**Origin conflict:** an earlier user-attested note attributes chats `1` and `2` to DeepSeek before renaming. Attachment `file_00000000343482109ecb2381153c4550` explicitly corrects the interpretation to ChatGPT conversations inside the Project, not conversations in the DeepSeek application. Neither report is a direct thread export or authenticated origin record. Keep the external origin unresolved; do not silently select either description.
+
 ## 3. Project attachment provenance — raw-byte verified
 
 Each record below was materialized individually from its Project file ID into `/mnt/data/cos-source-inputs/`. SHA-256 was computed using `sha256sum` against the resulting raw file.
@@ -102,6 +104,7 @@ For those exact records:
 | PROV-006 | Stage 2 Library record/content contradictions | OPEN — CAUSAL ORIGIN UNRESOLVED | Authenticated source/audit evidence; no attribution by inference |
 | PROV-007 | Embedded external citations and source URLs not individually inventoried | NOT STARTED | Extraction and source mapping |
 | PROV-008 | Project Library-only source documents have not all been reconciled to repository files | OPEN | Document-by-document mapping |
+| PROV-009 | Conflicting descriptions of the original platform/source for Project chats `1` and `2` | OPEN — ORIGIN ATTRIBUTION CONFLICT | Direct thread export, source turn, or authenticated platform-origin evidence |
 
 ## 7. State vocabulary
 
