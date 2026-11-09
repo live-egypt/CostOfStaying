@@ -20,12 +20,12 @@
 |---|---|---|---|
 | Project overview and navigation | `docs/README.md` | Repository docs | PRESENT |
 | Overall execution and evidence boundary | `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | CI reports, ADRs, audit reports | PRESENT — requires reconciliation against new source records |
-| Requirements traceability | `docs/governance/REQUIREMENTS_TRACEABILITY.md` | Library `TBD_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`, `CONSISTENCY_MATRIX.md` | PARTIAL — 85 TBD source matching not complete |
+| Requirements traceability | `docs/governance/TBD_REGISTER.md` (85-item uncertainty register) and `docs/governance/REQUIREMENTS_TRACEABILITY.md` (gameplay/Core traceability) | `SOURCE_TRACEABILITY_REGISTER.md`, `CONSISTENCY_MATRIX.md` | PARTIAL — preserve distinction between the 85 TBDs and the separate 109-record consistency matrix |
 | Architecture decisions | Individual `docs/governance/adr/ADR-*.md` files | `docs/governance/DECISIONS_LOG.md` | PRESENT — status remains ADR-specific |
-| Decision/owner source events | `docs/governance/DECISION_TRACEABILITY_REGISTER.md` | Original ChatGPT export candidate and supplied reports | INITIAL — source event revalidation open |
+| Decision/owner source events | `docs/governance/DECISION_TRACEABILITY_REGISTER.md` | `DECISION_AND_CONFLICT_LOG.md`, original ChatGPT export candidate, supplied reports | INITIAL — source event revalidation open |
 | Source index | `docs/governance/SOURCE_INVENTORY.md` | Project attachments and Library listing | IMPLEMENTED — coverage partial |
 | Provenance | `docs/governance/PROVENANCE_REGISTER.md` | Stage 0 Negative Attestation and raw attachment hashes | IMPLEMENTED — Library provenance partial |
-| Conflict records | `docs/governance/DECISION_TRACEABILITY_REGISTER.md` (Section 5) | Library `DECISION_AND_CONFLICT_LOG.md` | OPEN — no owner conflict resolved |
+| Conflict records | `docs/governance/DECISION_AND_CONFLICT_LOG.md` and `docs/governance/DECISION_TRACEABILITY_REGISTER.md` | Original owner-conflict source values | OPEN — no owner conflict resolved |
 | Network architecture | `docs/architecture/NETWORK_ARCHITECTURE.md` | Network Audit source materials | DOCUMENT PRESENT — audit reconciliation open |
 | Security architecture and controls | `docs/security/*` | Security reconciliation material and security test plan | DOCUMENTS PRESENT — design/implementation/verification not implied |
 | Core CI evidence | Individual `docs/audit/*CI*.md` reports and `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | GitHub Actions runs/artifacts | RUN-SCOPED; no Unity/FishNet/Android/Linux inference |
@@ -48,9 +48,11 @@ The list is the inspected subset, not a full repository tree inventory.
 
 ## 4. Project Library-only documents requiring mapping
 
-The current Library includes source/review records such as:
-- `SOURCE_INVENTORY.md`, `PROVENANCE_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`
-- `TBD_REGISTER.md`, `CONSISTENCY_MATRIX.md`, `DECISION_AND_CONFLICT_LOG.md`
+The following source records now have repository text copies in this branch: `SOURCE_INVENTORY.md`, `PROVENANCE_REGISTER.md`, `TBD_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`, `CONSISTENCY_MATRIX.md`, and `DECISION_AND_CONFLICT_LOG.md`. Their Library originals remain unchanged; raw-byte equality is not asserted.
+
+Other current Library records still requiring mapping include:
+- `FULL_DOCUMENTS_REVIEW.md`, `REVIEW_INDEX.md`, `FINAL_REVIEW_REPORT.md`
+- Remaining Stage 0/1/2 evidence records and archives
 - `FULL_DOCUMENTS_REVIEW.md`, `REVIEW_INDEX.md`, `FINAL_REVIEW_REPORT.md`
 - `STAGE_1.md`, `STAGE_2.md`, `STAGE_2_REVIEW.md`, `STAGE_2_CLOSURE_DECLARATION.md`
 - `PROGRESS_LOG.md`, `PROGRESS_LOG(1).md`, `PROVENANCE_RECONCILIATION_NOTE_STAGE0.md`, `NEGATIVE_ATTESTATION_STAGE0.md)
