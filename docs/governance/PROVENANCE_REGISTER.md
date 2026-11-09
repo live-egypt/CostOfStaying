@@ -19,8 +19,8 @@
 
 | ID | Object | Origin / evidence | Status | Missing evidence |
 |---|---|---|---|---|
-| CHAT-001 | Project chat `1` | User states this Project chat originated from DeepSeek and was renamed `1` | USER-ATTESTED — CONTENT NOT RECOVERED | Full thread, thread ID, original export, authenticated origin |
-| CHAT-002 | Project chat `2` | User states this Project chat originated from DeepSeek and was renamed `2` | USER-ATTESTED — EXACT EXPORT MAPPING PENDING | Full thread, thread ID, exact relation to HTML candidate |
+| CHAT-001 | Project chat `1` | Project attachment `file_00000000343482109ecb2381153c4550` says the relevant sources are ChatGPT Project conversations, not DeepSeek-app chats; earlier provenance notes state a former DeepSeek association | USER-ATTESTED — CONTENT / ORIGIN CONFLICT OPEN | Full thread, thread ID, exact source event establishing original platform origin |
+| CHAT-002 | Project chat `2` | Same conflicting origin descriptions; HTML export candidate exists but exact mapping is unverified | USER-ATTESTED — CONTENT / ORIGIN CONFLICT OPEN | Full thread, thread ID, exact mapping to HTML candidate, authoritative origin evidence |
 | CHAT-003 | `محادثة 2.html` | Library record; indexed header reports `ChatGPT Shared Chat` | LIBRARY RECORD VERIFIED — TEXT/METADATA ONLY | Raw Library bytes; exact mapping to chat `2`; old 449-message/hash claims not revalidated from raw bytes |
 | CHAT-004 | Current active Project thread | Current conversation context | CURRENT CONTEXT AVAILABLE | Separate full export |
 | CHAT-005+ | Other surfaced Project chat references | Project context summaries | CONTEXT-SURFACED | Full thread objects and complete thread index |
