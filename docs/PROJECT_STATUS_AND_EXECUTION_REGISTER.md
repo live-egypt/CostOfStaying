@@ -160,6 +160,8 @@ The current Project Files surface supplied 15 distinct attachments. Each was mat
 
 The following Library source registers were copied into the repository from extracted text, with provenance headers and without a claim of raw-byte equality: `TBD_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`, `CONSISTENCY_MATRIX.md`, and `DECISION_AND_CONFLICT_LOG.md`. The source Library records were not modified.
 
+An initial 85-row mapping package was added: `SOURCE_TO_REQUIREMENT_MATRIX.md`, `TBD_CROSS_REFERENCE_MAP.md`, and `REQUIREMENT_EVIDENCE_MATRIX.md`. Original source matching remains partial; implementation and test evidence are not assessed item-by-item.
+
 The recursive Project Library listing returned 40 file records plus one folder. These are Library metadata records, not raw-byte verification. Stage 0 Negative Attestation remains binding for the affected Library objects.
 
 ### Evidence interpretation update
