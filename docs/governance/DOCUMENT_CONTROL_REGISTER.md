@@ -36,6 +36,7 @@
 | Requirements register structural QA | `docs/audit/REQUIREMENT_REGISTERS_QA_2026-11-10.md` | TBD Register, Source-to-Requirement Matrix, Consistency Matrix | REVIEWED — structural counts only; source resolution not implied |
 | ADR/Core implementation reconciliation | `docs/audit/ADR_RECONCILIATION_REVIEW_2026-11-10.md` | Main ADR-001…004, feature-branch ADR-005…015, Core source/tests/CI | REVIEWED — branch-specific; no ADR status changed |
 | Core implementation review | `docs/audit/CORE_IMPLEMENTATION_REVIEW_2026-11-10.md` | Core source, NUnit tests, project files and CI logs | REVIEWED — source-level; no fresh tests run |
+| CI/security automation review | `docs/audit/CI_WORKFLOW_SECURITY_REVIEW_2026-11-10.md` | Core CI, CodeQL, SecurityCodeScan, Contrast and Dependabot workflow definitions | REVIEWED — configuration only; findings/coverage not operationally proven |
 | Stage evidence | Project Library Stage 0–2 records | `STAGE_1.md`, `STAGE_2.md`, review and closure records | LIBRARY-ONLY unless separately committed |
 | Central risk register | Not created in repository | Gameplay, Psychology, Architecture, Engineering, Network, Security materials | DEFERRED pending source/ID reconciliation |
 | Technical debt register | Not created in repository | Engineering and repository audits | DEFERRED pending classification |
@@ -50,6 +51,7 @@
 - `docs/audit/REQUIREMENT_REGISTERS_QA_2026-11-10.md`
 - `docs/audit/ADR_RECONCILIATION_REVIEW_2026-11-10.md`
 - `docs/audit/CORE_IMPLEMENTATION_REVIEW_2026-11-10.md`
+- `docs/audit/CI_WORKFLOW_SECURITY_REVIEW_2026-11-10.md`
 - `docs/governance/REQUIREMENTS_TRACEABILITY.md`
 - `docs/governance/adr/ADR-001` through `ADR-004` on main.
 - `docs/architecture/NETWORK_ARCHITECTURE.md` — reviewed in the main snapshot.
