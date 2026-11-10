@@ -68,6 +68,7 @@
 
 - [سجل تقدم التوفيق](audit/RECONCILIATION_PROGRESS.md)
 - [مراجعة اتساق التصميم والأنظمة](audit/DESIGN_CONSISTENCY_REVIEW_2026-11-10.md)
+- [فحص بنية سجلات المتطلبات 85/109](audit/REQUIREMENT_REGISTERS_QA_2026-11-10.md)
 - [سجل أدلة Core CI](audit/CI_EVIDENCE_REGISTER.md)
 - [مراجعة Network Audit الأولية](audit/NETWORK_AUDIT_RECONCILIATION_INITIAL.md)
 - [مراجعة Security Audit الأولية](audit/SECURITY_AUDIT_RECONCILIATION_INITIAL.md)
