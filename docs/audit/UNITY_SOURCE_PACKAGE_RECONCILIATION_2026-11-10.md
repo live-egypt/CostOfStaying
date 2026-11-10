@@ -148,7 +148,21 @@ Assets/CostOfStaying/Core/MovementService.cs:
 
 **Required correction gate:** Define ingress rate and per-tick command budgets, apply a server-side processing cap or aggregate input semantics, and add an NUnit regression test proving that command spam cannot multiply movement per tick. The fix is not applied in this documentation review.
 
-### 9.3 Disconnect removes the player rather than preserving reconnect state
+### 9.3 Command order is split by command type
+
+Assets/CostOfStaying/Core/CommandSequenceTracker.cs keeps separate sequence dictionaries for Movement and Betrayal. Assets/CostOfStaying/Core/CorePipeline.cs drains the complete Movement queue first, then drains the Betrayal queue.
+
+**Finding:** The inspected implementation does not preserve one global per-session command order across Movement and Betrayal. A sequence value can be accepted once in each command-type tracker, and a Betrayal request is processed after all queued Movement requests regardless of cross-type arrival order. Whether this is acceptable depends on the required simulation ordering contract; that contract is not established by this ZIP.
+
+**Required design gate:** Define whether sequence numbers are global per session or scoped by command type, and define the deterministic ordering rule across command types. Add tests for interleaved Movement/Betrayal commands and conflicting arrival/order cases.
+
+### 9.4 Movement does not validate world geometry or collision
+
+Assets/CostOfStaying/Core/MovementService.cs normalizes the requested planar vector, chooses WalkSpeed or SprintSpeed, applies FixedDeltaTime and updates PlayerState.Position. The inspected service does not query map bounds, collision geometry, navigation constraints, or blocked movement resolution.
+
+**Finding:** Movement is deterministic planar arithmetic only. It is not a complete authoritative movement/collision system. The Sprint flag is also consumed as an input to speed selection; any intended sprint eligibility, resource cost, or cooldown must be enforced by a server-owned rule if those constraints are part of the design.
+
+### 9.5 Disconnect removes the player rather than preserving reconnect state
 
 Assets/CostOfStaying/Core/SessionLifecycleService.cs:
 - Disconnect marks the session disconnected.
@@ -161,7 +175,7 @@ Assets/CostOfStaying/Net/CoreServerSessionBridge.cs removes the connection/sessi
 
 **Finding:** The current package implements immediate player removal on disconnect. It does not preserve a reconnect grace period or identity continuity in the inspected path. This is a concrete behavior that must be reconciled with the intended gameplay and session policy before Alpha.
 
-### 9.4 FishNet adapter shape differs from the project network contract
+### 9.6 FishNet adapter shape differs from the project network contract
 
 Assets/CostOfStaying/Net/FishNetServerAdapter.cs:
 - Declares FishNetServerAdapter as a Unity MonoBehaviour, not a FishNet NetworkBehaviour.
@@ -177,7 +191,7 @@ Assets/CostOfStaying/Net/CoreServerCommandIngress.cs:
 
 **Finding:** The server-owned tick and Core session checks are positive source-level controls. However, the adapter uses MonoBehaviour and broadcast ingress/egress rather than the project's required FishNet NetworkBehaviour with the approved ServerRpc/ObserversRpc pattern. That is an architectural deviation requiring correction or explicit ADR review. FishNet API/runtime compatibility remains unverified because the actual resolved package was not supplied.
 
-### 9.5 Authentication is delegated to a host-supplied identity resolver
+### 9.7 Authentication is delegated to a host-supplied identity resolver
 
 CoreServerSessionBridge.Connect:
 - Creates a pending Core session through SessionLifecycle.Connect.
@@ -189,7 +203,7 @@ FishNetServerAdapter exposes AuthenticateConnection and obtains PlayerId through
 
 **Finding:** The package assumes that the host calls AuthenticateConnection only after a trusted identity check. The package itself does not provide a credential protocol or concrete identity validation source. Do not interpret the Core session IsAuthenticated flag as proof that account credentials were verified unless the host authentication integration is supplied and tested.
 
-### 9.6 Test fixtures present and missing
+### 9.8 Test fixtures present and missing
 
 The archive contains 5 EditMode test files and 8 Net test files, including:
 - CoreCompositionTests
