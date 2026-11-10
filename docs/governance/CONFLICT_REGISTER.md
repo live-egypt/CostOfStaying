@@ -55,6 +55,10 @@ A conflict may be closed only when the entry records:
 | DESIGN-007 | Dead/Spirit terminology in Collapse and Spirit | Main COLLAPSE_SYSTEM says Alive → Dead/Spirit; SPIRIT_SYSTEM describes Alive → Dead followed by Spirit. | One player lifecycle is not expressed consistently in main specs. | Ambiguous lifecycle wording, linked to DESIGN-001. | OPEN |
 | DESIGN-008 | Endgame result taxonomy | RULE-05 groups Time Limit and Mutual Collapse; ENDGAME_SYSTEM names them as separate outcomes. | Three grouped result categories vs four named terminal outcomes. | Taxonomy/presentation ambiguity. | OPEN |
 | DESIGN-009 | Combat-triggered Collapse | COMBAT_SYSTEM says apply Collapse if enabled, but trigger/stacking/scope are not specified in main rules. | Gameplay interaction is underspecified. | OPEN — DESIGN DECISION REQUIRED |
+| ADR-REV-001 | ADR-005/ADR-007 original approval trace | Feature-branch ADRs state owner approval, while the inspected decision trace does not provide the exact original user message/thread reference. | Approval status recorded in branch ADR; primary event mapping incomplete. | OPEN — SOURCE TRACE PENDING |
+| ADR-REV-002 | ADR-015 status language | ADR-015 header is PROPOSED, while the alternatives table marks Option B as "معتمد". | Internal status wording ambiguity. | OPEN — DOCUMENT CLARIFICATION |
+| ADR-REV-003 | Session cleanup and in-flight commands | ADR-013 and SessionCleanupService require the caller to wait for dequeued/in-flight command processing; queue does not track in-flight handlers. | Explicit application integration obligation, not a Core-enforced invariant. | OPEN — INTEGRATION REQUIREMENT |
+| ADR-REV-004 | CommandId implementation | ADR-015 proposes stable CommandId and in-memory result idempotency but explicitly says no code change; inspected Core identifiers/services show no CommandId/result registry. | Proposed guarantee not implemented in inspected Core scope. | RECORDED — NOT IMPLEMENTED |
 
 ## 5. Repository and delivery conflicts
 
@@ -79,12 +83,13 @@ A conflict may be closed only when the entry records:
 | EVID-005 | 187 tests | Run 42383513646, commit 2820285021b1a3d7ae9acd953b3bb65677c33512; job log reports 187 passed, 0 failed, 0 skipped. | Historical Core CI snapshot. | TESTED |
 | EVID-006 | CI count changes | Counts differ across commits/workflow runs. | Versioned snapshots, not a cumulative score. | RECORDED |
 | EVID-007 | Unity/FishNet/Android/Linux validation | No Unity project/package lock or FishNet adapter/integration test evidence established on main. | Integration evidence gap. | NOT VERIFIED |
+| EVID-008 | ADR-012/ADR-013 cited Core CI | Run 41332989910 on commit c33faf84aa39856d46181ccc1c9decbfba2777d2; job 124926820979 reports 181 passed, 0 failed, 0 skipped; artifact 13093814339. | Separate historical 181-test snapshot from run 41333575156 on a different commit. | TESTED |
 
 All CI rows above are scoped to standalone Core and the named workflow runs. They do not establish end-to-end game readiness.
 
 ## 7. Cross-document design review references
 
-The companion [Design Consistency Review](../audit/DESIGN_CONSISTENCY_REVIEW_2026-11-10.md) records findings DES-001…DES-015. Those DES identifiers are review-finding IDs, not replacements for the conflict IDs in this register. DES-001 maps to DESIGN-001; DES-002 and DES-003 map to DESIGN-007; DES-004 maps to DESIGN-008; DES-006 maps to DESIGN-006; DES-007 maps to DESIGN-009.
+The companion [Design Consistency Review](../audit/DESIGN_CONSISTENCY_REVIEW_2026-11-10.md) records findings DES-001…DES-015. The [ADR and Core Contract Review](../audit/ADR_RECONCILIATION_REVIEW_2026-11-10.md) records branch-specific ADR status, implementation and evidence boundaries. DES identifiers are review-finding IDs, not replacements for conflict IDs. DES-001 maps to DESIGN-001; DES-002 and DES-003 map to DESIGN-007; DES-004 maps to DESIGN-008; DES-006 maps to DESIGN-006; DES-007 maps to DESIGN-009.
 
 ## 8. Non-equivalence rules
 
