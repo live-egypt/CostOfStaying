@@ -131,3 +131,15 @@ Reviewed Core CI, CodeQL, SecurityCodeScan, optional Contrast and Dependabot wor
 - PR state: OPEN / DRAFT / NOT MERGED. GitHub mergeability is a technical signal only and is not owner approval.
 - No tests were run for this documentation-only PR.
 - main was not modified.
+
+
+## 12. Unity source package recovery and static source findings
+
+- Discovered a committed ZIP on branch review/unity-source-package-2026-11-01, included in PR #5's changed-file list, despite the PR body/checksum manifest stating that it was not committed.
+- Retrieved exact Git blob 319a584046d3ece7ce74242233015738758ec210; recomputed Git blob SHA-1 matched the repository object.
+- ZIP inventory: 94 entries, including 81 C# files, 4 asmdef files, 2 Markdown files and 7 directory entries.
+- SHA-256 computed over the exact blob bytes is 5f92947c8b23d1ee15d7c744fb62ef0cf7af361bfdda277fcdaeff61dab51ac4; the branch manifest declares 351190c6789b0a146be0978606c831f48b951509e7f353bb3b469374eb9b15d9. Mismatch remains open.
+- Archive is an Assets/source package, not a complete Unity project: no Packages manifest/lock, ProjectSettings/ProjectVersion, scenes or .meta files in the inspected archive.
+- Static extraction/review of CorePipeline, MovementService, MovementCommandIngress, BetrayalService, SessionLifecycleService, CoreServerSessionBridge and FishNetServerAdapter identified gaps recorded in UNITY_SOURCE_PACKAGE_RECONCILIATION_2026-11-10.md and CONFLICT_REGISTER.md.
+- No source code in the ZIP was changed, no ZIP was merged into main, and no Unity compilation or package tests were run.
+- Branch/PR snapshot for PR #1–#11 and 12 known branch names is in GITHUB_BRANCH_PR_INVENTORY_2026-11-10.md.
