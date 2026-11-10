@@ -2,7 +2,7 @@
 
 > **Governance status axes:** Decision Status and Evidence Maturity are independent. This document's existence does not approve its claims or prove implementation. See [Project Governance Baseline](PROJECT_GOVERNANCE_BASELINE.md).
 
-**Revision date:** 2026-11-09  
+**Revision date:** 2026-11-10 — WO-DOC-01 owner authorization and attachment-snapshot reconciliation  
 **Record State:** INITIAL RECONCILIATION SNAPSHOT — DOCUMENTATION ONLY; CONTENT AND SOURCE COMPLETENESS REMAIN PARTIAL
 **Scope:** Owner decisions, ADR status, architectural directions, and unresolved decision conflicts visible in the current repository and supplied source records.
 
@@ -19,6 +19,7 @@
 
 | Decision / record | Current recorded status | Evidence basis | Boundary / open item |
 |---|---|---|---|
+| WO-DOC-01 — Project Documentation Governance | APPROVED — EXECUTION AUTHORIZED | Current Project conversation owner message on 2026-11-10: “نعم اعتماد والبدء بتنفيذ جميع المراحل بالترتيب”, following the explicit WO-DOC-01 approval request | Authorizes sequential documentation work packages A–E only. Does not approve the proposed governance policy wholesale, alter ADRs/gameplay, authorize code changes, merge PRs, or close stages. |
 | ADR-007 — Player Lifecycle | APPROVED | Repository ADR and Project Status Register | Canonical lifecycle: Alive → Spirit at zero Vitality; explicit Resurrect; Eliminated terminal. Does not approve every gameplay rule. |
 | ADR-008 — Command Envelope / Sequence Admission | PROPOSED | Repository ADR and Requirements Traceability | Implementation/tests are documented, but production policy limits and owner approval remain open. |
 | ADR-009 — Match-Scoped Player Registry | PROPOSED | Repository ADR and Requirements Traceability | Capacity, spectator/Spirit treatment, reconnect grace and retention remain policy items. |
@@ -39,7 +40,7 @@
 | Stage | Recorded status | Boundary |
 |---|---|---|
 | Stage 0 | ACCEPTED WITH DOCUMENTED CONSTRAINT | Stage 0 Negative Attestation remains binding for affected Library records. |
-| Stage 1 | PARTIAL — SOURCE RECOVERY | Fifteen current Project attachments and 35 Library records + one folder inventoried; complete Project chat enumeration remains unavailable. |
+| Stage 1 | PARTIAL — SOURCE RECOVERY | Twenty attachment objects are currently surfaced in project conversation context (the prior 15-record snapshot plus five additional IDs recorded in the 2026-11-10 attachment delta); the historical Library listing reports 40 file records + one folder. No fresh direct Library enumeration or complete Project chat enumeration is available. |
 | Stage 2 | PARTIAL — CLOSURE GATE BLOCKED | Stage 2 declaration/acceptance records exist in Library; existence does not establish gate closure. |
 | Stage 3 | BLOCKED (recorded) | Do not begin by label alone. |
 | Stage 4–5 | NOT STARTED (recorded) | Requires preceding gates and evidence. |
@@ -63,6 +64,7 @@ These status rows are source-recorded snapshots. They are not a fresh re-evaluat
 | CI Run #406 approval | User turn 442 (reported) | REPORTED APPROVAL EVENT | Exact run/commit/evidence mapping |
 | ADR-014 scope | Prior explicit user approval summarized in project context | PROPOSED ADR; administrative creation approved | Original approval message mapping and gameplay rule disposition |
 | ADR-015 | Existing repository ADR | PROPOSED | Owner decision to approve/reject and implementation authorization |
+| WO-DOC-01 | Current active Project conversation — owner message immediately following the WO-DOC-01 approval request, 2026-11-10 | APPROVED — DOCUMENTATION EXECUTION AUTHORIZATION | Exact text is present in current conversation context; no separate exported thread ID/message ID was available in this inspection |
 
 Do not use an export-level timestamp as a substitute for missing per-message dates.
 
