@@ -17,6 +17,7 @@ The owner approved the five-package plan and authorized repository delivery on a
 | 2 | Decision and conflict traceability | Preserve decisions, source events and open conflicts | INITIAL REGISTERS CREATED; owner/source conflicts remain OPEN |
 | 3 | Requirements source mapping | Preserve and map 85 TBD rows and 109 consistency records | IMPORTED TRANSCRIPTIONS/MATRICES; source matching remains PARTIAL |
 | 4 | Architecture / Network / Security mapping | Separate responsibilities and link design to implementation/evidence | INITIAL NETWORK AND SECURITY RECONCILIATIONS CREATED; original audits missing |
+| 4A | Cross-system design consistency | Compare GDD, rules, systems, architecture, security and quality documents | INITIAL REVIEW CREATED; lifecycle and several rule details remain OPEN |
 | 5 | Evidence reconciliation | Bind claims to commit, run, environment, artifact, result and scope | FOUR CORE CI RUNS RECOVERED; integration evidence remains OPEN |
 | 6 | Document/package control | Map current documents before final numbering/consolidation | INITIAL DOCUMENT CONTROL REGISTER; canonical path map still needs owner review |
 | 7 | Central Risk and Debt registers | Start only after source and ID reconciliation | DEFERRED |
@@ -64,7 +65,11 @@ Historical documentation cited 41332755494 for the 177 run; the recovered associ
 
 The branch adds a consolidated governance/source package, preserves the 85-item and 109-record mapping content imported from the PR #9 documentation branch, and adds initial network/security/evidence reconciliations. The documentation index is being updated to the current canonical paths.
 
-## 7. Status
+## 7. Cross-system design review
+
+Inspected the six main system specifications, technical/network/backend/data/deployment architecture, six security documents, six quality documents, three operations documents and three roadmap documents. The resulting [Design Consistency Review](DESIGN_CONSISTENCY_REVIEW_2026-11-10.md) records 15 findings. Key unresolved items include player lifecycle, endgame result taxonomy, Betrayal threshold effects, CommandId/idempotency boundaries, combat-to-Collapse interaction, and unmeasured performance targets. No gameplay rule was changed.
+
+## 8. Status
 
 | Item | Decision Status | Evidence Maturity | Work State |
 |---|---|---|---|
