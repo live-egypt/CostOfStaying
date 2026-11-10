@@ -58,7 +58,7 @@ The live repository metadata was read during this session:
 - Default branch is `main`.
 - PR #11 is open, Draft, mergeable according to current metadata, and not merged.
 - PR #11 targets `main` from `docs/project-reconciliation-baseline-2026-11-10`.
-- PR #11 contains 36 changed documentation paths at the attachment-delta checkpoint.
+- PR #11 contains 36 changed documentation paths at the attachment-delta checkpoint; the current branch head may be newer.
 - PR #11's base SHA is `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`.
 - PR #11's observed head SHA at the attachment-delta checkpoint is `7fd3d8e96279c70a83ed26e0bdc525494a74959d`.
 
@@ -77,7 +77,7 @@ The owner explicitly approved WO-DOC-01 for sequential execution. The authoritat
 | Work package C | PARTIAL — WO-DOC-01 AUTHORIZATION MAPPED | Recover remaining owner decision events; A1-HOLD-01…06 remain source-blocked |
 | Work package D | PARTIAL | Keep evidence scoped to exact run/commit/artifact |
 | Work package E | PRESENT — MAINTAIN | Update this handoff after material changes |
-| Source inventory / provenance | PARTIAL | Continue source-level reconciliation where originals are available |
+| Source inventory / provenance | PARTIAL — 20 ATTACHMENT OBJECTS; 13 LOCAL PATHS | Library and complete conversation enumeration remain unavailable |
 | Decision traceability | PARTIAL | Recover exact owner approval events; preserve missing-source states |
 | TBD register (85) | STRUCTURALLY MAPPED; SOURCE VALIDATION PARTIAL | Validate item-by-item; do not mark resolved from registration alone |
 | Consistency matrix (109) | STRUCTURALLY MAPPED; 24 pending-source records reported | Reconcile source and dimension details |

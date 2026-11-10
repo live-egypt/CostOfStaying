@@ -201,3 +201,10 @@ A binary source package was discovered and retrieved from the repository review 
 The ZIP's presence in PR #5's changed-file list conflicts with the PR body and checksum manifest, both of which state the corrected ZIP is not committed. The archive is present on the review branch but not in the inspected main baseline. See [UNITY_SOURCE_PACKAGE_RECONCILIATION_2026-11-10.md](../audit/UNITY_SOURCE_PACKAGE_RECONCILIATION_2026-11-10.md).
 
 Do not conflate this repository binary object with the 10 currently materialized text attachments or the historical 15-attachment Project surface. No uploader attribution is inferred. No source files were extracted into main or merged.
+
+
+## 10. Dated attachment-context delta — 2026-11-10
+
+The current project conversation context exposes 20 distinct attachment objects. The earlier 15-object snapshot remains a valid historical snapshot; five additional attachment IDs and mounted-byte SHA-256 values are recorded in [ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md](../audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md).
+
+This is not a fresh Project Library listing and does not establish full conversation enumeration. The active runtime materialized 13 unique text-file paths; attachment-object count and local-path count are different dimensions. Preserve prior snapshot dates and counts rather than rewriting them as if they were measured simultaneously.

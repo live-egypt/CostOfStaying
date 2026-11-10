@@ -88,7 +88,16 @@ The supplied source records report:
 
 These are recorded relationships awaiting item-level source verification; they are not a substitute for the full original TBD Register.
 
-## 7. Decision change protocol
+## 7. Additional owner authorization events — 2026-11-10
+
+| Event ID | Owner instruction | Decision scope | Status | Source/evidence boundary |
+|---|---|---|---|---|
+| OWNER-EVENT-001 / WO-DOC-01 | User explicitly approved WO-DOC-01 and authorized sequential execution of all five documentation-governance work packages. | Documentation governance execution: repository inspection, documentation-only branch changes, commits and Draft PR maintenance, subject to the approved boundaries. | APPROVED — EXECUTION AUTHORIZED | Direct owner message in the current project conversation on 2026-11-10. Exact platform message/thread ID is not exposed in the mounted source; retain this conversation reference and do not fabricate a turn ID. |
+| OWNER-EVENT-002 / DOC-B-01 | User said “تابع الاستكمال” after the WO-DOC-01 approval. | Continue the authorized documentation work and bounded source reconciliation. | CONTINUATION AUTHORIZED | Direct current conversation message; this is not separate approval for code, ADR, stage closure, or PR merge. |
+
+**Scope limitation:** WO-DOC-01 authorization does not approve the proposed Governance Baseline wholesale, change any gameplay/architecture decision, approve the two WO-A3 amendments, resolve A1-HOLD-01…06, authorize Core/Net/Unity/Tests changes, or permit merging PR #11.
+
+## 8. Decision change protocol
 
 Any future change must record:
 1. Decision ID and prior status.

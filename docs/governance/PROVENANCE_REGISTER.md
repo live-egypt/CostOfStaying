@@ -134,3 +134,10 @@ This register is an implemented repository document with partial coverage. It do
 The ZIP central directory lists 81 C# files, 4 assembly definitions, 2 Markdown files and 7 directory entries. This is archive inventory, not proof of compilation or runtime behavior. The full reconciliation and source-level spot review are in [UNITY_SOURCE_PACKAGE_RECONCILIATION_2026-11-10.md](../audit/UNITY_SOURCE_PACKAGE_RECONCILIATION_2026-11-10.md).
 
 No Library payload SHA-256 or archive claim is inferred from this repository object. Repository blob identity and Project Library provenance remain separate evidence classes.
+
+
+## 10. Additional mounted attachment provenance — 2026-11-10
+
+Five additional attachment objects (IDs 16–20 relative to the prior 15-object snapshot) are identified by stable Project file IDs and mounted-byte SHA-256 in [ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md](../audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md).
+
+The hashes prove the identity of the bytes mounted at the recorded local paths for this session only. They do not prove original uploader identity, Project Library byte equality, source conversation identity, or complete inventory coverage. The five-object delta is bounded and reviewed; Project Library and original chat enumeration remain open.

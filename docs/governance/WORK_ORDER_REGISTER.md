@@ -78,7 +78,16 @@ Work packages proceed in order. A blocked item is recorded and carried forward; 
 | DOC-E-01 | E | Keep SESSION_HANDOFF aligned with live PR head and next action | IN PROGRESS | Update after each material commit/session. |
 | DOC-E-02 | E | Record commit, changed paths, validation, and PR state in closeout | REQUIRED EACH DELIVERY | Exact GitHub evidence required. |
 
-## 5. Execution and closeout protocol
+## 5. Additional bounded reconciliation checkpoint — 2026-11-10
+
+- DOC-B-01 is complete only for the bounded attachment-ID delta: five additional objects beyond the prior 15-object snapshot are mapped and their mounted-byte hashes are recorded.
+- Canonical SOURCE_INVENTORY and PROVENANCE_REGISTER now point to the dated delta addendum.
+- CONFLICT_REGISTER SRC-001 now distinguishes 20 attachment objects from 13 local materialized paths and preserves earlier counts as dated snapshots.
+- DECISION_TRACEABILITY_REGISTER records the direct owner authorization of WO-DOC-01 without inventing a message turn ID.
+- No Project Library re-enumeration, full conversation enumeration, or original DeepSeek export recovery is claimed.
+- A1-HOLD-01…06 and both WO-A3 amendments remain source-blocked.
+
+## 6. Execution and closeout protocol
 
 For each action:
 1. Read the canonical record and source evidence.
@@ -98,7 +107,7 @@ Every closeout must record:
 - Work-order/action IDs advanced.
 - Remaining blockers and exact next action.
 
-## 6. Delivery log
+## 7. Delivery log
 
 | Date | Commit | Scope | Validation | Result |
 |---|---|---|---|---|
@@ -106,7 +115,7 @@ Every closeout must record:
 | 2026-11-10 | `7fd3d8e96279c70a83ed26e0bdc525494a74959d` | Five additional attachment IDs, mounted-byte SHA-256 values, and three new runtime paths | Recomputed SHA-256/byte/line counts from mounted files; fetched committed addendum; confirmed README link and PR changed-file count | DOC-B-01 completed for this bounded 5-ID delta; Library and conversation completeness remain open. |
 | 2026-11-10 | `d9405d347f56ac14401bf7ab19892893fd939e70` | Recorded WO-DOC-01 owner authorization in Decision Traceability Register; corrected Stage 1 source-snapshot wording | Fetched committed register and checked approval scope/source limitation | DOC-C-01 mapped; broader decision recovery remains PARTIAL/BLOCKED. |
 
-## 7. Current closeout
+## 8. Current closeout
 
 - WO-DOC-01: APPROVED — execution authorized.
 - Work package A: initial baseline present on PR #11 branch; governance policy itself remains PROPOSED pending owner review.
