@@ -20,7 +20,11 @@
 | 9 | قسم · قسم · رفع الملفات على دفعات.txt | 4,972 | 120 | 0a0e459edd8717aa2e3fe26d630e3f130f6c88d46ae05b651350312c6de9f698 |
 | 10 | قسم · قسم · قسم · استكمال المحادثة.txt | 7,437 | 155 | fed4978a62d4d1a54c6f1848c5b36d4581be5dfb79181a1cddf50bdf84ff289f |
 
-## 1. Aggregate
+## 1. Runtime layout boundary
+
+The active runtime snapshot contains a flat set of ten text files directly under /mnt/data. A directory enumeration at depth three returned no subdirectories or project-folder tree in this session. This is only the local materialization surface, not the complete Project Files or Project Library structure.
+
+## 2. Aggregate
 
 - Materialized runtime paths: 10
 - Total bytes: 87,396
@@ -28,11 +32,11 @@
 - Original Project attachment completeness: NOT ESTABLISHED
 - Full Project Library byte-level access: NOT ESTABLISHED
 
-## 2. Provenance boundary
+## 3. Provenance boundary
 
 These hashes prove the identity of the bytes measured in this runtime only. They do not establish original uploader, source application, original conversation thread, Library byte equality, or archive contents. The manifest must not be used to overwrite the 15-attachment historical source snapshot reported in PR #8/#9. Those are different snapshots/surfaces until an exact crosswalk is available.
 
-## 3. Reproduction
+## 4. Reproduction
 
 From the directory containing the exact materialized files:
 
