@@ -148,3 +148,8 @@ PR #11 remains OPEN / DRAFT / NOT MERGED. No changes to main or code/test/ADR fi
 ## 7. Attachment snapshot update — 2026-11-10
 
 The current bounded Project conversation context exposes 21 distinct attachment objects, including one additional object beyond the prior 20-object checkpoint. The mounted runtime contains 14 unique text paths totaling 110,718 bytes. Exact new object identity and mounted-byte hash are recorded in `docs/audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10-02.md`; the full 14-path runtime manifest is `docs/audit/SESSION_MATERIALIZATION_MANIFEST_2026-11-10-02.md`. This does not establish complete Project Library enumeration or complete Project conversation coverage.
+
+
+## WO-DOC-01 execution delta — DOC-D-01
+
+On 2026-11-10, one existing standalone Core CI evidence row was freshly re-fetched: commit `2820285021b1a3d7ae9acd953b3bb65677c33512`, Core CI run `42383513646`, job `128435932500`, artifact `13578582284`. The decoded job log reports 187 passed / 0 failed / 0 skipped. This is metadata/log revalidation of a historical run, not a new test execution. DOC-D-01 remains PARTIAL; no Unity/FishNet/Android/Linux or production claim is established. DOC-D-02 remains PARTIAL and no requirement was resolved.
