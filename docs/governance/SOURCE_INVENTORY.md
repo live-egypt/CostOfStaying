@@ -175,3 +175,9 @@ This inventory is a current source index, not a Stage closure declaration.
 - Phase 1–3 remain separate from Stage 0–5 and must not be conflated.
 
 No claim of full project conversation coverage, full source recovery, or final project readiness is made.
+
+## 10. Current-session materialization crosswalk
+
+A separate runtime snapshot on 2026-11-10 contains ten materialized text-file paths. Their exact Project attachment IDs, byte sizes, line counts, SHA-256 values, and observed report roles are recorded in [UPLOADED_SOURCE_REVIEW_MATRIX.md](../audit/UPLOADED_SOURCE_REVIEW_MATRIX.md), with the raw measurement manifest in [SESSION_MATERIALIZATION_MANIFEST_2026-11-10.md](../audit/SESSION_MATERIALIZATION_MANIFEST_2026-11-10.md).
+
+This ten-path runtime snapshot is not a replacement for the historical 15-attachment Project Files snapshot recorded above. The exact crosswalk for all 15 historical records is incomplete; two additional current-session records (03.txt and Governance Baseline Setup.txt) were not present in the earlier 15-record table. Do not infer that unmounted historical attachments are deleted or that the current ten paths are a complete Project surface.
