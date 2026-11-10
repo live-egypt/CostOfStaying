@@ -33,7 +33,7 @@ Not authorized by this work order:
 | Record type | Canonical location | Rule |
 |---|---|---|
 | Governance policy | `docs/governance/PROJECT_GOVERNANCE_BASELINE.md` | Policy and authority map; currently PROPOSED pending owner review. |
-| Source inventory | `docs/governance/SOURCE_INVENTORY.md` | Inventory only; distinguish attachments, Library entries, exports, repository copies, and reports. |
+| Source inventory | `docs/governance/SOURCE_INVENTORY.md` + `docs/audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md` | Inventory and dated delta snapshots; distinguish attachments, Library entries, exports, repository copies, and reports. |
 | Provenance | `docs/governance/PROVENANCE_REGISTER.md` | Source lineage and limitations; never replace originals with summaries. |
 | Decisions | ADRs + `docs/governance/DECISIONS_LOG.md` | ADR is authoritative for its decision scope; log is an index. |
 | Decision traceability | `docs/governance/DECISION_TRACEABILITY_REGISTER.md` | Link owner event to decision/ADR and preserve missing-source states. |
@@ -67,7 +67,7 @@ Work packages proceed in order. A blocked item is recorded and carried forward; 
 |---|---|---|---|---|
 | DOC-A-01 | A | Preserve independent Decision Status and Evidence Maturity axes | DONE — branch documentation | Governance baseline exists; owner review remains separate. |
 | DOC-A-02 | A | Establish one canonical authority per record type | DONE — initial mapping | Validate against all current documentation paths. |
-| DOC-B-01 | B | Reconcile the current 19 attachment objects visible in project conversation context with the prior 15-record Project Files snapshot | IN PROGRESS | Compare stable attachment IDs; do not equate matching names with duplicate content. |
+| DOC-B-01 | B | Reconcile the current 20 attachment objects visible in project conversation context with the prior 15-record Project Files snapshot | DONE — 5-ID DELTA AND HASHES RECORDED | See ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md; hashes cover mounted bytes only. |
 | DOC-B-02 | B | Reconcile 40 Library file records + one folder with current attachment and repository inventories | BLOCKED — direct Library surface unavailable | Requires a fresh Library export/listing or accessible source snapshot. |
 | DOC-B-03 | B | Preserve ChatGPT/DeepSeek origin-attribution conflict and missing original chat threads | OPEN | Requires original conversation/export identity evidence. |
 | DOC-C-01 | C | Map WO-DOC-01 owner approval to this work-order record | DONE — current conversation approval | Approval applies to documentation work order, not to all proposed governance policy content. |
@@ -102,11 +102,11 @@ Every closeout must record:
 
 - WO-DOC-01: APPROVED — execution authorized.
 - Work package A: initial baseline present on PR #11 branch; governance policy itself remains PROPOSED pending owner review.
-- Work package B: in progress; current conversation context shows 19 uploaded attachment objects, while prior repository snapshot records 15 Project Files objects. These are different snapshots/surfaces and must be reconciled by stable IDs, not by filename.
+- Work package B: in progress; current conversation context shows 20 uploaded attachment objects, while prior repository snapshot records 15 Project Files objects. These are different snapshots/surfaces and must be reconciled by stable IDs, not by filename.
 - Work packages C and D: partial; source and evidence gaps remain.
 - Work package E: handoff exists and must be kept current.
 - PR #11: OPEN / DRAFT / NOT MERGED.
 - main: unchanged by this work order.
 - Stage 1 / Stage 2: no closure declared.
 
-**Next action:** complete DOC-B-01 by reconciling the current 19 attachment IDs against the prior 15-record manifest and update the source inventory without overwriting historical snapshots.
+**Next action:** continue DOC-B-02/DOC-B-03 source recovery where an accessible Library export or original conversation source is available; keep the Library and chat-origin blockers explicit.

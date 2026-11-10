@@ -69,6 +69,8 @@
 
 ## التدقيق والأدلة
 
+- [ملحق لقطة المرفقات الإضافية — 2026-11-10](audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md)
+
 - [سجل تقدم التوفيق](audit/RECONCILIATION_PROGRESS.md)
 - [مراجعة اتساق التصميم والأنظمة](audit/DESIGN_CONSISTENCY_REVIEW_2026-11-10.md)
 - [فحص بنية سجلات المتطلبات 85/109](audit/REQUIREMENT_REGISTERS_QA_2026-11-10.md)
