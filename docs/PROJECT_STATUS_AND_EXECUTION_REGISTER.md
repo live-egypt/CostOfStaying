@@ -13,9 +13,9 @@
 | Workstream | Location | State | Delivery meaning |
 |---|---|---|---|
 | v2.1 design documentation | main | PRESENT — proposed baseline | Documents exist; gameplay remains PROPOSED FOR PLAYTEST. |
-| Governance/source recovery package | This reconciliation branch / pending PR | IN PROGRESS | Not delivered to main until PR review and merge. |
+| Governance/source recovery package | docs/project-reconciliation-baseline-2026-11-10 / PR #11 | OPEN / DRAFT / REVIEW ONLY | 29 documentation files changed at the last confirmed PR snapshot; based on main; not merged. |
 | Standalone pure-C# Core | feature/core-lifecycle-resolution, PR #6 | IMPLEMENTED ON FEATURE BRANCH; CI TESTED | Not part of main. PR #6 remains open Draft. |
-| Core hotfix | PR #7 | MERGED INTO FEATURE BRANCH | Does not represent a main merge. |
+| Core hotfix | PR #7 | MERGED INTO feature/core-lifecycle-resolution | Does not represent a main merge. |
 | Stage 1 source package | PR #8 | OPEN / DRAFT / NOT MERGED | Based on main; overlaps PR #9. |
 | 85-TBD mapping package | PR #9 | OPEN / DRAFT / NOT MERGED | Based on Core feature branch; overlaps PR #8. |
 | Superseded package | PR #10 | CLOSED WITHOUT MERGE | Historical-only; not an active delivery candidate. |
@@ -40,6 +40,8 @@
 ## 3. Core implementation and CI evidence
 
 PR #6 contains standalone Core and NUnit source on feature/core-lifecycle-resolution at 2820285021b1a3d7ae9acd953b3bb65677c33512. That branch was 441 commits ahead and 0 behind the observed main SHA at comparison time. PR #6 is open, Draft, and unmerged.
+
+PR #11 is the current documentation consolidation candidate: base main at 3dd9cfc27aa48b09b3cde802e266a8221c39f0d3; head docs/project-reconciliation-baseline-2026-11-10. It remains Draft and unmerged. Its current metadata must be rechecked before any review/merge action; mergeability is not owner approval.
 
 Historical Core CI results are recorded in the CI Evidence Register. The latest recovered PR #6 head run reports 187/187 NUnit tests passing on the exact Core commit. This verifies only the standalone Core workflow scope. It does not verify Unity import/build, FishNet runtime, Android, Linux Dedicated Server, multiplayer networking, game balance, or production security.
 
@@ -120,3 +122,4 @@ The following are not established as complete production systems:
 | Risk Register | PROPOSED | — | DEFERRED |
 | Technical Debt Register | PROPOSED | — | DEFERRED |
 | Final readiness assessment | — | — | NOT ISSUED |
+| Documentation consolidation delivery | PROPOSED | DOCUMENTED / REVIEWED | PR #11 — OPEN / DRAFT / NOT MERGED |
