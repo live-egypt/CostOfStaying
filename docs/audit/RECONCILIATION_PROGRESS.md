@@ -69,6 +69,8 @@ The branch adds a consolidated governance/source package, preserves the 85-item 
 
 Inspected the six main system specifications, technical/network/backend/data/deployment architecture, six security documents, six quality documents, three operations documents and three roadmap documents. The resulting [Design Consistency Review](DESIGN_CONSISTENCY_REVIEW_2026-11-10.md) records 15 findings. Key unresolved items include player lifecycle, endgame result taxonomy, Betrayal threshold effects, CommandId/idempotency boundaries, combat-to-Collapse interaction, and unmeasured performance targets. No gameplay rule was changed.
 
+Structural QA confirmed 85 unique TBD IDs (TBD-01…85) in the Source-to-Requirement Matrix, with no gaps; the source TBD Register has 87 ID occurrences because TBD-37 and TBD-45 repeat in its binding-clarification section, but still 85 unique IDs. The Consistency Matrix primary table has 109 rows and 109 unique record IDs. These are structural results only; source, implementation, test and verification completeness remain partial. See [Requirements Register QA](REQUIREMENT_REGISTERS_QA_2026-11-10.md).
+
 ## 8. Status
 
 | Item | Decision Status | Evidence Maturity | Work State |
