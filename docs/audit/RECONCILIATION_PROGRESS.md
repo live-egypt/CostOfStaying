@@ -108,3 +108,12 @@ Reviewed Core CI, CodeQL, SecurityCodeScan, optional Contrast and Dependabot wor
 | Stage 1 closure | — | — | NOT DECLARED |
 | Stage 2 closure | — | — | BLOCKED in recovered records |
 | Final readiness assessment | — | — | NOT ISSUED |
+
+
+## 10. Documentation index and inventory validation
+
+- The 41 Markdown paths in the inspected main documentation inventory were fetched from this main-based branch.
+- The current docs/README.md contains 67 internal Markdown links. All 67 targets were fetched successfully from the same branch ref.
+- The link check verifies target existence only; it does not validate semantic correctness of all inline links or prove all repository files have been inventoried.
+- See DOCUMENTATION_REVIEW_MATRIX.md and INDEX_LINK_VALIDATION_2026-11-10.md.
+- Structural QA was independently rechecked: 85 unique TBD IDs in the Source-to-Requirement Matrix, no missing IDs from TBD-01 through TBD-85; 109 rows and 109 unique IDs in the primary Consistency Matrix table.
