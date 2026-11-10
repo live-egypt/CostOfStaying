@@ -86,6 +86,10 @@ Key boundaries recorded:
 
 No source code or ADR was changed. No fresh test execution was performed.
 
+## 9. CI and security automation review
+
+Reviewed Core CI, CodeQL, SecurityCodeScan, optional Contrast and Dependabot workflow definitions on the Core feature branch. See [CI Workflow and Security Automation Review](CI_WORKFLOW_SECURITY_REVIEW_2026-11-10.md). The review confirms the present Core-only trigger/build scope, SARIF artifact retention without GitHub Code Scanning ingestion in the inspected SecurityCodeScan workflow, optional/manual Contrast scope, and the need to verify nested NuGet Dependabot coverage from actual update PRs. No workflow YAML, permission or secret configuration was changed.
+
 ## 9. Status
 
 | Item | Decision Status | Evidence Maturity | Work State |
