@@ -68,7 +68,7 @@ Work packages proceed in order. A blocked item is recorded and carried forward; 
 |---|---|---|---|---|
 | DOC-A-01 | A | Preserve independent Decision Status and Evidence Maturity axes | DONE — branch documentation | Governance baseline exists; owner review remains separate. |
 | DOC-A-02 | A | Establish one canonical authority per record type | DONE — initial mapping | Validate against all current documentation paths. |
-| DOC-B-01 | B | Reconcile the current 20 attachment objects visible in project conversation context with the prior 15-record Project Files snapshot | DONE — 5-ID DELTA AND HASHES RECORDED | See ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md; hashes cover mounted bytes only. |
+| DOC-B-01 | B | Reconcile surfaced attachment objects against prior dated snapshots and record each newly surfaced object/hash | DONE — 6-OBJECT DELTA OVER THE 15-OBJECT BASELINE; 21 CURRENT OBJECTS RECORDED | See ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md and ATTACHMENT_SNAPSHOT_DELTA_2026-11-10-02.md; hashes cover mounted bytes only. |
 | DOC-B-02 | B | Reconcile 40 Library file records + one folder with current attachment and repository inventories | BLOCKED — direct Library surface unavailable | Requires a fresh Library export/listing or accessible source snapshot. |
 | DOC-B-03 | B | Preserve ChatGPT/DeepSeek origin-attribution conflict and missing original chat threads | OPEN | Requires original conversation/export identity evidence. |
 | DOC-C-01 | C | Map WO-DOC-01 owner approval to this work-order record | DONE — current conversation approval | Approval applies to documentation work order, not to all proposed governance policy content. |
@@ -130,3 +130,12 @@ Every closeout must record:
 - Stage 1 / Stage 2: no closure declared.
 
 **Next action:** continue source-backed requirement/evidence mapping across the 85 TBD rows and 109 consistency records. Keep all source gaps explicit; do not migrate package paths or create Risk/Debt registers before their gates.
+
+
+## 9. Additional attachment reconciliation checkpoint — 2026-11-10
+
+- One further distinct attachment object was surfaced after the prior 20-object checkpoint: `file_0000000022c481f4b8d45ee51c9bf603` (`قسم · قسم · مراجعة وجرد الملفات.txt`).
+- Mounted bytes: 5314 bytes, 152 lines, SHA-256 `23ebb91ab1e85b562e41aaca7884ccaf98f306aab0d20ce03340ef40794e817d`.
+- Bounded current context count: 21 attachment objects; mounted runtime: 14 unique text paths / 110,718 bytes.
+- Added [ATTACHMENT_SNAPSHOT_DELTA_2026-11-10-02.md](../audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10-02.md) and [SESSION_MATERIALIZATION_MANIFEST_2026-11-10-02.md](../audit/SESSION_MATERIALIZATION_MANIFEST_2026-11-10-02.md).
+- DOC-B-01 remains complete only for the bounded surfaced attachment-ID/hash reconciliation. DOC-B-02 and DOC-B-03 remain open/blocked because direct Library enumeration and original chat provenance are unavailable.
