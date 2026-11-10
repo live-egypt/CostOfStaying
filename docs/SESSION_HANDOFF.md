@@ -10,7 +10,7 @@
 **Working branch:** `docs/project-reconciliation-baseline-2026-11-10`  
 **Pull Request:** [#11 — Documentation and evidence baseline](https://github.com/live-egypt/CostOfStaying/pull/11)  
 **PR state at update:** OPEN / DRAFT / NOT MERGED  
-**Last substantive source-inventory commit:** `7fd3d8e96279c70a83ed26e0bdc525494a74959d`
+**Last substantive governance/decision-traceability commit:** `d9405d347f56ac14401bf7ab19892893fd939e70`
 
 > This handoff is a navigation aid, not a competing source of truth. Canonical decisions, source lineage, requirements, conflicts, and delivery status remain in their designated registers and ADRs.
 
@@ -74,7 +74,7 @@ The owner explicitly approved WO-DOC-01 for sequential execution. The authoritat
 | WO-DOC-01 execution | APPROVED — AUTHORIZED | Follow the sequential work packages in WORK_ORDER_REGISTER.md |
 | Work package A | INITIAL BASELINE PRESENT — REVIEW PENDING | Preserve current authority map and status axes |
 | Work package B | PARTIAL — 5-ID DELTA HASHED | Library/chat-source gaps remain blocked; see attachment snapshot delta |
-| Work package C | PARTIAL | Recover owner decision events; A1-HOLD-01…06 remain source-blocked |
+| Work package C | PARTIAL — WO-DOC-01 AUTHORIZATION MAPPED | Recover remaining owner decision events; A1-HOLD-01…06 remain source-blocked |
 | Work package D | PARTIAL | Keep evidence scoped to exact run/commit/artifact |
 | Work package E | PRESENT — MAINTAIN | Update this handoff after material changes |
 | Source inventory / provenance | PARTIAL | Continue source-level reconciliation where originals are available |

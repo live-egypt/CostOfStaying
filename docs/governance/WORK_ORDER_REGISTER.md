@@ -104,6 +104,7 @@ Every closeout must record:
 |---|---|---|---|---|
 | 2026-11-10 | `c7723063f0be5ea9613d0673c1135762a7b88a08` | WO-DOC-01 tracker, README index, status, and handoff baseline | Live GitHub branch/PR inspection; file fetch verification | Committed on documentation branch; PR #11 remains Draft. |
 | 2026-11-10 | `7fd3d8e96279c70a83ed26e0bdc525494a74959d` | Five additional attachment IDs, mounted-byte SHA-256 values, and three new runtime paths | Recomputed SHA-256/byte/line counts from mounted files; fetched committed addendum; confirmed README link and PR changed-file count | DOC-B-01 completed for this bounded 5-ID delta; Library and conversation completeness remain open. |
+| 2026-11-10 | `d9405d347f56ac14401bf7ab19892893fd939e70` | Recorded WO-DOC-01 owner authorization in Decision Traceability Register; corrected Stage 1 source-snapshot wording | Fetched committed register and checked approval scope/source limitation | DOC-C-01 mapped; broader decision recovery remains PARTIAL/BLOCKED. |
 
 ## 7. Current closeout
 
