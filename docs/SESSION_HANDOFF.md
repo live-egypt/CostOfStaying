@@ -10,7 +10,7 @@
 **Working branch:** `docs/project-reconciliation-baseline-2026-11-10`  
 **Pull Request:** [#11 — Documentation and evidence baseline](https://github.com/live-egypt/CostOfStaying/pull/11)  
 **PR state at update:** OPEN / DRAFT / NOT MERGED  
-**Observed PR head before attachment-delta commit:** `ef8059d6a4a6ae3e13932d8d71218f6af4f4d149`
+**Last substantive source-inventory commit:** `7fd3d8e96279c70a83ed26e0bdc525494a74959d`
 
 > This handoff is a navigation aid, not a competing source of truth. Canonical decisions, source lineage, requirements, conflicts, and delivery status remain in their designated registers and ADRs.
 
@@ -58,9 +58,9 @@ The live repository metadata was read during this session:
 - Default branch is `main`.
 - PR #11 is open, Draft, mergeable according to current metadata, and not merged.
 - PR #11 targets `main` from `docs/project-reconciliation-baseline-2026-11-10`.
-- PR #11 contains 36 changed documentation paths after the attachment-delta update.
+- PR #11 contains 36 changed documentation paths at the attachment-delta checkpoint.
 - PR #11's base SHA is `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`.
-- PR #11's observed head SHA before this update is `ef8059d6a4a6ae3e13932d8d71218f6af4f4d149`.
+- PR #11's observed head SHA at the attachment-delta checkpoint is `7fd3d8e96279c70a83ed26e0bdc525494a74959d`.
 
 These are a time-bounded observations. Re-fetch PR metadata and branch heads before every subsequent write or review. A mergeable flag is not owner approval.
 
@@ -73,7 +73,7 @@ The owner explicitly approved WO-DOC-01 for sequential execution. The authoritat
 | Governance baseline | PRESENT ON PR #11 — PROPOSED | Owner review; do not self-approve |
 | WO-DOC-01 execution | APPROVED — AUTHORIZED | Follow the sequential work packages in WORK_ORDER_REGISTER.md |
 | Work package A | INITIAL BASELINE PRESENT — REVIEW PENDING | Preserve current authority map and status axes |
-| Work package B | PARTIAL — IN PROGRESS | Reconcile current 20 attachment objects with prior 15-record snapshot |
+| Work package B | PARTIAL — 5-ID DELTA HASHED | Library/chat-source gaps remain blocked; see attachment snapshot delta |
 | Work package C | PARTIAL | Recover owner decision events; A1-HOLD-01…06 remain source-blocked |
 | Work package D | PARTIAL | Keep evidence scoped to exact run/commit/artifact |
 | Work package E | PRESENT — MAINTAIN | Update this handoff after material changes |
@@ -133,4 +133,4 @@ At the end of each substantial work session, update:
 - Open blockers and missing source evidence.
 - Exact next action.
 
-**Current next action:** continue DOC-B-02/DOC-B-03 source recovery where an accessible Library export or original conversation source is available; preserve access blockers. Do not merge PR #11 or close Stage 1/2.
+**Current next action:** continue source-backed decision/evidence mapping while retaining DOC-B-02/DOC-B-03 as blocked until the original Library/chat sources become accessible. Re-fetch live PR metadata before the next write. Do not merge PR #11 or close Stage 1/2.

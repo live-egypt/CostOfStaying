@@ -119,7 +119,7 @@ The project owner approved WO-DOC-01 for sequential execution. The work-order tr
 | Work package | Scope | Current state |
 |---|---|---|
 | A — Governance Baseline | Authority, status axes, document/change control | INITIAL BASELINE PRESENT ON PR #11 — OWNER REVIEW PENDING |
-| B — Source & Provenance | Attachments, Library, conversations, exports, repository sources | PARTIAL — IN PROGRESS |
+| B — Source & Provenance | Attachments, Library, conversations, exports, repository sources | PARTIAL — 20 ATTACHMENT IDS ENUMERATED; 5-ID DELTA HASHED; LIBRARY/CHAT SOURCES OPEN |
 | C — Decision & Action Tracking | Owner events, ADR traceability, conflicts, work orders | PARTIAL — SOURCE RECOVERY REQUIRED |
 | D — Evidence & Traceability | Requirements, code, tests, CI, artifacts, commits | PARTIAL — HISTORICAL EVIDENCE ONLY WHERE RECORDED |
 | E — Session Continuity | Session handoff and next action | PRESENT — MAINTAIN EACH SESSION |

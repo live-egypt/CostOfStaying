@@ -98,7 +98,14 @@ Every closeout must record:
 - Work-order/action IDs advanced.
 - Remaining blockers and exact next action.
 
-## 6. Current closeout
+## 6. Delivery log
+
+| Date | Commit | Scope | Validation | Result |
+|---|---|---|---|---|
+| 2026-11-10 | `c7723063f0be5ea9613d0673c1135762a7b88a08` | WO-DOC-01 tracker, README index, status, and handoff baseline | Live GitHub branch/PR inspection; file fetch verification | Committed on documentation branch; PR #11 remains Draft. |
+| 2026-11-10 | `7fd3d8e96279c70a83ed26e0bdc525494a74959d` | Five additional attachment IDs, mounted-byte SHA-256 values, and three new runtime paths | Recomputed SHA-256/byte/line counts from mounted files; fetched committed addendum; confirmed README link and PR changed-file count | DOC-B-01 completed for this bounded 5-ID delta; Library and conversation completeness remain open. |
+
+## 7. Current closeout
 
 - WO-DOC-01: APPROVED — execution authorized.
 - Work package A: initial baseline present on PR #11 branch; governance policy itself remains PROPOSED pending owner review.
@@ -109,4 +116,4 @@ Every closeout must record:
 - main: unchanged by this work order.
 - Stage 1 / Stage 2: no closure declared.
 
-**Next action:** continue DOC-B-02/DOC-B-03 source recovery where an accessible Library export or original conversation source is available; keep the Library and chat-origin blockers explicit.
+**Next action:** continue DOC-B-02/DOC-B-03 source recovery only when an accessible Library export or original conversation source is available; meanwhile proceed to the next source-backed decision/evidence mapping task without closing blocked items.
