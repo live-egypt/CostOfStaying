@@ -114,7 +114,9 @@ Reviewed Core CI, CodeQL, SecurityCodeScan, optional Contrast and Dependabot wor
 
 - The 41 Markdown paths in the inspected main documentation inventory were fetched from this main-based branch.
 - The current docs/README.md contains 69 internal Markdown links. All 69 targets were fetched successfully from the same branch ref.
-- The link check verifies target existence only; it does not validate semantic correctness of all inline links or prove all repository files have been inventoried.
+- The repository-root README.md has 4 internal Markdown links; all 4 targets were fetched successfully.
+- The other 40 documents in the 41-file main docs inventory contain 2 additional relative Markdown links; both targets were fetched successfully.
+- Combined bounded link check: 75 link occurrences / 75 targets fetched. This verifies target existence only; it does not validate semantic correctness or prove all repository files have been inventoried.
 - See DOCUMENTATION_REVIEW_MATRIX.md, UPLOADED_SOURCE_REVIEW_MATRIX.md, CORE_TEST_COVERAGE_INVENTORY_2026-11-10.md and INDEX_LINK_VALIDATION_2026-11-10.md. The Core fixture inventory covers 16 test fixture files, 171 test methods and 187 NUnit case declarations; no fresh execution was run. The ten materialized runtime files are crosswalked to their exact attachment IDs in UPLOADED_SOURCE_REVIEW_MATRIX.md.
 - Structural QA was independently rechecked: 85 unique TBD IDs in the Source-to-Requirement Matrix, no missing IDs from TBD-01 through TBD-85; 109 rows and 109 unique IDs in the primary Consistency Matrix table.
 
