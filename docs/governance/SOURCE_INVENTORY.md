@@ -208,3 +208,10 @@ Do not conflate this repository binary object with the 10 currently materialized
 The current project conversation context exposes 20 distinct attachment objects. The earlier 15-object snapshot remains a valid historical snapshot; five additional attachment IDs and mounted-byte SHA-256 values are recorded in [ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md](../audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md).
 
 This is not a fresh Project Library listing and does not establish full conversation enumeration. The active runtime materialized 13 unique text-file paths; attachment-object count and local-path count are different dimensions. Preserve prior snapshot dates and counts rather than rewriting them as if they were measured simultaneously.
+
+
+## 5.1 Additional surfaced attachment snapshot — 2026-11-10
+
+A later bounded project-context snapshot exposes one additional distinct attachment object beyond the 20-object checkpoint: `file_0000000022c481f4b8d45ee51c9bf603`, displayed as `قسم · قسم · مراجعة وجرد الملفات.txt`. The exact mounted bytes are 5314 bytes / 152 lines with SHA-256 `23ebb91ab1e85b562e41aaca7884ccaf98f306aab0d20ce03340ef40794e817d`. See [Attachment Snapshot Delta 02](../audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10-02.md) for its classification and limitations.
+
+This updates the bounded surfaced count to 21 attachment objects and the mounted runtime to 14 distinct paths / 110,718 bytes. It does not re-enumerate Project Library or establish complete conversation coverage. The earlier 15-object inventory and five-object delta remain historical snapshots.
