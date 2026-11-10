@@ -90,7 +90,7 @@ It does not authenticate credentials, prove that a live transport connection own
 
 The inspected Core identifiers include CommandSequenceId scoped to SessionId. The sequence tracker is in-memory, rejects stale/replayed sequences and enforces a configured maximum jump. It does not keep command results under a stable player identity.
 
-No CommandId type or idempotency-result store was found in the inspected Core identifiers/services. ADR-015 remains PROPOSED and explicitly says no code/test change is made by that ADR.
+No RequestId type, stable CommandId type, or idempotency-result store was found in the inspected Core identifiers/services. The main Trust Boundaries and Suffering Transfer specifications use RequestId terminology, while branch ADR-015 proposes CommandId as a distinct stable identity independent of session sequence. ADR-015 remains PROPOSED and explicitly says no code/test change is made by that ADR.
 
 **Classification:** Known unimplemented proposed capability.  
 **Required gate:** Do not claim effect-level idempotency, reconnect-safe result replay or restart-safe protection. Approve ADR-015 and specify atomic reservation/result semantics before implementing it.
