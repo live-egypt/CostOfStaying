@@ -25,7 +25,7 @@
 | 181 | 0 | 0 | 41332989910 | c33faf84aa39856d46181ccc1c9decbfba2777d2 | 124926820979 | 13093814339 | badb2929b1fdd4f4bbacc74405499df5c1902ca2181789f2903369db8dd5f7c1 |
 | 187 | 0 | 0 | 42383513646 | 2820285021b1a3d7ae9acd953b3bb65677c33512 | 128435932500 | 13578582284 | f57902a95f22498a4007aad7e135f3144fb8df994895e93a191bf26d8a04bdad |
 
-All four workflow jobs reported completed/success. The retrieved job logs contained explicit NUnit summaries:
+All five Core CI workflow runs reported completed/success. The retrieved job logs contained explicit NUnit summaries:
 - 148 passed, 0 failed, 0 skipped, total 148.
 - 177 passed, 0 failed, 0 skipped, total 177.
 - 181 passed, 0 failed, 0 skipped, total 181 (run 41333575156).
@@ -81,29 +81,8 @@ These runs cover the standalone .NET Core project and its NUnit suite on their r
 
 | Claim | Decision Status | Evidence Maturity | Boundary |
 |---|---|---|---|
-| The four named Core CI jobs passed their declared steps | — | TESTED | Exact run/commit only |
-| The NUnit totals listed above | — | TESTED | Historical per-commit snapshots |
+| The five named Core CI runs passed their declared steps | — | TESTED | Exact run/commit only |
+| The NUnit totals listed above (five separate run/commit snapshots) | — | TESTED | Historical per-commit snapshots |
 | Standalone Core is fully production-ready | — | NOT ESTABLISHED | Not supported by these runs |
 | Unity/FishNet integration is verified | — | NOT ESTABLISHED | No integration run evidenced |
 | Project is production-ready | — | NOT ESTABLISHED | No project-wide readiness evidence |
-
-
-## 5. Supplemental 181/181 snapshot — ADR-012 / ADR-013 cited run
-
-A second 181-test run cited by ADR-012 and ADR-013 on the Core feature branch was independently recovered and checked.
-
-| Tests passed | Failed | Skipped | Run ID | Tested commit | Job ID | Artifact ID | Artifact SHA-256 |
-|---:|---:|---:|---|---|---|---|---|
-| 181 | 0 | 0 | 41332989910 | c33faf84aa39856d46181ccc1c9decbfba2777d2 | 124926820979 | 13093814339 | badb2929b1fdd4f4bbacc74405499df5c1902ca2181789f2903369db8dd5f7c1 |
-
-Retrieved evidence:
-- Workflow: Core CI; run completed/success.
-- Job: Build and test standalone Core; completed/success.
-- Job log: Release build succeeded with 0 warnings and 0 errors; NUnit reported 181 passed, 0 failed, 0 skipped.
-- GitHub reported the artifact was not expired at retrieval time; expiry timestamp 2027-01-30T17:44:18Z.
-
-This is a separate 181/181 snapshot from run 41333575156 on commit 8a193190fb5f2e10c05773fb0789171011bfd2eb. They are not conflicting results because they refer to different commits and runs. Retain both evidence records.
-
-## 6. Updated snapshot interpretation
-
-The recovered Core CI evidence set now contains **five distinct run/commit snapshots** with test totals 148, 177, 181, 181 and 187. The two 181 results are independent. The totals are not cumulative and must not be represented as one current test count. The earlier 177 run-ID discrepancy remains recorded: 41332759086 is the run associated with the cited commit and log, while 41332755494 remains an unresolved historical reference.
