@@ -52,6 +52,9 @@ A conflict may be closed only when the entry records:
 | DESIGN-004 | ADR-008…015 policy | Main ADR set ends at ADR-004. | PR #6 branch adds ADR-008…015; many remain PROPOSED. | Branch-only architecture proposals. | OPEN — OWNER REVIEW REQUIRED |
 | DESIGN-005 | C1 / B3 / A1×C / S-C1 design claims | Recovered reports summarize conditional or exploratory architecture directions. | Original decision messages/source traces are incomplete. | Report-derived proposal, not final architecture approval. | SOURCE TRACE PENDING |
 | DESIGN-006 | Sequence vs identity vs idempotency | Existing design material distinguishes session sequence, command identity, and effect idempotency. | Their persistence/reconnect/restart boundaries remain policy questions. | Separate guarantees, not equivalent mechanisms. | OPEN |
+| DESIGN-007 | Dead/Spirit terminology in Collapse and Spirit | Main COLLAPSE_SYSTEM says Alive → Dead/Spirit; SPIRIT_SYSTEM describes Alive → Dead followed by Spirit. | One player lifecycle is not expressed consistently in main specs. | Ambiguous lifecycle wording, linked to DESIGN-001. | OPEN |
+| DESIGN-008 | Endgame result taxonomy | RULE-05 groups Time Limit and Mutual Collapse; ENDGAME_SYSTEM names them as separate outcomes. | Three grouped result categories vs four named terminal outcomes. | Taxonomy/presentation ambiguity. | OPEN |
+| DESIGN-009 | Combat-triggered Collapse | COMBAT_SYSTEM says apply Collapse if enabled, but trigger/stacking/scope are not specified in main rules. | Gameplay interaction is underspecified. | OPEN — DESIGN DECISION REQUIRED |
 
 ## 5. Repository and delivery conflicts
 
@@ -79,7 +82,11 @@ A conflict may be closed only when the entry records:
 
 All CI rows above are scoped to standalone Core and the named workflow runs. They do not establish end-to-end game readiness.
 
-## 7. Non-equivalence rules
+## 7. Cross-document design review references
+
+The companion [Design Consistency Review](../audit/DESIGN_CONSISTENCY_REVIEW_2026-11-10.md) records findings DES-001…DES-015. Those DES identifiers are review-finding IDs, not replacements for the conflict IDs in this register. DES-001 maps to DESIGN-001; DES-002 and DES-003 map to DESIGN-007; DES-004 maps to DESIGN-008; DES-006 maps to DESIGN-006; DES-007 maps to DESIGN-009.
+
+## 8. Non-equivalence rules
 
 Do not collapse the following into one record or guarantee:
 
@@ -94,6 +101,6 @@ Do not collapse the following into one record or guarantee:
 - Project attachments and Library records.
 - Original conversations, exports, derived reports, and repository copies.
 
-## 8. Closure status
+## 9. Closure status
 
 No open item in this register is closed by the current reconciliation commit. Resolved identity facts (for example, distinct files sharing a basename) do not resolve broader source completeness or provenance gaps.
