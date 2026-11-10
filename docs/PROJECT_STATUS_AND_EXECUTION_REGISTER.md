@@ -19,7 +19,8 @@
 | Stage 1 source package | PR #8 | OPEN / DRAFT / NOT MERGED | Based on main; overlaps PR #9. |
 | 85-TBD mapping package | PR #9 | OPEN / DRAFT / NOT MERGED | Based on Core feature branch; overlaps PR #8. |
 | Superseded package | PR #10 | CLOSED WITHOUT MERGE | Historical-only; not an active delivery candidate. |
-| Unity project | No reviewed Unity project tree on main | NOT IMPLEMENTED / NOT PRESENT IN REVIEWED MAIN SCOPE | Requires source project and package configuration. |
+| Unity project | No complete Unity project tree on main | NOT PRESENT IN REVIEWED MAIN SCOPE | The PR #5 ZIP is only an Assets/source package; no Packages manifest/lock, ProjectSettings, scenes or .meta inventory. |
+| Unity Assets/source package | review/unity-source-package-2026-11-01 / PR #5 | PRESENT ON REVIEW BRANCH — 81 C# / 4 asmdef | Not on main; archive SHA-256 manifest mismatch; Unity compilation, tests and FishNet compatibility NOT VERIFIED. |
 | FishNet runtime adapters | Not established in reviewed repository evidence | NOT IMPLEMENTED | API/version verification required. |
 | Android release client | No app build evidence recovered | NOT VERIFIED | Requires Unity build and device validation. |
 | Linux Dedicated Server | No integrated server build evidence recovered | NOT VERIFIED | Requires Unity headless/server build and runtime tests. |
@@ -80,6 +81,8 @@ A completed CI run is not a Stage closure event. A Stage closure is not a runtim
 ## 6. Open implementation boundaries
 
 The branch-scoped Core contains tested primitives for identifiers/results, vitality/lifecycle, betrayal ledger, match lifecycle/player registry, session lifecycle/registry, command envelope/sequence/queue/admission, time/revision, cleanup, and snapshot construction as described in PR #6 branch records.
+
+The PR #5 Unity ZIP contains Core/Net and EditMode/Net test source, but is only a branch-scoped Assets/source package. Its static source review identifies contract gaps and no Unity compilation/test execution. See the Unity Source Package Reconciliation audit.
 
 The following are not established as complete production systems:
 - Credential validation and authentication integration.
