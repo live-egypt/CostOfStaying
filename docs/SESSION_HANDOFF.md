@@ -10,7 +10,7 @@
 **Working branch:** `docs/project-reconciliation-baseline-2026-11-10`  
 **Pull Request:** [#11 — Documentation and evidence baseline](https://github.com/live-egypt/CostOfStaying/pull/11)  
 **PR state at update:** OPEN / DRAFT / NOT MERGED  
-**Observed PR head before this WO-DOC-01 commit:** `30bc1cb52938092da6cf9dc1106300cb3154f99a`
+**Observed PR head after WO-DOC-01 baseline commit:** `c7723063f0be5ea9613d0673c1135762a7b88a08`
 
 > This handoff is a navigation aid, not a competing source of truth. Canonical decisions, source lineage, requirements, conflicts, and delivery status remain in their designated registers and ADRs.
 
@@ -58,9 +58,9 @@ The live repository metadata was read during this session:
 - Default branch is `main`.
 - PR #11 is open, Draft, mergeable according to current metadata, and not merged.
 - PR #11 targets `main` from `docs/project-reconciliation-baseline-2026-11-10`.
-- PR #11 contains 34 documentation paths in its live changed-file list at this checkpoint.
+- PR #11 contains 35 changed documentation paths in its live changed-file list at this checkpoint.
 - PR #11's base SHA is `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`.
-- PR #11's observed head SHA is `f0ef29a027622a7e6c6b11918fe10e86cd684b7f`.
+- PR #11's observed head SHA is `c7723063f0be5ea9613d0673c1135762a7b88a08`.
 
 These are a time-bounded observations. Re-fetch PR metadata and branch heads before every subsequent write or review. A mergeable flag is not owner approval.
 

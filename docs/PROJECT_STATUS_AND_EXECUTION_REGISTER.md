@@ -13,7 +13,7 @@
 | Workstream | Location | State | Delivery meaning |
 |---|---|---|---|
 | v2.1 design documentation | main | PRESENT — proposed baseline | Documents exist; gameplay remains PROPOSED FOR PLAYTEST. |
-| Governance/source recovery package | docs/project-reconciliation-baseline-2026-11-10 / PR #11 | OPEN / DRAFT / REVIEW ONLY | 34 documentation paths in the live PR changed-file list at the current checkpoint; based on main; not merged. |
+| Governance/source recovery package | docs/project-reconciliation-baseline-2026-11-10 / PR #11 | OPEN / DRAFT / REVIEW ONLY | 35 documentation paths in the live PR changed-file list at the current checkpoint; based on main; not merged. |
 | Standalone pure-C# Core | feature/core-lifecycle-resolution, PR #6 | IMPLEMENTED ON FEATURE BRANCH; CI TESTED | Not part of main. PR #6 remains open Draft. |
 | Core hotfix | PR #7 | MERGED INTO feature/core-lifecycle-resolution | Does not represent a main merge. |
 | Stage 1 source package | PR #8 | OPEN / DRAFT / NOT MERGED | Based on main; overlaps PR #9. |
