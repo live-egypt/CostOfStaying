@@ -165,9 +165,9 @@ PR #8 and PR #9 remain open and untouched. Their branches are preserved for revi
 
 | PR | Base | Head branch | Latest recorded head | Scope | State |
 |---|---|---|---|---|---|
-| [#11](https://github.com/live-egypt/CostOfStaying/pull/11) | main at 3dd9cfc27aa48b09b3cde802e266a8221c39f0d3 | docs/project-reconciliation-baseline-2026-11-10 | 8a09bf60a452cfb061a3ccb92707907c1293cf39 | 29 documentation paths under docs/, including consolidated governance, source crosswalks, audit reviews and evidence records | OPEN / DRAFT / NOT MERGED |
+| [#11](https://github.com/live-egypt/CostOfStaying/pull/11) | main at 3dd9cfc27aa48b09b3cde802e266a8221c39f0d3 | docs/project-reconciliation-baseline-2026-11-10 | Use live PR metadata | 30 documentation paths under docs/ at the last recorded comparison; consolidated governance, source crosswalks, audit reviews and evidence records | OPEN / DRAFT / NOT MERGED |
 
-PR #11 is the current consolidation review candidate. It does not modify main, copy Core source, or merge PR #6/#8/#9. The branch comparison was 69 commits ahead and 0 behind at the last recorded check. GitHub's mergeability metadata is technical and may change between queries; it is not owner approval.
+PR #11 is the current consolidation review candidate. It does not modify main, copy Core source, or merge PR #6/#8/#9. For live head SHA, commit count, ahead/behind and mergeability, use PR #11 metadata; this register is a dated control record, not a live mirror. GitHub mergeability is technical metadata and is not owner approval.
 
 Before any merge:
 - Review the full diff and verify no unresolved source/decision conflict is being silently closed.
