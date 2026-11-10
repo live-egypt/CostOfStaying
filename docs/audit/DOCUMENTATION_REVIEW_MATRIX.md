@@ -35,7 +35,7 @@
 | 20 | docs/security/THREAT_MODEL.md | Security | d0102f1351c3fd7fe7a290fe11c405d0c0f87d30 | Read; requires threat-to-test evidence. |
 | 21 | docs/security/SECRETS_MANAGEMENT.md | Security/Operations | 5fc4880b76245f0551a48b331afc313ec73ff2e9 | Read; policy proposed, no runtime proof. |
 | 22 | docs/security/DATA_PRIVACY.md | Security/Privacy | 084b9e2720ad4b771e8f9ad8484e586de5f7bda3 | Read; data classes/retention remain TBD. |
-| 23 | docs/security/INCIDENT_RESPONSE.md | Security/Operations | 8dc012891176b0a203260be7a7c8a00c0ae518ad | Existence and blob fetched; full content review scheduled. |
+| 23 | docs/security/INCIDENT_RESPONSE.md | Security/Operations | 8dc012891176b0a203260be7a7c8a00c0ae518ad | Content reviewed; incident-response lifecycle/severity tiers are proposed, with no operational exercise evidence. |
 | 24 | docs/quality/TEST_STRATEGY.md | Quality | 8b595546292799c2e28a4a78712217044c96c28a | Read; explicitly proposed, no test claim from this document. |
 | 25 | docs/quality/SECURITY_TEST_PLAN.md | Quality/Security | 618318a0c802ce0af2cc0118015bc230358ef093 | Read; proposed security checks. |
 | 26 | docs/quality/PLAYTEST_PLAN.md | Quality/Gameplay | d9872eca8d4c2c3a8e7a95504b576df5e47eeb75 | Read; minimum 10 valid sessions before ADR-004 decision. |
