@@ -86,3 +86,18 @@ These runs cover the standalone .NET Core project and its NUnit suite on their r
 | Standalone Core is fully production-ready | — | NOT ESTABLISHED | Not supported by these runs |
 | Unity/FishNet integration is verified | — | NOT ESTABLISHED | No integration run evidenced |
 | Project is production-ready | — | NOT ESTABLISHED | No project-wide readiness evidence |
+
+
+## 9. Live re-fetch checkpoint — 2026-11-10
+
+A fresh read-only GitHub re-fetch was performed for the 187-test snapshot:
+
+- Commit: `2820285021b1a3d7ae9acd953b3bb65677c33512` — `ci: run Core CI on lifecycle resolution branch`.
+- Commit-associated Core CI run: `42383513646`, run number `406`, workflow `Core CI`, status `completed`, conclusion `success`.
+- Job: `128435932500`, `Build and test standalone Core`, status/conclusion `completed/success`.
+- Completed job steps included Core dependency-boundary enforcement, Core composition-root enforcement, .NET 10 setup, restore, Core build, test-project build, NUnit tests, and test-result upload.
+- Decoded job log explicitly reports: `Failed: 0, Passed: 187, Skipped: 0, Total: 187` from `CostOfStaying.Core.Tests.dll (net10.0)`.
+- Artifact: `core-test-results`, ID `13578582284`, 37,718 bytes, not expired at re-fetch; GitHub-reported digest `sha256:f57902a95f22498a4007aad7e135f3144fb8df994895e93a191bf26d8a04bdad`; expiry metadata `2027-02-05T14:50:58Z`.
+- The same commit lookup returned associated SecurityCodeScan run `42383513631` and CodeQL Advanced run `42383513638`, both completed/success. Their scanner findings/configuration are not assessed by this Core CI re-fetch.
+
+**Interpretation:** This is a fresh metadata/log confirmation of the existing historical 187/187 row, not a new test execution. It supports only the standalone Core workflow scope on the exact commit above. It does not verify Unity, FishNet runtime, Android, Linux Dedicated Server, multiplayer behavior, or production readiness. No artifact archive was downloaded or inspected in this checkpoint.
