@@ -79,7 +79,7 @@
 - [بصمات المواد المادية في جلسة 2026-11-10](audit/SESSION_MATERIALIZATION_MANIFEST_2026-11-10.md)
 - [جرد ومراجعة وثائق main — 41 ملفاً](audit/DOCUMENTATION_REVIEW_MATRIX.md)
 - [مصفوفة مراجعة التصميم والمعمارية والشبكة والأمن](audit/DESIGN_ARCHITECTURE_REVIEW_MATRIX.md)
-- [التحقق من روابط فهرس الوثائق — 68/68](audit/INDEX_LINK_VALIDATION_2026-11-10.md)
+- [التحقق من روابط فهرس الوثائق — 69/69](audit/INDEX_LINK_VALIDATION_2026-11-10.md)
 - [مصفوفة مطابقة الملفات المرفوعة ومعرّفات مصادرها](audit/UPLOADED_SOURCE_REVIEW_MATRIX.md)
 
 ## ADRs الموجودة على main
