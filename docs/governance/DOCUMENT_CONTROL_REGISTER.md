@@ -41,6 +41,8 @@
 | ADR/Core implementation reconciliation | `docs/audit/ADR_RECONCILIATION_REVIEW_2026-11-10.md` | Main ADR-001…004, feature-branch ADR-005…015, Core source/tests/CI | REVIEWED — branch-specific; no ADR status changed |
 | Core implementation review | `docs/audit/CORE_IMPLEMENTATION_REVIEW_2026-11-10.md` | Core source, NUnit tests, project files and CI logs | REVIEWED — source-level; no fresh tests run |
 | Core test coverage inventory | `docs/audit/CORE_TEST_COVERAGE_INVENTORY_2026-11-10.md` | 16 NUnit fixtures on PR #6 feature branch | REVIEWED — 171 test methods / 187 case declarations; no fresh test execution |
+| Unity source package reconciliation | `docs/audit/UNITY_SOURCE_PACKAGE_RECONCILIATION_2026-11-10.md` | PR #5 ZIP branch path/blob, archive central directory and checksum manifest | REVIEWED — ZIP present on review branch; checksum mismatch; not a complete Unity project |
+| GitHub branch/PR inventory | `docs/audit/GITHUB_BRANCH_PR_INVENTORY_2026-11-10.md` | GitHub branch search, PR #1–#11 metadata and ref comparisons | REVIEWED — dated branch/PR snapshot; live metadata must be rechecked |
 | Core test coverage inventory | `docs/audit/CORE_TEST_COVERAGE_INVENTORY_2026-11-10.md` | 16 NUnit fixture files on PR #6 feature branch | REVIEWED — 171 test methods / 187 case declarations; no fresh test execution |
 | CI/security automation review | `docs/audit/CI_WORKFLOW_SECURITY_REVIEW_2026-11-10.md` | Core CI, CodeQL, SecurityCodeScan, Contrast and Dependabot workflow definitions | REVIEWED — configuration only; findings/coverage not operationally proven |
 | Stage evidence | Project Library Stage 0–2 records | `STAGE_1.md`, `STAGE_2.md`, review and closure records | LIBRARY-ONLY unless separately committed |
