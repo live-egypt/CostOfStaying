@@ -72,6 +72,8 @@
 - [مراجعة ADRs وعقود Core](audit/ADR_RECONCILIATION_REVIEW_2026-11-10.md)
 - [مراجعة تنفيذ Core](audit/CORE_IMPLEMENTATION_REVIEW_2026-11-10.md)
 - [جرد تغطية اختبارات Core — 16 Fixture / 187 NUnit Cases](audit/CORE_TEST_COVERAGE_INVENTORY_2026-11-10.md)
+- [مراجعة حزمة مصادر Unity — الفرع PR #5](audit/UNITY_SOURCE_PACKAGE_RECONCILIATION_2026-11-10.md)
+- [جرد فروع GitHub وطلبات الدمج #1–#11](audit/GITHUB_BRANCH_PR_INVENTORY_2026-11-10.md)
 - [مراجعة CI والأتمتة الأمنية](audit/CI_WORKFLOW_SECURITY_REVIEW_2026-11-10.md)
 - [سجل أدلة Core CI](audit/CI_EVIDENCE_REGISTER.md)
 - [مراجعة Network Audit الأولية](audit/NETWORK_AUDIT_RECONCILIATION_INITIAL.md)
