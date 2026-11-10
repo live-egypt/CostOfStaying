@@ -181,3 +181,23 @@ No claim of full project conversation coverage, full source recovery, or final p
 A separate runtime snapshot on 2026-11-10 contains ten materialized text-file paths. Their exact Project attachment IDs, byte sizes, line counts, SHA-256 values, and observed report roles are recorded in [UPLOADED_SOURCE_REVIEW_MATRIX.md](../audit/UPLOADED_SOURCE_REVIEW_MATRIX.md), with the raw measurement manifest in [SESSION_MATERIALIZATION_MANIFEST_2026-11-10.md](../audit/SESSION_MATERIALIZATION_MANIFEST_2026-11-10.md).
 
 This ten-path runtime snapshot is not a replacement for the historical 15-attachment Project Files snapshot recorded above. The exact crosswalk for all 15 historical records is incomplete; two additional current-session records (03.txt and Governance Baseline Setup.txt) were not present in the earlier 15-record table. Do not infer that unmounted historical attachments are deleted or that the current ten paths are a complete Project surface.
+
+## 11. Unity source package repository object — PR #5 branch
+
+A binary source package was discovered and retrieved from the repository review branch:
+
+| Field | Value | Evidence boundary |
+|---|---|---|
+| Object ID | REPO-BIN-UNITY-001 | Repository binary object, not a Project attachment/Library record |
+| Path | incoming/unity-source-package/CostOfStaying_Unity_Source_Package.zip | Exact path on review branch |
+| Branch / PR | review/unity-source-package-2026-11-01 / PR #5 | Open Draft, not merged |
+| Git blob SHA | 319a584046d3ece7ce74242233015738758ec210 | Independently recomputed Git blob SHA-1 matched |
+| Decoded bytes | 56,217 | Base64 decoded from the fetched object |
+| Archive contents | 94 ZIP entries: 81 C#, 4 asmdef, 2 Markdown, 7 directory entries | Central-directory inventory; no source compilation |
+| Computed SHA-256 | 5f92947c8b23d1ee15d7c744fb62ef0cf7af361bfdda277fcdaeff61dab51ac4 | Computed over exact decoded object bytes |
+| Declared SHA-256 | 351190c6789b0a146be0978606c831f48b951509e7f353bb3b469374eb9b15d9 | Value in branch SHA256 manifest; mismatch |
+| Completeness | Assets/source package only | No Packages manifest/lock, ProjectSettings/ProjectVersion, scenes or .meta files in 94-entry inventory |
+
+The ZIP's presence in PR #5's changed-file list conflicts with the PR body and checksum manifest, both of which state the corrected ZIP is not committed. The archive is present on the review branch but not in the inspected main baseline. See [UNITY_SOURCE_PACKAGE_RECONCILIATION_2026-11-10.md](../audit/UNITY_SOURCE_PACKAGE_RECONCILIATION_2026-11-10.md).
+
+Do not conflate this repository binary object with the 10 currently materialized text attachments or the historical 15-attachment Project surface. No uploader attribution is inferred. No source files were extracted into main or merged.
