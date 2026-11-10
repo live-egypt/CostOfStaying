@@ -9,6 +9,7 @@
 - [تجربة اللاعب والحلقة الأساسية](03_PLAYER_EXPERIENCE_AND_CORE_LOOP.md)
 - [مسرد المصطلحات](GLOSSARY.md)
 - [حالة المشروع والتنفيذ](PROJECT_STATUS_AND_EXECUTION_REGISTER.md)
+- [ملخص استئناف العمل وسياق الجلسة](SESSION_HANDOFF.md)
 
 ## الأنظمة
 - [Collapse](systems/COLLAPSE_SYSTEM.md)
