@@ -18,8 +18,8 @@
 
 | Check | Result |
 |---|---:|
-| Internal Markdown links extracted | 67 |
-| Repository targets successfully fetched | 67 |
+| Internal Markdown links extracted | 68 |
+| Repository targets successfully fetched | 68 |
 | Missing targets | 0 |
 | Failed fetches | 0 |
 
@@ -33,4 +33,4 @@ This procedure verifies that each internal link target in docs/README.md exists 
 - That the repository-wide tree has been enumerated.
 - That the source claims or implementation states in linked documents are verified.
 
-The 41-file baseline document inventory separately records the main documentation set reviewed in this reconciliation. The current index includes additional governance and audit records introduced on this feature branch. The 67th link, added after the initial 66-target check, points to this validation report itself and was fetched successfully.
+The 41-file baseline document inventory separately records the main documentation set reviewed in this reconciliation. The current index includes additional governance and audit records introduced on this feature branch. The additional links added after the initial check point to this validation report and the uploaded-source review matrix; both targets were fetched successfully.
