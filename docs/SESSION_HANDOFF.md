@@ -133,4 +133,4 @@ At the end of each substantial work session, update:
 - Open blockers and missing source evidence.
 - Exact next action.
 
-**Current next action:** continue source-backed decision/evidence mapping while retaining DOC-B-02/DOC-B-03 as blocked until the original Library/chat sources become accessible. Re-fetch live PR metadata before the next write. Do not merge PR #11 or close Stage 1/2.
+**Current next action:** proceed with the 85-item TBD and 109-record consistency source/evidence mapping using available original excerpts; preserve per-item source gaps and do not infer approval. Re-fetch live PR metadata before the next write. Do not merge PR #11 or close Stage 1/2.
