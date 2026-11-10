@@ -32,6 +32,10 @@
 | Security architecture and controls | `docs/security/*` | Security reconciliation material and security test plan | DOCUMENTS PRESENT — design/implementation/verification not implied |
 | Requirement evidence mapping | `docs/governance/REQUIREMENT_EVIDENCE_MATRIX.md` | Source-to-Requirement Matrix, exact code/test/CI artifacts when mapped | INITIAL SCAFFOLD — implementation/test evidence not assessed item-by-item |
 | Core CI evidence | `docs/audit/CI_EVIDENCE_REGISTER.md` and `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | GitHub Actions runs/artifacts | RUN-SCOPED; no Unity/FishNet/Android/Linux inference |
+| Current-session source crosswalk | `docs/audit/UPLOADED_SOURCE_REVIEW_MATRIX.md` | Session materialization manifest and exact attachment IDs | REVIEWED — ten runtime paths only; not a complete Project surface |
+| Main documentation inventory | `docs/audit/DOCUMENTATION_REVIEW_MATRIX.md` | Main documentation index/tree snapshot | REVIEWED — 41 indexed Markdown files; not repository-wide recursive inventory |
+| Documentation index link validation | `docs/audit/INDEX_LINK_VALIDATION_2026-11-10.md` | `docs/README.md` | VERIFIED for 68 internal target-existence checks only |
+| Cross-domain design/architecture matrix | `docs/audit/DESIGN_ARCHITECTURE_REVIEW_MATRIX.md` | Gameplay, architecture, Network and Security documents | REVIEWED — findings remain proposed/open; no decisions changed |
 | Cross-document design review | `docs/audit/DESIGN_CONSISTENCY_REVIEW_2026-11-10.md` | GDD, rules, system specifications, ADRs, architecture, security and quality docs | REVIEWED — findings remain proposals/open until owner decision |
 | Requirements register structural QA | `docs/audit/REQUIREMENT_REGISTERS_QA_2026-11-10.md` | TBD Register, Source-to-Requirement Matrix, Consistency Matrix | REVIEWED — structural counts only; source resolution not implied |
 | ADR/Core implementation reconciliation | `docs/audit/ADR_RECONCILIATION_REVIEW_2026-11-10.md` | Main ADR-001…004, feature-branch ADR-005…015, Core source/tests/CI | REVIEWED — branch-specific; no ADR status changed |
