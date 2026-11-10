@@ -71,7 +71,22 @@ Inspected the six main system specifications, technical/network/backend/data/dep
 
 Structural QA confirmed 85 unique TBD IDs (TBD-01…85) in the Source-to-Requirement Matrix, with no gaps; the source TBD Register has 87 ID occurrences because TBD-37 and TBD-45 repeat in its binding-clarification section, but still 85 unique IDs. The Consistency Matrix primary table has 109 rows and 109 unique record IDs. These are structural results only; source, implementation, test and verification completeness remain partial. See [Requirements Register QA](REQUIREMENT_REGISTERS_QA_2026-11-10.md).
 
-## 8. Status
+## 8. Core implementation review
+
+A source-level review inspected Core result/identifier/time primitives, vitality/lifecycle, BetrayalLedger, MatchLifecycle, MatchPlayerRegistry, SessionLifecycle/Registry, command envelope/sequence/queue, authenticated admission, session cleanup, roster snapshots, composition root, associated NUnit fixtures and project files. See [Core Implementation Review](CORE_IMPLEMENTATION_REVIEW_2026-11-10.md).
+
+Key boundaries recorded:
+- SessionCleanupService does not know whether a dequeued command handler remains in flight; the caller must coordinate completion before cleanup.
+- Core session admission is not credential authentication or proof of transport connection ownership.
+- CommandSequenceId is not stable CommandId; ADR-015 idempotency is not implemented in inspected Core.
+- BetrayalLedger has in-memory event retention dependent on per-match composition lifetime.
+- CoreComposition's one-per-match scope is documented but not enforced by the API.
+- MatchRosterSnapshot is a limited roster projection, not a full world snapshot; atomic capture and central StateRevision ownership remain unresolved.
+- No Debuff/atomic Suffering Transfer service, movement simulation, authoritative tick executor, complete outcome resolver, Unity/FishNet adapter, Android build or Linux server runtime was established in this review.
+
+No source code or ADR was changed. No fresh test execution was performed.
+
+## 9. Status
 
 | Item | Decision Status | Evidence Maturity | Work State |
 |---|---|---|---|
