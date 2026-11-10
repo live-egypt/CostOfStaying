@@ -116,3 +116,34 @@ A separate pre-existing documentation PR was discovered during final review:
 The two PRs overlap in source inventory, provenance, decision traceability, document control, and README indexing, but use different paths and base branches. PR #9 also contains the migrated 85-item TBD/traceability/consistency source records and initial evidence matrices.
 
 **DOC-PACKAGE-01 — OPEN:** PR #8 and PR #9 remain overlapping review candidates and neither is merged. The current branch is a separately authorized consolidation candidate based on main; it places the source/governance records at one root path set, retains the 85-item and 109-record source material, and uses one CONFLICT_REGISTER.md. This does not make the new paths canonical until PR review and owner acceptance. Do not merge PR #8 or PR #9 as-is. This is a document-package conflict, not CONFLICT-01 or CONFLICT-02.
+
+
+## 9. PR path reconciliation — consolidation candidate
+
+The following mapping prevents the PR #8 and PR #9 packages from becoming competing sources. These are proposed consolidated paths in this branch; they do not become canonical until PR review and owner acceptance.
+
+| PR #8 source path | PR #9 source path | Consolidated candidate path in this branch | Treatment |
+|---|---|---|---|
+| docs/governance/sources/SOURCE_INVENTORY.md | docs/governance/SOURCE_INVENTORY.md | docs/governance/SOURCE_INVENTORY.md | One inventory document; PR #9 copy retained as the richer reconciliation base. |
+| docs/governance/sources/PROVENANCE_REGISTER.md | docs/governance/PROVENANCE_REGISTER.md | docs/governance/PROVENANCE_REGISTER.md | One provenance document; raw Library limitations preserved. |
+| docs/governance/sources/DECISION_TRACEABILITY_MATRIX.md | docs/governance/DECISION_TRACEABILITY_REGISTER.md | docs/governance/DECISION_TRACEABILITY_REGISTER.md | Register retained; matrix naming is not duplicated. |
+| docs/governance/sources/CONFLICT_REGISTER.md | docs/governance/DECISION_AND_CONFLICT_LOG.md | docs/governance/CONFLICT_REGISTER.md | Conflicts consolidated here; no second decision/conflict log created. |
+| docs/governance/sources/DOCUMENT_CONTROL.md | docs/governance/DOCUMENT_CONTROL_REGISTER.md | docs/governance/DOCUMENT_CONTROL_REGISTER.md | One document-control register with path-mapping record. |
+| docs/audit/STAGE1_SOURCE_PROVENANCE_REVIEW.md | — | docs/audit/STAGE1_SOURCE_PROVENANCE_REVIEW.md | New bounded review synthesis; not claimed byte-identical to a Library or PR source file. |
+| — | docs/governance/TBD_REGISTER.md | docs/governance/TBD_REGISTER.md | Preserve the 85-item register and its unresolved fields. |
+| — | docs/governance/SOURCE_TRACEABILITY_REGISTER.md | docs/governance/SOURCE_TRACEABILITY_REGISTER.md | Preserve source-event trace and missing-source limits. |
+| — | docs/governance/SOURCE_TO_REQUIREMENT_MATRIX.md | docs/governance/SOURCE_TO_REQUIREMENT_MATRIX.md | Preserve 85 item mappings; source match remains partial. |
+| — | docs/governance/CONSISTENCY_MATRIX.md | docs/governance/CONSISTENCY_MATRIX.md | Preserve 109 rows and 24 reported pending-source records. |
+| — | docs/governance/TBD_CROSS_REFERENCE_MAP.md | docs/governance/TBD_CROSS_REFERENCE_MAP.md | Preserve non-equivalent cross-reference relationships. |
+| — | docs/governance/REQUIREMENT_EVIDENCE_MATRIX.md | docs/governance/REQUIREMENT_EVIDENCE_MATRIX.md | Evidence scaffold; NOT ASSESSED is not a negative implementation claim. |
+| — | docs/audit/RECONCILIATION_PROGRESS.md | docs/audit/RECONCILIATION_PROGRESS.md | Rewritten as the 2026-11-10 checkpoint for this branch. |
+| — | docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md | docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md | Synthesized against main and current branch/PR evidence; does not inherit Core code. |
+
+PR #8 and PR #9 remain open and untouched. Their branches are preserved for review/history. Do not merge either package as-is while this path consolidation candidate is under review.
+
+## 10. Updated control tasks
+
+| ID | Task | Status |
+|---|---|---|
+| DOC-CTRL-09 | Maintain one candidate path per information type across PR #8, PR #9 and this branch | INITIAL PATH MAP RECORDED — OWNER REVIEW REQUIRED |
+| DOC-CTRL-10 | Confirm canonical path set and integration decision | PENDING OWNER REVIEW |
