@@ -122,3 +122,15 @@ For those exact records:
 ## 8. Current disposition
 
 This register is an implemented repository document with partial coverage. It does not close Stage 1, Stage 2, or Phase 2. It does not authorize changes to ADRs, Core, Net, Unity, Tests, or the Project Library.
+
+## 9. Repository binary source package provenance
+
+| ID | Object | Origin / exact identity | Status | Missing proof / limitation |
+|---|---|---|---|---|
+| REPO-BIN-UNITY-001 | Unity source ZIP | Path incoming/unity-source-package/CostOfStaying_Unity_Source_Package.zip; branch review/unity-source-package-2026-11-01; PR #5; Git blob SHA 319a584046d3ece7ce74242233015738758ec210 | RAW REPOSITORY BLOB FETCHED; GIT BLOB SHA-1 MATCHED; ZIP DIRECTORY REVIEWED | Branch-only; not on main. Archive is Assets/source package, not a full Unity project. |
+| REPO-BIN-UNITY-001-HASH | SHA-256 identity | Computed 5f92947c8b23d1ee15d7c744fb62ef0cf7af361bfdda277fcdaeff61dab51ac4; accompanying branch manifest declares 351190c6789b0a146be0978606c831f48b951509e7f353bb3b469374eb9b15d9 | OPEN — CHECKSUM MISMATCH | Retain both; determine which archive version the manifest intended to identify. |
+| REPO-BIN-UNITY-001-DELIVERY | PR #5 delivery statement | PR changed-file list includes the ZIP; PR body and README/manifest text state it is not committed | OPEN — DESCRIPTION/CONTENT CONFLICT | Exact historical uploader/operation event is not established. Do not infer attribution. |
+
+The ZIP central directory lists 81 C# files, 4 assembly definitions, 2 Markdown files and 7 directory entries. This is archive inventory, not proof of compilation or runtime behavior. The full reconciliation and source-level spot review are in [UNITY_SOURCE_PACKAGE_RECONCILIATION_2026-11-10.md](../audit/UNITY_SOURCE_PACKAGE_RECONCILIATION_2026-11-10.md).
+
+No Library payload SHA-256 or archive claim is inferred from this repository object. Repository blob identity and Project Library provenance remain separate evidence classes.
