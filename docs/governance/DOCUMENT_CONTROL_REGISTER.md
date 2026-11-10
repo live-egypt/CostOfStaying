@@ -34,6 +34,7 @@
 | Core CI evidence | `docs/audit/CI_EVIDENCE_REGISTER.md` and `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | GitHub Actions runs/artifacts | RUN-SCOPED; no Unity/FishNet/Android/Linux inference |
 | Cross-document design review | `docs/audit/DESIGN_CONSISTENCY_REVIEW_2026-11-10.md` | GDD, rules, system specifications, ADRs, architecture, security and quality docs | REVIEWED — findings remain proposals/open until owner decision |
 | Requirements register structural QA | `docs/audit/REQUIREMENT_REGISTERS_QA_2026-11-10.md` | TBD Register, Source-to-Requirement Matrix, Consistency Matrix | REVIEWED — structural counts only; source resolution not implied |
+| ADR/Core implementation reconciliation | `docs/audit/ADR_RECONCILIATION_REVIEW_2026-11-10.md` | Main ADR-001…004, feature-branch ADR-005…015, Core source/tests/CI | REVIEWED — branch-specific; no ADR status changed |
 | Stage evidence | Project Library Stage 0–2 records | `STAGE_1.md`, `STAGE_2.md`, review and closure records | LIBRARY-ONLY unless separately committed |
 | Central risk register | Not created in repository | Gameplay, Psychology, Architecture, Engineering, Network, Security materials | DEFERRED pending source/ID reconciliation |
 | Technical debt register | Not created in repository | Engineering and repository audits | DEFERRED pending classification |
@@ -46,6 +47,7 @@
 - `docs/audit/DESIGN_CONSISTENCY_REVIEW_2026-11-10.md`
 - `docs/audit/CI_EVIDENCE_REGISTER.md`
 - `docs/audit/REQUIREMENT_REGISTERS_QA_2026-11-10.md`
+- `docs/audit/ADR_RECONCILIATION_REVIEW_2026-11-10.md`
 - `docs/governance/REQUIREMENTS_TRACEABILITY.md`
 - `docs/governance/adr/ADR-001` through `ADR-004` on main.
 - `docs/architecture/NETWORK_ARCHITECTURE.md` — reviewed in the main snapshot.
