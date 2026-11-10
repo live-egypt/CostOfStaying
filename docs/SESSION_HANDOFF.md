@@ -142,3 +142,14 @@ At the end of each substantial work session, update:
 A further distinct attachment object is now surfaced beyond the earlier 20-object checkpoint: `file_0000000022c481f4b8d45ee51c9bf603` (`قسم · قسم · مراجعة وجرد الملفات.txt`). Its mounted-byte SHA-256 is `23ebb91ab1e85b562e41aaca7884ccaf98f306aab0d20ce03340ef40794e817d` (5314 bytes; 152 lines). The current bounded counts are 21 attachment objects and 14 mounted text paths / 110,718 bytes. See `docs/audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10-02.md` and `docs/audit/SESSION_MATERIALIZATION_MANIFEST_2026-11-10-02.md`.
 
 This is not a complete Project Library or conversation inventory. A1-HOLD-01…06 and both WO-A3 amendments remain source-blocked. Next action: continue DOC-B-02/DOC-B-03 recovery where original Library/chat source access exists; otherwise preserve the blockers and proceed only with source-backed item-level mapping under DOC-D-02.
+
+
+## 8. Latest execution checkpoint — 2026-11-10
+
+- Live PR #11 re-fetched: OPEN / DRAFT / NOT MERGED; base `main`; head branch `docs/project-reconciliation-baseline-2026-11-10`; head SHA at session start `8ddf8f71d460c8db148c0069eb4a4893561eed77`; 39 changed files, all under `docs/`.
+- DOC-B-02 remains BLOCKED: direct Project Library listing/export is not accessible through the current source surface.
+- DOC-B-03 remains OPEN/BLOCKED for closure: surfaced reports and attachment texts do not provide the complete original Project chat threads, direct thread IDs, or decisive platform-origin metadata.
+- The next source-backed action selected was DOC-D-01. A fresh read-only re-fetch confirmed the existing 187/187 Core CI record: commit `2820285021b1a3d7ae9acd953b3bb65677c33512`, run `42383513646`, job `128435932500`, artifact `13578582284`. The log says 187 passed, 0 failed, 0 skipped. No test was run in this session; no artifact archive was inspected.
+- DOC-D-01 remains PARTIAL pending equivalent re-fetch/inspection for the remaining historical rows and artifact scope. DOC-D-02 remains PARTIAL; no TBD or consistency record is resolved.
+
+**Next single action:** continue DOC-D-01 by re-fetching the next distinct Core CI snapshot (run `41331400978`, commit `94c5789b0e82493290ca85133fc692e83ffd9884`) and checking its exact run/job/log/artifact association before recording any update.
