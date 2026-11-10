@@ -218,6 +218,22 @@ The archive contains 5 EditMode test files and 8 Net test files, including:
 
 No fixture named MovementServiceTests, BetrayalServiceTests, or CorePipelineTests appears in the archive inventory. The existing fixtures therefore do not establish regression coverage for the multi-command-per-tick movement finding or the direct-damage-versus-Transfer contract mismatch. Test names and file presence are not execution evidence.
 
+### 9.9 Player lifecycle and match-state model differ from ADR-007
+
+Assets/CostOfStaying/Core/PlayerState.cs:
+- Exposes IsAlive as the boolean expression Vitality > 0.
+- ApplyDamage clamps Vitality at zero but does not perform a transition to Spirit or Eliminated.
+
+Assets/CostOfStaying/Core/VitalityState.cs:
+- Stores integer Vitality values and exposes IsAlive as Get(playerId) > 0.
+- Does not model Spirit, resurrection, or terminal elimination transitions.
+
+Assets/CostOfStaying/Core/MatchLifecycleState.cs defines only Waiting, Running, Finished and Closed. The ZIP filename inventory contains no standalone Spirit, Collapse, Endgame, Debuff or Vote source module.
+
+**Finding:** This package's inspected player model is a vitality/boolean Alive model. It does not implement the PR #6 branch ADR-007 lifecycle matrix Alive / Spirit / Eliminated, zero Vitality → Spirit, explicit Resurrect, and terminal Eliminated. The match state enum also does not model the proposed vote/endgame phases.
+
+**Branch boundary:** These are source findings for PR #5's ZIP only. They do not describe the separate PR #6 Core implementation, and must not be conflated with PR #6's tested VitalityAccount lifecycle.
+
 ## 10. Static implementation conclusion
 
 The archive is a substantial Unity-oriented source package, not an empty placeholder. It contains Core, Net, and test source, but the inspected gameplay/network paths show material differences from the current project contracts:
