@@ -102,7 +102,7 @@ Reviewed Core CI, CodeQL, SecurityCodeScan, optional Contrast and Dependabot wor
 | 109-record consistency matrix | — | DOCUMENTED | 24 pending-source records reported |
 | Network reconciliation | PROPOSED | REVIEWED | INITIAL / OPEN |
 | Security reconciliation | PROPOSED | REVIEWED | INITIAL / OPEN |
-| CI evidence | — | TESTED | Four historical Core snapshots recovered |
+| CI evidence | — | TESTED | Five historical Core snapshots recovered (148, 177, 181, 181, 187) |
 | Risk Register | PROPOSED | — | DEFERRED |
 | Technical Debt Register | PROPOSED | — | DEFERRED |
 | Stage 1 closure | — | — | NOT DECLARED |
@@ -124,9 +124,8 @@ Reviewed Core CI, CodeQL, SecurityCodeScan, optional Contrast and Dependabot wor
 - Consolidation PR: [PR #11](https://github.com/live-egypt/CostOfStaying/pull/11).
 - Base: main at 3dd9cfc27aa48b09b3cde802e266a8221c39f0d3.
 - Head branch: docs/project-reconciliation-baseline-2026-11-10.
-- Latest checked head: d7c7f53c72796f9a655e1f17415e37469bb59c92.
-- Current comparison: 64 commits ahead, 0 behind.
-- Current PR diff: 29 files changed (28 added, 1 modified); documentation-only paths under docs/.
+- Current PR diff snapshot: 29 documentation paths under docs/ (28 added, 1 modified at the recorded metadata check).
+- For the live head SHA, commit count and comparison, use PR #11 metadata; this checkpoint is a dated work record, not a live mirror.
 - PR state: OPEN / DRAFT / NOT MERGED. GitHub mergeability is a technical signal only and is not owner approval.
 - No tests were run for this documentation-only PR.
 - main was not modified.
