@@ -115,3 +115,105 @@ These are report claims. The current archive presence does not independently val
 | Production readiness | — | NOT ESTABLISHED | NOT CLAIMED |
 
 No ZIP was modified, no source files were extracted into the repository, and no PR #5 change was made by this reconciliation.
+
+
+## 9. Source-level spot review of critical files
+
+The ZIP central directory was used to locate the following files. Their compressed contents were extracted from the same decoded bytes whose Git blob identity was verified, then read as source text. This is a static inspection only; no compiler or Unity runtime was invoked.
+
+### 9.1 Betrayal is direct damage, not the current Transfer rule
+
+Assets/CostOfStaying/Core/BetrayalService.cs:
+- Resolves the attacker from SessionRepository and requires an authenticated session.
+- Validates attacker and victim existence, attacker/victim alive state, victim online presence, and rejects self-target.
+- Calls victimState.ApplyDamage(_rules.VitalityDamage) and marks authoritative state changed.
+- It does not move a Debuff, remove it from the source, check source/target Debuff capacity, apply range or cooldown rules, or atomically commit a Transfer plus Betrayal ledger event.
+
+**Finding:** This is a direct-damage Betrayal mechanic. It does not implement the proposed v2.1 Suffering Transfer Move/atomicity contract. Do not map the class name "Betrayal" to the Suffering Transfer requirement without a rule and implementation reconciliation.
+
+### 9.2 Movement queue can process multiple fixed-delta updates in one tick
+
+Assets/CostOfStaying/Core/MovementCommandIngress.cs:
+- Bounds the queue at MaximumCommandsPerTick multiplied by four.
+- Validates command age, then queues each command.
+
+Assets/CostOfStaying/Core/CorePipeline.cs:
+- On every Execute(tick), drains the MovementCommandIngress queue in a while loop until empty.
+- Applies each dequeued movement command through MovementService.Execute.
+
+Assets/CostOfStaying/Core/MovementService.cs:
+- Computes displacement as normalized input × speed × MovementRules.FixedDeltaTime for every executed command.
+
+**Finding:** The inspected path limits queue storage but does not enforce MaximumCommandsPerTick as a processing cap. Multiple accepted movement commands can each apply a fixed-delta displacement during the same pipeline tick. The exact maximum depends on runtime CommandQueueOptions, but the source does not show a per-tick execution limit in CorePipeline. A client capable of enqueueing several increasing-sequence inputs before a tick may therefore receive multiple movement updates during one simulation tick.
+
+**Required correction gate:** Define ingress rate and per-tick command budgets, apply a server-side processing cap or aggregate input semantics, and add an NUnit regression test proving that command spam cannot multiply movement per tick. The fix is not applied in this documentation review.
+
+### 9.3 Disconnect removes the player rather than preserving reconnect state
+
+Assets/CostOfStaying/Core/SessionLifecycleService.cs:
+- Disconnect marks the session disconnected.
+- Sets presence offline.
+- Removes participation state.
+- Removes the player from AuthoritativeState.Players.
+- Decrements Match.ConnectedPlayers and removes the session record.
+
+Assets/CostOfStaying/Net/CoreServerSessionBridge.cs removes the connection/session mapping and calls Pipeline.RemoveSession after the session lifecycle disconnect succeeds.
+
+**Finding:** The current package implements immediate player removal on disconnect. It does not preserve a reconnect grace period or identity continuity in the inspected path. This is a concrete behavior that must be reconciled with the intended gameplay and session policy before Alpha.
+
+### 9.4 FishNet adapter shape differs from the project network contract
+
+Assets/CostOfStaying/Net/FishNetServerAdapter.cs:
+- Declares FishNetServerAdapter as a Unity MonoBehaviour, not a FishNet NetworkBehaviour.
+- Registers MovementInputBroadcast and BetrayalRequestBroadcast through ServerManager.RegisterBroadcast.
+- Subscribes and unsubscribes TimeManager.OnTick and executes CorePipeline from OnServerTick.
+- Publishes CoreSnapshotBroadcast messages to mapped authenticated connections.
+- The inspected publishing path does not send CommandOutcomeBroadcast, although that DTO exists in the archive.
+- The broadcast registrations disable FishNet's built-in authentication gate and rely on the package's own connection/session mapping plus Core session checks.
+
+Assets/CostOfStaying/Net/CoreServerCommandIngress.cs:
+- Does not trust the client requestedTick; it creates the envelope from Core.Ticks.Current.
+- Requires a Core session to exist and be authenticated before enqueueing the movement or betrayal intent.
+
+**Finding:** The server-owned tick and Core session checks are positive source-level controls. However, the adapter uses MonoBehaviour and broadcast ingress/egress rather than the project's required FishNet NetworkBehaviour with the approved ServerRpc/ObserversRpc pattern. That is an architectural deviation requiring correction or explicit ADR review. FishNet API/runtime compatibility remains unverified because the actual resolved package was not supplied.
+
+### 9.5 Authentication is delegated to a host-supplied identity resolver
+
+CoreServerSessionBridge.Connect:
+- Creates a pending Core session through SessionLifecycle.Connect.
+- Binds ClientId to SessionId in ConnectionSessionMap.
+- Calls SessionLifecycle.Authenticate after binding.
+- Rolls back the binding/session if authentication fails.
+
+FishNetServerAdapter exposes AuthenticateConnection and obtains PlayerId through IServerIdentityResolver. The ZIP contains the interface, but no concrete credential/account identity provider.
+
+**Finding:** The package assumes that the host calls AuthenticateConnection only after a trusted identity check. The package itself does not provide a credential protocol or concrete identity validation source. Do not interpret the Core session IsAuthenticated flag as proof that account credentials were verified unless the host authentication integration is supplied and tested.
+
+### 9.6 Test fixtures present and missing
+
+The archive contains 5 EditMode test files and 8 Net test files, including:
+- CoreCompositionTests
+- MatchStateTests
+- PlayerStateTests
+- SessionLifecycleServiceTests
+- CommandSequenceTrackerTests
+- ConnectionSessionMapTests
+- CoreServerCommandIngressTests
+- PendingConnectionRegistryTests
+- Client/Server adapter state and PlayMode test files
+
+No fixture named MovementServiceTests, BetrayalServiceTests, or CorePipelineTests appears in the archive inventory. The existing fixtures therefore do not establish regression coverage for the multi-command-per-tick movement finding or the direct-damage-versus-Transfer contract mismatch. Test names and file presence are not execution evidence.
+
+## 10. Static implementation conclusion
+
+The archive is a substantial Unity-oriented source package, not an empty placeholder. It contains Core, Net, and test source, but the inspected gameplay/network paths show material differences from the current project contracts:
+
+- Betrayal applies direct Vitality damage rather than the specified full Debuff Move.
+- Movement lacks a visible per-tick processing cap while fixed delta is applied per command.
+- Disconnect removes the player from authoritative match state.
+- Network adapters use MonoBehaviour/Broadcasts rather than the project's required FishNet NetworkBehaviour/RPC shape.
+- Command outcomes are not published by the inspected server adapter path.
+- Authentication relies on a host-supplied resolver; no credential provider is included.
+- Unity/FishNet import, compile, EditMode/PlayMode execution, Host, Dedicated Server, and device validation remain NOT RUN.
+
+These are review findings against the ZIP on PR #5's branch only. They are not claims about the separate PR #6 Core branch or current main implementation.
