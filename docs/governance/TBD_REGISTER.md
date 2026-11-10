@@ -5,7 +5,9 @@
 
 ## `docs/governance/TBD_REGISTER.md`
 
-# TBD Register — TBD-07
+# TBD Register — TBD-01…85
+
+> **Repository title normalization:** The extracted Library text's heading reads “TBD Register — TBD-07”, while the content contains the 85-item range TBD-01…85. This repository heading reflects the actual content scope; the source heading is preserved here for provenance.
 
 > **STATUS: PARTIAL — TBD-01…20 PENDING SOURCE; TBD-21…58 RECEIVED / SOURCE VALIDATION PENDING WITH OWNER DISCREPANCIES; TBD-59…85 REGISTERED — UNRESOLVED — SOURCE VERIFICATION PENDING**
 >
