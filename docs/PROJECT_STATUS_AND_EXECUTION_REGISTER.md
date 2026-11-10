@@ -1,6 +1,6 @@
 # Project Status and Execution Register
 
-**Revision:** 2026-11-10  
+**Revision:** 2026-11-10 — WO-DOC-01 execution update  
 **Decision Status:** PROPOSED — operational control document  
 **Evidence Maturity:** REVIEWED — bounded repository and supplied-source snapshot  
 **Default branch:** main  
@@ -13,7 +13,7 @@
 | Workstream | Location | State | Delivery meaning |
 |---|---|---|---|
 | v2.1 design documentation | main | PRESENT — proposed baseline | Documents exist; gameplay remains PROPOSED FOR PLAYTEST. |
-| Governance/source recovery package | docs/project-reconciliation-baseline-2026-11-10 / PR #11 | OPEN / DRAFT / REVIEW ONLY | 32 documentation files changed at the last confirmed PR snapshot; based on main; not merged. |
+| Governance/source recovery package | docs/project-reconciliation-baseline-2026-11-10 / PR #11 | OPEN / DRAFT / REVIEW ONLY | 34 documentation paths in the live PR changed-file list at the current checkpoint; based on main; not merged. |
 | Standalone pure-C# Core | feature/core-lifecycle-resolution, PR #6 | IMPLEMENTED ON FEATURE BRANCH; CI TESTED | Not part of main. PR #6 remains open Draft. |
 | Core hotfix | PR #7 | MERGED INTO feature/core-lifecycle-resolution | Does not represent a main merge. |
 | Stage 1 source package | PR #8 | OPEN / DRAFT / NOT MERGED | Based on main; overlaps PR #9. |
@@ -110,7 +110,21 @@ The following are not established as complete production systems:
 8. Define reproducible Unity/FishNet integration, Android, Linux, security, performance, and playtest validation gates.
 9. Issue final assessment only when all declared gates have evidence and owner acceptance.
 
-## 8. Current delivery status
+## 8. WO-DOC-01 documentation governance execution
+
+The project owner approved WO-DOC-01 for sequential execution. The work-order tracker is `docs/governance/WORK_ORDER_REGISTER.md` and is the single index for action state. This approval authorizes documentation work; it does not approve the proposed governance policy wholesale, alter ADRs, authorize code changes, merge PRs, or close project stages.
+
+| Work package | Scope | Current state |
+|---|---|---|
+| A — Governance Baseline | Authority, status axes, document/change control | INITIAL BASELINE PRESENT ON PR #11 — OWNER REVIEW PENDING |
+| B — Source & Provenance | Attachments, Library, conversations, exports, repository sources | PARTIAL — IN PROGRESS |
+| C — Decision & Action Tracking | Owner events, ADR traceability, conflicts, work orders | PARTIAL — SOURCE RECOVERY REQUIRED |
+| D — Evidence & Traceability | Requirements, code, tests, CI, artifacts, commits | PARTIAL — HISTORICAL EVIDENCE ONLY WHERE RECORDED |
+| E — Session Continuity | Session handoff and next action | PRESENT — MAINTAIN EACH SESSION |
+
+PR #11 remains OPEN / DRAFT / NOT MERGED. No changes to main or code/test/ADR files are authorized by this documentation work order.
+
+## 9. Current delivery status
 
 | Item | Decision Status | Evidence Maturity | Work State |
 |---|---|---|---|

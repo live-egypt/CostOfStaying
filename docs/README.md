@@ -50,6 +50,8 @@
 
 ## الحوكمة والتحكم بالمصادر
 
+- [سجل أوامر العمل والإجراءات](governance/WORK_ORDER_REGISTER.md)
+
 - [خط أساس الحوكمة](governance/PROJECT_GOVERNANCE_BASELINE.md)
 - [ضبط الوثائق والمرجعيات](governance/DOCUMENT_CONTROL_REGISTER.md)
 - [جرد المصادر](governance/SOURCE_INVENTORY.md)

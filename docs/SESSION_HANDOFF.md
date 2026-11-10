@@ -10,7 +10,7 @@
 **Working branch:** `docs/project-reconciliation-baseline-2026-11-10`  
 **Pull Request:** [#11 — Documentation and evidence baseline](https://github.com/live-egypt/CostOfStaying/pull/11)  
 **PR state at update:** OPEN / DRAFT / NOT MERGED  
-**Observed PR head:** `f0ef29a027622a7e6c6b11918fe10e86cd684b7f`
+**Observed PR head before this WO-DOC-01 commit:** `30bc1cb52938092da6cf9dc1106300cb3154f99a`
 
 > This handoff is a navigation aid, not a competing source of truth. Canonical decisions, source lineage, requirements, conflicts, and delivery status remain in their designated registers and ADRs.
 
@@ -58,7 +58,7 @@ The live repository metadata was read during this session:
 - Default branch is `main`.
 - PR #11 is open, Draft, mergeable according to current metadata, and not merged.
 - PR #11 targets `main` from `docs/project-reconciliation-baseline-2026-11-10`.
-- PR #11 contains 32 documentation paths in its observed changed-file list.
+- PR #11 contains 34 documentation paths in its live changed-file list at this checkpoint.
 - PR #11's base SHA is `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`.
 - PR #11's observed head SHA is `f0ef29a027622a7e6c6b11918fe10e86cd684b7f`.
 
@@ -66,9 +66,17 @@ These are a time-bounded observations. Re-fetch PR metadata and branch heads bef
 
 ## 4. Current work state
 
+The owner explicitly approved WO-DOC-01 for sequential execution. The authoritative work-order/action tracker is [WORK_ORDER_REGISTER.md](governance/WORK_ORDER_REGISTER.md). The governance baseline remains PROPOSED pending owner review; work-order authorization does not approve every policy statement in that baseline.
+
 | Workstream | State | Next action |
 |---|---|---|
 | Governance baseline | PRESENT ON PR #11 — PROPOSED | Owner review; do not self-approve |
+| WO-DOC-01 execution | APPROVED — AUTHORIZED | Follow the sequential work packages in WORK_ORDER_REGISTER.md |
+| Work package A | INITIAL BASELINE PRESENT — REVIEW PENDING | Preserve current authority map and status axes |
+| Work package B | PARTIAL — IN PROGRESS | Reconcile current 19 attachment objects with prior 15-record snapshot |
+| Work package C | PARTIAL | Recover owner decision events; A1-HOLD-01…06 remain source-blocked |
+| Work package D | PARTIAL | Keep evidence scoped to exact run/commit/artifact |
+| Work package E | PRESENT — MAINTAIN | Update this handoff after material changes |
 | Source inventory / provenance | PARTIAL | Continue source-level reconciliation where originals are available |
 | Decision traceability | PARTIAL | Recover exact owner approval events; preserve missing-source states |
 | TBD register (85) | STRUCTURALLY MAPPED; SOURCE VALIDATION PARTIAL | Validate item-by-item; do not mark resolved from registration alone |
@@ -125,4 +133,4 @@ At the end of each substantial work session, update:
 - Open blockers and missing source evidence.
 - Exact next action.
 
-**Current next action:** continue WO-DOC-01 by reconciling the canonical documentation package and its unresolved source/decision traceability; do not merge PR #11 or close Stage 1/2.
+**Current next action:** complete DOC-B-01 by reconciling the current 19 attachment IDs against the prior 15-record manifest and update the source inventory without overwriting historical snapshots. Do not merge PR #11 or close Stage 1/2.

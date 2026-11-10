@@ -1,0 +1,112 @@
+# Work Order Register — Cost of Staying
+
+**Revision:** 2026-11-10  
+**Work Order:** WO-DOC-01 — Project Documentation Governance  
+**Decision Status:** APPROVED — execution authorized by project owner  
+**Evidence Maturity:** DOCUMENTED — initial execution baseline  
+**Working branch:** `docs/project-reconciliation-baseline-2026-11-10`  
+**Pull Request:** [#11 — Documentation and evidence baseline](https://github.com/live-egypt/CostOfStaying/pull/11)  
+**Merge status:** OPEN / DRAFT / NOT MERGED
+
+> This register is the single index for work-order scope, sequencing, execution state, and next actions. Subject-specific facts remain in their canonical registers; this file must not duplicate their detailed contents.
+
+## 1. Authorization and boundaries
+
+The project owner approved WO-DOC-01 and authorized sequential execution of all five work packages.
+
+Authorized:
+- Documentation-only repository changes on a dedicated feature branch.
+- Inspection and reconciliation of existing documentation, sources, decisions, actions, and evidence.
+- Updates to canonical registers and their indexes.
+- Commits and Draft PR maintenance for review.
+
+Not authorized by this work order:
+- Direct changes to `main`.
+- Changes to Core, Net, Unity, Tests, or ADR decision content.
+- Merging any PR.
+- Declaring Stage 1/2 closed.
+- Promoting a proposal to APPROVED unless the source contains an explicit owner decision.
+- Creating Risk or Technical Debt registers before source/identifier reconciliation is complete.
+
+## 2. Canonical authority map
+
+| Record type | Canonical location | Rule |
+|---|---|---|
+| Governance policy | `docs/governance/PROJECT_GOVERNANCE_BASELINE.md` | Policy and authority map; currently PROPOSED pending owner review. |
+| Source inventory | `docs/governance/SOURCE_INVENTORY.md` | Inventory only; distinguish attachments, Library entries, exports, repository copies, and reports. |
+| Provenance | `docs/governance/PROVENANCE_REGISTER.md` | Source lineage and limitations; never replace originals with summaries. |
+| Decisions | ADRs + `docs/governance/DECISIONS_LOG.md` | ADR is authoritative for its decision scope; log is an index. |
+| Decision traceability | `docs/governance/DECISION_TRACEABILITY_REGISTER.md` | Link owner event to decision/ADR and preserve missing-source states. |
+| Conflicts | `docs/governance/CONFLICT_REGISTER.md` | Preserve competing claims until source-backed resolution. |
+| Requirements uncertainty | `docs/governance/TBD_REGISTER.md` | Registration is not resolution. |
+| Requirement/source mapping | `docs/governance/SOURCE_TO_REQUIREMENT_MATRIX.md` | Mapping aid; does not independently approve requirements. |
+| Requirement/evidence | `docs/governance/REQUIREMENT_EVIDENCE_MATRIX.md` | Evidence scope and maturity. |
+| CI evidence | `docs/audit/CI_EVIDENCE_REGISTER.md` | Exact run/commit/job/artifact scope. |
+| Document control | `docs/governance/DOCUMENT_CONTROL_REGISTER.md` | Document owner, authority, and change rules. |
+| Work orders/actions | This file | Single work-order and action index; detailed domain facts stay in their canonical registers. |
+| Session continuity | `docs/SESSION_HANDOFF.md` | Resume pointer, not a competing source of truth. |
+| Project delivery status | `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | Branch-aware implementation and stage/phase status. |
+
+## 3. Execution sequence and current state
+
+Decision status and evidence maturity are independent. Work state is a separate field.
+
+| Sequence | Work package | Scope | Current state | Exit gate |
+|---|---|---|---|---|
+| A | Governance Baseline | Authority map, status axes, change control, document ownership | IMPLEMENTED ON PR #11 BRANCH — REVIEW PENDING | Owner review of governance policy; no silent canonicalization. |
+| B | Source & Provenance | Reconcile attachment, Library, conversation, export, and repository source surfaces | PARTIAL — IN PROGRESS | Source records have stable IDs, provenance class, date/snapshot, access boundary, and evidence pointer; gaps remain explicit. |
+| C | Decision & Action Tracking | Link owner decisions, ADRs, conflicts, work orders, and actions | PARTIAL | Every recovered decision has source event or explicit SOURCE PENDING; no invented approvals. |
+| D | Evidence & Traceability | Link requirement → implementation → test → CI/run/artifact/commit | PARTIAL | Claims are scoped to exact branch/commit/test and unsupported claims remain NOT VERIFIED. |
+| E | Session Continuity | Maintain handoff, current branch/PR/commit, blockers, and next action | IMPLEMENTED ON PR #11 BRANCH — UPDATE EACH SESSION | Handoff matches live repository state and identifies one next action. |
+
+Work packages proceed in order. A blocked item is recorded and carried forward; it is not bypassed by changing its status.
+
+## 4. Active action tracker
+
+| Action ID | Work package | Action | State | Dependency / exit condition |
+|---|---|---|---|---|
+| DOC-A-01 | A | Preserve independent Decision Status and Evidence Maturity axes | DONE — branch documentation | Governance baseline exists; owner review remains separate. |
+| DOC-A-02 | A | Establish one canonical authority per record type | DONE — initial mapping | Validate against all current documentation paths. |
+| DOC-B-01 | B | Reconcile the current 19 attachment objects visible in project conversation context with the prior 15-record Project Files snapshot | IN PROGRESS | Compare stable attachment IDs; do not equate matching names with duplicate content. |
+| DOC-B-02 | B | Reconcile 40 Library file records + one folder with current attachment and repository inventories | BLOCKED — direct Library surface unavailable | Requires a fresh Library export/listing or accessible source snapshot. |
+| DOC-B-03 | B | Preserve ChatGPT/DeepSeek origin-attribution conflict and missing original chat threads | OPEN | Requires original conversation/export identity evidence. |
+| DOC-C-01 | C | Map WO-DOC-01 owner approval to this work-order record | DONE — current conversation approval | Approval applies to documentation work order, not to all proposed governance policy content. |
+| DOC-C-02 | C | Recover A1-HOLD-01…06 and both WO-A3 amendments from exact owner source | BLOCKED — original source not recovered | Do not reconstruct from summaries. |
+| DOC-C-03 | C | Reconcile CONFLICT-01 and CONFLICT-02 without inferring owners | OPEN | Exact requirement source and owner decision required. |
+| DOC-D-01 | D | Maintain exact CI run/commit/job/artifact links | PARTIAL | Existing CI evidence register; no fresh test execution claimed. |
+| DOC-D-02 | D | Link all 85 TBD and 109 consistency records to primary sources/evidence | PARTIAL | Item-level source validation and pending-source reconciliation required. |
+| DOC-E-01 | E | Keep SESSION_HANDOFF aligned with live PR head and next action | IN PROGRESS | Update after each material commit/session. |
+| DOC-E-02 | E | Record commit, changed paths, validation, and PR state in closeout | REQUIRED EACH DELIVERY | Exact GitHub evidence required. |
+
+## 5. Execution and closeout protocol
+
+For each action:
+1. Read the canonical record and source evidence.
+2. State the bounded scope and expected changes.
+3. Preserve original claims and unresolved alternatives.
+4. Make documentation-only edits on the dedicated branch.
+5. Validate changed links, IDs, counts, and cross-references.
+6. Commit with a scoped message.
+7. Update this register, project status, and session handoff as needed.
+8. Keep the PR Draft until owner review; never merge automatically.
+
+Every closeout must record:
+- Branch and exact head SHA.
+- Commit SHA and message.
+- Changed paths.
+- Validation performed and results.
+- Work-order/action IDs advanced.
+- Remaining blockers and exact next action.
+
+## 6. Current closeout
+
+- WO-DOC-01: APPROVED — execution authorized.
+- Work package A: initial baseline present on PR #11 branch; governance policy itself remains PROPOSED pending owner review.
+- Work package B: in progress; current conversation context shows 19 uploaded attachment objects, while prior repository snapshot records 15 Project Files objects. These are different snapshots/surfaces and must be reconciled by stable IDs, not by filename.
+- Work packages C and D: partial; source and evidence gaps remain.
+- Work package E: handoff exists and must be kept current.
+- PR #11: OPEN / DRAFT / NOT MERGED.
+- main: unchanged by this work order.
+- Stage 1 / Stage 2: no closure declared.
+
+**Next action:** complete DOC-B-01 by reconciling the current 19 attachment IDs against the prior 15-record manifest and update the source inventory without overwriting historical snapshots.
