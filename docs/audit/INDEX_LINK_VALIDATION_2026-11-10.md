@@ -18,8 +18,8 @@
 
 | Check | Result |
 |---|---:|
-| Internal Markdown links extracted | 69 |
-| Repository targets successfully fetched | 69 |
+| Internal Markdown links extracted | 71 |
+| Repository targets successfully fetched | 71 |
 | Missing targets | 0 |
 | Failed fetches | 0 |
 
@@ -33,7 +33,7 @@ This procedure verifies that each internal link target in docs/README.md exists 
 - That the repository-wide tree has been enumerated.
 - That the source claims or implementation states in linked documents are verified.
 
-The 41-file baseline document inventory separately records the main documentation set reviewed in this reconciliation. The current index includes additional governance and audit records introduced on this feature branch. The additional links added after the initial check point to this validation report, the uploaded-source review matrix, and the Core test coverage inventory; all three targets were fetched successfully.
+The 41-file baseline document inventory separately records the main documentation set reviewed in this reconciliation. The current index includes additional governance and audit records introduced on this feature branch. The additional links added after the previous check point to this validation report, the uploaded-source review matrix, the Core test coverage inventory, the Unity source-package reconciliation, and the GitHub branch/PR inventory; all five targets were fetched successfully.
 
 
 ## 4. Additional internal-link checks
@@ -49,7 +49,7 @@ The two additional cross-document links found in the baseline docs set were:
 - docs/01_GAME_DESIGN_DOCUMENT.md → docs/02_GAME_RULES_SPECIFICATION.md
 - docs/03_PLAYER_EXPERIENCE_AND_CORE_LOOP.md → docs/quality/PLAYTEST_PLAN.md
 
-**Combined bounded check:** 75 internal Markdown link occurrences were inspected across the root README, docs/README.md, and the 41-file documentation set; all 75 targets were fetched successfully. This is an occurrence count, not a unique-destination count.
+**Combined bounded check:** 77 internal Markdown link occurrences were inspected across the root README, docs/README.md, and the 41-file documentation set; all 77 targets were fetched successfully. This is an occurrence count, not a unique-destination count.
 
 ## 5. Overall limitation
 
