@@ -139,3 +139,14 @@ Every closeout must record:
 - Bounded current context count: 21 attachment objects; mounted runtime: 14 unique text paths / 110,718 bytes.
 - Added [ATTACHMENT_SNAPSHOT_DELTA_2026-11-10-02.md](../audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10-02.md) and [SESSION_MATERIALIZATION_MANIFEST_2026-11-10-02.md](../audit/SESSION_MATERIALIZATION_MANIFEST_2026-11-10-02.md).
 - DOC-B-01 remains complete only for the bounded surfaced attachment-ID/hash reconciliation. DOC-B-02 and DOC-B-03 remain open/blocked because direct Library enumeration and original chat provenance are unavailable.
+
+
+## 10. DOC-D-01 live evidence re-fetch — 2026-11-10
+
+- Re-fetched the exact commit `2820285021b1a3d7ae9acd953b3bb65677c33512`, associated Core CI run `42383513646`, job `128435932500`, decoded job log, and artifact metadata.
+- Confirmed the existing log result: 187 passed, 0 failed, 0 skipped; job completed successfully; artifact `13578582284` was reported not expired with the recorded digest.
+- This revalidates the metadata/log association for one existing historical row; it is not a fresh test execution and does not expand verification scope.
+- DOC-D-01 remains **PARTIAL** because the five historical rows and associated artifacts have not all been freshly re-fetched in this run, and artifact contents were not downloaded/inspected.
+- DOC-D-02 remains **PARTIAL**; no TBD or Consistency Matrix item is resolved by this CI check.
+
+**Delivery log:** 2026-11-10 — live re-fetch of Core CI 187/187 evidence for exact commit/run/job/artifact; recorded in `docs/audit/CI_EVIDENCE_REGISTER.md`. Validation: exact commit association, run/job success, NUnit summary in decoded log, artifact ID/digest/expiry metadata. No tests were executed by this documentation session.
