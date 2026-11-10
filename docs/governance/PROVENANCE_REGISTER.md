@@ -141,3 +141,12 @@ No Library payload SHA-256 or archive claim is inferred from this repository obj
 Five additional attachment objects (IDs 16–20 relative to the prior 15-object snapshot) are identified by stable Project file IDs and mounted-byte SHA-256 in [ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md](../audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md).
 
 The hashes prove the identity of the bytes mounted at the recorded local paths for this session only. They do not prove original uploader identity, Project Library byte equality, source conversation identity, or complete inventory coverage. The five-object delta is bounded and reviewed; Project Library and original chat enumeration remain open.
+
+
+## 3.1 Additional surfaced attachment object — 2026-11-10
+
+| Project file ID | Display name | Bytes | Lines | SHA-256 | Source classification |
+|---|---|---:|---:|---|---|
+| `file_0000000022c481f4b8d45ee51c9bf603` | `قسم · قسم · مراجعة وجرد الملفات.txt` | 5314 | 152 | `23ebb91ab1e85b562e41aaca7884ccaf98f306aab0d20ce03340ef40794e817d` | Derived inventory/progress report; not an original decision transcript. |
+
+The hash authenticates only the mounted runtime bytes. The current bounded context count is 21 surfaced attachment objects and 14 mounted text paths. See [Attachment Snapshot Delta 02](../audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10-02.md) and [Materialization Manifest 02](../audit/SESSION_MATERIALIZATION_MANIFEST_2026-11-10-02.md). Project Library raw-byte access and complete conversation enumeration remain unverified.
