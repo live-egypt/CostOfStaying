@@ -78,6 +78,7 @@
 - [بصمات المواد المادية في جلسة 2026-11-10](audit/SESSION_MATERIALIZATION_MANIFEST_2026-11-10.md)
 - [جرد ومراجعة وثائق main — 41 ملفاً](audit/DOCUMENTATION_REVIEW_MATRIX.md)
 - [مصفوفة مراجعة التصميم والمعمارية والشبكة والأمن](audit/DESIGN_ARCHITECTURE_REVIEW_MATRIX.md)
+- [التحقق من روابط فهرس الوثائق — 66/66](audit/INDEX_LINK_VALIDATION_2026-11-10.md)
 
 ## ADRs الموجودة على main
 - [ADR-001: التكدس التقني](governance/adr/ADR-001-TECH-STACK.md)
