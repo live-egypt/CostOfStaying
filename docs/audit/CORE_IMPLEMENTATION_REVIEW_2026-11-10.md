@@ -136,6 +136,12 @@ No Debuff aggregate, transfer command handler or atomic Suffering Transfer appli
 **Classification:** Ledger primitive implemented; gameplay transfer not implemented.  
 **Required gate:** Before transfer implementation, define a pure Core interface and transaction contract, then test all rejection paths for zero partial mutation and all success paths for exactly one effect.
 
+## 4.1 Test fixture inventory cross-reference
+
+The source-level test fixture enumeration is maintained separately in [CORE_TEST_COVERAGE_INVENTORY_2026-11-10.md](CORE_TEST_COVERAGE_INVENTORY_2026-11-10.md).
+
+That inventory fetched 16 fixture files from the Core feature branch and counted 171 test methods / 187 NUnit case declarations. The count is consistent with the historical 187/187 Core CI run 42383513646 on commit 2820285021b1a3d7ae9acd953b3bb65677c33512. No fresh tests were run for this documentation review, and no statement/branch coverage percentage was obtained.
+
 ## 5. Implemented scope vs remaining product slice
 
 | Capability | Core branch state |
