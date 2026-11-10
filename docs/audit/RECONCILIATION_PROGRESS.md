@@ -46,7 +46,7 @@ This is not a complete inventory of every Project attachment or Library object. 
 
 ## 4. Evidence recovery
 
-Core CI logs were fetched for the four workflow runs listed in CI_EVIDENCE_REGISTER.md. Job logs explicitly reported 148, 177, 181 and 187 NUnit tests passed, each with zero failed and zero skipped. GitHub also returned the associated artifact IDs/digests.
+Core CI logs were fetched for five separate workflow runs listed in CI_EVIDENCE_REGISTER.md. Job logs explicitly reported 148, 177, 181, 181 and 187 NUnit tests passed, each with zero failed and zero skipped. The two 181-test results belong to different commits/runs (41332989910 and 41333575156). GitHub also returned the associated artifact IDs/digests.
 
 Historical documentation cited 41332755494 for the 177 run; the recovered association/log for the stated commit is 41332759086. The mismatch is recorded, not silently overwritten.
 
