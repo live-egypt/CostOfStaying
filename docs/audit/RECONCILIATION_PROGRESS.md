@@ -124,8 +124,8 @@ Reviewed Core CI, CodeQL, SecurityCodeScan, optional Contrast and Dependabot wor
 - Consolidation PR: [PR #11](https://github.com/live-egypt/CostOfStaying/pull/11).
 - Base: main at 3dd9cfc27aa48b09b3cde802e266a8221c39f0d3.
 - Head branch: docs/project-reconciliation-baseline-2026-11-10.
-- Latest checked head: 52bcff78df89ffc65900e8404e2ac8e44838562e.
-- Current comparison: 62 commits ahead, 0 behind.
+- Latest checked head: d7c7f53c72796f9a655e1f17415e37469bb59c92.
+- Current comparison: 64 commits ahead, 0 behind.
 - Current PR diff: 29 files changed (28 added, 1 modified); documentation-only paths under docs/.
 - PR state: OPEN / DRAFT / NOT MERGED. GitHub mergeability is a technical signal only and is not owner approval.
 - No tests were run for this documentation-only PR.
