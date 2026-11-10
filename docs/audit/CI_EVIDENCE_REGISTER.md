@@ -2,7 +2,7 @@
 
 **Revision:** 2026-11-10  
 **Decision Status:** — (evidence register; it does not approve project decisions)  
-**Evidence Maturity:** TESTED — four historical standalone Core CI runs inspected  
+**Evidence Maturity:** TESTED — five historical standalone Core CI runs inspected  
 **Repository:** live-egypt/CostOfStaying  
 **Evidence scope:** Core CI workflow jobs and retained GitHub Actions artifacts.
 
