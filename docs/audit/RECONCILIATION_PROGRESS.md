@@ -117,3 +117,16 @@ Reviewed Core CI, CodeQL, SecurityCodeScan, optional Contrast and Dependabot wor
 - The link check verifies target existence only; it does not validate semantic correctness of all inline links or prove all repository files have been inventoried.
 - See DOCUMENTATION_REVIEW_MATRIX.md, UPLOADED_SOURCE_REVIEW_MATRIX.md and INDEX_LINK_VALIDATION_2026-11-10.md. The ten materialized runtime files are crosswalked to their exact attachment IDs in UPLOADED_SOURCE_REVIEW_MATRIX.md.
 - Structural QA was independently rechecked: 85 unique TBD IDs in the Source-to-Requirement Matrix, no missing IDs from TBD-01 through TBD-85; 109 rows and 109 unique IDs in the primary Consistency Matrix table.
+
+
+## 11. Delivery checkpoint
+
+- Consolidation PR: [PR #11](https://github.com/live-egypt/CostOfStaying/pull/11).
+- Base: main at 3dd9cfc27aa48b09b3cde802e266a8221c39f0d3.
+- Head branch: docs/project-reconciliation-baseline-2026-11-10.
+- Latest checked head: 52bcff78df89ffc65900e8404e2ac8e44838562e.
+- Current comparison: 62 commits ahead, 0 behind.
+- Current PR diff: 29 files changed (28 added, 1 modified); documentation-only paths under docs/.
+- PR state: OPEN / DRAFT / NOT MERGED. GitHub mergeability is a technical signal only and is not owner approval.
+- No tests were run for this documentation-only PR.
+- main was not modified.
