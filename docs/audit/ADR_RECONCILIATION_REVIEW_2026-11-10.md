@@ -80,6 +80,7 @@ The current mounted text-file set and inspected decision-traceability record do 
 - SessionCleanupService cannot prove that a command already dequeued is no longer executing. Its API documentation leaves completion synchronization to the caller. This is an explicit integration obligation, not a verified Core feature.
 - SessionLifecycle and SessionRegistry are in-memory, single-writer/server-serialized primitives. They do not establish credentials, transport ownership, global identity uniqueness, durable persistence or production reconnect behavior.
 - The inspected Identifiers.cs defines ActorId, MatchId, SessionId, VictimId, EventSequenceId and CommandSequenceId; it does not define CommandId.
+- ADR-006's BetrayalEvent constructor rejects the event when ActorId.Value equals VictimId.Value. This is appropriate only if the permitted victim identities share the same numeric namespace as actors. ADR-014 leaves victim categories TBD, so the namespace assumption must remain explicit and unresolved until victim scope is decided.
 
 ## 5. ADR-012 / ADR-013 CI reference verification
 
@@ -115,6 +116,7 @@ ADR-015 has overall status PROPOSED, but its alternatives table labels Option B 
 | ADR-REV-08 | Decide reconnect/multi-session/expiry/restart policy | HIGH | TBD |
 | ADR-REV-09 | Design CommandId/idempotency only after ADR-015 is approved; include atomic reservation and result persistence boundary | HIGH | PROPOSED — NOT IMPLEMENTED |
 | ADR-REV-10 | Keep Debuff/atomic transfer application outside current implemented Core claims until code/tests are present | HIGH | NOT IMPLEMENTED |
+| ADR-REV-11 | Resolve whether ActorId and VictimId share the same numeric identity namespace before relying on numeric equality as self-target rejection | HIGH | OPEN — ADR-014 DOMAIN SCOPE TBD |
 
 ## 8. Status
 
