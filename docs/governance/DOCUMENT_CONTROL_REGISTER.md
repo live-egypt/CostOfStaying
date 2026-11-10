@@ -2,7 +2,7 @@
 
 > **Governance status axes:** Decision Status and Evidence Maturity are independent. This document's existence does not approve its claims or prove implementation. See [Project Governance Baseline](PROJECT_GOVERNANCE_BASELINE.md).
 
-**Revision date:** 2026-11-09  
+**Revision date:** 2026-11-10  
 **Record State:** INITIAL RECONCILIATION SNAPSHOT — DOCUMENTATION ONLY; CONTENT AND SOURCE COMPLETENESS REMAIN PARTIAL
 **Scope:** Initial source-of-truth mapping for the repository and Project Library documents inspected in this reconciliation. This is not yet a complete recursive repository document inventory.
 
@@ -24,10 +24,10 @@
 | Overall execution and evidence boundary | `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | CI reports, ADRs, audit reports | PRESENT — requires reconciliation against new source records |
 | Requirements traceability | `docs/governance/TBD_REGISTER.md` (85-item uncertainty register), `SOURCE_TO_REQUIREMENT_MATRIX.md`, and `REQUIREMENTS_TRACEABILITY.md` (gameplay/Core traceability) | `SOURCE_TRACEABILITY_REGISTER.md`, `TBD_CROSS_REFERENCE_MAP.md`, `CONSISTENCY_MATRIX.md` | PARTIAL — original source matching remains incomplete; keep the 85 TBDs separate from the 109-record consistency matrix |
 | Architecture decisions | Individual `docs/governance/adr/ADR-*.md` files | `docs/governance/DECISIONS_LOG.md` | PRESENT — status remains ADR-specific |
-| Decision/owner source events | `docs/governance/DECISION_TRACEABILITY_REGISTER.md` | `DECISION_AND_CONFLICT_LOG.md`, original ChatGPT export candidate, supplied reports | INITIAL — source event revalidation open |
-| Source index | `docs/governance/SOURCE_INVENTORY.md` | Project attachments and Library listing | IMPLEMENTED — coverage partial |
-| Provenance | `docs/governance/PROVENANCE_REGISTER.md` | Stage 0 Negative Attestation and raw attachment hashes | IMPLEMENTED — Library provenance partial |
-| Conflict records | `docs/governance/DECISION_AND_CONFLICT_LOG.md` and `docs/governance/DECISION_TRACEABILITY_REGISTER.md` | Original owner-conflict source values | OPEN — no owner conflict resolved |
+| Decision/owner source events | `docs/governance/DECISION_TRACEABILITY_REGISTER.md` | Original ChatGPT export candidate, ADR records, supplied reports | INITIAL — source event revalidation open |
+| Source index | `docs/governance/SOURCE_INVENTORY.md` | Project attachments and Library listing | DOCUMENTED — coverage partial |
+| Provenance | `docs/governance/PROVENANCE_REGISTER.md` | Stage 0 Negative Attestation and raw attachment hashes | DOCUMENTED — Library provenance partial |
+| Conflict records | `docs/governance/CONFLICT_REGISTER.md` | Original owner-conflict source values and branch-scoped decision records | OPEN — no owner conflict resolved |
 | Network architecture | `docs/architecture/NETWORK_ARCHITECTURE.md` | Network Audit source materials | DOCUMENT PRESENT — audit reconciliation open |
 | Security architecture and controls | `docs/security/*` | Security reconciliation material and security test plan | DOCUMENTS PRESENT — design/implementation/verification not implied |
 | Requirement evidence mapping | `docs/governance/REQUIREMENT_EVIDENCE_MATRIX.md` | Source-to-Requirement Matrix, exact code/test/CI artifacts when mapped | INITIAL SCAFFOLD — implementation/test evidence not assessed item-by-item |
@@ -42,26 +42,26 @@
 - `docs/README.md`
 - `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md`
 - `docs/governance/REQUIREMENTS_TRACEABILITY.md`
-- `docs/governance/adr/ADR-015-COMMAND-IDENTITY-AND-IDEMPOTENCY.md)
-- `docs/architecture/NETWORK_ARCHITECTURE.md) — existence confirmed in prior repository read; content review remains scheduled.
+- `docs/governance/adr/ADR-001` through `ADR-004` on main.
+- `docs/architecture/NETWORK_ARCHITECTURE.md` — reviewed in the main snapshot.
 - Security documents listed in `docs/README.md`: `SECURITY_ARCHITECTURE.md`, `TRUST_BOUNDARIES.md`, `THREAT_MODEL.md`, `SECRETS_MANAGEMENT.md`, `DATA_PRIVACY.md`, `INCIDENT_RESPONSE.md`.
-- `docs/quality/SECURITY_TEST_PLAN.md).
+- `docs/quality/SECURITY_TEST_PLAN.md`.
 
 The list is the inspected subset, not a full repository tree inventory.
 
 ## 4. Project Library-only documents requiring mapping
 
-The following source records now have repository text copies in this branch: `SOURCE_INVENTORY.md`, `PROVENANCE_REGISTER.md`, `TBD_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`, `CONSISTENCY_MATRIX.md`, and `DECISION_AND_CONFLICT_LOG.md`. Their Library originals remain unchanged; raw-byte equality is not asserted.
+The following source records now have repository text copies in this branch: `SOURCE_INVENTORY.md`, `PROVENANCE_REGISTER.md`, `TBD_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`, `CONSISTENCY_MATRIX.md`, `SOURCE_TO_REQUIREMENT_MATRIX.md`, `TBD_CROSS_REFERENCE_MAP.md`, and `REQUIREMENT_EVIDENCE_MATRIX.md`. The consolidated repository conflict record is `CONFLICT_REGISTER.md`; no separate `DECISION_AND_CONFLICT_LOG.md` is created to avoid a competing conflict source. Library originals remain unchanged; raw-byte equality is not asserted.
 
 Other current Library records still requiring mapping include:
 - `FULL_DOCUMENTS_REVIEW.md`, `REVIEW_INDEX.md`, `FINAL_REVIEW_REPORT.md`
 - Remaining Stage 0/1/2 evidence records and archives
 - `FULL_DOCUMENTS_REVIEW.md`, `REVIEW_INDEX.md`, `FINAL_REVIEW_REPORT.md`
 - `STAGE_1.md`, `STAGE_2.md`, `STAGE_2_REVIEW.md`, `STAGE_2_CLOSURE_DECLARATION.md`
-- `PROGRESS_LOG.md`, `PROGRESS_LOG(1).md`, `PROVENANCE_RECONCILIATION_NOTE_STAGE0.md`, `NEGATIVE_ATTESTATION_STAGE0.md)
+- `PROGRESS_LOG.md`, `PROGRESS_LOG(1).md`, `PROVENANCE_RECONCILIATION_NOTE_STAGE0.md`, `NEGATIVE_ATTESTATION_STAGE0.md`
 - Diff files, checksum manifests, and review/CI archives.
 
-Library-only status is not equivalent to repository synchronization. The current branch now receives the source inventory and provenance records through this documentation branch; other Library-only files remain unmigrated unless explicitly listed in a later commit.
+Library-only status is not equivalent to repository synchronization. This branch receives the source/reconciliation registers listed above; other Library-only files remain unmigrated unless explicitly listed in a later commit.
 
 ## 5. Naming and numbering control
 
@@ -95,7 +95,7 @@ A repository document update does not alter the Project Library source record. A
 | DOC-CTRL-04 | Approve final hybrid package structure | PENDING OWNER REVIEW |
 | DOC-CTRL-05 | Complete source-to-requirement mapping for TBD-01…85 | OPEN |
 | DOC-CTRL-06 | Reconcile Network/Security/Architecture source responsibilities | OPEN |
-| DOC-CTRL-07 | Build evidence register after claim/source reconciliation | DEFERRED |
+| DOC-CTRL-07 | Maintain claim-scoped evidence register and complete artifact-to-claim mapping | INITIAL REGISTER CREATED — ITEM-LEVEL MAPPING OPEN |
 | DOC-CTRL-08 | Resolve DOC-PACKAGE-01 overlap between PR #8 and PR #9 | OPEN — OWNER REVIEW REQUIRED |
 
 
@@ -110,4 +110,4 @@ A separate pre-existing documentation PR was discovered during final review:
 
 The two PRs overlap in source inventory, provenance, decision traceability, document control, and README indexing, but use different paths and base branches. PR #9 also contains the migrated 85-item TBD/traceability/consistency source records and initial evidence matrices.
 
-**DOC-PACKAGE-01 — OPEN:** canonical path and integration strategy for the overlapping Stage 1 source/provenance package are not selected. Do not merge either PR or create a third competing package until the owner chooses the canonical package/integration strategy. This is a document-package conflict, not CONFLICT-01 or CONFLICT-02.
+**DOC-PACKAGE-01 — OPEN:** PR #8 and PR #9 remain overlapping review candidates and neither is merged. The current branch is a separately authorized consolidation candidate based on main; it places the source/governance records at one root path set, retains the 85-item and 109-record source material, and uses one CONFLICT_REGISTER.md. This does not make the new paths canonical until PR review and owner acceptance. Do not merge PR #8 or PR #9 as-is. This is a document-package conflict, not CONFLICT-01 or CONFLICT-02.
