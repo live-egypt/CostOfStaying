@@ -135,3 +135,10 @@ At the end of each substantial work session, update:
 - Exact next action.
 
 **Current next action:** continue source-backed requirement/evidence mapping across TBD-01…85 and the 109-record Consistency Matrix. Preserve per-item source gaps; no path migration, Risk/Debt register creation, PR merge, or Stage 1/2 closure.
+
+
+## 7. Latest bounded source snapshot — 2026-11-10
+
+A further distinct attachment object is now surfaced beyond the earlier 20-object checkpoint: `file_0000000022c481f4b8d45ee51c9bf603` (`قسم · قسم · مراجعة وجرد الملفات.txt`). Its mounted-byte SHA-256 is `23ebb91ab1e85b562e41aaca7884ccaf98f306aab0d20ce03340ef40794e817d` (5314 bytes; 152 lines). The current bounded counts are 21 attachment objects and 14 mounted text paths / 110,718 bytes. See `docs/audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10-02.md` and `docs/audit/SESSION_MATERIALIZATION_MANIFEST_2026-11-10-02.md`.
+
+This is not a complete Project Library or conversation inventory. A1-HOLD-01…06 and both WO-A3 amendments remain source-blocked. Next action: continue DOC-B-02/DOC-B-03 recovery where original Library/chat source access exists; otherwise preserve the blockers and proceed only with source-backed item-level mapping under DOC-D-02.
