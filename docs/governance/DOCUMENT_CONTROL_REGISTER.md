@@ -40,6 +40,7 @@
 | Requirements register structural QA | `docs/audit/REQUIREMENT_REGISTERS_QA_2026-11-10.md` | TBD Register, Source-to-Requirement Matrix, Consistency Matrix | REVIEWED — structural counts only; source resolution not implied |
 | ADR/Core implementation reconciliation | `docs/audit/ADR_RECONCILIATION_REVIEW_2026-11-10.md` | Main ADR-001…004, feature-branch ADR-005…015, Core source/tests/CI | REVIEWED — branch-specific; no ADR status changed |
 | Core implementation review | `docs/audit/CORE_IMPLEMENTATION_REVIEW_2026-11-10.md` | Core source, NUnit tests, project files and CI logs | REVIEWED — source-level; no fresh tests run |
+| Core test coverage inventory | `docs/audit/CORE_TEST_COVERAGE_INVENTORY_2026-11-10.md` | 16 NUnit fixtures on PR #6 feature branch | REVIEWED — 171 test methods / 187 case declarations; no fresh test execution |
 | Core test coverage inventory | `docs/audit/CORE_TEST_COVERAGE_INVENTORY_2026-11-10.md` | 16 NUnit fixture files on PR #6 feature branch | REVIEWED — 171 test methods / 187 case declarations; no fresh test execution |
 | CI/security automation review | `docs/audit/CI_WORKFLOW_SECURITY_REVIEW_2026-11-10.md` | Core CI, CodeQL, SecurityCodeScan, Contrast and Dependabot workflow definitions | REVIEWED — configuration only; findings/coverage not operationally proven |
 | Stage evidence | Project Library Stage 0–2 records | `STAGE_1.md`, `STAGE_2.md`, review and closure records | LIBRARY-ONLY unless separately committed |
