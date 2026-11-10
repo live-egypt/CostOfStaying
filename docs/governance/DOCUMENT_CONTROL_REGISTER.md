@@ -157,3 +157,18 @@ PR #8 and PR #9 remain open and untouched. Their branches are preserved for revi
 |---|---|---|
 | DOC-CTRL-09 | Maintain one candidate path per information type across PR #8, PR #9 and this branch | INITIAL PATH MAP RECORDED — OWNER REVIEW REQUIRED |
 | DOC-CTRL-10 | Confirm canonical path set and integration decision | PENDING OWNER REVIEW |
+
+
+## 11. Current documentation delivery record
+
+| PR | Base | Head branch | Latest recorded head | Scope | State |
+|---|---|---|---|---|---|
+| [#11](https://github.com/live-egypt/CostOfStaying/pull/11) | main at 3dd9cfc27aa48b09b3cde802e266a8221c39f0d3 | docs/project-reconciliation-baseline-2026-11-10 | 8a09bf60a452cfb061a3ccb92707907c1293cf39 | 29 documentation paths under docs/, including consolidated governance, source crosswalks, audit reviews and evidence records | OPEN / DRAFT / NOT MERGED |
+
+PR #11 is the current consolidation review candidate. It does not modify main, copy Core source, or merge PR #6/#8/#9. The branch comparison was 69 commits ahead and 0 behind at the last recorded check. GitHub's mergeability metadata is technical and may change between queries; it is not owner approval.
+
+Before any merge:
+- Review the full diff and verify no unresolved source/decision conflict is being silently closed.
+- Confirm canonical document paths and whether PR #8/#9 should be closed as superseded or retained for historical review; do not close either automatically.
+- Confirm CI/documentation checks and the final PR base/head SHAs.
+- Obtain explicit owner authorization to merge.
