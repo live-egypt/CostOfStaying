@@ -114,7 +114,7 @@ The following are not established as complete production systems:
 
 The current project conversation context now contains 20 attachment objects. The prior source snapshot recorded 15; five additional IDs and mounted-byte SHA-256 values are documented in `docs/audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md`. This does not re-enumerate Project Library or prove full conversation coverage.
 
-The project owner approved WO-DOC-01 for sequential execution. The work-order tracker is `docs/governance/WORK_ORDER_REGISTER.md` and is the single index for action state. This approval authorizes documentation work; it does not approve the proposed governance policy wholesale, alter ADRs, authorize code changes, merge PRs, or close project stages.
+The project owner approved WO-DOC-01 for sequential execution. The work-order tracker is `docs/governance/WORK_ORDER_REGISTER.md` and is the single index for action state. Package mapping Draft 0.1 is recorded at `docs/audit/PACKAGE_STRUCTURE_RECONCILIATION.md`; it proposes functional grouping only and does not authorize renames or moves. This approval authorizes documentation work; it does not approve the proposed governance policy wholesale, alter ADRs, authorize code changes, merge PRs, or close project stages.
 
 | Work package | Scope | Current state |
 |---|---|---|
@@ -123,6 +123,7 @@ The project owner approved WO-DOC-01 for sequential execution. The work-order tr
 | C — Decision & Action Tracking | Owner events, ADR traceability, conflicts, work orders | PARTIAL — WO-DOC-01 AUTHORIZATION MAPPED; A1-HOLD/WO-A3 SOURCE RECOVERY BLOCKED |
 | D — Evidence & Traceability | Requirements, code, tests, CI, artifacts, commits | PARTIAL — HISTORICAL EVIDENCE ONLY WHERE RECORDED |
 | E — Session Continuity | Session handoff and next action | PRESENT — MAINTAIN EACH SESSION |
+| F — Package Structure Reconciliation | Functional package map and overlap analysis | DRAFT 0.1 CREATED — OWNER REVIEW REQUIRED; NO PATH MIGRATION |
 
 PR #11 remains OPEN / DRAFT / NOT MERGED. No changes to main or code/test/ADR files are authorized by this documentation work order.
 

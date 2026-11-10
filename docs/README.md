@@ -69,6 +69,8 @@
 
 ## التدقيق والأدلة
 
+- [توفيق هيكل الحزمة — Draft 0.1](audit/PACKAGE_STRUCTURE_RECONCILIATION.md)
+
 - [ملحق لقطة المرفقات الإضافية — 2026-11-10](audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md)
 
 - [سجل تقدم التوفيق](audit/RECONCILIATION_PROGRESS.md)

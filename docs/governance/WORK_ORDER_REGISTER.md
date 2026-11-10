@@ -58,6 +58,7 @@ Decision status and evidence maturity are independent. Work state is a separate 
 | C | Decision & Action Tracking | Link owner decisions, ADRs, conflicts, work orders, and actions | PARTIAL | Every recovered decision has source event or explicit SOURCE PENDING; no invented approvals. |
 | D | Evidence & Traceability | Link requirement → implementation → test → CI/run/artifact/commit | PARTIAL | Claims are scoped to exact branch/commit/test and unsupported claims remain NOT VERIFIED. |
 | E | Session Continuity | Maintain handoff, current branch/PR/commit, blockers, and next action | IMPLEMENTED ON PR #11 BRANCH — UPDATE EACH SESSION | Handoff matches live repository state and identifies one next action. |
+| F | Package Structure Reconciliation | Map every document to one functional package; identify overlaps and authority | DRAFT 0.1 CREATED — OWNER REVIEW REQUIRED | Owner accepts functional map; no path migration until separately approved. |
 
 Work packages proceed in order. A blocked item is recorded and carried forward; it is not bypassed by changing its status.
 
@@ -77,6 +78,8 @@ Work packages proceed in order. A blocked item is recorded and carried forward; 
 | DOC-D-02 | D | Link all 85 TBD and 109 consistency records to primary sources/evidence | PARTIAL | Item-level source validation and pending-source reconciliation required. |
 | DOC-E-01 | E | Keep SESSION_HANDOFF aligned with live PR head and next action | IN PROGRESS | Update after each material commit/session. |
 | DOC-E-02 | E | Record commit, changed paths, validation, and PR state in closeout | REQUIRED EACH DELIVERY | Exact GitHub evidence required. |
+| DOC-F-01 | F | Create a functional package map and identify overlapping document responsibilities | DONE — DRAFT 0.1 ON PR #11 | `docs/audit/PACKAGE_STRUCTURE_RECONCILIATION.md`; proposal only, owner review pending. |
+| DOC-F-02 | F | Obtain owner approval before renaming/moving/merging documents or fixing final numbering | BLOCKED — OWNER REVIEW REQUIRED | No migration is authorized by WO-DOC-01 alone. |
 
 ## 5. Additional bounded reconciliation checkpoint — 2026-11-10
 
@@ -126,4 +129,4 @@ Every closeout must record:
 - main: unchanged by this work order.
 - Stage 1 / Stage 2: no closure declared.
 
-**Next action:** continue DOC-B-02/DOC-B-03 source recovery only when an accessible Library export or original conversation source is available; meanwhile proceed to the next source-backed decision/evidence mapping task without closing blocked items.
+**Next action:** continue source-backed requirement/evidence mapping across the 85 TBD rows and 109 consistency records. Keep all source gaps explicit; do not migrate package paths or create Risk/Debt registers before their gates.

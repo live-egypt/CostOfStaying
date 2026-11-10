@@ -10,7 +10,7 @@
 **Working branch:** `docs/project-reconciliation-baseline-2026-11-10`  
 **Pull Request:** [#11 — Documentation and evidence baseline](https://github.com/live-egypt/CostOfStaying/pull/11)  
 **PR state at update:** OPEN / DRAFT / NOT MERGED  
-**Last substantive governance/decision-traceability commit:** `d9405d347f56ac14401bf7ab19892893fd939e70`
+**Last substantive commit before package-map draft:** `c11e60fe5313a60d6b2bf6637acfdacf710b4d6a`
 
 > This handoff is a navigation aid, not a competing source of truth. Canonical decisions, source lineage, requirements, conflicts, and delivery status remain in their designated registers and ADRs.
 
@@ -77,6 +77,7 @@ The owner explicitly approved WO-DOC-01 for sequential execution. The authoritat
 | Work package C | PARTIAL — WO-DOC-01 AUTHORIZATION MAPPED | Recover remaining owner decision events; A1-HOLD-01…06 remain source-blocked |
 | Work package D | PARTIAL | Keep evidence scoped to exact run/commit/artifact |
 | Work package E | PRESENT — MAINTAIN | Update this handoff after material changes |
+| Work package F — Package Structure | DRAFT 0.1 CREATED — OWNER REVIEW REQUIRED | Review functional package map; no path migration authorized |
 | Source inventory / provenance | PARTIAL — 20 ATTACHMENT OBJECTS; 13 LOCAL PATHS | Library and complete conversation enumeration remain unavailable |
 | Decision traceability | PARTIAL | Recover exact owner approval events; preserve missing-source states |
 | TBD register (85) | STRUCTURALLY MAPPED; SOURCE VALIDATION PARTIAL | Validate item-by-item; do not mark resolved from registration alone |
@@ -133,4 +134,4 @@ At the end of each substantial work session, update:
 - Open blockers and missing source evidence.
 - Exact next action.
 
-**Current next action:** proceed with the 85-item TBD and 109-record consistency source/evidence mapping using available original excerpts; preserve per-item source gaps and do not infer approval. Re-fetch live PR metadata before the next write. Do not merge PR #11 or close Stage 1/2.
+**Current next action:** continue source-backed requirement/evidence mapping across TBD-01…85 and the 109-record Consistency Matrix. Preserve per-item source gaps; no path migration, Risk/Debt register creation, PR merge, or Stage 1/2 closure.
