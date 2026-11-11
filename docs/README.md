@@ -48,6 +48,7 @@
 ## الحوكمة والتسليم
 - [سجل القرارات](governance/DECISIONS_LOG.md)
 - [تتبع المتطلبات](governance/REQUIREMENTS_TRACEABILITY.md)
+- [A5 PDR-014 — مراجعة SOURCE-ORIGIN-01](governance/A5/PDR-014_SOURCE_ORIGIN_01_REVIEW.md)
 - [ADR-001: التكدس التقني](governance/adr/ADR-001-TECH-STACK.md)
 - [ADR-002: سلطة الخادم](governance/adr/ADR-002-SERVER-AUTHORITY.md)
 - [ADR-003: Backend والاستضافة](governance/adr/ADR-003-BACKEND-AND-HOSTING.md)
