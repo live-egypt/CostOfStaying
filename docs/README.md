@@ -56,6 +56,9 @@
 - [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
 
+## حوكمة A5 — Document Control
+- [PDR-008: مراجعة تصنيف ADR-C-002 / ADR-C-005](governance/A5/PDR-008_ADR_CLASSIFICATION_REVIEW.md) — CANNOT RESOLVE؛ النصان الأصليان وسلطة التصنيف غير مستعادة، وPDR-008 يبقى OPEN.
+
 ## حالات الوثائق
 - **PROPOSED:** مقترح لم يعتمد.
 - **PROPOSED FOR PLAYTEST:** خط أساس يحتاج جلسات اختبار قبل اعتماده.
