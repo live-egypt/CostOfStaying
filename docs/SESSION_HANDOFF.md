@@ -10,7 +10,7 @@
 **Working branch:** `docs/project-reconciliation-baseline-2026-11-10`  
 **Pull Request:** [#11 — Documentation and evidence baseline](https://github.com/live-egypt/CostOfStaying/pull/11)  
 **PR state at update:** OPEN / DRAFT / NOT MERGED  
-**Last observed branch head before this DOC-B-02 update:** `8e7bc1ec0a0306655781755eb281ebb22d1b0ae6`
+**Last substantive DOC-B-02 content commit:** `35197b7acfc0ae31dfa958abdccf8d3f16b9abb4`
 
 > This handoff is a navigation aid, not a competing source of truth. Canonical decisions, source lineage, requirements, conflicts, and delivery status remain in their designated registers and ADRs.
 
@@ -157,7 +157,8 @@ This is not a complete Project Library or conversation inventory. A1-HOLD-01…0
 
 ## 9. Latest execution checkpoint — DOC-B-02 — 2026-11-11
 
-- Pre-write live state: PR #11 OPEN / DRAFT / NOT MERGED; base `main` at `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`; branch `docs/project-reconciliation-baseline-2026-11-10`; head `8e7bc1ec0a0306655781755eb281ebb22d1b0ae6`; 39 changed paths, all under `docs/`.
+- Pre-write live state: PR #11 OPEN / DRAFT / NOT MERGED; base `main` at `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`; branch `docs/project-reconciliation-baseline-2026-11-10`; pre-write head `8e7bc1ec0a0306655781755eb281ebb22d1b0ae6`; 39 changed paths, all under `docs/`.
+- DOC-B-02 content commit: `35197b7acfc0ae31dfa958abdccf8d3f16b9abb4` (`docs(provenance): reconcile live Library metadata snapshot`). Post-write verification confirmed that PR #11 and the branch ref both pointed to this commit before this closeout synchronization.
 - Library metadata re-fetch at `2026-11-11T08:55:12.632764Z`: 45 file records / 45 unique IDs + 1 folder; all 40 historical IDs retained; five additional records listed in `SOURCE_INVENTORY.md` Section 4.1.
 - Current active conversation file surface at `2026-11-11T08:55:13.004803Z`: one `محادثة 2.html` record; its ID matches the Library record. The historical 21 attachment IDs are a separate set and do not overlap the current 45 Library IDs.
 - Complete pre-write repository tree: SHA `28aabb1420b5e794566d0001249243b5a3032fca`, 99 entries / 87 blobs, not truncated. Five Library basenames match repository paths; no content/byte equality is claimed.

@@ -155,6 +155,7 @@ Every closeout must record:
 ## 11. DOC-B-02 live Library and repository-tree crosswalk — 2026-11-11
 
 - Re-fetched repository, branch, and PR #11 before writing: default branch `main`; PR #11 OPEN / DRAFT / NOT MERGED; base SHA `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`; branch `docs/project-reconciliation-baseline-2026-11-10`; pre-write head `8e7bc1ec0a0306655781755eb281ebb22d1b0ae6`; 39 changed paths, all under `docs/`.
+- **DOC-B-02 content commit:** `35197b7acfc0ae31dfa958abdccf8d3f16b9abb4` — `docs(provenance): reconcile live Library metadata snapshot`; post-write PR head and branch ref were re-fetched and matched this SHA.
 - Fresh recursive Library listing at `2026-11-11T08:55:12.632764Z`: 45 file records with 45 unique IDs and one folder under `/لعبة`; no warnings or continuation cursor.
 - Stable-ID comparison: all 40 records in the 2026-11-09 inventory remain present (40/40); five additional Library records are listed in `SOURCE_INVENTORY.md` Section 4.1; no prior record was absent.
 - Active conversation Files surface at `2026-11-11T08:55:13.004803Z`: one `محادثة 2.html` attachment, ID `file_000000007f6482109c42c450bf73d0b4`, identical to the Library record ID. The 21 historical attachment IDs from the 2026-11-10 snapshots are distinct from the 45 Library IDs.
