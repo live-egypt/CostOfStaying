@@ -2,7 +2,7 @@
 
 هذه الوثائق تصف التصميم المقترح وخطط التحقق. لا تعني أن أي نظام منفذ أو مختبر ما لم يذكر دليل قابل للمراجعة.
 
-التنظيم وقواعد التعارض والكتالوج الكامل في [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md). هذا الملف فهرس قراءة فقط.
+التنظيم وقواعد التعارض والكتالوج في [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md). ما حُسم فعلياً في [سجل حل التعارض](governance/CONFLICT_RESOLUTIONS.md).
 
 ## ابدأ هنا
 - [ميثاق المشروع](00_PROJECT_CHARTER.md)
@@ -50,6 +50,7 @@
 
 ## الحوكمة والتسليم
 - [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md)
+- [سجل حل التعارض](governance/CONFLICT_RESOLUTIONS.md)
 - [سجل القرارات](governance/DECISIONS_LOG.md)
 - [تتبع المتطلبات](governance/REQUIREMENTS_TRACEABILITY.md)
 - [ADR-001: التكدس التقني](governance/adr/ADR-001-TECH-STACK.md)
