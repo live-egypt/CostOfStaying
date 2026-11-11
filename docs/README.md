@@ -56,6 +56,9 @@
 - [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
 
+## حوكمة A5 — Document Control
+- [PDR-005: مراجعة إحلال LIF-DEC-01](governance/A5/PDR-005_LIF-DEC-01_SUPERSESSION_REVIEW.md) — CANNOT RESOLVE؛ الأدلة الأصلية غير مستعادة، وPDR-005 يبقى OPEN.
+
 ## حالات الوثائق
 - **PROPOSED:** مقترح لم يعتمد.
 - **PROPOSED FOR PLAYTEST:** خط أساس يحتاج جلسات اختبار قبل اعتماده.
