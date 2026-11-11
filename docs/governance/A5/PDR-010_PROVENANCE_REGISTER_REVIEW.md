@@ -1,10 +1,10 @@
 # PDR-010 — Provenance Register Review
 
 **Workstream:** A5 — Document Control  
-**Status:** CANNOT RESOLVE — CANONICAL PROVENANCE REGISTER NOT LOCATED  
+**Status:** PARTIAL — MULTIPLE PROVENANCE REGISTERS RECOVERED ON UNMERGED REVIEW BRANCHES; SOURCE AUTHORITY / COVERAGE INCOMPLETE  
 **Document class:** Governance review / evidence assessment  
 **Repository:** `live-egypt/CostOfStaying`  
-**Base examined:** `main` at review time  
+**Branches examined:** `main`, PR #8 branch `docs/stage1-source-provenance-recovery`, PR #9 branch `docs/source-provenance-reconciliation-2026-11-09`, and PR #11 branch `docs/project-reconciliation-baseline-2026-11-10`  
 **Decision effect:** This review does not establish or infer the origin, authorship, approval, or authority of undocumented source material.
 
 ## 1. Purpose
@@ -13,18 +13,26 @@ Assess whether the repository contains a canonical provenance register capable o
 
 ## 2. Search scope and findings
 
-Repository search on the default branch was performed for the exact and related terms: `SOURCE-ORIGIN-01`, `provenance register`, `PROVENANCE`, `source inventory`, and `LIF-DEC-01`. No matching repository files were returned for these queries.
+The initial exact-term search was performed on the default branch only and returned no matches. That search scope was insufficient. A subsequent branch-aware inspection directly fetched provenance and source-inventory registers from PR #8, PR #9, and PR #11 branches.
 
-The following governance documents were also inspected:
+| Branch / PR | Provenance artifact | Blob SHA | Source inventory artifact | Blob SHA |
+|---|---|---|---|---|
+| `docs/stage1-source-provenance-recovery` / PR #8 | `docs/governance/sources/PROVENANCE_REGISTER.md` | `fcaeb5d2acd0cdaeaf0d08b68a30754f4623efb5` | `docs/governance/sources/SOURCE_INVENTORY.md` | `6ae0d344a968f9f94ed481501a9f2dbd48abf599` |
+| `docs/source-provenance-reconciliation-2026-11-09` / PR #9 | `docs/governance/PROVENANCE_REGISTER.md` | `d7f08fbb3ccd091881a8a29416bad92da34eb13c` | `docs/governance/SOURCE_INVENTORY.md` | `2cac4bdec6d30f5dba28b61c9e2d87b8e0981cfb` |
+| `docs/project-reconciliation-baseline-2026-11-10` / PR #11 | `docs/governance/PROVENANCE_REGISTER.md` | `2c13e9d5e20627ce730eb34dff098b6cd9022c4d` | `docs/governance/SOURCE_INVENTORY.md` | `ae4400e134f5fd2385a27b8b01c19a5e751147de` |
+
+The PR #8 register explicitly marks its state PARTIAL, with 15 current attachments hashed and Library/chat provenance limited. PR #9 labels its provenance register IMPLEMENTED as a repository document but PROVENANCE PARTIAL; its source inventory also says coverage PARTIAL. PR #11 is a later metadata-only crosswalk and keeps content/source completeness PARTIAL. These are real branch artifacts, not approved canonical authority.
+
+The following `main`-branch governance documents were also inspected:
 
 | Artifact | Finding |
 |---|---|
 | `docs/governance/DECISIONS_LOG.md` | Records ADR-001..004; does not provide a source-provenance ledger. |
 | `docs/governance/REQUIREMENTS_TRACEABILITY.md` | PROPOSED requirements examples; not a provenance register. |
-| `docs/README.md` | No provenance register is indexed. |
+| `docs/README.md` | No provenance register is indexed on `main`; the PR #8/#9/#11 branches index distinct source/provenance packages. |
 | A5 PDR-005 review | Exists on its separate, unmerged feature branch / PR #13; it records missing source evidence for LIF-DEC-01, but is not itself the original source or a canonical provenance register. |
 
-A repository search returning no result is limited by the repository index and examined branch. It does not prove that source material never existed, is not present in another branch, or is unavailable in the conversation/file archive.
+The recovered branch documents establish that provenance registers exist as repository artifacts on PR #8/#9/#11. Their existence does not establish approval, canonical path, full coverage, or closure of the source-origin gaps. PR #8 and PR #9 overlap with different paths and base contexts; PR #11 is a proposed consolidation candidate. DOC-PACKAGE-01 remains OPEN.
 
 ## 3. Provenance fields required
 
@@ -50,9 +58,9 @@ These are proposed schema fields for future reconciliation, not a claim that the
 
 ## 4. Evidence gaps
 
-- No canonical provenance register was located on the examined default branch.
-- No repository artifact matching SOURCE-ORIGIN-01 was found by exact search.
-- No complete source inventory was located in the examined governance index.
+- No provenance register is indexed or present in the examined `main` governance package; provenance registers are present on unmerged PR #8/#9/#11 branches.
+- The provenance registers are explicitly partial and do not close SOURCE-ORIGIN-01.
+- Canonical path and package authority remain unresolved under DOC-PACKAGE-01.
 - The source origin, original wording, version, and approval evidence for LIF-DEC-01 remain unestablished in the available repository evidence reviewed for PDR-005.
 - The separate PDR-005 review is an evidence assessment, not a substitute for the missing original source.
 - Provenance of historical conversation exports and uploaded files has not been reconciled into a row-level ledger.
@@ -60,9 +68,9 @@ These are proposed schema fields for future reconciliation, not a claim that the
 
 ## 5. Determination
 
-**PDR-010 = CANNOT RESOLVE — CANONICAL PROVENANCE REGISTER AND COMPLETE SOURCE INVENTORY NOT LOCATED.**
+**PDR-010 = PARTIAL — PROVENANCE REGISTERS AND SOURCE INVENTORIES RECOVERED ON UNMERGED REVIEW BRANCHES; CANONICAL AUTHORITY AND FULL SOURCE COVERAGE NOT ESTABLISHED.**
 
-This is not a determination that the source artifacts are invalid or never existed. It means the evidence required to establish their provenance and authority has not been assembled into a verifiable register.
+The branch-aware review corrects the earlier default-branch-only conclusion. PR #8, PR #9, and PR #11 contain provenance/source-inventory documents. Their own status declarations and recorded gaps show partial coverage. This review therefore cannot claim that no register exists; it also cannot treat any branch copy as an approved canonical register or declare source provenance complete.
 
 No authorship, date, approval, supersession, or authority is inferred from filenames, current repository placement, search ranking, or an unmerged review document.
 
@@ -92,7 +100,7 @@ PDR-010 can be reconsidered when:
 
 - Does not resolve SOURCE-ORIGIN-01.
 - Does not resolve LIF-DEC-01 supersession or close PDR-005.
-- Does not resolve PDR-009 or create a TBD inventory.
+- Does not resolve PDR-009; a TBD register is present on PR #9/#11 branches, but remains only partially source-validated.
 - Does not change A4 closure decisions or approve any ADR.
 - Does not authorize code, gameplay, Unity, networking, CI, or runtime changes.
 - Does not merge any PR or alter `main`.
@@ -102,8 +110,8 @@ PDR-010 can be reconsidered when:
 | Item | Status |
 |---|---|
 | Repository provenance search | IMPLEMENTED — review recorded |
-| Canonical provenance register located | NOT LOCATED |
-| Complete source inventory | TBD |
+| Provenance register documents located | VERIFIED — PR #8 / PR #9 / PR #11 branches; unmerged |
+| Complete source inventory | PARTIAL — NOT ESTABLISHED |
 | Source authority / approval mapping | INSUFFICIENT EVIDENCE |
-| PDR-010 final resolution | CANNOT RESOLVE |
+| PDR-010 final resolution | PARTIAL — NOT CLOSED |
 | A5.6 closure | NOT ACHIEVED |
