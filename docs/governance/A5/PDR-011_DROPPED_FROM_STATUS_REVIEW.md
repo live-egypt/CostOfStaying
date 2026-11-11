@@ -38,11 +38,23 @@ Repository search was performed on the default branch for:
 - `status register dropped`
 - `NOT IN STATUS`
 
-No matching repository files were returned by those searches.
+No matching dedicated PDR-011 / dropped-from-status register was returned by the initial default-branch searches. Branch-aware PR #9/#11 status documents were then examined, as recorded below.
 
 The current `docs/README.md` and `docs/governance/DECISIONS_LOG.md` do not index or define a dropped-from-status register. The decisions log records ADR-001 through ADR-004 and does not provide the item-level historical decisions required here.
 
 This search is bounded to the examined default-branch repository index and files. It does not prove that historical records do not exist in other branches, PRs, uploaded archives, or conversation exports.
+
+## 3.1 Branch-aware historical status evidence
+
+A later branch-aware review of PR #11 documents found relevant package/PR lifecycle records:
+
+| Artifact | Evidence | What it establishes | What it does not establish |
+|---|---|---|---|
+| PR #11 branch `docs/project-reconciliation-baseline-2026-11-10`, `docs/governance/DOCUMENT_CONTROL_REGISTER.md` | Blob SHA `cee0b934bdee749a6cae3227912b905096ff2034` | Explicitly says to confirm whether PR #8/#9 should be closed as superseded or retained for historical review; neither should be closed automatically. | Does not list project requirements or status items dropped from a canonical register. |
+| Same PR #11 branch, `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | Blob SHA `f226764cba94c1dce6903b7a9d572a0464674221` | Records PR #10 as CLOSED WITHOUT MERGE and historical-only. | PR lifecycle disposition is not proof that any requirement/risk/decision was deleted from the project status register. |
+| PR #9 branch `docs/source-provenance-reconciliation-2026-11-09`, `docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md` | Blob SHA `568f5999592f1ac3da375d25115aacfe6a03cd5d` | Contains historical supersession statements for earlier PR/documentation work. | Does not provide the required item-by-item dropped-status ledger or an authorization record for every omission. |
+
+These findings refine the history available for PR/package objects only. They must not be repurposed as the missing dropped-requirement list. The distinction between a superseded pull request, a superseded document, a deleted file, and a requirement removed from a status register remains mandatory.
 
 ## 4. Evidence assessment
 
@@ -82,14 +94,14 @@ The event types above are a proposed reconciliation vocabulary. They do not impl
 
 ## 6. Determination
 
-**PDR-011 = CANNOT RESOLVE — DROPPED ITEMS AND AUTHORIZING DECISIONS NOT ESTABLISHED.**
+**PDR-011 = CANNOT RESOLVE — DROPPED ITEMS AND THEIR ITEM-LEVEL AUTHORIZING DECISIONS NOT ESTABLISHED.**
 
 The evidence currently available supports identifying the integrity risk and the exact evidence needed. It does not support identifying the omitted elements, reconstructing their prior statuses, or validating the authority and rationale for their omission.
 
 Accordingly:
 
 - Absence from a current register must not be treated as deletion.
-- No item may be treated as obsolete merely because it is missing from a status view.
+- No item may be treated as obsolete merely because it is missing from a status view. PR/package supersession records are not interchangeable with requirement/status-register disposition records.
 - No missing item may be recreated with invented wording or identifiers.
 - No historical record may be overwritten to make status history appear continuous.
 - DOC-PACKAGE-01 remains unresolved and constrains any final package/status consolidation.
