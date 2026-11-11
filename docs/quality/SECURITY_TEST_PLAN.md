@@ -1,6 +1,8 @@
-# Security Test Plan — v2.0
-**الحالة: PROPOSED**
+# Security Test Plan — v2.1
+**الحالة: PROPOSED | لا توجد نتائج فحص**
 
-اختبر: تزوير health/damage/ammo/energy؛ RPC spam؛ replay للنقل والهجوم والتصويت؛ نقل متزامن؛ هدف ميت أو من مباراة أخرى؛ payload مشوه/كبير؛ speed/teleport؛ جلسة منتهية أو مزورة؛ replication غير مصرح؛ وفحص الأسرار.
+اختبر عند وجود خادم: تزوير health وdamage وammo؛ RPC spam؛ replay للنقل والهجوم والتصويت؛ نقل متزامن؛ هدف ميت أو من مباراة أخرى؛ payload كبير؛ speed وteleport؛ وجلسة مزورة.
 
-النجاح: الطلب غير الصالح يرفض دون تغيير الحالة أو crash أو استنزاف غير محدود. كل ثغرة تتحول إلى regression test قبل إغلاقها.
+لا تختبر Energy كقاعدة حتى تُعتمد. لا تختبر عتبات Betrayal كقواعد.
+
+النجاح: الطلب غير الصالح يُرفض دون تغيير الحالة أو crash. كل ثغرة مكتشفة تصبح regression test قبل إغلاقها. لا نتائج في هذه الحزمة.

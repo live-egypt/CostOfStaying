@@ -1,6 +1,6 @@
-# Monitoring and Logging — v2.0
-**الحالة: PROPOSED**
+# Monitoring and Logging — v2.1
+**الحالة: PROPOSED | لا نظام مراقبة منفذ ولا عتبات تنبيه**
 
-مقاييس المباراة: عدد الجلسات، وقت الانتظار، إكمال المباراة، disconnect rate، أسباب رفض الأوامر، زمن الاستجابة وأخطاء الخادم.
+مقاييس مستهدفة بعد وجود خادم: عدد الجلسات، إكمال المباراة، disconnect rate، أسباب رفض الأوامر، وأخطاء الخادم.
 
-مقاييس الأداء: CPU/RAM، tick duration، bandwidth، queue depth، crash rate وGC. استخدم correlation IDs وMatchId عشوائياً. لا تسجل tokens أو أسراراً أو بيانات شخصية غير لازمة. اعتمد عتبات التنبيه بعد baseline.
+مقاييس الأداء: CPU/RAM وtick duration وbandwidth وcrash rate. لا عتبات قبل baseline. استخدم MatchId عشوائياً. لا تسجل tokens أو أسراراً أو بيانات شخصية غير لازمة.

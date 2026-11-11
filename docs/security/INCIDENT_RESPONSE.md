@@ -1,8 +1,8 @@
-# Incident Response — v2.0
-**الحالة: PROPOSED**
+# Incident Response — v2.1
+**الحالة: PROPOSED | لا خط استجابة منفذ ولا فريق مناوبة مسمى**
 
-دورة الاستجابة: Detection → Triage → Containment → Eradication → Recovery → Verification → Postmortem.
+الدورة المستهدفة: Detection → Triage → Containment → Eradication → Recovery → Verification → Postmortem.
 
-P0: اختراق signing key أو إصدار ضار أو RCE أو سيطرة على المستودع/الإنتاج. P1: تجاوز سلطة الخادم أو تسريب بيانات أو ثغرة حرجة. P2: فشل ضابط/إعداد خاطئ/ثغرة متوسطة. P3: مشكلة توثيق منخفضة.
+P0: اختراق signing key أو إصدار ضار أو سيطرة على المستودع أو الإنتاج. P1: تجاوز سلطة الخادم أو تسريب بيانات. P2: إعداد خاطئ أو ثغرة متوسطة. P3: مشكلة توثيق.
 
-احفظ وقت UTC وcommit SHA وworkflow run وartifact hash والسجلات المنقحة وخطوات إعادة الإنتاج ونطاق التأثير. لا تحذف الأدلة قبل حفظها. بعد الحادث: سبب جذري، ضوابط، regression tests، مسؤول وموعد، ثم تحقق إغلاق.
+احفظ وقت UTC وcommit SHA والسجلات المنقحة وخطوات إعادة الإنتاج. لا تحذف الأدلة قبل حفظها. هذه خطة وليست سجل حادثة.
