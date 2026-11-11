@@ -1,6 +1,6 @@
 # Conflict Register — Cost of Staying
 
-**Revision:** 2026-11-10  
+**Revision:** 2026-11-11 — fresh Library/repository metadata crosswalk  
 **Decision Status:** PROPOSED — resolutions require the relevant owner/source gate  
 **Evidence Maturity:** REVIEWED — initial cross-branch and supplied-record reconciliation  
 **Scope:** Source, requirements, design, architecture, repository delivery, and CI-evidence conflicts.
@@ -21,9 +21,9 @@ A conflict may be closed only when the entry records:
 
 | ID | Subject | Observed values / source claims | Classification | State | Closure evidence |
 |---|---|---|---|---|---|
-| SRC-001 | Project attachment totals | Earlier snapshots report 5, 9, 11 and 15 attachments; current conversation context exposes 20 distinct attachment objects. Current mounted runtime contains 13 unique text-file paths (not 20 paths). | Snapshot/surface difference; the five-object delta over the prior 15-object snapshot is recorded with IDs and mounted-byte hashes in ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md. | PARTIAL — 5-ID DELTA RECONCILED | Fresh Library enumeration and a complete attachment-ID-to-materialized-path crosswalk remain required. |
+| SRC-001 | Project attachment totals | Dated 2026-11-10 snapshots contain 21 distinct Project attachment objects and 14 mounted text paths; the active conversation Files surface on 2026-11-11 returns one `محادثة 2.html` attachment whose ID is also in the Library listing. | Snapshot/surface difference; the 21 historical attachment IDs have no ID overlap with the current 45 Library IDs; the active one-file conversation snapshot is separate. | PARTIAL — HISTORICAL 21-ID SNAPSHOT AND CURRENT ONE-FILE SURFACE DISTINGUISHED | Complete Project attachment/thread enumeration and full attachment-to-materialized-path crosswalk remain required. |
 | SRC-002 | Repeated attachment names | Four records named 2 استكمال المحادثة.txt are reported as distinct IDs and hashes. Current runtime contains only one path with that basename. | Distinct-source identity plus current materialization limitation. | PARTIAL | Preserve source IDs and exact hashes; establish missing-file mapping. |
-| SRC-003 | Project Library inventory | Earlier snapshot reports 35 files + 1 folder; later PR #8/#9 snapshot reports 40 files + 1 folder. | Different inventory snapshots. | OPEN | Exact timestamped Library listings and metadata. |
+| SRC-003 | Project Library inventory | The 2026-11-09 inventory lists 40 file records + 1 folder; the 2026-11-11 recursive listing returns 45 file records + 1 folder. All 40 historical IDs remain; five additional IDs are present; zero historical IDs are missing. | Snapshot difference; the 40-to-45 change is reconciled by stable Library IDs. The earlier 35-file snapshot remains historical and unverified. | PARTIAL — 40/40 HISTORICAL IDS MATCHED; 5 ADDITIONAL RECORDS | Source evidence for the earlier 35-file snapshot; future listing comparisons; no content/raw-byte identity claim. |
 | SRC-004 | Chat 1 and Chat 2 origin | Earlier material describes DeepSeek association; attachment file_00000000343482109ecb2381153c4550 says these are ChatGPT Project conversations, not DeepSeek-app conversations. | Origin attribution conflict. | OPEN | Full original threads, IDs, and platform-origin evidence. |
 | SRC-005 | محادثة 2.html identity | Reported as a 449-message ChatGPT Shared Chat export; exact mapping to Project chat 2 is unverified. | Export-to-thread mapping gap. | OPEN | Exact export metadata and matching source thread ID. |
 | SRC-006 | Network Audit original | Reconciliation notes describe Network topics, but the complete original audit is not present in recovered material. | Derived material / missing original. | SOURCE PARTIAL | Complete original audit or authoritative export. |

@@ -1,6 +1,6 @@
 # Project Status and Execution Register
 
-**Revision:** 2026-11-10 — WO-DOC-01 execution update  
+**Revision:** 2026-11-11 — WO-DOC-01 DOC-B-02 metadata crosswalk update  
 **Decision Status:** PROPOSED — operational control document  
 **Evidence Maturity:** REVIEWED — bounded repository and supplied-source snapshot  
 **Default branch:** main  
@@ -13,7 +13,7 @@
 | Workstream | Location | State | Delivery meaning |
 |---|---|---|---|
 | v2.1 design documentation | main | PRESENT — proposed baseline | Documents exist; gameplay remains PROPOSED FOR PLAYTEST. |
-| Governance/source recovery package | docs/project-reconciliation-baseline-2026-11-10 / PR #11 | OPEN / DRAFT / REVIEW ONLY | 36 documentation paths in the live PR changed-file list at the current checkpoint; based on main; not merged. |
+| Governance/source recovery package | docs/project-reconciliation-baseline-2026-11-10 / PR #11 | OPEN / DRAFT / REVIEW ONLY | 39 documentation paths in the live PR changed-file list at the pre-write checkpoint; based on main; not merged. |
 | Standalone pure-C# Core | feature/core-lifecycle-resolution, PR #6 | IMPLEMENTED ON FEATURE BRANCH; CI TESTED | Not part of main. PR #6 remains open Draft. |
 | Core hotfix | PR #7 | MERGED INTO feature/core-lifecycle-resolution | Does not represent a main merge. |
 | Stage 1 source package | PR #8 | OPEN / DRAFT / NOT MERGED | Based on main; overlaps PR #9. |
@@ -42,7 +42,7 @@
 
 PR #6 contains standalone Core and NUnit source on feature/core-lifecycle-resolution at 2820285021b1a3d7ae9acd953b3bb65677c33512. That branch was 441 commits ahead and 0 behind the observed main SHA at comparison time. PR #6 is open, Draft, and unmerged.
 
-PR #11 is the current documentation consolidation candidate: base main at 3dd9cfc27aa48b09b3cde802e266a8221c39f0d3; head docs/project-reconciliation-baseline-2026-11-10. It remains Draft and unmerged. Its current metadata must be rechecked before any review/merge action; mergeability is not owner approval.
+PR #11 is the current documentation consolidation candidate: base main at 3dd9cfc27aa48b09b3cde802e266a8221c39f0d3; head docs/project-reconciliation-baseline-2026-11-10; pre-write head SHA 8e7bc1ec0a0306655781755eb281ebb22d1b0ae6. It remains Draft and unmerged. Its current metadata must be rechecked before any review/merge action; mergeability is not owner approval.
 
 Historical Core CI results are recorded in the CI Evidence Register. The latest recovered PR #6 head run reports 187/187 NUnit tests passing on the exact Core commit. This verifies only the standalone Core workflow scope. It does not verify Unity import/build, FishNet runtime, Android, Linux Dedicated Server, multiplayer networking, game balance, or production security.
 
@@ -112,14 +112,14 @@ The following are not established as complete production systems:
 
 ## 8. WO-DOC-01 documentation governance execution
 
-The current project conversation context now contains 20 attachment objects. The prior source snapshot recorded 15; five additional IDs and mounted-byte SHA-256 values are documented in `docs/audit/ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md`. This does not re-enumerate Project Library or prove full conversation coverage.
+The dated 2026-11-10 bounded Project conversation snapshot contains 21 attachment objects across the 15-record baseline, five-object delta, and one-object delta 02; 14 mounted text paths remain a separate measurement. The active conversation Files surface on 2026-11-11 returns one `محادثة 2.html` attachment whose file ID matches the Library record. A fresh recursive Library listing returns 45 file records + 1 folder; all 40 historical Library IDs remain and five additional records are recorded in `SOURCE_INVENTORY.md` Section 4.1. The complete pre-write repository tree contains 87 blobs and 99 entries. This does not establish complete Project conversation enumeration or source completeness.
 
 The project owner approved WO-DOC-01 for sequential execution. The work-order tracker is `docs/governance/WORK_ORDER_REGISTER.md` and is the single index for action state. Package mapping Draft 0.1 is recorded at `docs/audit/PACKAGE_STRUCTURE_RECONCILIATION.md`; it proposes functional grouping only and does not authorize renames or moves. This approval authorizes documentation work; it does not approve the proposed governance policy wholesale, alter ADRs, authorize code changes, merge PRs, or close project stages.
 
 | Work package | Scope | Current state |
 |---|---|---|
 | A — Governance Baseline | Authority, status axes, document/change control | INITIAL BASELINE PRESENT ON PR #11 — OWNER REVIEW PENDING |
-| B — Source & Provenance | Attachments, Library, conversations, exports, repository sources | PARTIAL — 20 ATTACHMENT IDS ENUMERATED; 5-ID DELTA HASHED; LIBRARY/CHAT SOURCES OPEN |
+| B — Source & Provenance | Attachments, Library, conversations, exports, repository sources | PARTIAL — DOC-B-01 AND DOC-B-02 BOUNDED INVENTORY PASSES DONE; DOC-B-03 ORIGIN/THREAD/COMPLETENESS OPEN |
 | C — Decision & Action Tracking | Owner events, ADR traceability, conflicts, work orders | PARTIAL — WO-DOC-01 AUTHORIZATION MAPPED; A1-HOLD/WO-A3 SOURCE RECOVERY BLOCKED |
 | D — Evidence & Traceability | Requirements, code, tests, CI, artifacts, commits | PARTIAL — HISTORICAL EVIDENCE ONLY WHERE RECORDED |
 | E — Session Continuity | Session handoff and next action | PRESENT — MAINTAIN EACH SESSION |
@@ -153,3 +153,10 @@ The current bounded Project conversation context exposes 21 distinct attachment 
 ## WO-DOC-01 execution delta — DOC-D-01
 
 On 2026-11-10, one existing standalone Core CI evidence row was freshly re-fetched: commit `2820285021b1a3d7ae9acd953b3bb65677c33512`, Core CI run `42383513646`, job `128435932500`, artifact `13578582284`. The decoded job log reports 187 passed / 0 failed / 0 skipped. This is metadata/log revalidation of a historical run, not a new test execution. DOC-D-01 remains PARTIAL; no Unity/FishNet/Android/Linux or production claim is established. DOC-D-02 remains PARTIAL and no requirement was resolved.
+
+
+## 10. DOC-B-02 metadata crosswalk — 2026-11-11
+
+The fresh recursive Project Library listing returned 45 file records with 45 unique IDs and one folder. All 40 IDs in the 2026-11-09 historical inventory remain present; five additional records were identified. The active conversation file surface returned one `محادثة 2.html` record whose ID matches the Library record. The 21 attachment IDs in the 2026-11-10 snapshots remain a separate set with no ID overlap against the 45 Library records.
+
+The complete recursive repository tree at pre-write head `8e7bc1ec0a0306655781755eb281ebb22d1b0ae6` has tree SHA `28aabb1420b5e794566d0001249243b5a3032fca`, 99 entries / 87 blobs, and was not truncated. Five of the 45 Library basenames match repository paths; 40 do not. PR #11's changed-file list contains 39 paths, all under `docs/`. This is a filename-level crosswalk only. No Library raw-byte identity or content equality is claimed. DOC-B-02 is DONE for this bounded metadata crosswalk; DOC-B-03 remains OPEN. PR #11 remains OPEN / DRAFT / NOT MERGED; `main` was not changed.

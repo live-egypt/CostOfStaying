@@ -2,7 +2,7 @@
 
 > **Governance status axes:** Decision Status and Evidence Maturity are independent. This document's existence does not approve its claims or prove implementation. See [Project Governance Baseline](PROJECT_GOVERNANCE_BASELINE.md).
 
-**Revision date:** 2026-11-09  
+**Revision date:** 2026-11-11 — metadata-only Library/repository crosswalk  
 **Record State:** INITIAL RECONCILIATION SNAPSHOT — DOCUMENTATION ONLY; CONTENT AND SOURCE COMPLETENESS REMAIN PARTIAL
 **Binding control:** Project Library `NEGATIVE_ATTESTATION_STAGE0.md` (recorded SHA-256: `2340032b4b60a50f159a091cd590a8ec85b10207f576ec48af42004bc8c8131d`).  
 **Purpose:** Identify where claims and records came from, what each source can prove, and what remains unverified.
@@ -57,7 +57,7 @@ Each record below was materialized individually from its Project file ID into `/
 
 ## 4. Library provenance — TEXT/METADATA ONLY
 
-The current recursive listing returned 40 file records plus one folder under `/لعبة`. The inventory is metadata-level unless a specific record's extracted text or raw bytes were separately examined. Stage 0 Negative Attestation applies specifically to the three records identified in Section 4.1; it must not be generalized to every Library record. The current Library contains, among others:
+The 40-file/one-folder list in `SOURCE_INVENTORY.md` Section 4 is a 2026-11-09 historical snapshot. A fresh recursive listing at 2026-11-11T08:55:12.632764Z returned 45 file records with 45 unique IDs plus one folder; all 40 historical IDs remain, with five additional records. Exact names, IDs, sizes, and modified timestamps are in `SOURCE_INVENTORY.md` Section 4.1. Four additional text records were read and are derivative/draft reports; `STAGE_1_WORKING_OUTPUTS.zip` is metadata-only and was not opened. The active conversation file listing returned one `محادثة 2.html` object with the same ID as the Library record; this does not establish mapping to Project chat `2` or platform origin. The 21 historical attachment IDs from the 2026-11-10 snapshots are separate from the 45 Library IDs. The complete pre-write repository tree contains 87 blobs; five Library basenames match repository paths, as detailed in `SOURCE_INVENTORY.md` Section 4.1. This is a metadata/text-level crosswalk only; no Library raw-byte hash or content-equality claim is made. Stage 0 Negative Attestation applies specifically to the three records in Section 4.1 below and must not be generalized to every Library record. The current Library contains, among others:
 - `SOURCE_INVENTORY.md`, `PROVENANCE_REGISTER.md`, `SOURCE_TRACEABILITY_REGISTER.md`
 - `TBD_REGISTER.md`, `CONSISTENCY_MATRIX.md`, `DECISION_AND_CONFLICT_LOG.md`
 - `FULL_DOCUMENTS_REVIEW.md`, `REVIEW_INDEX.md`, `FINAL_REVIEW_REPORT.md`
@@ -105,7 +105,7 @@ For those exact records:
 | PROV-005 | Stage 0 Library raw-byte and uploader evidence limitations | OPEN — BINDING LIMITATION | Authorized raw export/audit event if available |
 | PROV-006 | Stage 2 Library record/content contradictions | OPEN — CAUSAL ORIGIN UNRESOLVED | Authenticated source/audit evidence; no attribution by inference |
 | PROV-007 | Embedded external citations and source URLs not individually inventoried | NOT STARTED | Extraction and source mapping |
-| PROV-008 | Project Library-only source documents have not all been reconciled to repository files | OPEN | Document-by-document mapping |
+| PROV-008 | Project Library-only source documents have not all been reconciled to repository files | PARTIAL — COMPLETE TREE NAME-ONLY CROSSWALK (5 matches) | Content-identity mapping; basename matches do not establish byte/text equality |
 | PROV-009 | Conflicting descriptions of the original platform/source for Project chats `1` and `2` | OPEN — ORIGIN ATTRIBUTION CONFLICT | Direct thread export, source turn, or authenticated platform-origin evidence |
 
 ## 7. State vocabulary

@@ -2,7 +2,7 @@
 
 > **Governance status axes:** Decision Status and Evidence Maturity are independent. This document's existence does not approve its claims or prove implementation. See [Project Governance Baseline](PROJECT_GOVERNANCE_BASELINE.md).
 
-**Revision date:** 2026-11-09  
+**Revision date:** 2026-11-11 — fresh Library and repository-tree metadata reconciliation; prior tables retained as dated snapshots  
 **Record State:** INITIAL RECONCILIATION SNAPSHOT — DOCUMENTATION ONLY; CONTENT AND SOURCE COMPLETENESS REMAIN PARTIAL
 **Scope:** Sources visible through the current Project Files surface, Project Library listing, supplied attachments, and read-only GitHub inspection.  
 **Stage:** Stage 1 — Source & Provenance Recovery  
@@ -108,6 +108,41 @@ The recursive Library listing returned **40 file records + 1 folder** under `/ل
 | 40 | `محادثة 2.html` | `file_000000007f6482109c42c450bf73d0b4` | `/لعبة/محادثة 2.html` |
 
 No Library payload is raw-byte verified by this table.
+
+## 4.1 Fresh Project Library and repository-tree crosswalk — 2026-11-11
+
+**Library listing observed at:** `2026-11-11T08:55:12.632764Z`  
+**Library surface:** recursive listing for `/لعبة`  
+**Result:** 46 items: 45 file records with 45 unique file IDs, plus one folder (`/لعبة`); no warnings and no continuation cursor.
+
+Compared by stable `file_id` with the 2026-11-09 table in Section 4:
+- All 40 historical file IDs remain present (40/40); no historical record was absent.
+- Five additional records are present:
+
+| Additional Library record | File ID | Size (bytes) | Modified (UTC) | Evidence classification |
+|---|---|---:|---|---|
+| `DUPLICATE_ANALYSIS.md` | `file_00000000f51c8210a26766f67b198342` | 5,437 | 2026-11-09T20:23:25.397473Z | Derivative comparison of eight mounted text objects; not an original source. |
+| `MISSING_SOURCES_REGISTER.md` | `file_000000005720821081b9987faf9b1ddb` | 4,394 | 2026-11-09T20:23:28.194165Z | Derivative source-gap register; not an original decision source. |
+| `PROVENANCE_REGISTER(1).md` | `file_00000000d75c8210a52cc26371989127` | 4,932 | 2026-11-09T20:23:22.215973Z | Draft provenance assessment of eight mounted files; not primary-source provenance. |
+| `SOURCE_INVENTORY(1).md` | `file_00000000da888210b05244cf4300aa66` | 7,245 | 2026-11-09T20:23:18.666570Z | Draft inventory of eight mounted files; not a complete Project inventory. |
+| `STAGE_1_WORKING_OUTPUTS.zip` | `file_00000000d5808210b7fb7af30b2e9a67` | 8,717 | 2026-11-09T20:23:30.828866Z | Library metadata only; archive not opened or inspected. |
+
+The four additional text records above were read through extracted text and classified as derivative/draft records. No Library raw-byte hash was calculated. No contents are asserted for the ZIP.
+
+A separate active-conversation Files listing at `2026-11-11T08:55:13.004803Z` returned one attachment: `محادثة 2.html`, file ID `file_000000007f6482109c42c450bf73d0b4`. The same ID appears in the 45-record Library listing. This is an ID-level cross-surface match for one file object only; it does not prove mapping to Project chat `2`, platform origin, or conversation completeness.
+
+The 21 Project attachment IDs in the dated 2026-11-10 snapshots (15 + 5 + 1) have no ID overlap with the current 45 Library file IDs. Preserve these as distinct source surfaces; do not merge records by basename.
+
+**Repository tree at pre-write head:** branch `docs/project-reconciliation-baseline-2026-11-10`, commit `8e7bc1ec0a0306655781755eb281ebb22d1b0ae6`, tree SHA `28aabb1420b5e794566d0001249243b5a3032fca`; 99 tree entries / 87 blobs; `truncated=false`. Comparing all 45 Library basenames against all 87 repository blob paths produces five exact basename matches:
+- `CONSISTENCY_MATRIX.md` → `docs/governance/CONSISTENCY_MATRIX.md`
+- `PROVENANCE_REGISTER.md` → `docs/governance/PROVENANCE_REGISTER.md`
+- `SOURCE_INVENTORY.md` → `docs/governance/SOURCE_INVENTORY.md`
+- `SOURCE_TRACEABILITY_REGISTER.md` → `docs/governance/SOURCE_TRACEABILITY_REGISTER.md`
+- `TBD_REGISTER.md` → `docs/governance/TBD_REGISTER.md`
+
+The remaining 40 Library records have no exact basename match in that repository tree. PR #11's changed-file list contains 39 paths, all under `docs/`. This is a complete path/basename inventory crosswalk for the exact pre-write tree, not content/byte equality, uploader attribution, or proof that similarly named files are identical.
+
+**DOC-B-02 disposition:** the bounded Library/current-conversation/repository metadata crosswalk is complete for this snapshot. Library raw-byte identity, content equality, and original source lineage remain unverified.
 
 ## 5. GitHub repository snapshot — 2026-11-09
 

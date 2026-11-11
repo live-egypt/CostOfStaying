@@ -1,7 +1,7 @@
 # Session Handoff — Cost of Staying
 
 **Project:** Cost of Staying (ثمن البقاء)  
-**Updated:** 2026-11-10  
+**Updated:** 2026-11-11  
 **Work Order:** WO-DOC-01 — Project Documentation Governance  
 **Decision Status:** APPROVED TO PROCEED WITH DOCUMENTATION WORK  
 **Evidence Maturity:** REVIEWED — bounded live GitHub inspection  
@@ -10,7 +10,7 @@
 **Working branch:** `docs/project-reconciliation-baseline-2026-11-10`  
 **Pull Request:** [#11 — Documentation and evidence baseline](https://github.com/live-egypt/CostOfStaying/pull/11)  
 **PR state at update:** OPEN / DRAFT / NOT MERGED  
-**Last substantive commit before package-map draft:** `c11e60fe5313a60d6b2bf6637acfdacf710b4d6a`
+**Last observed branch head before this DOC-B-02 update:** `8e7bc1ec0a0306655781755eb281ebb22d1b0ae6`
 
 > This handoff is a navigation aid, not a competing source of truth. Canonical decisions, source lineage, requirements, conflicts, and delivery status remain in their designated registers and ADRs.
 
@@ -58,9 +58,9 @@ The live repository metadata was read during this session:
 - Default branch is `main`.
 - PR #11 is open, Draft, mergeable according to current metadata, and not merged.
 - PR #11 targets `main` from `docs/project-reconciliation-baseline-2026-11-10`.
-- PR #11 contains 36 changed documentation paths at the attachment-delta checkpoint; the current branch head may be newer.
+- PR #11 contains 39 changed paths, all under `docs/`, at the pre-write checkpoint.
 - PR #11's base SHA is `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`.
-- PR #11's observed head SHA at the attachment-delta checkpoint is `7fd3d8e96279c70a83ed26e0bdc525494a74959d`.
+- PR #11's observed pre-write head SHA on 2026-11-11 is `8e7bc1ec0a0306655781755eb281ebb22d1b0ae6`.
 
 These are a time-bounded observations. Re-fetch PR metadata and branch heads before every subsequent write or review. A mergeable flag is not owner approval.
 
@@ -73,12 +73,12 @@ The owner explicitly approved WO-DOC-01 for sequential execution. The authoritat
 | Governance baseline | PRESENT ON PR #11 — PROPOSED | Owner review; do not self-approve |
 | WO-DOC-01 execution | APPROVED — AUTHORIZED | Follow the sequential work packages in WORK_ORDER_REGISTER.md |
 | Work package A | INITIAL BASELINE PRESENT — REVIEW PENDING | Preserve current authority map and status axes |
-| Work package B | PARTIAL — 5-ID DELTA HASHED | Library/chat-source gaps remain blocked; see attachment snapshot delta |
+| Work package B | PARTIAL — DOC-B-01 AND DOC-B-02 BOUNDED INVENTORY PASSES DONE; DOC-B-03 OPEN | Original chat/thread identity and completeness remain unresolved |
 | Work package C | PARTIAL — WO-DOC-01 AUTHORIZATION MAPPED | Recover remaining owner decision events; A1-HOLD-01…06 remain source-blocked |
 | Work package D | PARTIAL | Keep evidence scoped to exact run/commit/artifact |
 | Work package E | PRESENT — MAINTAIN | Update this handoff after material changes |
 | Work package F — Package Structure | DRAFT 0.1 CREATED — OWNER REVIEW REQUIRED | Review functional package map; no path migration authorized |
-| Source inventory / provenance | PARTIAL — 20 ATTACHMENT OBJECTS; 13 LOCAL PATHS | Library and complete conversation enumeration remain unavailable |
+| Source inventory / provenance | PARTIAL — 21 HISTORICAL ATTACHMENT OBJECTS; 14 LOCAL PATHS; 45 LIBRARY FILES + 1 FOLDER; 87 REPOSITORY BLOBS | One active conversation attachment matches a Library ID; full Project conversation enumeration remains unavailable |
 | Decision traceability | PARTIAL | Recover exact owner approval events; preserve missing-source states |
 | TBD register (85) | STRUCTURALLY MAPPED; SOURCE VALIDATION PARTIAL | Validate item-by-item; do not mark resolved from registration alone |
 | Consistency matrix (109) | STRUCTURALLY MAPPED; 24 pending-source records reported | Reconcile source and dimension details |
@@ -134,7 +134,7 @@ At the end of each substantial work session, update:
 - Open blockers and missing source evidence.
 - Exact next action.
 
-**Current next action:** continue source-backed requirement/evidence mapping across TBD-01…85 and the 109-record Consistency Matrix. Preserve per-item source gaps; no path migration, Risk/Debt register creation, PR merge, or Stage 1/2 closure.
+**Current next action:** DOC-B-03 — reconcile the accessible `محادثة 2.html` metadata and owner-attested identity relation while preserving the origin, original-thread, and completeness gaps. Do not infer missing conversation parts or owner decisions.
 
 
 ## 7. Latest bounded source snapshot — 2026-11-10
@@ -144,7 +144,7 @@ A further distinct attachment object is now surfaced beyond the earlier 20-objec
 This is not a complete Project Library or conversation inventory. A1-HOLD-01…06 and both WO-A3 amendments remain source-blocked. Next action: continue DOC-B-02/DOC-B-03 recovery where original Library/chat source access exists; otherwise preserve the blockers and proceed only with source-backed item-level mapping under DOC-D-02.
 
 
-## 8. Latest execution checkpoint — 2026-11-10
+## 8. Historical execution checkpoint — 2026-11-10
 
 - Live PR #11 re-fetched: OPEN / DRAFT / NOT MERGED; base `main`; head branch `docs/project-reconciliation-baseline-2026-11-10`; head SHA at session start `8ddf8f71d460c8db148c0069eb4a4893561eed77`; 39 changed files, all under `docs/`.
 - DOC-B-02 remains BLOCKED: direct Project Library listing/export is not accessible through the current source surface.
@@ -153,3 +153,15 @@ This is not a complete Project Library or conversation inventory. A1-HOLD-01…0
 - DOC-D-01 remains PARTIAL pending equivalent re-fetch/inspection for the remaining historical rows and artifact scope. DOC-D-02 remains PARTIAL; no TBD or consistency record is resolved.
 
 **Next single action:** continue DOC-D-01 by re-fetching the next distinct Core CI snapshot (run `41331400978`, commit `94c5789b0e82493290ca85133fc692e83ffd9884`) and checking its exact run/job/log/artifact association before recording any update.
+
+
+## 9. Latest execution checkpoint — DOC-B-02 — 2026-11-11
+
+- Pre-write live state: PR #11 OPEN / DRAFT / NOT MERGED; base `main` at `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`; branch `docs/project-reconciliation-baseline-2026-11-10`; head `8e7bc1ec0a0306655781755eb281ebb22d1b0ae6`; 39 changed paths, all under `docs/`.
+- Library metadata re-fetch at `2026-11-11T08:55:12.632764Z`: 45 file records / 45 unique IDs + 1 folder; all 40 historical IDs retained; five additional records listed in `SOURCE_INVENTORY.md` Section 4.1.
+- Current active conversation file surface at `2026-11-11T08:55:13.004803Z`: one `محادثة 2.html` record; its ID matches the Library record. The historical 21 attachment IDs are a separate set and do not overlap the current 45 Library IDs.
+- Complete pre-write repository tree: SHA `28aabb1420b5e794566d0001249243b5a3032fca`, 99 entries / 87 blobs, not truncated. Five Library basenames match repository paths; no content/byte equality is claimed.
+- PR #11 changed-file list has 39 documentation paths. DOC-B-02: DONE for the bounded metadata crosswalk. DOC-B-03: OPEN; original thread IDs, complete original chat content, and platform-origin evidence remain unresolved. A1-HOLD-01…06 and both mandatory WO-A3 amendments remain source-blocked.
+- No Core, Net, Unity, Tests, ADR content, or `main` was changed. No PR merge or Stage closure occurred.
+
+**Next single action:** DOC-B-03 — inspect the accessible HTML export metadata against the owner-attested identity relation, preserving the possibility that other conversation parts are elsewhere and not present in this export.
