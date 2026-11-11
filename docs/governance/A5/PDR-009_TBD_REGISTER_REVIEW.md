@@ -56,7 +56,7 @@ The A4 governance context available to this review identifies `TBD-37` and `TBD-
 
 This is an evidence limitation, not a finding that the TBD items do not exist, were never recorded, or are invalid. No item is closed, deleted, superseded, renumbered, or reclassified by this review.
 
-The review cannot establish a complete count (including any previously mentioned range such as TBD-01…TBD-85), nor can it validate that range. Do not use such a count as a repository fact until the original register or equivalent source is recovered and reconciled.
+The A4.6 source record supplied in the project files explicitly reports that TBD-01…TBD-85 were historically recorded. This establishes a source-derived historical count/range claim, not that all 85 entries are currently present in the repository, complete, correctly numbered, source-verified, or approved. The original register and row-level source mapping remain unrecovered in the examined repository evidence. Preserve the historical 85-item claim as RECORDED — NOT INDEPENDENTLY RECONCILED.
 
 ## 5. Required recovery and reconciliation
 
