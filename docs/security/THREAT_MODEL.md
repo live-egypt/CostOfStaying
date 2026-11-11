@@ -1,18 +1,18 @@
-# Threat Model — v2.0
-**الحالة: PROPOSED**
+# Threat Model — v2.1
+**الحالة: PROPOSED | نموذج لم يُراجَع على نظام منفذ**
 
-النطاق: Android Client، الشبكة، Dedicated Server، Backend، البيانات، CI/CD، GitHub، مفاتيح التوقيع والنشر.
+النطاق المستهدف: عميل Android، الشبكة، Dedicated Server، Backend إن اعتُمد، ومفاتيح التوقيع. CI غير موجود؛ تهديد CI ينطبق فقط بعد إنشاء خط بناء حقيقي.
 
-| التهديد | الضابط |
-|---|---|
-| تزوير الصحة/الضرر | حساب خادمي |
-| RPC spam | rate limits وحدود رسائل |
-| Replay | Request IDs وidempotency |
-| Serialization abuse | schema validation وحدود الحجم |
-| Speed/teleport | server movement validation |
-| Session theft | جلسات قابلة للإبطال |
-| Secret leak | secret manager وrotation |
-| Dependency compromise | pinning ومراجعة |
-| CI compromise | least privilege وحماية branches |
+| التهديد | الضابط المقصود | الحالة |
+|---|---|---|
+| تزوير الصحة والضرر | حساب خادمي | غير منفذ |
+| RPC spam | rate limits | غير منفذ |
+| Replay | RequestId وidempotency | غير منفذ |
+| Serialization abuse | schema وحد الحجم | غير منفذ |
+| Speed/teleport | تحقق حركة خادمي | غير منفذ |
+| Session theft | جلسات قابلة للإبطال | غير منفذ |
+| Secret leak | أسرار خارج Git | سياسة فقط |
+| Dependency compromise | تثبيت ومراجعة | لا كود بعد |
+| CI compromise | أقل صلاحية عند وجود CI | لا ينطبق الآن |
 
-لكل تهديد وثّق Asset → Entry Point → Abuse Case → Impact → Control → Test → Evidence → Residual Risk. راجع النموذج عند تغيير الشبكة أو الجلسات أو الحفظ أو Backend أو CI.
+لكل تهديد لاحقاً: Asset وEntry Point وAbuse Case وImpact وControl وTest وEvidence وResidual Risk. لا تُعامل هذه الجدول كدليل على أن الضابط موجود.

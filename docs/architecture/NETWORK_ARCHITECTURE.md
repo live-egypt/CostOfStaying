@@ -1,10 +1,12 @@
-# Network Architecture — v2.0
-**الحالة: PROPOSED**
+# Network Architecture — v2.1
+**الحالة: PROPOSED | المبدأ في ADR-002 وغير منفذ**
 
-Dedicated Server authoritative؛ العميل يرسل Intent فقط. الخادم يحسم الصحة والضرر والذخيرة والمؤقتات والنقل والطاقة والتصويت والنتيجة.
+Dedicated Server يملك الحالة. العميل يرسل Intent فقط. الخادم يحسم الصحة والضرر والذخيرة والمؤقتات والنقل والتصويت والنتيجة. Energy غير معتمدة في RULE-04؛ إن وُجدت لاحقاً يملكها الخادم أيضاً.
 
-استخدم server monotonic clock، Request IDs، rate limits، حدود حجم الرسائل، validation، Snapshot عند الانضمام/إعادة الاتصال وDelta عند التغيير.
+استخدم ساعة الخادم monotonic وRequestId وrate limits وحدود حجم الرسائل.
 
-اختبر tick rates 10/15/20Hz ولا تثبت 20Hz قبل قياس CPU وbandwidth وlatency. معدل الشبكة مستقل عن render FPS وUnity physics timestep.
+Snapshot هنا يعني لقطة حالة شبكية في ذاكرة الخادم عند الانضمام أو إعادة الاتصال، مع Delta عند التغيير. ليس قاعدة بيانات دائمة. الحفظ الدائم يتبع [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) وADR-003. سياسة مهلة إعادة الاتصال ما زالت غير معتمدة ويجب حسمها قبل Alpha.
 
-اختبر RTT 100/200/300ms، loss 1/3/5%، jitter، packet reordering، disconnect/reconnect. قواعد مهلة إعادة الاتصال وحفظ الحالة يجب اعتمادها قبل alpha.
+اختبر tick rates 10 و15 و20Hz. لا تثبّت 20Hz قبل قياس CPU وbandwidth وlatency. معدل الشبكة مستقل عن معدل الرسم وعن Unity physics timestep.
+
+نقاط الاختبار المقترحة: RTT 100/200/300ms، loss 1/3/5%، jitter، وإعادة ترتيب الحزم. ليست مواصفات تشغيل معتمدة.

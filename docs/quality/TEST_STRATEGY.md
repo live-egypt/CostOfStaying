@@ -1,26 +1,23 @@
 # استراتيجية الاختبار — v2.1
-**الحالة: PROPOSED | لا توجد اختبارات منفذة مثبتة في هذه الحزمة**
+**الحالة: PROPOSED | لا توجد اختبارات منفذة**
 
 ## هرم الاختبار
-Unit → Integration → PlayMode/System → Network → Manual UX/Playtest → Performance/Security. يجب اختيار مستوى الاختبار وفق الخطر؛ لا يغني اختبار Unit عن اختبار الشبكة أو الجهاز الفعلي.
+Unit → Integration → PlayMode/System → Network → Playtest → Performance/Security. لا يغني اختبار الوحدة عن الشبكة أو الجهاز الفعلي.
 
-## نطاق الاختبار الوظيفي
-- Collapse: Vitality decay، المؤقتات، إعادة الجدولة، وحدود الموت.
-- Transfer: Move atomicity، السعة، المدى، cooldown، replay، concurrency.
-- Betrayal: اكتساب النقاط والعتبات بعد حسم آثارها.
-- Combat: server validation، ammo، fire rate، range، line of sight.
-- Spirit: انتقال الموت، Echo uniqueness، cooldown للتلميح، ومنع التأثير المباشر على الأحياء.
-- Endgame: التصويت، الإجماع، timeout، disconnect، time limit، mutual collapse.
-- Match lifecycle: إنشاء المباراة، الانضمام، البدء، الانتهاء، وإعادة الاتصال وفق سياسة معتمدة.
+## النطاق
+- Collapse: التآكل، المؤقتات، إعادة الجدولة، والموت عند الصفر فقط. لا تُعتمد فترات غير مسماة في RULE-03.
+- Transfer: Move ذري، السعة، المدى الأولي، cooldown، replay، والتزامن.
+- Betrayal: نقطة واحدة بعد النجاح فقط، وعدم الزيادة عند الفشل أو replay. لا تُكتب عتبات 3/5/7 كاختبارات قواعد قبل تسجيلها.
+- Combat: تحقق خادمي. أرقام الأسلحة ليست متطلبات.
+- Spirit: انتقال واحد إلى Spirit، فرادة Echo، ومنع التأثير في الأحياء. Energy ليس نطاقاً حتى يُحسم.
+- Endgame: التصويت، الإجماع، الرفض، ثم النتائج الخمس بما فيها Draw منفصلة عن Time Limit وMutual Collapse.
+- دورة المباراة وإعادة الاتصال بعد اعتماد سياسة. لا سياسة معتمدة الآن.
 
-## أدوات مقترحة
-Unity Test Framework وNUnit بعد اعتماد Unity. لا تفترض أن الأدوات أو test assemblies أضيفت إلى المستودع.
+## أدوات
+Unity Test Framework وNUnit بعد اعتماد Unity في ADR-001. ليست مضافة إلى المستودع.
 
-## سيناريوهات الشبكة
-RTT 100/200/300ms، loss 1/3/5%، jitter، packet reorder، reconnect، والطلبات المتزامنة. هذه نقاط اختبار مقترحة وليست مواصفات تشغيل مثبتة.
+## الشبكة
+RTT 100/200/300ms وloss 1/3/5% وjitter وreorder وreconnect نقاط اختبار مقترحة، ليست مواصفات تشغيل مثبتة. tick rate لم يُحسم.
 
-## توثيق كل اختبار
-كل اختبار يجب أن يحمل ID وهدفاً وخطوات ونتيجة متوقعة وفعلية وcommit/build والجهاز/البيئة وسجل أو artifact. اربط الاختبار بمتطلب في REQUIREMENTS_TRACEABILITY.md.
-
-## بوابات الجودة المستهدفة
-لا Critical defects معروفة، لا crash أو data corruption معروف في سيناريو القبول، مباراة كاملة لأربعة لاعبين، وأداء قابل للتكرار على أجهزة مستهدفة. هذه معايير قبول مستقبلية وليست حالة حالية.
+## التوثيق
+كل اختبار يحمل ID وهدفاً وخطوات ونتيجة متوقعة وفعلية وcommit وبيئة. اربطه بمتطلب في REQUIREMENTS_TRACEABILITY.md. لا VERIFIED بلا تنفيذ.

@@ -1,22 +1,17 @@
-# Deployment Architecture — v2.0
-**الحالة: PROPOSED**
+# Deployment Architecture — v2.1
+**الحالة: PROPOSED | لا بيئة منشأة ولا CI منفذ**
 
-## البيئات
-- Local: تطوير واختبارات محلية.
-- CI: بناء واختبار آلي دون أسرار إنتاج.
-- Staging: خادم Linux تجريبي وعميل Android تجريبي.
-- Production: غير معتمد قبل اجتياز بوابات الإصدار.
+البيئات التالية مستهدفة. وجود اسمها هنا لا يعني أنها تعمل:
+- Local: تطوير محلي عند وجود مشروع.
+- CI: بناء واختبار آلي مستقبلي بلا أسرار إنتاج. قوالب `.github/workflows` ليست هذا الـ CI.
+- Staging: خادم Linux تجريبي وعميل Android تجريبي بعد وجود build.
+- Production: غير معتمد قبل بوابات الإصدار. Backend الإنتاج ينتظر ADR-003.
 
-## وحدات النشر
-1. Android Client: ملف APK/AAB موقع بمفتاح إصدار محفوظ خارج Git.
-2. Linux Dedicated Server: بناء مستقل عن العميل، مع إعدادات بيئية خارج الحزمة.
-3. Backend: يضاف بعد اعتماد مزود وخدمات محددة.
+## وحدات النشر المستهدفة
+1. Android Client موقّع بمفتاح خارج Git.
+2. Linux Dedicated Server مستقل عن العميل.
+3. Backend فقط بعد اعتماد مزود.
 
-## إصدار الخادم
-كل artifact يحمل commit SHA، إصدار Unity، إصدار FishNet، build number، target architecture، config schema version وSHA-256 hash.
+كل artifact مستقبلي يحمل commit SHA وإصدار Unity وFishNet وbuild number والهدف وhash.
 
-## التدرج والرجوع
-انشر أولاً إلى Staging؛ نفذ smoke test؛ قارن hash؛ راقب crash rate وserver tick؛ ثم وسع النشر تدريجياً. احتفظ بآخر نسخة سليمة معروفة. يجب أن تكون rollback procedure مجربة وليست مجرد تعليمات.
-
-## الأسرار
-لا تضع credentials أو signing keys داخل العميل أو مستودع Git. استخدم أقل صلاحية وافصل البيئات. لا تعتمد build إنتاجياً إذا تسرب سر أو تعذر التحقق من مصدر artifact.
+النشر المستهدف: Staging ثم smoke ثم مقارنة hash ثم توسيع تدريجي مع نسخة سابقة معروفة. الرجوع يجب أن يُجرّب قبل الاعتماد عليه. لا أسرار داخل العميل أو Git.
