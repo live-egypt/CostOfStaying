@@ -2,6 +2,8 @@
 
 هذه الوثائق تصف التصميم المقترح وخطط التحقق. لا تعني أن أي نظام منفذ أو مختبر ما لم يذكر دليل قابل للمراجعة.
 
+التنظيم وقواعد التعارض والكتالوج الكامل في [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md). هذا الملف فهرس قراءة فقط.
+
 ## ابدأ هنا
 - [ميثاق المشروع](00_PROJECT_CHARTER.md)
 - [Game Design Document](01_GAME_DESIGN_DOCUMENT.md)
@@ -36,6 +38,7 @@
 - [استراتيجية الاختبار](quality/TEST_STRATEGY.md)
 - [خطة الاختبارات الأمنية](quality/SECURITY_TEST_PLAN.md)
 - [خطة اختبار اللعب](quality/PLAYTEST_PLAN.md)
+- [مراجعة مخاطر التوازن](quality/BALANCE_RISK_REVIEW.md)
 - [ميزانية الأداء](quality/PERFORMANCE_BUDGET.md)
 - [بروتوكول قياس الأداء](quality/PERFORMANCE_TEST_PROTOCOL.md)
 - [توافق الأجهزة](quality/DEVICE_COMPATIBILITY.md)
@@ -46,6 +49,7 @@
 - [النسخ الاحتياطي والاستعادة](operations/BACKUP_AND_RECOVERY.md)
 
 ## الحوكمة والتسليم
+- [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md)
 - [سجل القرارات](governance/DECISIONS_LOG.md)
 - [تتبع المتطلبات](governance/REQUIREMENTS_TRACEABILITY.md)
 - [ADR-001: التكدس التقني](governance/adr/ADR-001-TECH-STACK.md)
@@ -57,6 +61,7 @@
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
 
 ## حالات الوثائق
+التعريف الملزم في [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md). ملخص:
 - **PROPOSED:** مقترح لم يعتمد.
 - **PROPOSED FOR PLAYTEST:** خط أساس يحتاج جلسات اختبار قبل اعتماده.
 - **APPROVED:** قرار معتمد تصميمياً.
