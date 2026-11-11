@@ -6,6 +6,7 @@
 ## 1. الدخول
 - الفهرس البشري: [docs/README.md](../README.md)
 - هذه الوثيقة: الكتالوج وقواعد التعارض والحالة
+- ما حُسم: [CONFLICT_RESOLUTIONS.md](CONFLICT_RESOLUTIONS.md)
 - قرارات التصميم: [DECISIONS_LOG.md](DECISIONS_LOG.md) وملفات `adr/`
 
 ## 2. الطبقات
@@ -29,34 +30,31 @@
 5. هذا الكتالوج هو قائمة الوثائق المعتمدة داخل الحزمة. وثيقة غير مدرجة هنا ليست جزءاً من الحوكمة حتى تُضاف في نفس الالتزام.
 
 ## 4. حالات موحّدة
-استخدم هذه الألفاظ فقط في رأس الوثيقة:
 - **PROPOSED:** مقترح لم يُعتمد.
 - **PROPOSED FOR PLAYTEST:** خط أساس يحتاج جلسات قبل الاعتماد.
 - **APPROVED:** قرار معتمد تصميمياً. لا يعني منفذاً.
 - **IMPLEMENTED:** منفذ في commit محدد قابل للمراجعة.
 - **VERIFIED:** اجتاز اختباراً محدداً وله دليل محفوظ.
 - **TBD:** لم يُحسم.
-- **NOT IMPLEMENTED:** يُستخدم فقط كوصف تنفيذ بجانب حالة تصميمية، كما في ADR-002.
+- **NOT IMPLEMENTED:** وصف تنفيذ فقط، كما في ADR-002.
 
 لا تستخدم IMPLEMENTED أو VERIFIED لمجرد وجود وثيقة.
 
 ## 5. قواعد التحديث
 - أي وثيقة جديدة تُضاف في هذا الكتالوج وفي [docs/README.md](../README.md) في نفس الالتزام.
 - تغيير حالة ADR يحدّث ملفه و[DECISIONS_LOG.md](DECISIONS_LOG.md) معاً.
-- تغيير قاعدة يحدّث مواصفة القواعد ووثيقة النظام المقابل وADR-004 عند الحاجة، ثم الاختبارات.
-- لا تُعاد تسمية المسارات القائمة دون سبب موثق؛ الروابط النسبية جزء من الحوكمة.
-- رأس بعض وثائق المعمارية والأمن ما زالت تقول v2.0 بينما الحزمة v2.1. هذا انحراف شكلي معروف ولا يغيّر الحالة. يُصحّح الرأس إلى v2.1 عند أول تعديل موضوعي للملف، دون رفع الحالة.
+- تغيير قاعدة يحدّث مواصفة القواعد ووثيقة النظام المقابل وADR-004 عند الحاجة.
+- لا تُعاد تسمية المسارات القائمة دون سبب موثق.
+- الملفات التي لم تُمس في حسم 2026-11-11 قد يبقى رأسها v2.0. هذا انحراف شكلي ولا يغيّر الحالة.
 
 ## 6. الكتالوج
-الحالة هنا تلخّص رأس الملف. إذا اختلفت، رأس الملف هو المرجع ويُصحّح هذا الجدول في نفس الالتزام.
-
 | المسار | الطبقة | الحالة |
 |---|---|---|
 | `00_PROJECT_CHARTER.md` | منتج | PROPOSED |
 | `01_GAME_DESIGN_DOCUMENT.md` | منتج | PROPOSED FOR PLAYTEST |
 | `02_GAME_RULES_SPECIFICATION.md` | منتج / قواعد | PROPOSED FOR PLAYTEST |
 | `03_PLAYER_EXPERIENCE_AND_CORE_LOOP.md` | منتج | PROPOSED FOR PLAYTEST |
-| `GLOSSARY.md` | منتج | مرجع مصطلحات |
+| `GLOSSARY.md` | منتج | PROPOSED |
 | `systems/COLLAPSE_SYSTEM.md` | نظام | PROPOSED FOR PLAYTEST |
 | `systems/SUFFERING_TRANSFER_SYSTEM.md` | نظام | PROPOSED FOR PLAYTEST |
 | `systems/BETRAYAL_SYSTEM.md` | نظام | PROPOSED FOR PLAYTEST |
@@ -85,6 +83,7 @@
 | `operations/MONITORING_AND_LOGGING.md` | عمليات | PROPOSED |
 | `operations/BACKUP_AND_RECOVERY.md` | عمليات | PROPOSED |
 | `governance/DOCUMENT_GOVERNANCE.md` | حوكمة | PROPOSED |
+| `governance/CONFLICT_RESOLUTIONS.md` | حوكمة | PROPOSED |
 | `governance/DECISIONS_LOG.md` | حوكمة | فهرس ADR |
 | `governance/REQUIREMENTS_TRACEABILITY.md` | حوكمة | PROPOSED |
 | `governance/adr/ADR-001-TECH-STACK.md` | قرار | PROPOSED |
@@ -95,4 +94,4 @@
 | `roadmap/ACCEPTANCE_CRITERIA.md` | تسليم | PROPOSED |
 | `roadmap/DELIVERY_PLAN.md` | تسليم | PROPOSED |
 
-لا يوجد كود لعبة أو خادم أو اختبار منفذ داخل هذه الحزمة. workflows الأمن في `.github/workflows/` قوالب وليست دليلاً على فحص ناجح.
+لا كود لعبة ولا خادم ولا اختبار منفذ. ملفات `.github/workflows` قوالب متوقفة على `workflow_dispatch` وليست دليل فحص ناجح.
