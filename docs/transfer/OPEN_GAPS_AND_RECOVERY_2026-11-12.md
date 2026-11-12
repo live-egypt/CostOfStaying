@@ -82,3 +82,23 @@
 - أصل Network/Security/Unity source محدد أو gap disposition موثق.
 - GitHub branches/PRs والمراجع المتقاطعة موثقة.
 - مراجعة مستقلة وقبول owner قبل أي stage closure.
+
+## 8. فجوة حفظ أرشيف النقل داخل GitHub
+
+**TRANSFER-ARCHIVE-01 = VERIFIED LOCALLY / NOT COMMITTED TO REPOSITORY.**
+
+- ملف ZIP موجود كتنزيل في محادثة ChatGPT الحالية، وحجمه 60,375 bytes.
+- SHA-256 المتوقع: `572222b1185c25483aad71b30c80441215b803190ab8cb56d14ac3ba56e0266b`.
+- فحص ZIP نجح؛ 20 entries؛ 18 TXT files؛ جميع أحجام/أسطر/SHA-256 للـ18 ملف تطابقت مع `SOURCE_MANIFEST.json`.
+- محتوى ZIP الثنائي نفسه غير موجود في فرع GitHub حتى لقطة هذه المراجعة. الموجود في PR #22 هو manifest والوثائق التي تصف الأرشيف وحدوده.
+
+### الإجراء لإغلاق فجوة النقل
+
+1. نزّل ZIP من المحادثة الحالية واحفظ نسختين محليتين.
+2. افتح GitHub branch `docs/chatgpt-project-transfer-archive-2026-11-12` من صفحة المستودع.
+3. اختر **Add file → Upload files**، وارفع ZIP إلى المسار `docs/transfer/source-attachments/CostOfStaying_uploaded_text_sources_2026-11-12.zip`.
+4. اجعل commit على فرع النقل نفسه، لا على `main`، برسالة مثل `docs: add verified source attachment archive`.
+5. بعد الرفع، أعد تنزيل الملف من GitHub واحسب SHA-256 محلياً. لا تغلق TRANSFER-ARCHIVE-01 إلا إذا تطابق الحجم والبصمة مع القيم أعلاه.
+6. تحقق من ظهور الملف ضمن Changes في PR #22 قبل الدمج.
+
+هذه فجوة خاصة بأرشيف النقل ولا تغير سجل M1-G01…G06 ولا تعني أن M1 أُغلق.
