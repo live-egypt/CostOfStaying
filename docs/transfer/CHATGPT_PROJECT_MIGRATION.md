@@ -25,7 +25,7 @@
 4. `docs/transfer/SOURCE_ARCHIVE_MANIFEST_2026-11-12.md`
 5. `docs/transfer/OPEN_GAPS_AND_RECOVERY_2026-11-12.md`
 6. `docs/transfer/CHATGPT_PROJECT_INSTRUCTIONS.md`
-7. أرشيف `docs/transfer/source-attachments/CostOfStaying_uploaded_text_sources_2026-11-12.zip`
+7. أرشيف TXT الـ18 المتاح للتنزيل من المحادثة الحالية؛ ليس ملفاً ثنائياً داخل GitHub branch في هذه النسخة.
 
 يُفضل أن يكون GitHub connector متصلاً بالمستودع حتى يستطيع المشروع الجديد قراءة main والفروع وPRs مباشرة. لا تجعل PR غير مدمج مصدراً نهائياً من دون مراجعة.
 
