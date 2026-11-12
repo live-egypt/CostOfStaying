@@ -62,3 +62,15 @@
 - لا تدمج PRs أو تقرر أي حزمة وثائق canonical.
 - لا تثبت تنفيذ Unity أو FishNet أو Android أو Linux server.
 - لا تغلق M1 ولا تبدأ M2.
+
+## 7. إلحاق ملف ZIP بفرع GitHub قبل الدمج
+
+النسخة الحالية من PR #22 تحتوي على وثائق النقل والـmanifest، لكن ملف ZIP الثنائي نفسه لم يُرفع إلى GitHub بعد. لإكماله:
+
+1. نزّل `CostOfStaying_uploaded_text_sources_2026-11-12.zip` من المحادثة الحالية، واحتفظ بنسختين محليتين.
+2. افتح [PR #22](https://github.com/live-egypt/CostOfStaying/pull/22)، وانتقل إلى فرع `docs/chatgpt-project-transfer-archive-2026-11-12`.
+3. عبر GitHub: **Add file → Upload files**، ارفع ZIP إلى `docs/transfer/source-attachments/CostOfStaying_uploaded_text_sources_2026-11-12.zip` ثم اعمل commit إلى فرع النقل نفسه.
+4. تحقق من تنزيل النسخة التي رفعتها من GitHub وحساب SHA-256: يجب أن يساوي `572222b1185c25483aad71b30c80441215b803190ab8cb56d14ac3ba56e0266b`، والحجم 60,375 bytes.
+5. تأكد أن الملف يظهر ضمن PR #22. لا تدمج PR ولا تحذف مشروع ChatGPT القديم قبل اكتمال النسخ الاحتياطية والتحقق من المشروع الجديد.
+
+إذا لم تستطع رفع ZIP عبر GitHub Web UI، احتفظ بالنسختين المحليتين وبنسخة المحادثة، وسجّل TRANSFER-ARCHIVE-01 على أنها مفتوحة؛ لا تصف المستودع بأنه يحتوي الأرشيف الثنائي.
