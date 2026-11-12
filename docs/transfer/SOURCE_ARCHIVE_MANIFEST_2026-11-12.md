@@ -5,7 +5,7 @@
 
 ## الأرشيف
 
-- المسار داخل المستودع: `docs/transfer/source-attachments/CostOfStaying_uploaded_text_sources_2026-11-12.zip`
+- اسم ملف التنزيل: `CostOfStaying_uploaded_text_sources_2026-11-12.zip` (خارج GitHub في هذه النسخة).
 - الحجم: 60,375 bytes
 - SHA-256: `572222b1185c25483aad71b30c80441215b803190ab8cb56d14ac3ba56e0266b`
 - عدد الملفات TXT: 18
