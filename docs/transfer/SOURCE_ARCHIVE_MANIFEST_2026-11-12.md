@@ -50,3 +50,21 @@
 3. ملف `محادثة 2.html` غير موجود كبايتات خام ضمن هذه اللقطة، لذلك لم يُضمّن.
 4. سجلات مكتبة ChatGPT الـ40 والـ45 المذكورة في تقارير سابقة هي لقطات metadata بتاريخين مختلفين وليست ملفات خام محفوظة هنا.
 5. الأرشيف لا يثبت اكتمال جميع محادثات المشروع أو جميع المرفقات التاريخية أو مصدرها الأصلي.
+
+
+## نتيجة إعادة التحقق من الأرشيف — 2026-11-12 (بعد إعادة رفع الملف)
+
+أُعيد فحص الملف ZIP الموجود في مساحة العمل الحالية بعد توفره مجدداً:
+
+- ZIP size: 60,375 bytes.
+- SHA-256: `572222b1185c25483aad71b30c80441215b803190ab8cb56d14ac3ba56e0266b` — MATCH.
+- ZIP central directory: 20 entries (18 TXT attachments + `SOURCE_MANIFEST.json` + `README_ARCHIVE.md`).
+- `unzip -t`: PASS — no compressed-data errors.
+- TXT files read back from ZIP: 18.
+- Sum of TXT uncompressed sizes: 146,407 bytes.
+- Every TXT file size and SHA-256 matched its entry in the embedded `SOURCE_MANIFEST.json` and the table in this document: **18/18 MATCHED**.
+- Total uncompressed ZIP contents: 151,139 bytes (includes both metadata files).
+
+**Evidence boundary:** this verifies archive integrity and internal consistency of the 18 TXT payloads. It does not authenticate the underlying conversation originals, prove complete Project coverage, or recover `محادثة 2.html` / Library raw bytes.
+
+**Repository storage boundary:** the binary ZIP remains a separate downloadable file in the ChatGPT conversation workspace; it has not been committed as a GitHub binary object in this PR. The repository carries its manifest, checksums, and transfer instructions, not the ZIP payload itself.
