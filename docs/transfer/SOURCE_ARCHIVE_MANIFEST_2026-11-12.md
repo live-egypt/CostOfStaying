@@ -1,0 +1,70 @@
+# سجل حزمة المصادر المرفوعة — 2026-11-12
+
+**نطاق القياس:** 18 ملف TXT ظاهراً فعلياً في مساحة العمل الحالية لهذه المحادثة وقت إنشاء الأرشيف.  
+**الحالة:** الملفات الأصلية المتاحة في هذه اللقطة محفوظة داخل ZIP byte-preserving، مع manifest للبصمات. هذه ليست نسخة كاملة من كل محادثات ChatGPT أو مكتبة المشروع. ZIP متاح للتنزيل من المحادثة وليس جزءاً من GitHub branch في هذه النسخة.
+
+## الأرشيف
+
+- اسم ملف التنزيل: `CostOfStaying_uploaded_text_sources_2026-11-12.zip` (خارج GitHub في هذه النسخة).
+- الحجم: 60,375 bytes
+- SHA-256: `572222b1185c25483aad71b30c80441215b803190ab8cb56d14ac3ba56e0266b`
+- عدد الملفات TXT: 18
+- مجموع أحجام ملفات TXT قبل الضغط: 146,407 bytes
+- يحتوي ZIP أيضاً على `SOURCE_MANIFEST.json` و`README_ARCHIVE.md`.
+
+## Manifest الملفات
+
+| # | الملف كما ظهر | الحجم | الأسطر | SHA-256 |
+|---:|---|---:|---:|---|
+| 1 | `00.txt` | 12,519 | 227 | `b7d134696c9229b988decc7ba204bc9e7b723638eb0bbd117aae401f1c02ab9f` |
+| 2 | `01.txt` | 9,565 | 196 | `f6a87965829fcd44f787b9e984340d659d1748258e934672de7618f09b44c26b` |
+| 3 | `03.txt` | 6,852 | 117 | `12bf0b421a6158bca1d0c6c514c72ee5e2a61c7c0bb04130fdc3815772baf393` |
+| 4 | `2 استكمال المحادثة.txt` | 8,163 | 199 | `5bc108ffd11326d10d83562198d0fdca99fe7a3fe49204952ed020152ecd866d` |
+| 5 | `5.txt` | 17,454 | 248 | `5cf496c1183f36d23ef46d22b3afb7438728df70175bd17f0f46014c130dce60` |
+| 6 | `Governance Baseline Setup.txt` | 6,090 | 137 | `da1538c1c6db713114d266fc31813df410d47de0c4f84fe16eb273657b404bfc` |
+| 7 | `رفع الملفات على دفعات.txt` | 4,719 | 43 | `02688c4ab66f7cb6a32896159854b62028fcab019072967c09fc334c2e438333` |
+| 8 | `قسم · قسم · 00.txt` | 21,841 | 180 | `45130fc80bf74c52035d7eb65ed1150c291a8e23d242ac951445d4fb77dd4730` |
+| 9 | `قسم · قسم · استكمال المحادثة.txt` | 9,625 | 145 | `0177fcd7e59f79db23d18ff9b820841618fbc29bd5b071a8f43f6546c35d6f96` |
+| 10 | `قسم · قسم · رفع الملفات على دفعات.txt` | 4,972 | 120 | `0a0e459edd8717aa2e3fe26d630e3f130f6c88d46ae05b651350312c6de9f698` |
+| 11 | `قسم · قسم · قسم · استكمال المحادثة.txt` | 7,437 | 155 | `fed4978a62d4d1a54c6f1848c5b36d4581be5dfb79181a1cddf50bdf84ff289f` |
+| 12 | `قسم · قسم · قسم · قسم · قسم · مراجعة وجرد الملفات.txt` | 2,794 | 66 | `fa7123aebc81d82a22b5f8877cebf3a86c152d40c0ad2b8ca6e02cee46c06ac4` |
+| 13 | `قسم · قسم · قسم · قسم · مراجعة وجرد الملفات.txt` | 5,740 | 118 | `26015708d159cc98e56315420dc4f3fc86c46c9eb35f02f9b2da8e4bd21842a9` |
+| 14 | `قسم · قسم · قسم · مراجعة وجرد الملفات.txt` | 5,314 | 92 | `51105bf049497182fc6edd233533014a65a0d633f25f5d2da4f284b96086d098` |
+| 15 | `قسم · قسم · مراجعة وجرد الملفات.txt` | 5,314 | 152 | `23ebb91ab1e85b562e41aaca7884ccaf98f306aab0d20ce03340ef40794e817d` |
+| 16 | `قسم · مراجعة وجرد الملفات.txt` | 8,696 | 202 | `950ea1da49077e3d56763d0c1586e5f954ffade54d183092a239020bbe726dbc` |
+| 17 | `متابعة حالة Cost of Staying أسبوعيًا.txt` | 3,932 | 44 | `11d87c3df43259d41cdfc481c967baac992090b4e46afcee1433806d3f08509` |
+| 18 | `مراجعة وجرد الملفات.txt` | 5,380 | 102 | `c9ede33e70ab944241e962b7e8796cd8986e474097a6108522475e439d7f3840` |
+
+## تصنيف المحتوى — وصفي وليس حكماً على المصدر الأصلي
+
+- تقارير جرد المصادر والاستكمال: `2 استكمال المحادثة.txt`، `قسم · قسم · قسم · استكمال المحادثة.txt`، `قسم · قسم · استكمال المحادثة.txt`، `مراجعة وجرد الملفات.txt`.
+- الحوكمة وPDR والتوصيات: `Governance Baseline Setup.txt`، `قسم · قسم · 00.txt`، `قسم · مراجعة وجرد الملفات.txt`.
+- التوفيق والأمن والشبكة: `00.txt`، `5.txt`، `رفع الملفات على دفعات.txt`، `قسم · قسم · رفع الملفات على دفعات.txt`.
+- الاستئناف وحالة التنفيذ: `01.txt`، `03.txt`، `متابعة حالة Cost of Staying أسبوعيًا.txt`.
+- سجلات جرد/مراجعة متعددة: الملفات ذات الأسماء المتداخلة `قسم · ... · مراجعة وجرد الملفات.txt`؛ لا تُدمج بسبب تشابه الاسم.
+
+## قيود provenance
+
+1. الأرشيف يثبت حفظ بايتات هذه الملفات الـ18 كما كانت في مساحة العمل وقت الإنشاء، وتُستخدم SHA-256 للتحقق من كل ملف بعد فك الضغط.
+2. كثير من الملفات تقارير مشتقة/مراجعات وليست النصوص الأصلية للمحادثات.
+3. ملف `محادثة 2.html` غير موجود كبايتات خام ضمن هذه اللقطة، لذلك لم يُضمّن.
+4. سجلات مكتبة ChatGPT الـ40 والـ45 المذكورة في تقارير سابقة هي لقطات metadata بتاريخين مختلفين وليست ملفات خام محفوظة هنا.
+5. الأرشيف لا يثبت اكتمال جميع محادثات المشروع أو جميع المرفقات التاريخية أو مصدرها الأصلي.
+
+
+## نتيجة إعادة التحقق من الأرشيف — 2026-11-12 (بعد إعادة رفع الملف)
+
+أُعيد فحص الملف ZIP الموجود في مساحة العمل الحالية بعد توفره مجدداً:
+
+- ZIP size: 60,375 bytes.
+- SHA-256: `572222b1185c25483aad71b30c80441215b803190ab8cb56d14ac3ba56e0266b` — MATCH.
+- ZIP central directory: 20 entries (18 TXT attachments + `SOURCE_MANIFEST.json` + `README_ARCHIVE.md`).
+- `unzip -t`: PASS — no compressed-data errors.
+- TXT files read back from ZIP: 18.
+- Sum of TXT uncompressed sizes: 146,407 bytes.
+- Every TXT file size, line count, and SHA-256 matched its entry in the embedded `SOURCE_MANIFEST.json` and the table in this document: **18/18 MATCHED**.
+- Total uncompressed ZIP contents: 151,139 bytes (includes both metadata files).
+
+**Evidence boundary:** this verifies archive integrity and internal consistency of the 18 TXT payloads. It does not authenticate the underlying conversation originals, prove complete Project coverage, or recover `محادثة 2.html` / Library raw bytes.
+
+**Repository storage boundary:** the binary ZIP remains a separate downloadable file in the ChatGPT conversation workspace; it has not been committed as a GitHub binary object in this PR. The repository carries its manifest, checksums, and transfer instructions, not the ZIP payload itself.

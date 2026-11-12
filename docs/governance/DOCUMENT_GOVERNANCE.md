@@ -93,5 +93,13 @@
 | `roadmap/MVP_SCOPE.md` | تسليم | PROPOSED |
 | `roadmap/ACCEPTANCE_CRITERIA.md` | تسليم | PROPOSED |
 | `roadmap/DELIVERY_PLAN.md` | تسليم | PROPOSED |
+| `transfer/README.md` | نقل/حفظ | لقطة نقل؛ حدودها موضحة في الحزمة |
+| `transfer/PROJECT_STATE_SNAPSHOT_2026-11-12.md` | نقل/حفظ | لقطة مؤرخة لا تستبدل الفحص الحي |
+| `transfer/GITHUB_REPOSITORY_SNAPSHOT_2026-11-12.md` | نقل/حفظ | GitHub snapshot مؤرخ |
+| `transfer/SOURCE_ARCHIVE_MANIFEST_2026-11-12.md` | نقل/حفظ | سجل hashes لأرشيف 18 TXT |
+| `transfer/OPEN_GAPS_AND_RECOVERY_2026-11-12.md` | نقل/حفظ | فجوات مفتوحة؛ لا تعني الإغلاق |
+| `transfer/CHATGPT_PROJECT_MIGRATION.md` | نقل/حفظ | تعليمات نقل، لا تثبت اكتمال التصدير |
+| `transfer/CHATGPT_PROJECT_INSTRUCTIONS.md` | نقل/حفظ | تعليمات تشغيل للمشروع الجديد |
+| `transfer/SESSION_HANDOFF_2026-11-12.md` | نقل/حفظ | نقطة استئناف مؤرخة |
 
 لا كود لعبة ولا خادم ولا اختبار منفذ. ملفات `.github/workflows` قوالب متوقفة على `workflow_dispatch` وليست دليل فحص ناجح.
