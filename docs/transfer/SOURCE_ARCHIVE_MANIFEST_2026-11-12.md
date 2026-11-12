@@ -62,7 +62,7 @@
 - `unzip -t`: PASS — no compressed-data errors.
 - TXT files read back from ZIP: 18.
 - Sum of TXT uncompressed sizes: 146,407 bytes.
-- Every TXT file size and SHA-256 matched its entry in the embedded `SOURCE_MANIFEST.json` and the table in this document: **18/18 MATCHED**.
+- Every TXT file size, line count, and SHA-256 matched its entry in the embedded `SOURCE_MANIFEST.json` and the table in this document: **18/18 MATCHED**.
 - Total uncompressed ZIP contents: 151,139 bytes (includes both metadata files).
 
 **Evidence boundary:** this verifies archive integrity and internal consistency of the 18 TXT payloads. It does not authenticate the underlying conversation originals, prove complete Project coverage, or recover `محادثة 2.html` / Library raw bytes.
