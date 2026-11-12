@@ -12,6 +12,9 @@
 - حالة التكدس التقني: PROPOSED، باستثناء مبدأ سلطة الخادم المعتمد تصميمياً وغير المنفذ.
 - قوالب الفحص في `.github/workflows` يدوية فقط وليست CI منفذاً.
 
+## حفظ ونقل المشروع
+- [حزمة النقل إلى مشروع ChatGPT جديد](docs/transfer/README.md) — لقطة الحالة، جرد GitHub، بصمات المصادر، الفجوات، وتعليمات الاستئناف. هذه الحزمة لا تستبدل تصدير محادثات ChatGPT الأصلية.
+
 ## نقطة البداية
 ابدأ من [فهرس الوثائق](docs/README.md) و[حوكمة الوثائق](docs/governance/DOCUMENT_GOVERNANCE.md) و[سجل حل التعارض](docs/governance/CONFLICT_RESOLUTIONS.md)، ثم [ميثاق المشروع](docs/00_PROJECT_CHARTER.md) و[قواعد اللعبة](docs/02_GAME_RULES_SPECIFICATION.md).
 

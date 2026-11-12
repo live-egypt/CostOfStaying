@@ -4,6 +4,13 @@
 
 التنظيم وقواعد التعارض والكتالوج في [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md). ما حُسم فعلياً في [سجل حل التعارض](governance/CONFLICT_RESOLUTIONS.md).
 
+## حفظ ونقل المشروع
+- [حزمة نقل وحفظ المشروع إلى ChatGPT جديد](transfer/README.md)
+- [لقطة حالة المشروع](transfer/PROJECT_STATE_SNAPSHOT_2026-11-12.md)
+- [لقطة GitHub والفروع وPRs](transfer/GITHUB_REPOSITORY_SNAPSHOT_2026-11-12.md)
+- [سجل المصادر والبصمات](transfer/SOURCE_ARCHIVE_MANIFEST_2026-11-12.md)
+- [الفجوات وخطة الاستعادة](transfer/OPEN_GAPS_AND_RECOVERY_2026-11-12.md)
+
 ## ابدأ هنا
 - [ميثاق المشروع](00_PROJECT_CHARTER.md)
 - [Game Design Document](01_GAME_DESIGN_DOCUMENT.md)
