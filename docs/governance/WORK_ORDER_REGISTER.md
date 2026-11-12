@@ -1,6 +1,6 @@
 # Work Order Register — Cost of Staying
 
-**Revision:** 2026-11-11 — DOC-B-02 metadata crosswalk  
+**Revision:** 2026-11-12 — DOC-B-03 bounded HTML metadata and owner-attestation checkpoint  
 **Work Order:** WO-DOC-01 — Project Documentation Governance  
 **Decision Status:** APPROVED — execution authorized by project owner  
 **Evidence Maturity:** DOCUMENTED — initial execution baseline  
@@ -54,7 +54,7 @@ Decision status and evidence maturity are independent. Work state is a separate 
 | Sequence | Work package | Scope | Current state | Exit gate |
 |---|---|---|---|---|
 | A | Governance Baseline | Authority map, status axes, change control, document ownership | IMPLEMENTED ON PR #11 BRANCH — REVIEW PENDING | Owner review of governance policy; no silent canonicalization. |
-| B | Source & Provenance | Reconcile attachment, Library, conversation, export, and repository source surfaces | PARTIAL — DOC-B-01 AND DOC-B-02 BOUNDED INVENTORY PASSES DONE; DOC-B-03 OPEN | Original chat identity, completeness, and provenance gaps remain explicit. |
+| B | Source & Provenance | Reconcile attachment, Library, conversation, export, and repository source surfaces | PARTIAL — DOC-B-01/02 BOUNDED PASSES DONE; DOC-B-03 PARTIAL / CLOSURE OPEN | Owner-attested identity relation and HTML metadata are recorded; original source origin, thread identity, and completeness remain unresolved. |
 | C | Decision & Action Tracking | Link owner decisions, ADRs, conflicts, work orders, and actions | PARTIAL | Every recovered decision has source event or explicit SOURCE PENDING; no invented approvals. |
 | D | Evidence & Traceability | Link requirement → implementation → test → CI/run/artifact/commit | PARTIAL | Claims are scoped to exact branch/commit/test and unsupported claims remain NOT VERIFIED. |
 | E | Session Continuity | Maintain handoff, current branch/PR/commit, blockers, and next action | IMPLEMENTED ON PR #11 BRANCH — UPDATE EACH SESSION | Handoff matches live repository state and identifies one next action. |
@@ -70,7 +70,7 @@ Work packages proceed in order. A blocked item is recorded and carried forward; 
 | DOC-A-02 | A | Establish one canonical authority per record type | DONE — initial mapping | Validate against all current documentation paths. |
 | DOC-B-01 | B | Reconcile surfaced attachment objects against prior dated snapshots and record each newly surfaced object/hash | DONE — 6-OBJECT DELTA OVER THE 15-OBJECT BASELINE; 21 CURRENT OBJECTS RECORDED | See ATTACHMENT_SNAPSHOT_DELTA_2026-11-10.md and ATTACHMENT_SNAPSHOT_DELTA_2026-11-10-02.md; hashes cover mounted bytes only. |
 | DOC-B-02 | B | Reconcile 40 Library file records + one folder with current attachment and repository inventories | DONE — 2026-11-11 METADATA CROSSWALK | 45 current Library file records + 1 folder; all 40 historical IDs retained; 5 additions; current conversation attachment ID matched to Library; full pre-write repository tree enumerated (87 blobs); 5 basename matches. No raw-byte/content equality is claimed. |
-| DOC-B-03 | B | Preserve ChatGPT/DeepSeek origin-attribution conflict and missing original chat threads | OPEN | Requires original conversation/export identity evidence. |
+| DOC-B-03 | B | Preserve ChatGPT/DeepSeek origin-attribution conflict and missing original chat threads | PARTIAL — HTML TEXT/METADATA AND OWNER ATTESTATION RECORDED; CLOSURE OPEN | Requires direct original thread/export identity, authenticated platform-origin evidence, and completeness/segment evidence; owner attestation alone does not close the action. |
 | DOC-C-01 | C | Map WO-DOC-01 owner approval to this work-order record | DONE — current conversation approval | Approval applies to documentation work order, not to all proposed governance policy content. |
 | DOC-C-02 | C | Recover A1-HOLD-01…06 and both WO-A3 amendments from exact owner source | BLOCKED — original source not recovered | Do not reconstruct from summaries. |
 | DOC-C-03 | C | Reconcile CONFLICT-01 and CONFLICT-02 without inferring owners | OPEN | Exact requirement source and owner decision required. |
@@ -117,19 +117,20 @@ Every closeout must record:
 | 2026-11-10 | `c7723063f0be5ea9613d0673c1135762a7b88a08` | WO-DOC-01 tracker, README index, status, and handoff baseline | Live GitHub branch/PR inspection; file fetch verification | Committed on documentation branch; PR #11 remains Draft. |
 | 2026-11-10 | `7fd3d8e96279c70a83ed26e0bdc525494a74959d` | Five additional attachment IDs, mounted-byte SHA-256 values, and three new runtime paths | Recomputed SHA-256/byte/line counts from mounted files; fetched committed addendum; confirmed README link and PR changed-file count | DOC-B-01 completed for this bounded 5-ID delta; Library and conversation completeness remain open. |
 | 2026-11-10 | `d9405d347f56ac14401bf7ab19892893fd939e70` | Recorded WO-DOC-01 owner authorization in Decision Traceability Register; corrected Stage 1 source-snapshot wording | Fetched committed register and checked approval scope/source limitation | DOC-C-01 mapped; broader decision recovery remains PARTIAL/BLOCKED. |
+| 2026-11-12 | `496638051dbe9f232c1752827ab5a461f2f9ac63` | DOC-B-03 bounded HTML metadata inspection and owner-attested underlying-conversation relationship; source inventory, provenance, and conflict records | Re-fetched current conversation and Library surfaces; inspected extracted HTML header/source URL/export timestamp, counted 226 user + 223 assistant turn elements, checked terminal tag and literal DeepSeek occurrence; validated new source/provenance IDs | DOC-B-03 PARTIAL; origin/thread/completeness remain OPEN; no raw-byte hash or source-platform resolution claimed. |
 
 ## 8. Current closeout
 
 - WO-DOC-01: APPROVED — execution authorized.
 - Work package A: initial baseline present on PR #11 branch; governance policy itself remains PROPOSED pending owner review.
-- Work package B: PARTIAL. DOC-B-01 remains complete for the bounded 21-object attachment snapshot; DOC-B-02 is DONE for the 2026-11-11 metadata crosswalk (45 Library files + 1 folder; 40/40 prior IDs retained; 5 additions; one active conversation attachment ID matched to Library; complete pre-write repository tree of 87 blobs; five basename matches). DOC-B-03 remains OPEN for original chat/thread identity and completeness.
+- Work package B: PARTIAL. DOC-B-01 remains complete for the bounded 21-object attachment snapshot; DOC-B-02 is DONE for the 2026-11-11 metadata crosswalk (45 Library files + 1 folder; 40/40 prior IDs retained; 5 additions; one active conversation attachment ID matched to Library; complete pre-write repository tree of 87 blobs; five basename matches). DOC-B-03 has a bounded 2026-11-12 HTML text/metadata inspection and owner-attested identity relation recorded; it remains OPEN for technical source/thread identity, platform origin, and completeness.
 - Work packages C and D: partial; source and evidence gaps remain.
 - Work package E: handoff exists and must be kept current.
 - PR #11: OPEN / DRAFT / NOT MERGED.
 - main: unchanged by this work order.
 - Stage 1 / Stage 2: no closure declared.
 
-**Next action:** DOC-B-03 — reconcile the accessible `محادثة 2.html` record and owner-attested identity relation while preserving the unresolved ChatGPT/DeepSeek origin, original-thread, and completeness gaps. Do not infer missing conversation parts or owner decisions.
+**Next action:** DOC-D-01 — re-fetch the next distinct Core CI snapshot, starting with the previously recorded candidate run `41331400978` / commit `94c5789b0e82493290ca85133fc692e83ffd9884`; re-fetch the live run, job, log, artifact, and exact commit association before recording any update. DOC-B-03 remains open for closure; do not infer missing conversation parts or owner decisions.
 
 
 ## 9. Additional attachment reconciliation checkpoint — 2026-11-10
@@ -165,3 +166,18 @@ Every closeout must record:
 - **Disposition:** DOC-B-02 DONE for the bounded metadata crosswalk. Library raw-byte identity, content equivalence, and original source lineage remain unverified. DOC-B-03 remains OPEN.
 
 **Next single action:** DOC-B-03 — reconcile the accessible HTML export metadata with the owner-attested identity relationship without treating the export as complete or resolving the origin conflict.
+
+
+## 12. DOC-B-03 bounded HTML metadata and owner-attestation checkpoint — 2026-11-12
+
+- Pre-write live state: PR #11 OPEN / DRAFT / NOT MERGED; base `main` at `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`; branch `docs/project-reconciliation-baseline-2026-11-10`; pre-write head `c29b44580b6a6fabd842a567aea9f83849938cce`; 39 changed paths, all under `docs/`.
+- **Source/provenance content commit:** `496638051dbe9f232c1752827ab5a461f2f9ac63` (`docs(provenance): record owner-attested conversation identity evidence`); changed only `docs/governance/SOURCE_INVENTORY.md`, `docs/governance/PROVENANCE_REGISTER.md`, and `docs/governance/CONFLICT_REGISTER.md`.
+- The current conversation Files surface and Library path `/لعبة/محادثة 2.html` expose the same ID `file_000000007f6482109c42c450bf73d0b4`; Library metadata reports 26,698,846 bytes. This is metadata, not a raw-byte hash.
+- The extracted HTML reports `ChatGPT Shared Chat`, source `https://chatgpt.com/share/6aef6082-3c6c-83ea-95c9-ee863196fadc`, and displayed export timestamp `٧‏/١١‏/٢٠٢٦، ٧:٣٣:٥٩ م`. Text inspection found 79,302 lines, 226 user + 223 assistant turn elements (449 total), `Assistant turn 449` as the final turn label, one terminal `</html>`, and zero literal `DeepSeek` occurrences.
+- Owner attests that the DeepSeek references, Project chat labels `1` and `2`, and `محادثة 2.html` refer to one underlying conversation; the owner warns that some parts may exist elsewhere and may not be present in this export. This remains an attestation, not a technical source/thread match or completeness proof.
+- Attachment `file_00000000343482109ecb2381153c4550`, previously reported as containing a contrary ChatGPT-Project/DeepSeek-app statement, was not present in the current conversation or Library file surfaces and was not directly re-inspected. Preserve that claim as reported, not verified.
+- No DeepSeek-native export or direct original thread ID was surfaced in the current Library listing. Archives not inspected remain outside the claim. DOC-B-03 stays PARTIAL / OPEN.
+- `CONFLICT_REGISTER.md` contains a pre-existing duplicate `SRC-010` row; it was not changed as part of this bounded source-identity action. New `SRC-011` is unique.
+- DOC-C-02 remains source-blocked; DOC-C-03 remains open pending exact source/owner evidence. The next source-backed action is DOC-D-01.
+
+**Next single action:** DOC-D-01 — re-fetch the next distinct Core CI snapshot, starting with the previously recorded candidate run `41331400978` / commit `94c5789b0e82493290ca85133fc692e83ffd9884`; re-fetch the live run, job, log, artifact, and exact commit association before recording any update.

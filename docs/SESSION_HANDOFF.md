@@ -1,7 +1,7 @@
 # Session Handoff — Cost of Staying
 
 **Project:** Cost of Staying (ثمن البقاء)  
-**Updated:** 2026-11-11  
+**Updated:** 2026-11-12  
 **Work Order:** WO-DOC-01 — Project Documentation Governance  
 **Decision Status:** APPROVED TO PROCEED WITH DOCUMENTATION WORK  
 **Evidence Maturity:** REVIEWED — bounded live GitHub inspection  
@@ -10,7 +10,7 @@
 **Working branch:** `docs/project-reconciliation-baseline-2026-11-10`  
 **Pull Request:** [#11 — Documentation and evidence baseline](https://github.com/live-egypt/CostOfStaying/pull/11)  
 **PR state at update:** OPEN / DRAFT / NOT MERGED  
-**Last substantive DOC-B-02 content commit:** `35197b7acfc0ae31dfa958abdccf8d3f16b9abb4`
+**Last source/provenance content commit (DOC-B-03):** `496638051dbe9f232c1752827ab5a461f2f9ac63`
 
 > This handoff is a navigation aid, not a competing source of truth. Canonical decisions, source lineage, requirements, conflicts, and delivery status remain in their designated registers and ADRs.
 
@@ -73,7 +73,7 @@ The owner explicitly approved WO-DOC-01 for sequential execution. The authoritat
 | Governance baseline | PRESENT ON PR #11 — PROPOSED | Owner review; do not self-approve |
 | WO-DOC-01 execution | APPROVED — AUTHORIZED | Follow the sequential work packages in WORK_ORDER_REGISTER.md |
 | Work package A | INITIAL BASELINE PRESENT — REVIEW PENDING | Preserve current authority map and status axes |
-| Work package B | PARTIAL — DOC-B-01 AND DOC-B-02 BOUNDED INVENTORY PASSES DONE; DOC-B-03 OPEN | Original chat/thread identity and completeness remain unresolved |
+| Work package B | PARTIAL — DOC-B-01/02 BOUNDED PASSES DONE; DOC-B-03 PARTIAL / CLOSURE OPEN | Owner-attested identity relation and HTML metadata recorded; original source origin, thread identity, and completeness remain unresolved |
 | Work package C | PARTIAL — WO-DOC-01 AUTHORIZATION MAPPED | Recover remaining owner decision events; A1-HOLD-01…06 remain source-blocked |
 | Work package D | PARTIAL | Keep evidence scoped to exact run/commit/artifact |
 | Work package E | PRESENT — MAINTAIN | Update this handoff after material changes |
@@ -91,9 +91,11 @@ The owner explicitly approved WO-DOC-01 for sequential execution. The authoritat
 
 ## 5. Mandatory unresolved items
 
-- Complete Project conversation enumeration and direct thread IDs for chats labelled 1 and 2 are unavailable in the current source surface.
-- ChatGPT/DeepSeek origin attribution remains an open provenance conflict.
-- Exact mapping of `محادثة 2.html` to Project chat 2 remains unverified.
+- Complete Project conversation enumeration and direct thread IDs for the owner-identified underlying conversation remain unavailable.
+- The owner attests that DeepSeek references, Project chat labels `1` and `2`, and `محادثة 2.html` refer to one underlying conversation; this relation is not technically verified.
+- The HTML artifact self-identifies as `ChatGPT Shared Chat` and links to `chatgpt.com/share`; underlying platform origin remains unresolved.
+- The owner warns that some conversation parts may exist elsewhere and may be absent from the HTML export; completeness remains unverified.
+- The prior report about attachment `file_00000000343482109ecb2381153c4550` is not directly verified because that attachment is not present in the current conversation/Library file surfaces.
 - Original complete Network Audit is not recovered.
 - Original complete Security Audit is not recovered.
 - A1-HOLD-01…06 original texts and the exact two mandatory WO-A3 amendments must not be reconstructed by inference.
@@ -134,7 +136,7 @@ At the end of each substantial work session, update:
 - Open blockers and missing source evidence.
 - Exact next action.
 
-**Current next action:** DOC-B-03 — reconcile the accessible `محادثة 2.html` metadata and owner-attested identity relation while preserving the origin, original-thread, and completeness gaps. Do not infer missing conversation parts or owner decisions.
+**Current next action:** DOC-D-01 — re-fetch the next distinct Core CI snapshot, starting with the previously recorded candidate run `41331400978` / commit `94c5789b0e82493290ca85133fc692e83ffd9884`; re-fetch the live run, job, log, artifact, and exact commit association before recording any update. DOC-B-03 remains PARTIAL / OPEN; do not infer missing conversation parts or owner decisions.
 
 
 ## 7. Latest bounded source snapshot — 2026-11-10
@@ -166,3 +168,16 @@ This is not a complete Project Library or conversation inventory. A1-HOLD-01…0
 - No Core, Net, Unity, Tests, ADR content, or `main` was changed. No PR merge or Stage closure occurred.
 
 **Next single action:** DOC-B-03 — inspect the accessible HTML export metadata against the owner-attested identity relation, preserving the possibility that other conversation parts are elsewhere and not present in this export.
+
+
+## 10. Latest execution checkpoint — DOC-B-03 — 2026-11-12
+
+- Pre-sync live state: PR #11 OPEN / DRAFT / NOT MERGED; base `main` at `3dd9cfc27aa48b09b3cde802e266a8221c39f0d3`; branch `docs/project-reconciliation-baseline-2026-11-10`; source-content head before this handoff/status synchronization `496638051dbe9f232c1752827ab5a461f2f9ac63`; 39 changed paths, all under `docs/`.
+- Source/provenance content commit: `496638051dbe9f232c1752827ab5a461f2f9ac63` (`docs(provenance): record owner-attested conversation identity evidence`).
+- The HTML artifact was inspected at text/metadata level only: same ID across current conversation and Library; header `ChatGPT Shared Chat`; source URL `https://chatgpt.com/share/6aef6082-3c6c-83ea-95c9-ee863196fadc`; displayed export timestamp `٧‏/١١‏/٢٠٢٦، ٧:٣٣:٥٩ م`; 79,302 extracted lines; 226 user + 223 assistant turn elements; no literal `DeepSeek` occurrence; terminal `</html>` present.
+- Owner-attested identity relation recorded; underlying platform origin, original thread IDs, exact thread-to-export mapping, and completeness remain unresolved. Other possible conversation parts have not been located. No raw Library bytes/hash was claimed.
+- Source records updated: `docs/governance/SOURCE_INVENTORY.md`, `docs/governance/PROVENANCE_REGISTER.md`, `docs/governance/CONFLICT_REGISTER.md`. The work-order, project-status, and handoff records are synchronized in this checkpoint.
+- A pre-existing duplicate `SRC-010` entry in `CONFLICT_REGISTER.md` was detected and left unchanged; new `SRC-011` is unique.
+- No Core, Net, Unity, Tests, ADR content, `main`, PR merge, or Stage closure was changed.
+
+**Next single action:** DOC-D-01 — re-fetch the next distinct Core CI snapshot, starting with the previously recorded candidate run `41331400978` / commit `94c5789b0e82493290ca85133fc692e83ffd9884`; re-fetch the live run, job, log, artifact, and exact commit association before recording any update.

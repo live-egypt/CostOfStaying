@@ -1,6 +1,6 @@
 # Project Status and Execution Register
 
-**Revision:** 2026-11-11 — WO-DOC-01 DOC-B-02 metadata crosswalk update  
+**Revision:** 2026-11-12 — WO-DOC-01 DOC-B-03 HTML metadata / owner-attestation checkpoint  
 **Decision Status:** PROPOSED — operational control document  
 **Evidence Maturity:** REVIEWED — bounded repository and supplied-source snapshot  
 **Default branch:** main  
@@ -119,7 +119,7 @@ The project owner approved WO-DOC-01 for sequential execution. The work-order tr
 | Work package | Scope | Current state |
 |---|---|---|
 | A — Governance Baseline | Authority, status axes, document/change control | INITIAL BASELINE PRESENT ON PR #11 — OWNER REVIEW PENDING |
-| B — Source & Provenance | Attachments, Library, conversations, exports, repository sources | PARTIAL — DOC-B-01 AND DOC-B-02 BOUNDED INVENTORY PASSES DONE; DOC-B-03 ORIGIN/THREAD/COMPLETENESS OPEN |
+| B — Source & Provenance | Attachments, Library, conversations, exports, repository sources | PARTIAL — DOC-B-01/02 BOUNDED PASSES DONE; DOC-B-03 PARTIAL / ORIGIN/THREAD/COMPLETENESS OPEN |
 | C — Decision & Action Tracking | Owner events, ADR traceability, conflicts, work orders | PARTIAL — WO-DOC-01 AUTHORIZATION MAPPED; A1-HOLD/WO-A3 SOURCE RECOVERY BLOCKED |
 | D — Evidence & Traceability | Requirements, code, tests, CI, artifacts, commits | PARTIAL — HISTORICAL EVIDENCE ONLY WHERE RECORDED |
 | E — Session Continuity | Session handoff and next action | PRESENT — MAINTAIN EACH SESSION |
@@ -162,3 +162,14 @@ The fresh recursive Project Library listing returned 45 file records with 45 uni
 The complete recursive repository tree at pre-write head `8e7bc1ec0a0306655781755eb281ebb22d1b0ae6` has tree SHA `28aabb1420b5e794566d0001249243b5a3032fca`, 99 entries / 87 blobs, and was not truncated. Five of the 45 Library basenames match repository paths; 40 do not. PR #11's changed-file list contains 39 paths, all under `docs/`. This is a filename-level crosswalk only. No Library raw-byte identity or content equality is claimed. DOC-B-02 is DONE for this bounded metadata crosswalk; DOC-B-03 remains OPEN. PR #11 remains OPEN / DRAFT / NOT MERGED; `main` was not changed.
 
 **DOC-B-02 content commit:** `35197b7acfc0ae31dfa958abdccf8d3f16b9abb4` (`docs(provenance): reconcile live Library metadata snapshot`).
+
+
+## 11. DOC-B-03 bounded HTML metadata and owner-attestation checkpoint — 2026-11-12
+
+The owner attests that the DeepSeek references, Project conversation labels `1` and `2`, and `محادثة 2.html` refer to one underlying conversation, and warns that some parts may exist elsewhere and may not be included in this export. This is recorded as an owner attestation only; it does not establish the original platform, direct thread ID, technical export-to-thread match, or completeness.
+
+The current conversation Files surface and Library path `/لعبة/محادثة 2.html` expose the same file ID `file_000000007f6482109c42c450bf73d0b4`. The Library listing reports 26,698,846 bytes. The extracted HTML identifies itself as `ChatGPT Shared Chat`, links to `https://chatgpt.com/share/6aef6082-3c6c-83ea-95c9-ee863196fadc`, and displays export timestamp `٧‏/١١‏/٢٠٢٦، ٧:٣٣:٥٩ م`. Text inspection counted 79,302 lines, 226 user + 223 assistant turn elements (449 total), and found a terminal `</html>` tag with no literal `DeepSeek` occurrence. No raw Library bytes or hash were inspected or computed.
+
+The prior report about attachment `file_00000000343482109ecb2381153c4550` remains unverified because that attachment was not present in the current conversation or Library surfaces. No separate DeepSeek-native export or direct original thread ID was surfaced; possible other segments remain unlocated. DOC-B-03 therefore remains PARTIAL / OPEN. Source/provenance content commit: `496638051dbe9f232c1752827ab5a461f2f9ac63`.
+
+**Next source-backed action:** DOC-D-01 — re-fetch the next distinct Core CI snapshot, starting with the previously recorded candidate run `41331400978` / commit `94c5789b0e82493290ca85133fc692e83ffd9884`; re-fetch the live run, job, log, artifact, and exact commit association before recording any update.
