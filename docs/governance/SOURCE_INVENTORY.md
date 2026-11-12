@@ -2,7 +2,7 @@
 
 > **Governance status axes:** Decision Status and Evidence Maturity are independent. This document's existence does not approve its claims or prove implementation. See [Project Governance Baseline](PROJECT_GOVERNANCE_BASELINE.md).
 
-**Revision date:** 2026-11-11 — fresh Library and repository-tree metadata reconciliation; prior tables retained as dated snapshots  
+**Revision date:** 2026-11-12 — DOC-B-03 bounded HTML metadata inspection and owner-attested identity relation; prior tables retained as dated snapshots  
 **Record State:** INITIAL RECONCILIATION SNAPSHOT — DOCUMENTATION ONLY; CONTENT AND SOURCE COMPLETENESS REMAIN PARTIAL
 **Scope:** Sources visible through the current Project Files surface, Project Library listing, supplied attachments, and read-only GitHub inspection.  
 **Stage:** Stage 1 — Source & Provenance Recovery  
@@ -25,8 +25,8 @@ For Library records, Stage 0 Negative Attestation remains binding: use accessibl
 
 | Reference | Evidence class | Current coverage | Limitation |
 |---|---|---|---|
-| Project conversation `1` | USER-ATTESTED | Existence of Project chat labelled `1` is attested; origin label is disputed by surfaced records | Full thread, thread ID, transcript, and authoritative platform-origin evidence unavailable |
-| Project conversation `2` | USER-ATTESTED | Existence of Project chat labelled `2` is attested; origin label is disputed by surfaced records | Full thread, thread ID, transcript, and exact mapping to `محادثة 2.html` unavailable |
+| Project conversation `1` | OWNER-ATTESTED — IDENTITY RELATION ONLY | Owner states Project chat labels `1` and `2`, DeepSeek references, and `محادثة 2.html` refer to one underlying conversation | Direct thread object/ID, original source-platform evidence, and completeness remain unavailable |
+| Project conversation `2` | OWNER-ATTESTED — EXPORT RELATION ONLY | Owner states `محادثة 2.html` is associated with the same underlying conversation as the DeepSeek references and Project chat labels `1`/`2`; the HTML artifact self-identifies as a ChatGPT Shared Chat | Direct thread object/ID and technical mapping remain unverified; owner warns that some parts may exist elsewhere and may be absent from this export |
 | `استكمال المحادثة` | Context surfaced | Summary/context available | Full thread object not available |
 | `قسم · استكمال المحادثة` | Context surfaced | Summary/context available | Full thread object not available |
 | `2 استكمال المحادثة` | Context surfaced | Summary/context available | Not equivalent to the similarly named TXT report attachments |
@@ -34,7 +34,9 @@ For Library records, Stage 0 Negative Attestation remains binding: use accessibl
 | `مراجعة شاملة للمشروع` | Context surfaced | Summary/context available | Full thread object not available |
 | Current active thread | CURRENT CONTEXT | Current messages available | No separate full export generated |
 
-**Origin-attribution conflict — OPEN:** Earlier provenance notes record chats `1` and `2` as formerly associated with DeepSeek. However, Project attachment `file_00000000343482109ecb2381153c4550` explicitly states: “المقصود هو محادثات ChatGPT داخل المشروع، وليس محادثات تطبيق DeepSeek.” The available evidence supports that `1` and `2` are Project conversation labels, but does not establish their original platform origin. Preserve both statements as conflicting source claims; do not label the chats DeepSeek-origin or DeepSeek-app transcripts until the exact source statement/thread metadata is recovered.
+**Origin-attribution conflict — OPEN:** Earlier provenance notes associate chats `1` and `2` with DeepSeek. Owner attestation (2026-11-12): the DeepSeek references, Project conversation labels `1` and `2`, and `محادثة 2.html` refer to the same underlying conversation. The owner confirms that the HTML is associated with that same DeepSeek-referenced conversation, while warning that some parts may exist elsewhere and may not be present in this export. This is an attested relationship, not a technically verified source/thread match or completeness finding. The accessible HTML artifact self-identifies as `ChatGPT Shared Chat` and links to `chatgpt.com/share`; that identifies the export/page format, not necessarily the origin of the underlying conversation. A prior report attributes a ChatGPT-Project-versus-DeepSeek-app statement to attachment `file_00000000343482109ecb2381153c4550`, but that attachment is not present in the current conversation or Library file surfaces and was not directly re-inspected in this run. Preserve the owner attestation, the HTML metadata, and the prior reported claim without selecting an origin. Do not infer missing conversation parts.
+
+**Bounded HTML inspection — 2026-11-12 (text/metadata only):** The current conversation Files surface and Library path `/لعبة/محادثة 2.html` expose the same file ID, `file_000000007f6482109c42c450bf73d0b4`; Library metadata reports 26,698,846 bytes. The extracted HTML contains 79,302 lines and identifies itself as `ChatGPT Shared Chat`, with source URL `https://chatgpt.com/share/6aef6082-3c6c-83ea-95c9-ee863196fadc` and displayed export timestamp `٧‏/١١‏/٢٠٢٦، ٧:٣٣:٥٩ م`. Text inspection counted 226 user and 223 assistant turn elements (449 total); the last is `Assistant turn 449`, the file ends with `</html>`, and no literal `DeepSeek` occurrence was found in the extracted HTML. These observations establish the artifact's visible format and contents only; they do not authenticate the underlying source platform, establish the mapping to a Project thread ID, or prove completeness. No Library raw-byte hash or byte-level verification was performed.
 
 ## 3. Current Project conversation attachments — raw-byte inventory
 
@@ -182,7 +184,7 @@ Existence of these documents does not establish that their designs are implement
 
 | Source | Status | Limitation |
 |---|---|---|
-| DeepSeek-related project chats `1` and `2` | USER-ATTESTED | Direct content and authenticated platform origin not recovered |
+| DeepSeek-related project chats `1` and `2` | OWNER-ATTESTED SAME UNDERLYING CONVERSATION AS `محادثة 2.html` | Original thread content/IDs and authenticated platform origin not recovered; possible additional parts may exist elsewhere |
 | Gemini-related discussion | CONTEXT-SURFACED | No Gemini-native export in the current inventory |
 | Embedded external references | NOT INDIVIDUALLY INVENTORIED | URLs/citations inside documents require later extraction |
 
@@ -191,12 +193,13 @@ Existence of these documents does not establish that their designs are implement
 | ID | Item | Status |
 |---|---|---|
 | SRC-01 | Complete Project conversation/thread enumeration | OPEN — interface does not expose a complete thread index |
-| SRC-02 | Direct content and thread IDs for chats `1` and `2` | SOURCE PENDING |
-| SRC-03 | Exact mapping of `محادثة 2.html` to project chat `2` | UNVERIFIED |
+| SRC-02 | Direct content and thread IDs for chats `1` and `2` | PARTIAL — OWNER-ATTESTED SAME UNDERLYING CONVERSATION; ORIGINAL THREADS/IDS SOURCE PENDING |
+| SRC-03 | Exact mapping of `محادثة 2.html` to project chat `2` | OWNER-ATTESTED RELATION; TECHNICAL THREAD MATCH UNVERIFIED |
 | SRC-04 | Full provenance of Gemini-related discussion | SOURCE PENDING |
 | SRC-05 | Individual extraction of embedded web/external references | NOT STARTED |
 | SRC-06 | Reconcile prior Library inventory snapshots against current listing | OPEN |
 | SRC-07 | Recheck Library record count and metadata after future uploads | OPEN |
+| SRC-08 | Completeness of `محادثة 2.html` relative to the owner-identified underlying conversation | OPEN — OWNER WARNED THAT PARTS MAY EXIST ELSEWHERE; EXPORT COMPLETENESS NOT ESTABLISHED |
 
 ## 9. Stage status boundary
 
