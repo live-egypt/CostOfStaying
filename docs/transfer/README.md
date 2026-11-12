@@ -14,7 +14,7 @@
 
 ## الأرشيف المرفق
 
-`source-attachments/CostOfStaying_uploaded_text_sources_2026-11-12.zip`
+ملف الأرشيف ZIP المتاح للتنزيل من المحادثة الحالية (ليس مرفقاً بعد داخل GitHub)
 
 - 18 ملف TXT من الملفات الفعلية المتاحة في runtime.
 - الحجم قبل الضغط: 146,407 bytes.
