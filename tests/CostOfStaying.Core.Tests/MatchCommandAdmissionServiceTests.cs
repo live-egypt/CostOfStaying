@@ -4,6 +4,7 @@ namespace CostOfStaying.Core.Tests
     using CostOfStaying.Core;
     using CostOfStaying.Core.Contracts;
     using CostOfStaying.Core.Domain;
+    using CostOfStaying.Core.Services;
     using NUnit.Framework;
 
     [TestFixture]
@@ -47,7 +48,7 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void TryAdmit_RejectsPendingSessionWithoutConsumingQueueOrSequence()
         {
-            var service = CreateService(out SessionRegistry sessions, out _, out CommandAdmissionQueue<string> queue);
+            var service = CreateService(out SessionRegistry sessions, out IMatchPlayerRegistry players, out CommandAdmissionQueue<string> queue);
             var session = RegisterPending(sessions, new SessionId(10));
             var envelope = CreateEnvelope(session.SessionId, 1, "move");
 
