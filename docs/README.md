@@ -22,6 +22,7 @@
 
 ## المعمارية
 - [المعمارية التقنية](architecture/TECHNICAL_ARCHITECTURE.md)
+- [مقارنة التكدس FishNet/NGO/Mirror](architecture/STACK_COMPARISON.md) — جديد GATE-2.1
 - [معمارية الشبكة](architecture/NETWORK_ARCHITECTURE.md)
 - [Backend والاستضافة](architecture/BACKEND_AND_HOSTING.md)
 - [معمارية البيانات](architecture/DATA_ARCHITECTURE.md)

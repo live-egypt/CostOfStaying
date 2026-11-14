@@ -74,6 +74,7 @@
 | `architecture/NETWORK_ARCHITECTURE.md` | معمارية | PROPOSED |
 | `architecture/BACKEND_AND_HOSTING.md` | معمارية | PROPOSED |
 | `architecture/DATA_ARCHITECTURE.md` | معمارية | PROPOSED |
+| `architecture/STACK_COMPARISON.md` | معمارية | PROPOSED — مقارنة FishNet/NGO/Mirror (GATE-2.1) |
 | `architecture/DEPLOYMENT_ARCHITECTURE.md` | معمارية | PROPOSED |
 | `architecture/DOMAIN_CORE.md` | معمارية / تنفيذ | PROPOSED |
 | `security/SECURITY_ARCHITECTURE.md` | أمن | PROPOSED |

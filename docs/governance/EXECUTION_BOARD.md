@@ -30,7 +30,7 @@
 
 | # | المهمة | الوكيل | الحجم | الحالة | الدليل |
 |---|---|---|---|---|---|
-| 2.1 | مقارنة FishNet/Netcode + ADR-001 | Unity+Architect | M | TODO | STACK_COMPARISON.md |
+| 2.1 | مقارنة FishNet/Netcode + ADR-001 | Unity+Architect | M | DONE `379b19df` | `STACK_COMPARISON.md` (3 بدائل, 8 معايير, توصية FishNet + شرط prototype) |
 | 2.2 | Unity فارغ + APK + Linux | DevOps | M | TODO | APK artifact |
 | 2.3 | Baseline PSS/CPU | Verifier | S | TODO | perf_baseline.json |
 | 2.4 | ADR-001 APPROVED | Governor | XS | TODO | ADR file |
