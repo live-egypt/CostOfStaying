@@ -1,0 +1,45 @@
+name: مهمة وكيل متخصص — Agent Task
+description: فتح مهمة موزعة على أحد الوكلاء العشرة مع بوابة وحارس دليل
+title: "[GATE-?][AGENT] "
+labels: ["agent-task"]
+body:
+  - type: dropdown
+    id: gate
+    attributes:
+      label: البوابة — Gate
+      options: ["GATE-0 تثبيت", "GATE-1 قواعد", "GATE-2 تكدس", "GATE-3 شبكة", "GATE-4 Slice", "GATE-5 بوابات", "GATE-6 إطلاق", "GATE-7 LiveOps"]
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: agent
+    attributes:
+      label: الوكيل — Agent
+      options: ["Governor", "Architect", "Domain Guardian", "Net Sage", "Sentinel", "Unity Forger", "Balancer", "Playtest Oracle", "Verifier", "DevOps Herald"]
+    validations:
+      required: true
+  - type: input
+    id: task_id
+    attributes:
+      label: رقم المهمة (مثل 1.2 أو 3.1)
+      placeholder: "3.1"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: الوصف + معيار القبول
+      description: انسخ السطر من WORK_PLAN_V2_DETAILED + حدد الدليل (SHA+artifact)
+      placeholder: "نقل Domain→Core + NetArchTest — الدليل: 242 tests خضراء"
+    validations:
+      required: true
+  - type: checkboxes
+    id: dod
+    attributes:
+      label: Definition of Done
+      options:
+        - label: PR مفتوح <400 سطر + اختبار
+        - label: CI أخضر (ci.yml)
+        - label: artifact hash محفوظ
+        - label: الكتالوج DOCUMENT_GOVERNANCE محدث
+        - label: لوحة EXECUTION_BOARD محدثة

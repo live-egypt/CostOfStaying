@@ -65,10 +65,14 @@
 - [ADR-021: نقل Domain إلى Core](governance/adr/ADR-021-DOMAIN-RULES-TRANSPLANT-TO-CORE.md)
 - [ADR-022: عتبات Betrayal](governance/adr/ADR-022-BETRAYAL-THRESHOLDS.md)
 - [ADR-023: النواة الموحدة وحسم دورة الحياة](governance/adr/ADR-023-UNIFIED-CORE-AND-LIFECYCLE-RESOLUTION.md)
+- [خطة العمل المفصلة V2 — 8 بوابات + 10 وكلاء](roadmap/WORK_PLAN_V2_DETAILED.md) — **الجديد: مخطط التنفيذ الكامل**
+- [ميثاق الوكلاء المتخصصين](governance/AGENT_CHARTER.md)
+- [لوحة التنفيذ — 40 مهمة](governance/EXECUTION_BOARD.md)
+- [مصفوفة RACI](governance/RACI_MATRIX.md)
 - [نطاق MVP](roadmap/MVP_SCOPE.md)
 - [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
-- [خطة العمل المفصلة 2026-11-14](roadmap/WORK_PLAN_2026-11-14.md)
+- [خطة العمل المفصلة 2026-11-14](roadmap/WORK_PLAN_2026-11-14.md) — الإصدار السابق
 
 ## حالات الوثائق
 التعريف الملزم في [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md). ملخص:
