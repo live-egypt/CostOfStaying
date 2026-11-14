@@ -495,7 +495,7 @@ See [P1.1 CI evidence](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_20
 
 ## 12. Exact current implementation status
 
-**Current implementation status:** ADR-007 is APPROVED; ADR-010 through ADR-017 remain PROPOSED. PR #25 separately verifies in-flight command completion (191 tests). PR #26 verifies P1.1 transport-neutral connection/session binding (210 tests); both PRs target feature/core-lifecycle-resolution and remain unmerged. The current PR #26 head includes a docs-only ADR-016 wording commit after the tested source SHA.
+**Current implementation status:** ADR-007 is APPROVED; ADR-010 through ADR-017 remain PROPOSED. PR #25 separately verifies in-flight command completion (191 tests). PR #26 verifies P1.1 transport-neutral connection/session binding (210 tests); both PRs target feature/core-lifecycle-resolution and remain unmerged. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification.
 
 | Item | Status |
 |---|---|
