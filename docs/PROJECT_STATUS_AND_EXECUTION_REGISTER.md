@@ -1,6 +1,6 @@
 # Project Status and Execution Register
 
-**Revision:** 2026-11-01  
+**Revision:** 2026-11-14  
 **Status:** ACTIVE CONTROL DOCUMENT  
 **Applies to:** repository-wide documentation, Core, Unity and networking work  
 **Related:** [Technical Master](architecture/PHASE1_TECHNICAL_MASTER.md), [ADR-007](governance/adr/ADR-007-PLAYER-LIFECYCLE-VITALITY-CONFLICT.md), [Requirements Traceability](governance/REQUIREMENTS_TRACEABILITY.md)
@@ -17,6 +17,8 @@ The default branch is `main`. The implementation and consolidation work is isola
 | Uploaded transcript audit | PR #6 branch | Included in consolidated review | Audit evidence, not executable source |
 | Standalone pure-C# Core and NUnit tests | PR #6 branch | CI-verified within stated scope | Not yet merged to `main`; full Core remains partial |
 | Unity source-package static review | PR #5 branch | Audit checkpoint | Does not claim the ZIP/binary package was uploaded |
+| P1 in-flight command completion | PR #25 — `fix/p1-inflight-command-cleanup-2026-11-14` | VERIFIED in review branch | 191 NUnit passed on its tested SHA; not merged |
+| P1.1 connection-to-session mapping | PR #26 — `fix/p1-connection-session-binding-2026-11-14` | VERIFIED in review branch | 210 NUnit passed on tested SHA; ADR-016 remains PROPOSED; not merged |
 | Unity project and FishNet integration | Not present in reviewed tree | NOT IMPLEMENTED | Requires actual project/package files and exact-version verification |
 
 PR #6 is the consolidated Core/documentation review and supersedes PR #4, which is closed to avoid duplicate delivery. PR #5 is a separate source-package audit checkpoint. PR #2, PR #3 and PR #4 are superseded; do not continue parallel implementation on them.
@@ -49,7 +51,12 @@ The Core source and NUnit tests have been updated on `feature/core-lifecycle-res
 
 ## 3. Verified evidence boundary
 
-The latest GitHub Actions Core CI run 41333575156 passed on source commit 8a193190fb5f2e10c05773fb0789171011bfd2eb: dependency-boundary and CoreComposition construction-root scans, Release restore/build succeeded; NUnit reported 181 passed, 0 failed, 0 skipped. TRX artifact 13092964341 is retained.
+The consolidated baseline run `41333575156` remains historical evidence for 181 NUnit tests on `8a193190fb5f2e10c05773fb0789171011bfd2eb`. Two later, separate review branches add P1 safeguards:
+
+- PR #25: Core CI run `43596902378` passed 191 NUnit tests on `7d82c3becf96eac338999de767770c75bc5795eb`, covering queued plus in-flight command accounting and safe session cleanup.
+- PR #26: Core CI run `43599420409` passed 210 NUnit tests on tested source commit `95a7bc93a7fd4772f45e7dc428f7574906945061`. Dependency-boundary and CoreComposition scans passed; Core and test Release builds had 0 warnings and 0 errors. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification. See [P1.1 CI evidence](audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md).
+
+Neither PR #25 nor PR #26 is merged. These checks verify standalone pure-C# Core and do not verify a real transport adapter.
 
 This verifies only the source and tests exercised by that workflow. It does **not** verify:
 
@@ -57,7 +64,7 @@ This verifies only the source and tests exercised by that workflow. It does **no
 - Unity EditMode or PlayMode tests.
 - FishNet 4.7.4R API compatibility or serialization.
 - Host mode or Dedicated Server behavior.
-- Authentication, connection/session mapping or production security.
+- Credential validation, external account identity or production transport integration/security.
 - Android builds, device compatibility, performance or release readiness.
 
 Never widen a verification claim beyond its actual command, commit, environment and retained evidence.
@@ -92,13 +99,17 @@ Do not skip a gate to make the project appear more complete. Keep deferred syste
 
 ## 6. Immediate next actions
 
-1. Continue with transport connection-to-session mapping, application credential validation/reconnect policy and authoritative match/player aggregate ownership; per-session lifecycle, bounded session registry, authenticated admission and cleanup orchestration are implemented and verified.
+1. Review PR #26: its pure-Core transport-connection/session mapping is implemented and CI-verified, but not merged; ADR-016 remains PROPOSED.
+2. Review PR #25 independently: it adds in-flight command completion and safe cleanup, but is not merged. Keep PR ordering and cross-PR dependencies explicit.
+3. Implement trusted transport-adapter hooks and credential validation only after the actual transport/API and identity provider are available. Do not trust client-supplied connection or session identifiers.
+4. Resolve per-ActorId multi-session policy, reconnect grace/expiry and session persistence through owner-reviewed ADR updates before implementing those policies.
+5. Define authoritative match/player aggregate ownership and gameplay command handlers after session/connection identity has been resolved.
 2. Add gameplay payload validation/application handlers after the verified authenticated-session admission gate and bounded queue.
 3. Implement movement and Debuff/atomic transfer only after their contracts and gameplay parameters are approved.
-4. Keep ADR-008 PROPOSED until production sequence/session/queue limits and reconnect policy are approved.
-5. Review PR #6 as the consolidated technical baseline; it remains unmerged pending review.
-6. Keep PR #5 as static source audit only; do not represent the Unity source ZIP as uploaded.
-7. Keep Unity/FishNet integration gated on actual project metadata and exact package verification.
+6. Keep ADR-008 and ADR-016 PROPOSED until their production policies and integration boundaries are approved.
+7. Review the consolidated Core baseline PR and the separate P0/P1 review requests; no PR is to be treated as delivered until reviewed and merged.
+8. Keep PR #5 as static source audit only; do not represent the Unity source ZIP as uploaded.
+9. Keep Unity/FishNet integration gated on actual project metadata and exact package verification.
 
 ## 7. Status vocabulary
 

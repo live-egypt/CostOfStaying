@@ -19,11 +19,13 @@ namespace CostOfStaying.Core.Tests
                 typeof(MatchLifecycle),
                 typeof(SessionLifecycle),
                 typeof(SessionRegistry),
+                typeof(ConnectionSessionRegistry),
                 typeof(MatchPlayerRegistry),
                 typeof(CommandSequenceTracker),
                 typeof(CommandAdmissionQueue<string>),
                 typeof(CommandAdmissionService<string>),
-                typeof(SessionCleanupService<string>)
+                typeof(SessionCleanupService<string>),
+                typeof(ConnectionAwareSessionCleanupService<string>)
             };
 
             foreach (System.Type serviceType in serviceTypes)
@@ -71,6 +73,17 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void CreateConnectionSessionRegistry_UsesExplicitCapacityAndProvidedSessions()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var sessions = composition.CreateSessionRegistry(4);
+            IConnectionSessionRegistry connections = composition.CreateConnectionSessionRegistry(sessions, 12);
+
+            Assert.That(connections.Capacity, Is.EqualTo(12));
+            Assert.That(connections.Count, Is.Zero);
+        }
+
+        [Test]
         public void CreateSessionLifecycle_UsesRequestedSessionId()
         {
             CoreComposition composition = CoreComposition.Create();
@@ -114,13 +127,27 @@ namespace CostOfStaying.Core.Tests
             CoreComposition composition = CoreComposition.Create();
             var sessions = composition.CreateSessionRegistry(4);
             var queue = composition.CreateCommandAdmissionQueue<string>(8, 4, 8);
-            ISessionCleanupService<string> cleanup = composition.CreateSessionCleanupService(sessions, queue);
+            IConnectionSessionRegistry connections = composition.CreateConnectionSessionRegistry(sessions, 4);
+            ISessionCleanupService<string> cleanup = composition.CreateSessionCleanupService(sessions, queue, connections);
             var session = composition.CreateSessionLifecycle(new SessionId(20));
             sessions.Register(session);
             session.TryClose();
 
             Assert.That(cleanup.TryRemoveClosedSession(session.SessionId).IsSuccess, Is.True);
             Assert.That(sessions.Get(session.SessionId).ErrorCode, Is.EqualTo(CoreErrorCode.NotFound));
+        }
+
+        [Test]
+        public void CreateSessionCleanupService_RejectsConnectionRegistryFromDifferentSessionRegistry()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var cleanupSessions = composition.CreateSessionRegistry(4);
+            var otherSessions = composition.CreateSessionRegistry(4);
+            var queue = composition.CreateCommandAdmissionQueue<string>(8, 4, 8);
+            IConnectionSessionRegistry connections = composition.CreateConnectionSessionRegistry(otherSessions, 4);
+
+            Assert.Throws<System.ArgumentException>(() =>
+                composition.CreateSessionCleanupService(cleanupSessions, queue, connections));
         }
 
         [Test]

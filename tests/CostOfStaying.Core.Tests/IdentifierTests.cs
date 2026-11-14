@@ -64,6 +64,23 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void TransportConnectionId_PreservesValueAndHasTypedEquality()
+        {
+            var id = new TransportConnectionId(901UL);
+            Assert.That(id.Value, Is.EqualTo(901UL));
+            Assert.That(id.IsValid, Is.True);
+            Assert.That(id, Is.EqualTo(new TransportConnectionId(901UL)));
+            Assert.That(id, Is.Not.EqualTo(new TransportConnectionId(902UL)));
+        }
+
+        [Test]
+        public void TransportConnectionId_ZeroIsInvalid()
+        {
+            Assert.That(new TransportConnectionId(0UL).IsValid, Is.False);
+            Assert.That(default(TransportConnectionId).IsValid, Is.False);
+        }
+
+        [Test]
         public void VictimId_ZeroIsInvalidAndMaximumIsValid()
         {
             Assert.That(new VictimId(0UL).IsValid, Is.False);
@@ -97,6 +114,8 @@ namespace CostOfStaying.Core.Tests
             Assert.That(typeof(ActorId), Is.Not.EqualTo(typeof(MatchId)));
             Assert.That(typeof(ActorId), Is.Not.EqualTo(typeof(SessionId)));
             Assert.That(typeof(ActorId), Is.Not.EqualTo(typeof(VictimId)));
+            Assert.That(typeof(TransportConnectionId), Is.Not.EqualTo(typeof(SessionId)));
+            Assert.That(typeof(TransportConnectionId), Is.Not.EqualTo(typeof(ActorId)));
             Assert.That(typeof(MatchId), Is.Not.EqualTo(typeof(SessionId)));
             Assert.That(typeof(MatchId), Is.Not.EqualTo(typeof(EventSequenceId)));
         }
