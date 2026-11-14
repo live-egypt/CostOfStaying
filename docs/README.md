@@ -21,6 +21,7 @@
 - [ADR-018 — Match Roster Command Admission](governance/adr/ADR-018-MATCH-ROSTER-COMMAND-ADMISSION.md) — PROPOSED
 - [ADR-019 — Match Command Authorization Policy Boundary](governance/adr/ADR-019-MATCH-COMMAND-AUTHORIZATION-POLICY-BOUNDARY.md) — PROPOSED
 - [ADR-020 — Typed Command Payload Validation Boundary](governance/adr/ADR-020-TYPED-COMMAND-PAYLOAD-VALIDATION.md) — PROPOSED
+- [ADR-021 — Typed Gameplay Command Catalog](governance/adr/ADR-021-TYPED-GAMEPLAY-COMMAND-CATALOG.md) — PROPOSED
 - [تدقيق CI لتسلسل الأوامر وCommandEnvelope](audit/COMMAND_SEQUENCE_CORE_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق CI لطابور الأوامر المحدود وسعة الجلسات](audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق CI لسجل لاعبي المباراة](audit/CORE_MATCH_PLAYER_REGISTRY_CI_VERIFICATION_2026-11-01.md)
@@ -101,6 +102,7 @@
 - [ADR-018: Match Roster Command Admission](governance/adr/ADR-018-MATCH-ROSTER-COMMAND-ADMISSION.md) — PROPOSED
 - [ADR-019: Match Command Authorization Policy Boundary](governance/adr/ADR-019-MATCH-COMMAND-AUTHORIZATION-POLICY-BOUNDARY.md) — PROPOSED
 - [ADR-020: Typed Command Payload Validation Boundary](governance/adr/ADR-020-TYPED-COMMAND-PAYLOAD-VALIDATION.md) — PROPOSED
+- [ADR-021: Typed Gameplay Command Catalog](governance/adr/ADR-021-TYPED-GAMEPLAY-COMMAND-CATALOG.md) — PROPOSED
 
 ## حالات الوثائق
 - **PROPOSED:** مقترح لم يعتمد.
