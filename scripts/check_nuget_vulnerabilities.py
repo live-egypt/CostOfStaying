@@ -36,8 +36,14 @@ def analyze(payload: Any) -> tuple[int, list[str]]:
             raise ValueError("NuGet report contains an invalid project entry.")
         project_path = str(project.get("path", "<unknown-project>"))
         frameworks = project.get("frameworks")
+        if frameworks is None:
+            # The .NET 10 --vulnerable JSON contract emits a path-only project
+            # object when that project has no vulnerable direct/transitive packages.
+            if set(project.keys()) == {"path"}:
+                continue
+            raise ValueError(f"NuGet report has an unexpected path-only project shape for {project_path}.")
         if not isinstance(frameworks, list):
-            raise ValueError(f"NuGet report has no framework list for {project_path}.")
+            raise ValueError(f"NuGet report framework list is invalid for {project_path}.")
 
         for framework in frameworks:
             if not isinstance(framework, dict):
@@ -72,8 +78,6 @@ def analyze(payload: Any) -> tuple[int, list[str]]:
                             f"{project_path} [{framework_name}] {package_id}: {severity} — {advisory}"
                         )
 
-    if projects and frameworks_seen == 0:
-        raise ValueError("NuGet report contains projects but no target frameworks.")
     return package_records_seen, findings
 
 
@@ -84,11 +88,6 @@ def self_test() -> None:
         "sources": ["https://api.nuget.org/v3/index.json"],
         "projects": [{
             "path": "tests/Example.csproj",
-            "frameworks": [{
-                "framework": "net10.0",
-                "topLevelPackages": [{"id": "Example.Safe", "vulnerabilities": []}],
-                "transitivePackages": [],
-            }],
         }],
     }
     vulnerable = {
