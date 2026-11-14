@@ -106,10 +106,14 @@
 | `governance/adr/ADR-022-BETRAYAL-THRESHOLDS.md` | قرار | PROPOSED — Betrayal تكلفة لا فوز |
 | `governance/adr/ADR-023-UNIFIED-CORE-AND-LIFECYCLE-RESOLUTION.md` | قرار | PROPOSED — النواة الموحدة + Resurrect معطل MVP |
 | `governance/AUDIT_REPORT_2026-11-14.md` | حوكمة / تدقيق | PROPOSED — تدقيق شامل 2026-11-14 |
+| `roadmap/WORK_PLAN_2026-11-14.md` | تسليم / خطة | PROPOSED — خطة عمل 2026-11-14 (6 مراحل) |
+| `roadmap/WORK_PLAN_V2_DETAILED.md` | تسليم / خطة | PROPOSED — خطة تنفيذ كاملة 8 بوابات |
+| `governance/AGENT_CHARTER.md` | حوكمة / وكلاء | PROPOSED — ميثاق 10 وكلاء متخصصين |
+| `governance/EXECUTION_BOARD.md` | حوكمة / تنفيذ | PROPOSED — لوحة 40 مهمة × 8 بوابات |
+| `governance/RACI_MATRIX.md` | حوكمة / أدوار | PROPOSED — مصفوفة RACI 10×8 |
 | `roadmap/MVP_SCOPE.md` | تسليم | PROPOSED |
 | `roadmap/ACCEPTANCE_CRITERIA.md` | تسليم | PROPOSED |
 | `roadmap/DELIVERY_PLAN.md` | تسليم | PROPOSED |
-| `roadmap/WORK_PLAN_2026-11-14.md` | تسليم / خطة | PROPOSED — خطة عمل 2026-11-14 (6 مراحل) |
 
 > **خارج الكتالوج (أدلة):** `quality/playtest-logs/*.json|*.csv|*.md` أدلة جلسات محاكاة — لا تخضع لحكم الفهرس، لكنها موثقة في `ci.yml`.
 >
