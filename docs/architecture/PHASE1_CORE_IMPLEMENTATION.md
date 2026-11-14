@@ -17,6 +17,7 @@
 **Authentication boundary ADR:** ADR-017 (PROPOSED; credential validation and ActorId binding requirements documented; no provider or auth implementation selected)  
 **Match command admission ADR:** ADR-018 (PROPOSED; roster membership gate implemented and CI-verified on PR #28; owner review pending)  
 **Command authorization ADR:** ADR-019 (PROPOSED; fail-closed generic policy gate implemented and CI-verified on PR #29; no gameplay policy approved)  
+**Typed command payload ADR:** ADR-020 (PROPOSED; generic typed payload validation before admission and before handoff implemented and CI-verified on PR #31; concrete gameplay DTOs not yet defined)  
 **Unity/FishNet:** NOT IMPLEMENTED / NOT VERIFIED.
 
 ## Implemented Core source
@@ -109,7 +110,7 @@ The following remain unimplemented and must not be represented as complete:
 1. Credential validation, external account identity, principal-to-ActorId assignment, production transport-adapter hooks, connection-ID allocation/reuse enforcement in that adapter, reconnect/timeout orchestration and persistence remain unimplemented. ADR-017 defines proposed boundaries only; provider and account mapping decisions remain unresolved. The pure-Core connection/session mapping contract is implemented and verified in PR #26 but is not merged. PR #25 separately tracks dequeued/in-flight commands for safe cleanup; it is also unmerged. PR #28 adds a match-roster membership gate that checks the authenticated ActorId at admission and dequeue; run 43601883483 passed 222 NUnit tests on source SHA dd853f02ccea94fe12d46f13d586ee56dbd13fb7. PR #29 adds an explicit fail-closed authorization policy boundary using trusted MatchPhase and PlayerLifecycleState context; run 43602883504 passed 234 NUnit tests on source SHA 7dc7f1ceb1fd4dc9cccb6fd5a61ed036b41e17d5. No command-specific gameplay policy was added.
 2. Full match aggregate, world-state ownership and cross-aggregate coordination (bounded match membership registry is implemented).
 3. Player aggregate and cross-system state coordination.
-4. Gameplay payload validation, application handlers and end-to-end authoritative execution pipeline (the authenticated session admission gate is implemented).
+4. P2.1 generic typed-payload validation gate is CI-verified on PR #31 (242 tests); concrete command DTOs, versioned wire schemas, transport-level raw frame/serializer limits and application handlers remain NOT IMPLEMENTED.
 5. Movement command model, validation, simulation and deterministic movement rules.
 6. Debuff model, transfer eligibility and atomic transfer application/rollback.
 7. Immutable authoritative snapshots and projection contracts.
@@ -130,7 +131,7 @@ These checks verify separate pure-C# Core review branches only. They do not veri
 
 ## Next implementation order
 
-1. P1.1 connection/session mapping, P1.3 match-roster membership admission and P1.4 generic policy authorization are implemented and CI-verified on separate unmerged PRs #26, #28 and #29. The actual game command policy remains unapproved; ADR-004 is PROPOSED FOR PLAYTEST. Next: approve command taxonomy and phase/lifecycle rules before writing a concrete application policy. Trusted transport and credential validation remain gated by ADR-017 decisions; review PR #25 for in-flight completion.
+1. P1.1 connection/session mapping, P1.3 match-roster membership admission and P1.4 generic policy authorization are implemented and CI-verified on separate unmerged PRs #26, #28 and #29. P2.1 adds an explicit generic typed-payload validation gate in PR #31 and is CI-verified at 242 NUnit tests (run 43603511612); ADR-020 remains PROPOSED. No concrete Movement/Attack/Transfer/Vote/Spirit DTOs or gameplay rules are implemented. Next: define and approve the command catalog and versioned wire DTO schemas; keep raw frame-size/serializer limits in the transport adapter. ADR-004 remains PROPOSED FOR PLAYTEST. Trusted transport and credential validation remain gated by ADR-017 decisions; review PR #25 for in-flight completion.
 2. Match/player aggregate ownership and authoritative state revision integration.
 3. Command payload validation and application handlers around the bounded queue.
 4. Movement command/rules/simulation.
