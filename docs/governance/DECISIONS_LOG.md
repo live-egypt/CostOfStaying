@@ -25,6 +25,7 @@
 | ADR-018 | Match Roster Command Admission | PROPOSED | لا تقبل المباراة أو تسلّم أوامر إلى المعالج إلا إذا كان ActorId المحلول من جلسة Authenticated عضواً في سجل لاعبي تلك المباراة؛ يعاد فحص العضوية عند dequeue؛ لا يحدد صلاحيات الحالات/الأطوار أو تعدد العضوية بين المباريات. |
 | ADR-019 | Match Command Authorization Policy Boundary | PROPOSED | بوابة تفويض عامة تتلقى سياسة تطبيق خادمية صريحة بلا سماح افتراضي؛ تفحص MatchPhase وحالة اللاعب قبل queue admission وقبل handoff؛ لا تعتمد أي مصفوفة صلاحيات لعب محددة ولا ترقي قواعد playtest إلى موافقة. |
 | ADR-020 | Typed Command Payload Validation Boundary | PROPOSED | مدقق حمولة typed command صريح من التطبيق، قبل queue admission وبعد dequeue؛ يرفض افتراضياً عند غياب/تعطل المدقق؛ تحقق بنيوي فقط، وحدود frame/serialization الخام تظل في النقل، ولا يعرّف DTOs لعب فعلية. |
+| ADR-021 | Typed Gameplay Command Catalog and Wire Intent Boundary | PROPOSED | كتالوج مرشح لفئات نوايا العميل وحدود السلطة؛ لا يعتمد DTO fields أو wire schema أو serializer أو ranges أو قواعد gameplay؛ يمنع client-authoritative results ويطلب DTOs immutable/versioned بعد مراجعة المالك. |
 
 ## قرارات نطاق ومبادئ
 - MVP لأربعة لاعبين وخريطة واحدة: نطاق المنتج المستهدف في ميثاق المشروع، ويعاد تقييمه عبر قرار موثق إذا تغير.
