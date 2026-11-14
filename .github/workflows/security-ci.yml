@@ -75,7 +75,7 @@ jobs:
           retention-days: 30
 
   gitleaks-history:
-    name: Scan repository history for secrets
+    name: Scan event commit range for secrets
     needs: gitleaks-self-test
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -88,7 +88,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Scan all available Git history with Gitleaks
+      - name: Scan the event commit range with Gitleaks
         uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
