@@ -20,6 +20,7 @@ on:
       - "src/CostOfStaying.Core/**"
       - "tests/CostOfStaying.Core.Tests/**"
       - ".github/workflows/**"
+      - "global.json"
   workflow_dispatch:
   schedule:
     - cron: "23 3 * * 1"

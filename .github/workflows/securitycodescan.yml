@@ -16,6 +16,7 @@ on:
       - "tests/**/*.cs"
       - ".github/workflows/securitycodescan.yml"
       - ".github/workflows/core-ci.yml"
+      - "global.json"
   workflow_dispatch:
 
 permissions:

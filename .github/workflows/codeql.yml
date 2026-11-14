@@ -14,6 +14,7 @@ on:
       - "src/**/*.cs"
       - "tests/**/*.cs"
       - ".github/workflows/**"
+      - "global.json"
   schedule:
     - cron: "24 14 * * 3"
   workflow_dispatch:
