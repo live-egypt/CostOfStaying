@@ -100,6 +100,8 @@ src/CostOfStaying.Core/Properties/AssemblyInfo.cs
 - تم تحويل PR #23 من مسودة إلى جاهز للمراجعة، مع بقائه مفتوحاً وغير مدمج.
 - فُتحت [Issue #24](https://github.com/live-egypt/CostOfStaying/issues/24) لتكليف المالك/المسؤول بالتحقق من حماية main وتطبيقها إن لزم.
 - جرى توسيع مشغلات Security CI لتعمل مع كل تغييرات الملفات على الفروع المستهدفة، حتى لا تُستثنى الوثائق أو الإعدادات أو الأصول من فحص Gitleaks.
+- تسمية فحص Gitleaks أصبحت تصف بدقة نطاق commit range الخاص بالحدث/طلب السحب؛ لا تدّعي مسح تاريخ جميع الفروع.
+- أضيف تحقق fail-closed يلزم تقرير NuGet أن يتضمن `--include-transitive`، مع self-test يرفض صراحة تقرير direct-only.
 - أزيلت مرشحات `paths` من Core CI وCodeQL وSecurityCodeScan وDocumentation Audit؛ أصبحت الفحوص المطلوبة تصدر نتائج على كل PR إلى `main` أو `feature/core-lifecycle-resolution`، بما يقلل خطر checks المعلّقة عند تغييرات الوثائق فقط.
 - ثُبّتت إشارات CodeQL (`checkout`, `init`, `analyze`) إلى SHA commits ثابتة بعد مطابقة المراجع الرسمية في مستودعات Actions الأصلية.
 - بعد كل تحديث للفرع، يجب اعتماد نتائج الفحوص على أحدث SHA، لا الاكتفاء بفحوص الرأس السابق.
