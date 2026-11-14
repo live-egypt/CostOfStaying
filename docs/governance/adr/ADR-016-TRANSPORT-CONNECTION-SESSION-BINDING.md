@@ -19,7 +19,7 @@ Transport-specific connection objects must remain outside Core. The boundary nee
 5. Resolution returns only Pending or Authenticated sessions. Disconnected or Closed sessions are not usable connection bindings.
 6. Detaching a Pending connection closes its session. Detaching an Authenticated connection transitions its session to Disconnected. Already Disconnected or Closed sessions may be detached without another lifecycle transition.
 7. The lifecycle transition occurs before the mapping is removed, so queued commands fail the existing dequeue-time authentication revalidation after a disconnect.
-8. Session cleanup must not remove a session while a connection mapping still references it. The Core composition root therefore wraps session cleanup with a connection-binding guard.
+8. Session cleanup must not remove a session while a connection mapping still references it. The Core composition root wraps session cleanup with a connection-binding guard and rejects composition unless the connection registry and cleanup service share the exact same SessionRegistry instance.
 9. The connection registry is bounded by an explicit positive capacity and is single-writer/server-serialized; it is not thread-safe.
 10. Core stores only `TransportConnectionId` and `SessionId`; no FishNet type, socket, peer address, transport connection object, token or credential is stored in this registry.
 
@@ -38,7 +38,7 @@ Transport-specific connection objects must remain outside Core. The boundary nee
 - `IConnectionSessionRegistry` and `ConnectionSessionRegistry` provide bounded bidirectional mapping.
 - `TryDetach` transitions the session before clearing the binding.
 - `ConnectionAwareSessionCleanupService` blocks session removal while a binding exists.
-- CoreComposition exposes factories for the mapping and guarded cleanup.
+- CoreComposition exposes factories for the mapping and guarded cleanup; guarded cleanup verifies registry-instance identity to prevent pairing a session registry with an unrelated connection registry.
 - NUnit coverage includes invalid IDs, unknown and non-Pending sessions, duplicate binding, capacity, both lookup directions, detach transitions, multiple sessions for one ActorId, rejection of queued commands after disconnect, and cleanup blocking while bound.
 
 ## Verification boundary
