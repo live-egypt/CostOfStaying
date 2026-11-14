@@ -20,7 +20,7 @@
 
 | # | المهمة | الوكيل | الحجم | الحالة | الدليل |
 |---|---|---|---|---|---|
-| 1.1 | 3 سيناريوهات Playtest | Oracle | M | TODO | PDFs |
+| 1.1 | 3 سيناريوهات Playtest (SOC/TAC/SPI) | Oracle | M | DONE `379b19df` | `scenarios/*.md` 3 سيناريوهات + README |
 | 1.2 | 10 جلسات بشرية | Verifier+Oracle | L | TODO | 10 JSON human |
 | 1.3 | تحليل + BALANCE_RISK_REVIEW | Architect+Balancer | M | TODO | report.md |
 | 1.4 | تحديث ADR-004 | Governor | S | TODO | PR |

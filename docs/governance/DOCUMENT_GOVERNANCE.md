@@ -84,6 +84,10 @@
 | `security/INCIDENT_RESPONSE.md` | أمن | PROPOSED |
 | `quality/TEST_STRATEGY.md` | جودة | PROPOSED |
 | `quality/SECURITY_TEST_PLAN.md` | جودة | PROPOSED |
+| `quality/playtest/scenarios/README.md` | جودة / اختبار | PROPOSED — فهرس 3 سيناريوهات |
+| `quality/playtest/scenarios/01-social-pressure.md` | جودة / اختبار | PROPOSED — سيناريو ضغط اجتماعي |
+| `quality/playtest/scenarios/02-tactical-tradeoff.md` | جودة / اختبار | PROPOSED — مقايضة تكتيكية |
+| `quality/playtest/scenarios/03-spirit-witness.md` | جودة / اختبار | PROPOSED — شاهد الروح |
 | `quality/PLAYTEST_PLAN.md` | جودة | PROPOSED |
 | `quality/BALANCE_RISK_REVIEW.md` | جودة | PROPOSED |
 | `quality/PERFORMANCE_BUDGET.md` | جودة | PROPOSED |
