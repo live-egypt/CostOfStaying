@@ -1,5 +1,5 @@
-# ADR-005 — تفعيل CI وتنفيذ Domain Core
-**الحالة: PROPOSED | التاريخ: 2026-11-14 | الفرع: `arena/4bfc0882-costofstaying`**
+# ADR-005 — تفعيل CI وتنفيذ Domain Core — ⚠️ SUPERSEDED by ADR-021
+**الحالة: SUPERSEDED — مُستبدل بـ ADR-021 | الأصل: PROPOSED 2026-11-14 | الفرع: `arena/4bfc0882-costofstaying` | لا تستخدم هذا الرقم مجدداً — ADR-005 الشرعي هو `ADR-005-CORE-EXECUTABLE-BOUNDARY.md` (APPROVED)**
 
 ## السياق
 حتى 2026-11-11 كان المستودع حزمة توثيق فقط بلا كود ولا CI منفذ؛ ملفات `.github/workflows` قوالب موردين متوقفة على `workflow_dispatch`. مبادئ العمل السبعة تمنع ادعاء IMPLEMENTED/VERIFIED بلا اختبار، وتتطلب سلطة الخادم وعدم ادعاء الأداء بلا قياس. خارطة التسليم تطلب بوابة 3: بناء Domain Core منفصل عن Unity واختباره.

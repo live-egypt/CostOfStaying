@@ -22,7 +22,8 @@
 | العمليات | `docs/operations/` | البناء والتشغيل بعد وجود كود |
 | الحوكمة | `docs/governance/` | القرارات والتتبع وهذه القواعد والمصادر الموحدة |
 | التسليم | `docs/roadmap/` | النطاق والقبول وخطة المراحل |
-| التنفيذ | `src/`, `tests/`, `tools/` | كود النواة واختباراته وأدواته (خارج `docs/` لكن محكوم بـ ADR-005) |
+| التنفيذ | `src/`, `tests/`, `tools/` | كود النواة واختباراته وأدواته (خارج `docs/` لكن محكوم بـ ADR-005 Core + ADR-021 Domain→Core) |
+| الفروع | `feature/*`, `fix/*`, `docs/*` | 30+ فرعاً — النواة الموحدة Core هي الأساس (ADR-023) |
 
 ## 3. قواعد التعارض
 عند اختلاف نصين، اطبّق هذا الترتيب ولا تستنتج قراراً من النص الأقدم:
@@ -51,6 +52,8 @@
 - لا تُعاد تسمية المسارات القائمة دون سبب موثق.
 - رؤوس الوثائق الحالية v2.1 (للتوثيق). تنفيذ النواة v0.1 في `architecture/DOMAIN_CORE.md` — رقم الرأس لا يرفع الحالة.
 - مستودع الكود: أي كود في `src/`/`tests/`/`tools/` يحدّث `REPOSITORY_STRUCTURE.md` و`SOURCES_AND_REFERENCES.md` إن غيّر إصداراً أو رقماً.
+- حجز أرقام ADR: ADR-005..020 محجوزة لـ Core (APPROVED/PROPOSED على فروع `feature/*`) — لا يُستخدم الرقم مكرراً. أي ADR جديد يحجز رقماً هنا قبل الكتابة (CONFLICT #21, ADR-023).
+- تثبيت الإصدارات: `global.json` يثبت .NET SDK، `Directory.Packages.props` يثبت NuGet — لا نطاقات مفتوحة (Fix #LangVersion).
 
 ## 6. الكتالوج
 | المسار | الطبقة | الحالة |
@@ -98,7 +101,10 @@
 | `governance/adr/ADR-002-SERVER-AUTHORITY.md` | قرار | APPROVED كمبدأ / NOT IMPLEMENTED (منطقياً في Domain) |
 | `governance/adr/ADR-003-BACKEND-AND-HOSTING.md` | قرار | PROPOSED |
 | `governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md` | قرار | PROPOSED FOR PLAYTEST |
-| `governance/adr/ADR-005-CI-AND-DOMAIN-CORE.md` | قرار | PROPOSED |
+| `governance/adr/ADR-005-CI-AND-DOMAIN-CORE.md` | قرار | SUPERSEDED — مُستبدل بـ ADR-021 (كان PROPOSED) |
+| `governance/adr/ADR-021-DOMAIN-RULES-TRANSPLANT-TO-CORE.md` | قرار | PROPOSED — Domain→Core (يحل محل 005 المكرر) |
+| `governance/adr/ADR-022-BETRAYAL-THRESHOLDS.md` | قرار | PROPOSED — Betrayal تكلفة لا فوز |
+| `governance/adr/ADR-023-UNIFIED-CORE-AND-LIFECYCLE-RESOLUTION.md` | قرار | PROPOSED — النواة الموحدة + Resurrect معطل MVP |
 | `governance/AUDIT_REPORT_2026-11-14.md` | حوكمة / تدقيق | PROPOSED — تدقيق شامل 2026-11-14 |
 | `roadmap/MVP_SCOPE.md` | تسليم | PROPOSED |
 | `roadmap/ACCEPTANCE_CRITERIA.md` | تسليم | PROPOSED |
@@ -109,4 +115,4 @@
 >
 > **تنفيذ (خارج `docs/`):** `src/CostOfStaying.Domain/` + `tests/` + `tools/` + `CostOfStaying.sln` + `global.json` + `Directory.Packages.props` — محكومة بـ ADR-005 و`REPOSITORY_STRUCTURE.md` وليست وثائق.
 
-النواة المجردة وCI منفذان في `src/CostOfStaying.Domain` و`.github/workflows/ci.yml` على فرع `arena/4bfc0882-costofstaying` بحالة PROPOSED بانتظار CI أخضر. ملفات `.github/workflows` الأخرى تبقى قوالب موردين متوقفة على `workflow_dispatch` وليست دليل فحص ناجح.
+النواة المجردة (Domain) وCI منفذان في `src/CostOfStaying.Domain` و`.github/workflows/ci.yml` على هذا الفرع بحالة PROPOSED بانتظار CI أخضر. النواة الصارمة (Core) في `feature/phase1-*` هي الأساس الموحد (ADR-023) — Domain يُنقل إليها عبر ADR-021. ملفات `.github/workflows` الأخرى تبقى قوالب موردين متوقفة على `workflow_dispatch` وليست دليل فحص ناجح.

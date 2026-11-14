@@ -23,8 +23,12 @@
 | SRC-ADR-002 | `governance/adr/ADR-002-SERVER-AUTHORITY.md` | سلطة الخادم | APPROVED (مبدأ) |
 | SRC-ADR-003 | `governance/adr/ADR-003-BACKEND-AND-HOSTING.md` | Backend | PROPOSED |
 | SRC-ADR-004 | `governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md` | خط أساس القواعد | PROPOSED FOR PLAYTEST |
-| SRC-ADR-005 | `governance/adr/ADR-005-CI-AND-DOMAIN-CORE.md` | CI + Domain Core | PROPOSED |
-| SRC-CONFLICT | `governance/CONFLICT_RESOLUTIONS.md` | حسم التعارضات (18 بنداً) | PROPOSED |
+| SRC-ADR-005 | `governance/adr/ADR-005-CORE-EXECUTABLE-BOUNDARY.md` (Core) | الحد التنفيذي الوحيد — APPROVED 2026-11-01 | APPROVED |
+| SRC-ADR-005-SUP | `governance/adr/ADR-005-CI-AND-DOMAIN-CORE.md` | (SUPERSEDED → ADR-021) CI + Domain Core | SUPERSEDED |
+| SRC-ADR-021 | `governance/adr/ADR-021-DOMAIN-RULES-TRANSPLANT-TO-CORE.md` | نقل RULE-01..05 إلى Core | PROPOSED |
+| SRC-ADR-022 | `governance/adr/ADR-022-BETRAYAL-THRESHOLDS.md` | Betrayal تكلفة لا فوز (3/5/7 تجريبية) | PROPOSED |
+| SRC-ADR-023 | `governance/adr/ADR-023-UNIFIED-CORE-AND-LIFECYCLE-RESOLUTION.md` | النواة الموحدة + Resurrect معطل MVP | PROPOSED |
+| SRC-CONFLICT | `governance/CONFLICT_RESOLUTIONS.md` | حسم التعارضات (25 بنداً) | PROPOSED |
 | SRC-TRACE | `governance/REQUIREMENTS_TRACEABILITY.md` | ربط المتطلب بالاختبار | PROPOSED |
 
 > أي وثيقة في `docs/systems/` أو `architecture/` أو `security/` أو `quality/` يجب أن تذكر في رأسها أي SRC تعتمد عليه. لا تفترض قاعدة غير مذكورة في SRC-RULES.
@@ -36,8 +40,8 @@
 | EXT-UNITY | Unity LTS | **6.3 LTS** (مقترح، ADR-001) | محرك اللعبة | https://unity.com/releases/editor/whats-new/unity-6 |
 | EXT-URP | Universal Render Pipeline | ضمن Unity 6.3 | الرسم | https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@latest |
 | EXT-FISHNET | FishNet | TBD (يُثبت بعد prototype) | الشبكة | https://fish-networking.gitbook.io/docs/ |
-| EXT-DOTNET | .NET SDK | 8.0.x (CI) / netstandard2.1 (Domain) | بناء النواة | https://dotnet.microsoft.com/ |
-| EXT-NUNIT | NUnit | 4.2.2 | اختبارات Domain | https://nunit.org/ |
+| EXT-DOTNET | .NET SDK | 8.0.400 (`global.json`) / netstandard2.1 (Core/Domain) / net8.0 (Tests) — `LangVersion 9.0` للنواة (Unity 6) | بناء النواة | https://dotnet.microsoft.com/ |
+| EXT-NUNIT | NUnit | 4.2.2 (Domain) / 3.14.0 (Core — يحسّن إلى 4.2.2 عند التوحيد) | اختبارات | https://nunit.org/ |
 | EXT-GITLEAKS | gitleaks | 8.18.0 (CI heuristic) | فحص الأسرار | https://github.com/gitleaks/gitleaks |
 | EXT-PYTHON | Python | 3.11 (CI) | أدوات المحاكاة | https://www.python.org/ |
 

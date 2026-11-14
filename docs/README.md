@@ -61,7 +61,10 @@
 - [ADR-002: سلطة الخادم](governance/adr/ADR-002-SERVER-AUTHORITY.md)
 - [ADR-003: Backend والاستضافة](governance/adr/ADR-003-BACKEND-AND-HOSTING.md)
 - [ADR-004: خط أساس قواعد اللعب](governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md)
-- [ADR-005: CI والنواة المجردة](governance/adr/ADR-005-CI-AND-DOMAIN-CORE.md)
+- [ADR-005: CI والنواة المجردة — مُستبدل بـ 021](governance/adr/ADR-005-CI-AND-DOMAIN-CORE.md)
+- [ADR-021: نقل Domain إلى Core](governance/adr/ADR-021-DOMAIN-RULES-TRANSPLANT-TO-CORE.md)
+- [ADR-022: عتبات Betrayal](governance/adr/ADR-022-BETRAYAL-THRESHOLDS.md)
+- [ADR-023: النواة الموحدة وحسم دورة الحياة](governance/adr/ADR-023-UNIFIED-CORE-AND-LIFECYCLE-RESOLUTION.md)
 - [نطاق MVP](roadmap/MVP_SCOPE.md)
 - [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
@@ -76,4 +79,4 @@
 - **VERIFIED:** اجتاز اختباراً وله دليل محفوظ.
 - **TBD:** لم يحسم بعد.
 
-لا تستخدم IMPLEMENTED أو VERIFIED لمجرد وجود تصميم أو وثيقة. التنفيذ الوحيد الحالي هو `src/CostOfStaying.Domain` بحالة PROPOSED (ADR-005).
+لا تستخدم IMPLEMENTED أو VERIFIED لمجرد وجود تصميم أو وثيقة. التنفيذان: النواة الصارمة `Core` (ADR-005 APPROVED على فروع `feature/*`) والنواة القواعدية `Domain` (ADR-021 PROPOSED) — التوحيد في ADR-023.

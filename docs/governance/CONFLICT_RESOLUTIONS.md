@@ -1,5 +1,5 @@
 # حل التعارضات — v2.1
-**الحالة: PROPOSED | التاريخ: 2026-11-11**
+**الحالة: PROPOSED | التاريخ: 2026-11-14**
 
 سجل تحريري. لا يرفع حالة أي ADR ولا يعتمد أرقام توازن.
 
@@ -21,10 +21,14 @@
 | 14 | بيئة CI ونموذج التهديد كأن الخط موجود | CI مستهدف وغير منفذ. القوالب اليدوية ليست خط بناء |
 | 15 | PERF-001 افترض ميزانية معتمدة | لا ميزانية حتى يوجد baseline وقرار |
 | 16 | Spectating قُرئ كبديل فوري لـ Spirit | الموت ينقل إلى Spirit أولاً. موعد Spectating غير محدد |
-| 17 | workflows قُرئت كلها يدوية | `ci.yml` نشط على push/PR (ADR-005)؛ بقية القوالب تبقى يدوية فقط |
+| 17 | workflows قُرئت كلها يدوية | `ci.yml` نشط على push/PR (ADR-005/021)؛ بقية القوالب تبقى يدوية فقط |
 | 18 | Domain Core قُرئ كمنفذ وموثق تلقائياً | النواة في `src/CostOfStaying.Domain` بحالة PROPOSED بانتظار CI أخضر؛ لا VERIFIED |
-
 | 19 | مصادر متفرقة بلا مرجع موحد | `SOURCES_AND_REFERENCES.md` هو مصدر الحقيقة للاستشهادات والإصدارات |
 | 20 | هيكل المستودع بلا وثيقة مرجعية | `REPOSITORY_STRUCTURE.md` يوثق البنية وقواعد الإضافة |
+| 21 | رقم ADR-005 مستخدم مرتين (Core vs Domain) | ADR-005 الشرعي هو `ADR-005-CORE-EXECUTABLE-BOUNDARY.md` (APPROVED)؛ `ADR-005-CI-AND-DOMAIN-CORE` مُستبدل بـ ADR-021 |
+| 22 | خطان تنفيذيان Core وDomain لم يُوفّق بينهما | النواة الموحدة هي Core (ADR-023) — Domain يُنقل إليها عبر ADR-021 |
+| 23 | ADR-007 يسمح Resurrect وRULE-01 تمنع العودة | المصفوفة Alive/Spirit/Eliminated معتمدة، Resurrect/Eliminate معطلان في MVP (ADR-023) — "لا عودة" قاعدة نطاق MVP لا دورة حياة |
+| 24 | ADR-021 مكرر (Core candidate vs Domain) | ADR-021 الحالى هو نقل Domain (هذا الفرع) — مرشح Core السابق يُرقم ADR-024 في التوحيد |
+| 25 | LangVersion 10 لا يعمل على Unity 6 | Core وDomain على LangVersion 9.0 — CI يحرس (ADR-023) |
 
-لم تُرفع حالة ADR-001 أو ADR-002 أو ADR-003 أو ADR-004. ADR-005 جديد بحالة PROPOSED. التوحيد لا يرفع الحالات.
+لم تُرفع حالة ADR-001 أو ADR-002 أو ADR-003 أو ADR-004. ADR-005 الأصلى APPROVED (Core). ADR-021..023 جديدة PROPOSED بانتظار توقيعك.
