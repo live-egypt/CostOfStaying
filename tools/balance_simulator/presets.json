@@ -1,0 +1,52 @@
+{
+  "default": {
+    "startingVitality": 100.0,
+    "baseDecayPerSecond": 0.10,
+    "collapseDecayIncreasePerSecond": 0.02,
+    "collapseIntervalSeconds": 20.0,
+    "collapseIntervalThreeAliveSeconds": 15.0,
+    "debuffDurationSeconds": 30.0,
+    "debuffDecayBonusPerSecond": 0.03,
+    "transferCooldownSeconds": 5.0,
+    "maxActiveDebuffs": 3,
+    "transferRangeMeters": 2.0,
+    "voteDurationSeconds": 20.0,
+    "matchTimeLimitSeconds": 1200.0,
+    "playerCount": 4,
+    "hintCooldownSeconds": 15.0,
+    "tickHz": 10.0,
+    "note": "PROPOSED TEST VALUES — not approved balance. See MatchConfig.cs header."
+  },
+  "fast-decay": {
+    "startingVitality": 100.0,
+    "baseDecayPerSecond": 0.18,
+    "collapseDecayIncreasePerSecond": 0.04,
+    "collapseIntervalSeconds": 15.0,
+    "collapseIntervalThreeAliveSeconds": 12.0,
+    "debuffDurationSeconds": 20.0,
+    "debuffDecayBonusPerSecond": 0.05,
+    "transferCooldownSeconds": 5.0,
+    "maxActiveDebuffs": 3,
+    "transferRangeMeters": 2.0,
+    "voteDurationSeconds": 20.0,
+    "matchTimeLimitSeconds": 1200.0,
+    "playerCount": 4,
+    "tickHz": 10.0
+  },
+  "slow-decay": {
+    "startingVitality": 100.0,
+    "baseDecayPerSecond": 0.06,
+    "collapseDecayIncreasePerSecond": 0.01,
+    "collapseIntervalSeconds": 25.0,
+    "collapseIntervalThreeAliveSeconds": 15.0,
+    "debuffDurationSeconds": 40.0,
+    "debuffDecayBonusPerSecond": 0.02,
+    "transferCooldownSeconds": 8.0,
+    "maxActiveDebuffs": 3,
+    "transferRangeMeters": 2.0,
+    "voteDurationSeconds": 20.0,
+    "matchTimeLimitSeconds": 1200.0,
+    "playerCount": 4,
+    "tickHz": 10.0
+  }
+}

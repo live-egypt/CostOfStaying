@@ -1,0 +1,11 @@
+session,seed,duration,outcome,winner,transfers,collapses,deaths,voted
+sim-20261114-014833-01,1,337.4,LastSurvivor,P3,85,64,3,True
+sim-20261114-014833-02,2,337.8,LastSurvivor,P2,81,64,3,True
+sim-20261114-014833-03,3,334.3,LastSurvivor,P1,88,64,3,True
+sim-20261114-014833-04,4,339.0,LastSurvivor,P3,89,65,3,True
+sim-20261114-014833-05,5,337.8,LastSurvivor,P1,94,64,3,True
+sim-20261114-014833-06,6,336.5,LastSurvivor,P2,85,64,3,True
+sim-20261114-014833-07,7,335.9,LastSurvivor,P3,77,64,3,True
+sim-20261114-014833-08,8,337.0,LastSurvivor,P2,89,64,3,True
+sim-20261114-014833-09,9,338.3,LastSurvivor,P3,92,64,3,True
+sim-20261114-014833-10,10,336.4,LastSurvivor,P2,95,64,3,True

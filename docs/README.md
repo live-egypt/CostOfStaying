@@ -2,7 +2,7 @@
 
 هذه الوثائق تصف التصميم المقترح وخطط التحقق. لا تعني أن أي نظام منفذ أو مختبر ما لم يذكر دليل قابل للمراجعة.
 
-التنظيم وقواعد التعارض والكتالوج في [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md). ما حُسم فعلياً في [سجل حل التعارض](governance/CONFLICT_RESOLUTIONS.md).
+التنظيم وقواعد التعارض والكتالوج في [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md). ما حُسم فعلياً في [سجل حل التعارض](governance/CONFLICT_RESOLUTIONS.md). المصادر الموحدة في [SOURCES_AND_REFERENCES.md](governance/SOURCES_AND_REFERENCES.md).
 
 ## ابدأ هنا
 - [ميثاق المشروع](00_PROJECT_CHARTER.md)
@@ -10,6 +10,7 @@
 - [مواصفات قواعد اللعبة](02_GAME_RULES_SPECIFICATION.md)
 - [تجربة اللاعب والحلقة الأساسية](03_PLAYER_EXPERIENCE_AND_CORE_LOOP.md)
 - [مسرد المصطلحات](GLOSSARY.md)
+- [هيكل المستودع](REPOSITORY_STRUCTURE.md)
 
 ## الأنظمة
 - [Collapse](systems/COLLAPSE_SYSTEM.md)
@@ -25,6 +26,7 @@
 - [Backend والاستضافة](architecture/BACKEND_AND_HOSTING.md)
 - [معمارية البيانات](architecture/DATA_ARCHITECTURE.md)
 - [النشر والتشغيل](architecture/DEPLOYMENT_ARCHITECTURE.md)
+- [النواة المجردة Domain Core](architecture/DOMAIN_CORE.md)
 
 ## الأمن والخصوصية
 - [المعمارية الأمنية](security/SECURITY_ARCHITECTURE.md)
@@ -53,13 +55,20 @@
 - [سجل حل التعارض](governance/CONFLICT_RESOLUTIONS.md)
 - [سجل القرارات](governance/DECISIONS_LOG.md)
 - [تتبع المتطلبات](governance/REQUIREMENTS_TRACEABILITY.md)
+- [المصادر والمراجع الموحدة](governance/SOURCES_AND_REFERENCES.md)
+- [تقرير التدقيق الشامل 2026-11-14](governance/AUDIT_REPORT_2026-11-14.md)
 - [ADR-001: التكدس التقني](governance/adr/ADR-001-TECH-STACK.md)
 - [ADR-002: سلطة الخادم](governance/adr/ADR-002-SERVER-AUTHORITY.md)
 - [ADR-003: Backend والاستضافة](governance/adr/ADR-003-BACKEND-AND-HOSTING.md)
 - [ADR-004: خط أساس قواعد اللعب](governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md)
+- [ADR-005: CI والنواة المجردة — مُستبدل بـ 021](governance/adr/ADR-005-CI-AND-DOMAIN-CORE.md)
+- [ADR-021: نقل Domain إلى Core](governance/adr/ADR-021-DOMAIN-RULES-TRANSPLANT-TO-CORE.md)
+- [ADR-022: عتبات Betrayal](governance/adr/ADR-022-BETRAYAL-THRESHOLDS.md)
+- [ADR-023: النواة الموحدة وحسم دورة الحياة](governance/adr/ADR-023-UNIFIED-CORE-AND-LIFECYCLE-RESOLUTION.md)
 - [نطاق MVP](roadmap/MVP_SCOPE.md)
 - [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
+- [خطة العمل المفصلة 2026-11-14](roadmap/WORK_PLAN_2026-11-14.md)
 
 ## حالات الوثائق
 التعريف الملزم في [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md). ملخص:
@@ -70,4 +79,4 @@
 - **VERIFIED:** اجتاز اختباراً وله دليل محفوظ.
 - **TBD:** لم يحسم بعد.
 
-لا تستخدم IMPLEMENTED أو VERIFIED لمجرد وجود تصميم أو وثيقة.
+لا تستخدم IMPLEMENTED أو VERIFIED لمجرد وجود تصميم أو وثيقة. التنفيذان: النواة الصارمة `Core` (ADR-005 APPROVED على فروع `feature/*`) والنواة القواعدية `Domain` (ADR-021 PROPOSED) — التوحيد في ADR-023.

@@ -1,0 +1,23 @@
+# Normalize line endings
+* text=auto eol=lf
+
+# Binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.mp4 binary
+*.wav binary
+*.mp3 binary
+*.unity binary
+*.prefab binary
+*.asset binary
+*.meta binary
+
+# Docs always diffable
+*.md diff=markdown
+*.cs diff=csharp
+
+# Lock files
+*.lock binary

@@ -1,0 +1,20 @@
+<Project>
+
+  <!--
+    Central package versioning — single source for NuGet versions.
+    Referenced by SOURCES_AND_REFERENCES.md (EXT-*).
+    ADR-001 PROPOSED — versions not final until prototype.
+  -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageVersion Include="NUnit" Version="4.2.2" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="4.6.0" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+  </ItemGroup>
+
+</Project>
