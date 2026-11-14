@@ -17,6 +17,7 @@ on:
       - main
       - feature/core-lifecycle-resolution
       - docs/p1-authentication-boundary-proposal-2026-11-14
+      - fix/p1-match-membership-command-admission-2026-11-14
     paths:
       - "src/CostOfStaying.Core/**"
       - "tests/CostOfStaying.Core.Tests/**"
