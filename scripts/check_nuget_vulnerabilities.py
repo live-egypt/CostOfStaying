@@ -14,14 +14,23 @@ def analyze(payload: Any) -> tuple[int, list[str]]:
     if not isinstance(payload, dict) or payload.get("version") != 1:
         raise ValueError("Unsupported NuGet package-list JSON schema (expected version 1).")
 
+    parameters = payload.get("parameters")
+    sources = payload.get("sources")
+    if not isinstance(parameters, str) or "--vulnerable" not in parameters:
+        raise ValueError("NuGet report was not generated with the --vulnerable filter.")
+    if not isinstance(sources, list) or not sources:
+        raise ValueError("NuGet report contains no package/audit sources; refusing to assume a clean scan.")
+
     projects = payload.get("projects")
-    if not isinstance(projects, list) or not projects:
-        raise ValueError("NuGet report has no projects; refusing to treat an empty/invalid report as clean.")
+    if not isinstance(projects, list):
+        raise ValueError("NuGet report projects field is missing or invalid.")
 
     findings: list[str] = []
     frameworks_seen = 0
     package_records_seen = 0
 
+    # With --vulnerable, a valid report may contain no projects when no packages match.
+    # The required version/parameters/sources metadata distinguishes that from an empty file.
     for project in projects:
         if not isinstance(project, dict):
             raise ValueError("NuGet report contains an invalid project entry.")
@@ -63,15 +72,16 @@ def analyze(payload: Any) -> tuple[int, list[str]]:
                             f"{project_path} [{framework_name}] {package_id}: {severity} — {advisory}"
                         )
 
-    if frameworks_seen == 0:
-        raise ValueError("NuGet report contains no target frameworks; refusing to treat it as clean.")
-
+    if projects and frameworks_seen == 0:
+        raise ValueError("NuGet report contains projects but no target frameworks.")
     return package_records_seen, findings
 
 
 def self_test() -> None:
     clean = {
         "version": 1,
+        "parameters": "--vulnerable --include-transitive",
+        "sources": ["https://api.nuget.org/v3/index.json"],
         "projects": [{
             "path": "tests/Example.csproj",
             "frameworks": [{
@@ -83,6 +93,8 @@ def self_test() -> None:
     }
     vulnerable = {
         "version": 1,
+        "parameters": "--vulnerable --include-transitive",
+        "sources": ["https://api.nuget.org/v3/index.json"],
         "projects": [{
             "path": "tests/Example.csproj",
             "frameworks": [{
@@ -109,6 +121,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("report", nargs="?", type=Path)
     parser.add_argument("--self-test", action="store_true")
+    parser.add_argument("--restore-log", type=Path)
     args = parser.parse_args()
 
     try:
@@ -117,6 +130,16 @@ def main() -> int:
             return 0
         if args.report is None:
             parser.error("provide a NuGet JSON report or --self-test")
+        if args.restore_log is not None:
+            restore_output = args.restore_log.read_text(encoding="utf-8", errors="replace")
+            unavailable = [
+                line for line in restore_output.splitlines()
+                if "NU1900" in line or "NU1905" in line
+            ]
+            if unavailable:
+                raise ValueError(
+                    "NuGet audit data source was unavailable or unsupported:\n" + "\n".join(unavailable)
+                )
         payload = json.loads(args.report.read_text(encoding="utf-8"))
         package_records, findings = analyze(payload)
     except (OSError, json.JSONDecodeError, ValueError) as exc:

@@ -152,7 +152,7 @@ jobs:
             > artifacts/security/nuget-vulnerabilities.json
 
       - name: Fail on any known NuGet vulnerability
-        run: python scripts/check_nuget_vulnerabilities.py artifacts/security/nuget-vulnerabilities.json
+        run: python scripts/check_nuget_vulnerabilities.py artifacts/security/nuget-vulnerabilities.json --restore-log artifacts/security/nuget-restore.log
 
       - name: Upload NuGet audit evidence
         if: always()

@@ -9,8 +9,8 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 
-INLINE_LINK = re.compile(r"!?[[][^]]*[]][(]([^)]*)[)]")
-REFERENCE_DEF = re.compile(r"^[ ]{0,3}\[[^]]+\]:[ ]*(\S+)", re.MULTILINE)
+INLINE_LINK = re.compile(r"!?[\x5b][^\x5d]*[\x5d][\x28]([^\x29]*)[\x29]")
+REFERENCE_DEF = re.compile(r"^[ ]{0,3}[\x5b][^\x5d]+[\x5d]:[ ]*(\S+)", re.MULTILINE)
 FENCE = re.compile(r"^[ ]{0,3}(\x60{3,}|~{3,})")
 
 
