@@ -1,5 +1,5 @@
 # لوحة التنفيذ — 8 بوابات / 40 مهمة
-**الحالة: PROPOSED | التاريخ: 2026-11-14 | الفرع: `arena/6c5729d1-costofstaying` | المالك: Governor + Verifier | تحدّث مع كل PR**
+**الحالة: PROPOSED | التاريخ: 2026-11-14 | الفرع: `arena/379b19df-costofstaying` | المالك: Governor + Verifier | تحدّث مع كل PR**
 
 > كل مهمة = بطاقة واحدة. الحالات: `TODO → DOING → REVIEW → DONE (SHA)`. لا DONE بدون SHA+artifact.
 
@@ -9,12 +9,12 @@
 
 | # | المهمة | الوكيل | الحجم | الحالة | الدليل |
 |---|---|---|---|---|---|
-| 0.1 | قفل `Directory.Build.props` 9.0 + WarnAsError | Architect | S | TODO | `dotnet build` log |
-| 0.2 | `dependabot.yml` + SHA-pin (منجز) | DevOps | S | DONE `4294eff` | `ci.yml` |
-| 0.3 | `test_parity.py` 6 حالات | Domain | M | TODO | `parity.log` |
+| 0.1 | قفل `Directory.Build.props` 9.0 + WarnAsError | Architect | S | DONE `cb57b25`→`379b19df` | `dotnet build` log |
+| 0.2 | `dependabot.yml` + SHA-pin (منجز) | DevOps | S | DONE `4294eff`→`379b19df` | `ci.yml` + `dependabot.yml` |
+| 0.3 | `test_parity.py` 6 حالات | Domain | M | DONE `379b19df` | `parity 6/6` |
 | 0.4 | `simulate.py` استراتيجي | Balancer | M | TODO | `sweep.json` |
-| 0.5 | تنظيف `Clone()` + حد `SentAt` | Domain | S | TODO | `grep Clone` |
-| 0.6 | ترويسة `DECISIONS_LOG` | Governor | XS | TODO | `audit.py` |
+| 0.5 | تنظيف `Clone()` + حد `SentAt` | Domain | S | DONE `379b19df` | `grep Clone` + `Intent SentAt` docs |
+| 0.6 | ترويسة `DECISIONS_LOG` | Governor | XS | TODO | `audit.py` — Warn مقبول (فهرس) |
 
 ## GATE-1 — القواعد (3أ) — فتح: بعد GATE-0
 

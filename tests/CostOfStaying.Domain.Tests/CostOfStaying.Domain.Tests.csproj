@@ -2,11 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <!-- Test project keeps LangVersion 12.0 (net8.0) — not shipped to Unity (Gate-0, SOURCES_AND_REFERENCES) -->
     <LangVersion>12.0</LangVersion>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <IsPackable>false</IsPackable>
-    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>

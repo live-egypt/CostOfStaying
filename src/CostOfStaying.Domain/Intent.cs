@@ -11,6 +11,11 @@ namespace CostOfStaying.Domain
     {
         public Guid PlayerId { get; set; }
         public string RequestId { get; set; } = Guid.NewGuid().ToString("N");
+        /// <summary>
+        /// Client-reported send time. Server must validate against <see cref="IMatchClock.NowSeconds"/>
+        /// with a bounded skew (e.g., ±5s) to mitigate replay/future-dated intents. Current validation
+        /// happens in TryTransfer via idempotency (ProcessedRequestIds); full temporal check is GATE-3 (ADR-008).
+        /// </summary>
         public double SentAtSeconds { get; set; }
     }
 

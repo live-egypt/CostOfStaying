@@ -2,14 +2,10 @@
 
   <PropertyGroup>
     <!-- netstandard2.1: portable to Unity 6 later; no Unity/FishNet references (ADR-001, TECHNICAL_ARCHITECTURE). -->
+    <!-- LangVersion/Nullable/Strictness now inherited from Directory.Build.props (Gate-0, CONFLICT #25) -->
     <TargetFramework>netstandard2.1</TargetFramework>
-    <LangVersion>9.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>disable</ImplicitUsings>
     <RootNamespace>CostOfStaying.Domain</RootNamespace>
     <AssemblyName>CostOfStaying.Domain</AssemblyName>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
 
 </Project>

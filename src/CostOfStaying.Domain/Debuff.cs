@@ -26,6 +26,7 @@ namespace CostOfStaying.Domain
             Transferable = transferable;
         }
 
+        /// <summary>Preserves remaining duration when moving (RULE-02 Move, not Copy).</summary>
         internal Debuff Clone()
         {
             return new Debuff(Id, DecayBonusPerSecond, RemainingSeconds, Transferable);

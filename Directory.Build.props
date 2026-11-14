@@ -1,0 +1,27 @@
+<Project>
+  <!--
+    Gate-0 hardening: central build defaults for Unity 6 compatibility.
+    LangVersion 9.0 is max for Unity 6 Mono (see CONFLICT #25, ADR-023).
+    TreatWarningsAsErrors enforced for src/ only; tests remain warnings.
+    All projects inherit these; per-project overrides only if explicitly needed.
+  -->
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- Src projects: warnings as errors (strict kernel) -->
+  <PropertyGroup Condition="$(MSBuildProjectName.Contains('Domain'))">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsNotAsErrors>CS1591</WarningsNotAsErrors> <!-- allow missing XML comment -->
+  </PropertyGroup>
+
+  <!-- Test projects: warnings remain warnings for faster iteration -->
+  <PropertyGroup Condition="$(MSBuildProjectName.Contains('Tests'))">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+</Project>
