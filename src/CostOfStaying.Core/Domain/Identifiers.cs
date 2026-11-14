@@ -44,6 +44,24 @@ namespace CostOfStaying.Core.Domain
         public static bool operator !=(SessionId left, SessionId right) => !left.Equals(right);
     }
 
+    /// <summary>
+    /// Opaque server-issued identity for one transport connection. It is not a transport
+    /// object or client-provided identifier. The adapter must not reuse values during one
+    /// server-process lifetime. Zero is an invalid/default sentinel.
+    /// </summary>
+    public readonly struct TransportConnectionId : IEquatable<TransportConnectionId>
+    {
+        public TransportConnectionId(ulong value) => Value = value;
+        public ulong Value { get; }
+        public bool IsValid => Value != 0UL;
+        public bool Equals(TransportConnectionId other) => Value == other.Value;
+        public override bool Equals(object? obj) => obj is TransportConnectionId other && Equals(other);
+        public override int GetHashCode() => Value.GetHashCode();
+        public override string ToString() => Value.ToString();
+        public static bool operator ==(TransportConnectionId left, TransportConnectionId right) => left.Equals(right);
+        public static bool operator !=(TransportConnectionId left, TransportConnectionId right) => !left.Equals(right);
+    }
+
     /// <summary>Transfer target identity. Zero is an invalid/default sentinel.</summary>
     public readonly struct VictimId : IEquatable<VictimId>
     {
@@ -71,11 +89,11 @@ namespace CostOfStaying.Core.Domain
         public static bool operator ==(EventSequenceId left, EventSequenceId right) => left.Equals(right);
         public static bool operator !=(EventSequenceId left, EventSequenceId right) => !left.Equals(right);
     }
+
     /// <summary>Server-validated per-session command sequence. Zero is an invalid/default sentinel.</summary>
     public readonly struct CommandSequenceId : IEquatable<CommandSequenceId>
     {
         public CommandSequenceId(ulong value) => Value = value;
-        public ulong Value { get; }
         public bool IsValid => Value != 0UL;
         public bool Equals(CommandSequenceId other) => Value == other.Value;
         public override bool Equals(object? obj) => obj is CommandSequenceId other && Equals(other);
