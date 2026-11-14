@@ -25,6 +25,7 @@ namespace CostOfStaying.Core.Tests
                 typeof(CommandAdmissionQueue<string>),
                 typeof(CommandAdmissionService<string>),
                 typeof(MatchCommandAdmissionService<string>),
+                typeof(MatchCommandAuthorizationService<string>),
                 typeof(SessionCleanupService<string>),
                 typeof(ConnectionAwareSessionCleanupService<string>)
             };
@@ -135,6 +136,49 @@ namespace CostOfStaying.Core.Tests
 
             Assert.That(service.MatchId, Is.EqualTo(new MatchId(42)));
             Assert.That(queue.PendingCount, Is.Zero);
+        }
+
+        [Test]
+        public void CreateMatchCommandAuthorizationService_UsesProvidedMatchAndPolicy()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var sessions = composition.CreateSessionRegistry(4);
+            IMatchLifecycle match = composition.CreateMatchLifecycle(new MatchId(42));
+            IMatchPlayerRegistry players = composition.CreateMatchPlayerRegistry(new MatchId(42), 4);
+            var queue = composition.CreateCommandAdmissionQueue<string>(8, 4, 8);
+            var policy = new AllowAllTestPolicy();
+
+            IMatchCommandAuthorizationService<string> service =
+                composition.CreateMatchCommandAuthorizationService(sessions, match, players, queue, policy);
+
+            Assert.That(service.MatchId, Is.EqualTo(new MatchId(42)));
+        }
+
+        [Test]
+        public void CreateMatchCommandAuthorizationService_RejectsMismatchedMatchScopes()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var sessions = composition.CreateSessionRegistry(4);
+            IMatchLifecycle match = composition.CreateMatchLifecycle(new MatchId(42));
+            IMatchPlayerRegistry players = composition.CreateMatchPlayerRegistry(new MatchId(43), 4);
+            var queue = composition.CreateCommandAdmissionQueue<string>(8, 4, 8);
+            var policy = new AllowAllTestPolicy();
+
+            Assert.Throws<System.ArgumentException>(() =>
+                composition.CreateMatchCommandAuthorizationService(sessions, match, players, queue, policy));
+        }
+
+        [Test]
+        public void CreateMatchCommandAuthorizationService_RequiresExplicitPolicy()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var sessions = composition.CreateSessionRegistry(4);
+            IMatchLifecycle match = composition.CreateMatchLifecycle(new MatchId(42));
+            IMatchPlayerRegistry players = composition.CreateMatchPlayerRegistry(new MatchId(42), 4);
+            var queue = composition.CreateCommandAdmissionQueue<string>(8, 4, 8);
+
+            Assert.Throws<System.ArgumentNullException>(() =>
+                composition.CreateMatchCommandAuthorizationService<string>(sessions, match, players, queue, null!));
         }
 
         [Test]
