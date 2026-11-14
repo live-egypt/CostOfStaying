@@ -43,7 +43,7 @@ namespace CostOfStaying.Core.Tests
             var service = CreateService(out SessionRegistry sessions, out CommandAdmissionQueue<string> queue);
             var session = RegisterAuthenticated(sessions, new SessionId(1));
             var envelope = new CommandEnvelope<string>(session.SessionId, new CommandSequenceId(1), new ServerTick(1), "pending");
-            queue.TryEnqueue(envelope);
+            Assert.That(queue.TryEnqueue(envelope).IsSuccess, Is.True);
             session.TryClose();
 
             Result result = service.TryRemoveClosedSession(session.SessionId);
@@ -51,6 +51,48 @@ namespace CostOfStaying.Core.Tests
             Assert.That(result.ErrorCode, Is.EqualTo(CoreErrorCode.InvalidState));
             Assert.That(sessions.Get(session.SessionId).IsSuccess, Is.True);
             Assert.That(queue.PendingCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void TryRemoveClosedSession_RejectsWhileCommandIsInFlightAndAllowsAfterCompletion()
+        {
+            var cleanup = CreateService(out SessionRegistry sessions, out CommandAdmissionQueue<string> queue);
+            var admission = new CommandAdmissionService<string>(sessions, queue);
+            var session = RegisterAuthenticated(sessions, new SessionId(1));
+            var envelope = new CommandEnvelope<string>(
+                session.SessionId, new CommandSequenceId(1), new ServerTick(1), "processing");
+
+            Assert.That(admission.TryAdmit(envelope).IsSuccess, Is.True);
+            Result<AuthenticatedCommand<string>> taken = admission.TryTakeNext();
+            Assert.That(taken.IsSuccess, Is.True);
+            Assert.That(queue.InFlightCount, Is.EqualTo(1));
+
+            Assert.That(session.TryClose().IsSuccess, Is.True);
+            Assert.That(cleanup.TryRemoveClosedSession(session.SessionId).ErrorCode, Is.EqualTo(CoreErrorCode.InvalidState));
+            Assert.That(sessions.Get(session.SessionId).IsSuccess, Is.True);
+
+            Assert.That(admission.Complete(taken.Value).IsSuccess, Is.True);
+            Assert.That(queue.InFlightCount, Is.Zero);
+            Assert.That(cleanup.TryRemoveClosedSession(session.SessionId).IsSuccess, Is.True);
+            Assert.That(sessions.Get(session.SessionId).ErrorCode, Is.EqualTo(CoreErrorCode.NotFound));
+        }
+
+        [Test]
+        public void TryRemoveClosedSession_AllowsStaleQueuedCommandDiscardedAtDequeue()
+        {
+            var cleanup = CreateService(out SessionRegistry sessions, out CommandAdmissionQueue<string> queue);
+            var admission = new CommandAdmissionService<string>(sessions, queue);
+            var session = RegisterAuthenticated(sessions, new SessionId(1));
+            var envelope = new CommandEnvelope<string>(
+                session.SessionId, new CommandSequenceId(1), new ServerTick(1), "stale");
+
+            Assert.That(admission.TryAdmit(envelope).IsSuccess, Is.True);
+            Assert.That(session.TryClose().IsSuccess, Is.True);
+            Assert.That(admission.TryTakeNext().ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
+            Assert.That(queue.PendingCount, Is.Zero);
+            Assert.That(queue.InFlightCount, Is.Zero);
+
+            Assert.That(cleanup.TryRemoveClosedSession(session.SessionId).IsSuccess, Is.True);
         }
 
         [Test]

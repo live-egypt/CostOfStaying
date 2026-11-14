@@ -8,5 +8,12 @@ namespace CostOfStaying.Core.Contracts
     {
         Result TryAdmit(CommandEnvelope<TCommand> envelope);
         Result<AuthenticatedCommand<TCommand>> TryTakeNext();
+
+        /// <summary>
+        /// Completes one command previously returned by TryTakeNext.
+        /// The application must call this exactly once after processing finishes,
+        /// including rejection or exception paths.
+        /// </summary>
+        Result Complete(AuthenticatedCommand<TCommand> command);
     }
 }
