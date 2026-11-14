@@ -1,24 +1,12 @@
 name: Security CI
 
 on:
+  # Run for every file change: Gitleaks must inspect docs, configs, assets,
+  # workflows, and source—not only C# or project files.
   push:
     branches: [main, feature/core-lifecycle-resolution]
-    paths:
-      - "src/**/*.cs"
-      - "src/**/*.csproj"
-      - "tests/**/*.cs"
-      - "tests/**/*.csproj"
-      - ".github/workflows/security-ci.yml"
-      - "global.json"
   pull_request:
     branches: [main, feature/core-lifecycle-resolution]
-    paths:
-      - "src/**/*.cs"
-      - "src/**/*.csproj"
-      - "tests/**/*.cs"
-      - "tests/**/*.csproj"
-      - ".github/workflows/security-ci.yml"
-      - "global.json"
   workflow_dispatch:
   schedule:
     - cron: "41 4 * * 1"
