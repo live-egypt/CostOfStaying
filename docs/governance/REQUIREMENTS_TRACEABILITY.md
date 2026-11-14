@@ -1,5 +1,5 @@
 # تتبع المتطلبات — v2.1
-**الحالة: PARTIALLY VERIFIED | Core baseline and separate P1 review branches have CI evidence; ADR-008 through ADR-019 remain proposed pending policy/owner review**
+**الحالة: PARTIALLY VERIFIED | Core baseline and separate P1 review branches have CI evidence; ADR-008 through ADR-020 remain proposed pending policy/owner review**
 
 الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. Historical Core CI run 41333575156 passed 181 tests. PR #25 separately passed 191 tests for in-flight cleanup; PR #26 separately passed 210 tests for P1.1 connection/session mapping (run 43599420409, tested source commit 95a7bc93a7fd4772f45e7dc428f7574906945061). These are separate, unmerged review branches, not a single combined build. The evidence verifies standalone pure-C# Core only, not Unity/FishNet or production transport integration.
 
@@ -130,3 +130,19 @@ ADR-019 is **PROPOSED**. PR #29 implements a generic pure-Core gate that require
 CI evidence: [run 43602883504](https://github.com/live-egypt/CostOfStaying/actions/runs/43602883504) passed dependency-boundary and CoreComposition checks, both Release builds (0 warnings, 0 errors), and **234 NUnit tests** (0 failed, 0 skipped) on tested source SHA `7dc7f1ceb1fd4dc9cccb6fd5a61ed036b41e17d5`. Artifact `core-test-results` ID `14117245816`. See [P1.4 verification report](../audit/P1_MATCH_COMMAND_AUTHORIZATION_POLICY_CI_VERIFICATION_2026-11-14.md). PR #29 remains open and unmerged; subsequent commits were a test-file addition on the intended review branch and its CI result is represented by the tested SHA. ADR-019 remains PROPOSED.
 
 This gate does not approve the specific permissions of Alive/Spirit/Eliminated or any MatchPhase; ADR-004 is still PROPOSED FOR PLAYTEST. No default policy should be interpreted as a game rule.
+
+
+## ADR-020 — Typed command payload validation boundary
+
+ADR-020 is **PROPOSED**. PR #31 implements a generic pure-Core boundary requiring an explicit `ICommandPayloadValidator<TCommand>`. Payload validation is performed before the authorized match gate admits a command, then repeated after dequeue before returning the command to an application handler. This gate receives an already-deserialized typed payload; it is not a transport parser or raw frame limiter.
+
+| Requirement ID | Requirement | Control | Test/evidence | Status |
+|---|---|---|---|---|
+| CORE-PAYLOAD-001 | A typed command payload cannot enter the match queue without an explicitly injected validator; invalid/default envelope is rejected before validator execution | CORE-PAYLOAD-CTRL-001 | MatchCommandPayloadValidationServiceTests: TryAdmit_RejectsDefaultEnvelopeWithoutInvokingValidator; CoreCompositionTests: CreateMatchCommandPayloadValidationService_RequiresExplicitValidator | Core CI run 43603511612; 242 NUnit passed; PR #31, ADR-020 PROPOSED |
+| CORE-PAYLOAD-002 | Payload rejection before queue admission does not consume queue capacity or command sequence; same sequence may retry after validation succeeds | CORE-PAYLOAD-CTRL-002 | MatchCommandPayloadValidationServiceTests: TryAdmit_PayloadRejectionDoesNotConsumeSequenceAndSameSequenceCanRetry | Core CI run 43603511612; 242 NUnit passed |
+| CORE-PAYLOAD-003 | Typed payload is revalidated after dequeue and before handler handoff so a changed mutable reference payload cannot bypass validation | CORE-PAYLOAD-CTRL-003 | MatchCommandPayloadValidationServiceTests: TryTakeNext_RevalidatesPayloadAfterDequeueBeforeReturningToHandler | Core CI run 43603511612; 242 NUnit passed |
+| CORE-PAYLOAD-004 | Uninitialized validator results and validator exceptions fail closed and do not admit commands | CORE-PAYLOAD-CTRL-004 | MatchCommandPayloadValidationServiceTests: TryAdmit_UninitializedValidatorResultFailsClosed / TryAdmit_ValidatorExceptionFailsClosedAndDoesNotConsumeSequence | Core CI run 43603511612; 242 NUnit passed |
+
+CI evidence: [run 43603511612](https://github.com/live-egypt/CostOfStaying/actions/runs/43603511612) passed Core dependency-boundary and CoreComposition scans, both Release builds (0 warnings, 0 errors), and **242 NUnit tests** (0 failed, 0 skipped) on tested source SHA `e1941c6fdf6283827a0fd39f664ced7863e94a94`. Artifact `core-test-results` ID `14117630467`. See [P2.1 verification report](../audit/P2_TYPED_COMMAND_PAYLOAD_VALIDATION_CI_VERIFICATION_2026-11-14.md). PR #31 remains open and unmerged; ADR-020 remains PROPOSED.
+
+The validator applies only after safe deserialization. Raw wire-frame size, decompression/serialization quotas, nesting depth and parser hardening remain transport-adapter requirements. The gate does not define actual Movement/Attack/Transfer/Vote/Spirit DTOs, gameplay numeric bounds or handler transactions. Dynamic distance, cooldown, ownership, target eligibility and atomic effects remain separate application policy/handler checks.
