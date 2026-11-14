@@ -106,6 +106,26 @@ namespace CostOfStaying.Core.Tests
             Assert.That(policy.Calls, Is.EqualTo(2));
         }
 
+        [Test]
+        public void Pipeline_DiscardsQueuedCommandAfterSessionDisconnectBeforeHandlerHandoff()
+        {
+            IMatchCommandPayloadValidationService<string> pipeline = CreatePipeline(
+                out SessionLifecycle session,
+                out CommandAdmissionQueue<string> queue,
+                out PayloadValidator validator,
+                out RunningAlivePolicy policy);
+
+            Assert.That(pipeline.TryAdmit(CreateEnvelope(session.SessionId, 1, "move")).IsSuccess, Is.True);
+            Assert.That(session.TryDisconnect().IsSuccess, Is.True);
+
+            Result<AuthenticatedCommand<string>> taken = pipeline.TryTakeNext();
+
+            Assert.That(taken.ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
+            Assert.That(queue.PendingCount, Is.Zero);
+            Assert.That(validator.Calls, Is.EqualTo(1));
+            Assert.That(policy.Calls, Is.EqualTo(1));
+        }
+
         private static IMatchCommandPayloadValidationService<string> CreatePipeline(
             out SessionLifecycle session,
             out CommandAdmissionQueue<string> queue,
