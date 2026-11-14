@@ -5,8 +5,7 @@
 **Implementation branch:** `fix/p1-connection-session-binding-2026-11-14`  
 **Pull request:** [PR #26](https://github.com/live-egypt/CostOfStaying/pull/26) — targets `feature/core-lifecycle-resolution`; not merged  
 **Tested source commit:** `95a7bc93a7fd4772f45e7dc428f7574906945061`  
-**Current branch head at report time:** `4ae4088716eb740ec736c3bea0f75727e2d6bc77`  
-**Post-test difference:** seven documentation-only commits updating ADR-016 wording, the audit report, project status, Core implementation status, technical master, requirements traceability and documentation index. No source, test or workflow files changed after the tested commit.
+**Post-test difference:** Subsequent commits after the tested source SHA updated documentation only. No source, test or workflow files changed after the tested commit.
 
 ## GitHub Actions evidence
 
