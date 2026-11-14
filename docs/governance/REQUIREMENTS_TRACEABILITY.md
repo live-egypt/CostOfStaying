@@ -1,5 +1,5 @@
 # تتبع المتطلبات — v2.1
-**الحالة: PARTIALLY VERIFIED | Core baseline and separate P1 review branches have CI evidence; ADR-008 through ADR-017 remain proposed pending policy/owner review**
+**الحالة: PARTIALLY VERIFIED | Core baseline and separate P1 review branches have CI evidence; ADR-008 through ADR-018 remain proposed pending policy/owner review**
 
 الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. Historical Core CI run 41333575156 passed 181 tests. PR #25 separately passed 191 tests for in-flight cleanup; PR #26 separately passed 210 tests for P1.1 connection/session mapping (run 43599420409, tested source commit 95a7bc93a7fd4772f45e7dc428f7574906945061). These are separate, unmerged review branches, not a single combined build. The evidence verifies standalone pure-C# Core only, not Unity/FishNet or production transport integration.
 
@@ -98,3 +98,16 @@ ADR-017 is **PROPOSED**; no credential validator, identity provider, account sto
 | CORE-AUTH-004 | Credentials and tokens are excluded from Core state and diagnostic output | CORE-AUTH-CTRL-004 | Redaction tests and security review required | PROPOSED — logging boundary not implemented |
 
 Owner decisions still required: identity provider and guest flow; credential/token format and validation; account-to-ActorId mapping and lifetime; provider outage behavior; retry/rate-limit/lockout; expiration/revocation/refresh; privacy retention; reconnect and concurrent-session policy. ADR-010 and ADR-011 are PROPOSED and do not by themselves settle these items.
+
+
+## ADR-018 — Match roster command admission
+
+ADR-018 is **PROPOSED**. PR #28 implements a pure-Core match-scoped gate that joins the authenticated session identity to a specific match roster. It checks membership before queue admission and again after dequeue before handing the command to a gameplay handler. It does not make gameplay-phase or lifecycle-permission decisions.
+
+| Requirement ID | Requirement | Control | Test/evidence | Status |
+|---|---|---|---|---|
+| CORE-MATCH-CMD-001 | A command is admitted to a match queue only when the registered Authenticated session's server-resolved ActorId is a member of that match | CORE-MATCH-CMD-CTRL-001 | MatchCommandAdmissionServiceTests: TryAdmit_RejectsAuthenticatedActorNotInThisMatchWithoutConsumingSequence / TryAdmit_RejectsActorWhoIsOnlyMemberOfAnotherMatch | Implemented on PR #28; CI pending |
+| CORE-MATCH-CMD-002 | Match membership is revalidated after dequeue before a command is returned to a gameplay handler | CORE-MATCH-CMD-CTRL-002 | MatchCommandAdmissionServiceTests: TryTakeNext_RejectsCommandWhenActorLeavesMatchAfterAdmission | Implemented on PR #28; CI pending |
+| CORE-MATCH-CMD-003 | Non-member rejection does not consume sequence or queue capacity; the same sequence may be retried after the actor is admitted to the match | CORE-MATCH-CMD-CTRL-003 | MatchCommandAdmissionServiceTests: TryAdmit_RejectsAuthenticatedActorNotInThisMatchWithoutConsumingSequence | Implemented on PR #28; CI pending |
+
+This service is membership-only. It does not decide command permissions for Alive/Spirit/Eliminated, MatchPhase, spectators, concurrent match membership, command payload validity or account-level multi-session policy. Those remain separate owner/application policy decisions. CoreComposition creates the inner authenticated admission gate from the same SessionRegistry and queue used by the match-scoped wrapper.
