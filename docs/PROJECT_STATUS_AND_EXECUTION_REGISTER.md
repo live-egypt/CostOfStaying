@@ -54,7 +54,7 @@ The Core source and NUnit tests have been updated on `feature/core-lifecycle-res
 The consolidated baseline run `41333575156` remains historical evidence for 181 NUnit tests on `8a193190fb5f2e10c05773fb0789171011bfd2eb`. Two later, separate review branches add P1 safeguards:
 
 - PR #25: Core CI run `43596902378` passed 191 NUnit tests on `7d82c3becf96eac338999de767770c75bc5795eb`, covering queued plus in-flight command accounting and safe session cleanup.
-- PR #26: Core CI run `43599420409` passed 210 NUnit tests on tested source commit `95a7bc93a7fd4772f45e7dc428f7574906945061`. Dependency-boundary and CoreComposition scans passed; Core and test Release builds had 0 warnings and 0 errors. The only later commit at current PR #26 head `4ae4088716eb740ec736c3bea0f75727e2d6bc77` changed ADR-016 wording only. See [P1.1 CI evidence](audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md).
+- PR #26: Core CI run `43599420409` passed 210 NUnit tests on tested source commit `95a7bc93a7fd4772f45e7dc428f7574906945061`. Dependency-boundary and CoreComposition scans passed; Core and test Release builds had 0 warnings and 0 errors. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification. See [P1.1 CI evidence](audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md).
 
 Neither PR #25 nor PR #26 is merged. These checks verify standalone pure-C# Core and do not verify a real transport adapter.
 
