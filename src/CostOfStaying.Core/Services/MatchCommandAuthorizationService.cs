@@ -151,7 +151,16 @@ namespace CostOfStaying.Core.Services
 
         private Result EvaluatePolicy(MatchCommandAuthorizationContext<TCommand> context)
         {
-            Result result = _policy.Authorize(context);
+            Result result;
+            try
+            {
+                result = _policy.Authorize(context);
+            }
+            catch (Exception)
+            {
+                return Result.Failure(CoreErrorCode.Unavailable);
+            }
+
             if (result.IsSuccess)
                 return Result.Success();
 
