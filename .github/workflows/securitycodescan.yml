@@ -3,20 +3,8 @@ name: SecurityCodeScan
 on:
   push:
     branches: [main]
-    paths:
-      - "src/**/*.cs"
-      - "tests/**/*.cs"
-      - ".github/workflows/securitycodescan.yml"
-      - ".github/workflows/core-ci.yml"
-      - "global.json"
   pull_request:
     branches: [main, feature/core-lifecycle-resolution]
-    paths:
-      - "src/**/*.cs"
-      - "tests/**/*.cs"
-      - ".github/workflows/securitycodescan.yml"
-      - ".github/workflows/core-ci.yml"
-      - "global.json"
   workflow_dispatch:
 
 permissions:
