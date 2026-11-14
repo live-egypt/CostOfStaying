@@ -156,6 +156,11 @@ namespace CostOfStaying.Core.Domain
             return sessionId.IsValid && _connectionBySession.ContainsKey(sessionId);
         }
 
+        internal bool IsBackedBy(ISessionRegistry sessions)
+        {
+            return ReferenceEquals(_sessions, sessions);
+        }
+
         private static bool IsLiveBindingState(SessionState state)
         {
             return state == SessionState.Pending || state == SessionState.Authenticated;
