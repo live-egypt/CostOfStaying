@@ -43,6 +43,7 @@ namespace CostOfStaying.Core.Services
         /// Dequeues the next command and revalidates its session immediately before handing
         /// the command and server-resolved ActorId to the application handler. Stale commands
         /// are discarded and return Unauthorized; their sequence remains consumed.
+        /// Successfully handed-off commands become in-flight until Complete is called.
         /// </summary>
         public Result<AuthenticatedCommand<TCommand>> TryTakeNext()
         {
@@ -56,8 +57,24 @@ namespace CostOfStaying.Core.Services
             if (!IsAuthenticatedBinding(lookup.Value, envelope.SessionId))
                 return Result<AuthenticatedCommand<TCommand>>.Failure(CoreErrorCode.Unauthorized);
 
+            Result tracked = _queue.MarkInFlight(envelope);
+            if (tracked.IsFailure)
+                return Result<AuthenticatedCommand<TCommand>>.Failure(tracked.ErrorCode);
+
             return Result<AuthenticatedCommand<TCommand>>.Success(
                 new AuthenticatedCommand<TCommand>(lookup.Value.ActorId!.Value, envelope));
+        }
+
+        /// <summary>
+        /// Releases the in-flight slot after the caller has finished all handling for a
+        /// command returned by TryTakeNext. Use a finally block at the application boundary.
+        /// </summary>
+        public Result Complete(AuthenticatedCommand<TCommand> command)
+        {
+            if (!command.ActorId.IsValid || !command.Envelope.IsValid)
+                return Result.Failure(CoreErrorCode.InvalidArgument);
+
+            return _queue.CompleteInFlight(command.SessionId, command.SequenceId);
         }
 
         private static bool IsAuthenticatedBinding(ISessionLifecycle session, SessionId expectedSessionId)
