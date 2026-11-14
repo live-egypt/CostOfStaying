@@ -155,7 +155,7 @@ namespace CostOfStaying.Core.Tests
         [Test]
         public void TryTakeNext_ResolvesActorFromAuthenticatedSession()
         {
-            var service = CreateService(out SessionRegistry sessions, out _);
+            var service = CreateService(out SessionRegistry sessions, out CommandAdmissionQueue<string> queue);
             var session = new SessionLifecycle(new SessionId(20));
             sessions.Register(session);
             session.TryAuthenticate(new ActorId(42));
@@ -170,6 +170,52 @@ namespace CostOfStaying.Core.Tests
             Assert.That(result.Value.SequenceId, Is.EqualTo(new CommandSequenceId(3)));
             Assert.That(result.Value.ReceivedAt, Is.EqualTo(new ServerTick(9)));
             Assert.That(result.Value.Command, Is.EqualTo("move"));
+            Assert.That(queue.InFlightCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Complete_RejectsDefaultAndDuplicateCompletion()
+        {
+            var service = CreateService(out SessionRegistry sessions, out CommandAdmissionQueue<string> queue);
+            Assert.That(service.Complete(default).ErrorCode, Is.EqualTo(CoreErrorCode.InvalidArgument));
+
+            var session = new SessionLifecycle(new SessionId(23));
+            sessions.Register(session);
+            session.TryAuthenticate(new ActorId(45));
+            var envelope = new CommandEnvelope<string>(session.SessionId, new CommandSequenceId(1), new ServerTick(1), "move");
+            Assert.That(service.TryAdmit(envelope).IsSuccess, Is.True);
+            Result<AuthenticatedCommand<string>> taken = service.TryTakeNext();
+            Assert.That(taken.IsSuccess, Is.True);
+
+            Assert.That(service.Complete(taken.Value).IsSuccess, Is.True);
+            Assert.That(service.Complete(taken.Value).ErrorCode, Is.EqualTo(CoreErrorCode.NotFound));
+            Assert.That(queue.InFlightCount, Is.Zero);
+        }
+
+        [Test]
+        public void OutstandingCapacity_IncludesInFlightCommandsUntilCompletion()
+        {
+            var sessions = new SessionRegistry(4);
+            var queue = new CommandAdmissionQueue<string>(MaximumSequenceJump, 4, 1);
+            var service = new CommandAdmissionService<string>(sessions, queue);
+            var session = new SessionLifecycle(new SessionId(24));
+            sessions.Register(session);
+            session.TryAuthenticate(new ActorId(46));
+
+            var first = new CommandEnvelope<string>(session.SessionId, new CommandSequenceId(1), new ServerTick(1), "first");
+            var second = new CommandEnvelope<string>(session.SessionId, new CommandSequenceId(2), new ServerTick(2), "second");
+
+            Assert.That(service.TryAdmit(first).IsSuccess, Is.True);
+            Result<AuthenticatedCommand<string>> taken = service.TryTakeNext();
+            Assert.That(taken.IsSuccess, Is.True);
+            Assert.That(queue.PendingCount, Is.Zero);
+            Assert.That(queue.InFlightCount, Is.EqualTo(1));
+            Assert.That(queue.OutstandingCount, Is.EqualTo(1));
+
+            Assert.That(service.TryAdmit(second).ErrorCode, Is.EqualTo(CoreErrorCode.CapacityExceeded));
+            Assert.That(service.Complete(taken.Value).IsSuccess, Is.True);
+            Assert.That(service.TryAdmit(second).IsSuccess, Is.True);
+            Assert.That(queue.OutstandingCount, Is.EqualTo(1));
         }
 
         [Test]
@@ -185,6 +231,7 @@ namespace CostOfStaying.Core.Tests
 
             Assert.That(service.TryTakeNext().ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
             Assert.That(queue.PendingCount, Is.Zero);
+            Assert.That(queue.InFlightCount, Is.Zero);
         }
 
         [Test]
@@ -200,6 +247,7 @@ namespace CostOfStaying.Core.Tests
 
             Assert.That(service.TryTakeNext().ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
             Assert.That(queue.PendingCount, Is.Zero);
+            Assert.That(queue.InFlightCount, Is.Zero);
         }
 
         private static CommandAdmissionService<string> CreateService(out SessionRegistry sessions, out CommandAdmissionQueue<string> queue)
