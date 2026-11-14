@@ -138,6 +138,19 @@ namespace CostOfStaying.Core.Tests
         }
 
         [Test]
+        public void CreateSessionCleanupService_RejectsConnectionRegistryFromDifferentSessionRegistry()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var cleanupSessions = composition.CreateSessionRegistry(4);
+            var otherSessions = composition.CreateSessionRegistry(4);
+            var queue = composition.CreateCommandAdmissionQueue<string>(8, 4, 8);
+            IConnectionSessionRegistry connections = composition.CreateConnectionSessionRegistry(otherSessions, 4);
+
+            Assert.Throws<System.ArgumentException>(() =>
+                composition.CreateSessionCleanupService(cleanupSessions, queue, connections));
+        }
+
+        [Test]
         public void CreateCommandAdmissionQueue_UsesExplicitBounds()
         {
             CoreComposition composition = CoreComposition.Create();
