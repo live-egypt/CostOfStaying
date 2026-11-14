@@ -18,6 +18,7 @@
 - [ADR-015: هوية الأمر و Idempotency](governance/adr/ADR-015-COMMAND-IDENTITY-AND-IDEMPOTENCY.md) — PROPOSED
 - [ADR-016 — Transport Connection to Session Binding](governance/adr/ADR-016-TRANSPORT-CONNECTION-SESSION-BINDING.md) — PROPOSED
 - [ADR-017 — Credential Validation and Actor Binding Boundary](governance/adr/ADR-017-CREDENTIAL-VALIDATION-ACTOR-BINDING.md) — PROPOSED
+- [ADR-018 — Match Roster Command Admission](governance/adr/ADR-018-MATCH-ROSTER-COMMAND-ADMISSION.md) — PROPOSED
 - [تدقيق CI لتسلسل الأوامر وCommandEnvelope](audit/COMMAND_SEQUENCE_CORE_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق CI لطابور الأوامر المحدود وسعة الجلسات](audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md)
 - [تدقيق CI لسجل لاعبي المباراة](audit/CORE_MATCH_PLAYER_REGISTRY_CI_VERIFICATION_2026-11-01.md)
@@ -58,6 +59,7 @@
 - [دليل تحقق Core عبر GitHub Actions](audit/PHASE1_CORE_CI_VERIFICATION.md)
 - [تدقيق تشغيل CI ومشكلات ماسحات الأمان](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md)
 - [تدقيق P1.1: ربط اتصال النقل بجلسة الخادم — 210 اختبارات](audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md)
+- [تدقيق P1.3: التحقق من عضوية المباراة عند قبول الأوامر — 222 اختباراً](audit/P1_MATCH_ROSTER_COMMAND_ADMISSION_CI_VERIFICATION_2026-11-14.md)
 
 ## الجودة والاختبار
 - [استراتيجية الاختبار](quality/TEST_STRATEGY.md)
@@ -92,6 +94,7 @@
 - [ADR-015: هوية الأمر و Idempotency](governance/adr/ADR-015-COMMAND-IDENTITY-AND-IDEMPOTENCY.md) — PROPOSED
 - [ADR-016: Transport Connection to Session Binding](governance/adr/ADR-016-TRANSPORT-CONNECTION-SESSION-BINDING.md) — PROPOSED
 - [ADR-017: Credential Validation and Actor Binding Boundary](governance/adr/ADR-017-CREDENTIAL-VALIDATION-ACTOR-BINDING.md) — PROPOSED
+- [ADR-018: Match Roster Command Admission](governance/adr/ADR-018-MATCH-ROSTER-COMMAND-ADMISSION.md) — PROPOSED
 
 ## حالات الوثائق
 - **PROPOSED:** مقترح لم يعتمد.

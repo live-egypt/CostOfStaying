@@ -24,6 +24,7 @@ namespace CostOfStaying.Core.Tests
                 typeof(CommandSequenceTracker),
                 typeof(CommandAdmissionQueue<string>),
                 typeof(CommandAdmissionService<string>),
+                typeof(MatchCommandAdmissionService<string>),
                 typeof(SessionCleanupService<string>),
                 typeof(ConnectionAwareSessionCleanupService<string>)
             };
@@ -119,6 +120,21 @@ namespace CostOfStaying.Core.Tests
 
             Assert.That(service.TryAdmit(envelope).IsSuccess, Is.True);
             Assert.That(queue.PendingCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void CreateMatchCommandAdmissionService_UsesProvidedSessionRegistryAndMatchRoster()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var sessions = composition.CreateSessionRegistry(4);
+            var players = composition.CreateMatchPlayerRegistry(new MatchId(42), 4);
+            var queue = composition.CreateCommandAdmissionQueue<string>(8, 4, 8);
+
+            IMatchCommandAdmissionService<string> service =
+                composition.CreateMatchCommandAdmissionService(sessions, players, queue);
+
+            Assert.That(service.MatchId, Is.EqualTo(new MatchId(42)));
+            Assert.That(queue.PendingCount, Is.Zero);
         }
 
         [Test]

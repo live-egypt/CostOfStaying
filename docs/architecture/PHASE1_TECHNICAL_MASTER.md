@@ -63,6 +63,7 @@ Existing ADR identifiers are occupied:
 - ADR-015: command identity and idempotency (PROPOSED).
 - ADR-016: transport connection-to-session binding (PROPOSED; Core contract implemented and CI-verified on PR #26; transport adapter integration pending).
 - ADR-017: credential validation and ActorId binding boundary (PROPOSED; no identity provider, credential format, account store or authentication service selected).
+- ADR-018: match roster command admission (PROPOSED; Core membership gate implemented on PR #28; CI and owner review pending; gameplay permissions remain downstream).
 - ADR-012: authenticated command admission gate (PROPOSED; gameplay payload validation remains downstream).
 - ADR-013: safe session cleanup and replay-state release (PROPOSED).
 
@@ -266,6 +267,7 @@ Naming rule: `ActorId` is the canonical player-actor identity in the current Cor
 | BetrayalCommandIngress.cs | Validate/enqueue transfer intent | BetrayalIngressTests | PROPOSED |
 | Domain/CommandAdmissionQueue.cs | Bounded FIFO, replay-aware enqueue and safe session reset after drain | CommandAdmissionQueueTests | VERIFIED — baseline run 41333575156; PR #25 in-flight accounting remains separate and unmerged; ADR-008 PROPOSED |
 | Contracts/IConnectionSessionRegistry.cs + Domain/ConnectionSessionRegistry.cs | Bounded bidirectional TransportConnectionId ↔ SessionId mapping, Pending-only binding and detach lifecycle transitions | ConnectionSessionRegistryTests | VERIFIED in PR #26 — run 43599420409, 210 passed; ADR-016 PROPOSED |
+| Contracts/IMatchCommandAdmissionService.cs + Services/MatchCommandAdmissionService.cs | Match-scoped authenticated command admission; checks ActorId roster membership before enqueue and before handler handoff | MatchCommandAdmissionServiceTests | VERIFIED on PR #28 — run 43601883483, 222 passed, 0 failed/skipped; ADR-018 PROPOSED |
 | Services/ConnectionAwareSessionCleanupService.cs | Blocks session cleanup while a live connection mapping exists; CoreComposition enforces shared SessionRegistry ownership | ConnectionAwareSessionCleanupServiceTests / CoreCompositionTests | VERIFIED in PR #26 — run 43599420409, 210 passed |
 | Services/CommandAdmissionService.cs + Contracts/ICommandAdmissionService.cs | Requires valid envelope and authenticated session with valid ActorId before queue admission | CommandAdmissionServiceTests | VERIFIED — 181 NUnit passed; gameplay payload validation remains downstream |
 | Services/SessionCleanupService.cs + Contracts/ISessionCleanupService.cs | Requires Closed, drains queue, resets replay state, then internally removes registry entry; only public cleanup path | SessionCleanupServiceTests | VERIFIED — 181 NUnit passed; ADR-013 PROPOSED |
@@ -406,7 +408,7 @@ Do not create placeholder manifests or locks that imply an installed Unity/FishN
 
 ## 7. Required future ADRs
 
-The historical transcript suggested new ADRs numbered 001–006, which conflict with the existing register. ADR-006 is assigned to Core identifier and Betrayal ledger invariants; ADR-007 is assigned to the player lifecycle/Vitality conflict. ADR-008 through ADR-017 are now assigned in the decision log. New candidates must use the next unused ADR number and be created only when the decision is ready for review.
+The historical transcript suggested new ADRs numbered 001–006, which conflict with the existing register. ADR-006 is assigned to Core identifier and Betrayal ledger invariants; ADR-007 is assigned to the player lifecycle/Vitality conflict. ADR-008 through ADR-018 are now assigned in the decision log. New candidates must use the next unused ADR number and be created only when the decision is ready for review.
 
 | Candidate topic | Decision required | Gate |
 |---|---|---|
@@ -473,7 +475,7 @@ Verification is recorded per review branch; these CI runs are independent and do
 - Baseline run 41333575156 on source 8a193190fb5f2e10c05773fb0789171011bfd2eb: 181 passed, 0 failed, 0 skipped.
 - PR #25 run 43596902378 on source 7d82c3becf96eac338999de767770c75bc5795eb: 191 passed, 0 failed, 0 skipped; PR #25 is unmerged.
 - PR #26 run 43599420409 on tested source 95a7bc93a7fd4772f45e7dc428f7574906945061: 210 passed, 0 failed, 0 skipped; dependency-boundary and CoreComposition checks passed; both Release builds had 0 warnings and 0 errors. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification.
-See [P1.1 CI evidence](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md). The runs verify pure-C# Core only, not combined PR integration, FishNet, credentials, production connection-ID allocation, reconnect policy, Unity or production security.
+See [P1.1 CI evidence](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md) and [P1.3 CI evidence](../audit/P1_MATCH_ROSTER_COMMAND_ADMISSION_CI_VERIFICATION_2026-11-14.md). The runs verify separate pure-C# Core scopes only, not merged/integrated PRs, FishNet, credentials, production connection-ID allocation, reconnect policy, Unity or production security.
 
 ### Evidence required for VERIFIED
 - exact commit SHA;
@@ -495,7 +497,7 @@ See [P1.1 CI evidence](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_20
 
 ## 12. Exact current implementation status
 
-**Current implementation status:** ADR-007 is APPROVED; ADR-010 through ADR-017 remain PROPOSED. PR #25 separately verifies in-flight command completion (191 tests). PR #26 verifies P1.1 transport-neutral connection/session binding (210 tests); both PRs target feature/core-lifecycle-resolution and remain unmerged. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification.
+**Current implementation status:** ADR-007 is APPROVED; ADR-010 through ADR-018 remain PROPOSED. PR #25 separately verifies in-flight command completion (191 tests). PR #26 verifies P1.1 connection/session mapping (210 tests); PR #28 verifies P1.3 match-roster command admission (222 tests) on its tested SHA. PR #25, PR #26 and PR #28 remain unmerged; PR #27 is the documentation-only ADR-017 proposal. These checks are separate review branches, not one integrated merged build. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification.
 
 | Item | Status |
 |---|---|
