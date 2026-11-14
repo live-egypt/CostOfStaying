@@ -43,7 +43,7 @@
 
 
 | 3.2 | NetworkAdapter + Envelope (ADR-008 Sequence) | Net Sage | M | DONE `379b19df` — CommandEnvelope + SequenceValidator 4 tests | adapter tests |
-| 3.3 | DedicatedServer + Snapshot + إعادة اتصال | Net Sage | L | TODO | server log |
+| 3.3 | DedicatedServer + Snapshot + إعادة اتصال (tick 10Hz + TransportBinding) | Net Sage | L | DONE `379b19df` — DedicatedServer + ServerMatch + Snapshot 3 tests | server log |
 | 3.4 | AuthZ + Payload fail-closed (IntentValidator) | Sentinel | M | DONE `379b19df` | `IntentValidator.cs` + `THREAT_MODEL` + `NETWORK_ARCH` حدود موثوقة |
 | 3.5 | اختبارات RTT/loss/jitter | Verifier | M | TODO | net_tests.log |
 | 3.6 | إثبات 4 أجهزة + فيديو | Verifier | M | TODO | video.mp4 |
