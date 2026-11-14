@@ -3,18 +3,8 @@ name: Documentation Audit
 on:
   push:
     branches: [main, feature/core-lifecycle-resolution]
-    paths:
-      - "README.md"
-      - "docs/**/*.md"
-      - "scripts/check_markdown_links.py"
-      - ".github/workflows/docs-audit.yml"
   pull_request:
     branches: [main, feature/core-lifecycle-resolution]
-    paths:
-      - "README.md"
-      - "docs/**/*.md"
-      - "scripts/check_markdown_links.py"
-      - ".github/workflows/docs-audit.yml"
   workflow_dispatch:
 
 permissions:
