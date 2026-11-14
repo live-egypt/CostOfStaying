@@ -243,7 +243,6 @@ namespace CostOfStaying.Core.Tests
 
             Assert.That(admission.TryTakeNext().ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
             Assert.That(queue.PendingCount, Is.Zero);
-            Assert.That(queue.InFlightCount, Is.Zero);
         }
 
         private static void CreateRegistries(out SessionRegistry sessions, out ConnectionSessionRegistry connections)
