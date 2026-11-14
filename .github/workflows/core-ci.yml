@@ -53,7 +53,7 @@ jobs:
       - name: Enforce Core composition root
         shell: bash
         run: |
-          aggregate_violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|SessionLifecycle|SessionRegistry|ConnectionSessionRegistry|MatchPlayerRegistry|CommandAdmissionQueue|CommandAdmissionService|SessionCleanupService|ConnectionAwareSessionCleanupService|MatchCommandAdmissionService|MatchCommandAuthorizationService|MatchRosterSnapshotBuilder)(\(|<)' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
+          aggregate_violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|SessionLifecycle|SessionRegistry|ConnectionSessionRegistry|MatchPlayerRegistry|CommandAdmissionQueue|CommandAdmissionService|SessionCleanupService|ConnectionAwareSessionCleanupService|MatchCommandAdmissionService|MatchCommandAuthorizationService|MatchCommandPayloadValidationService|MatchRosterSnapshotBuilder)(\(|<)' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
           tracker_violations="$(grep -R -n -E 'new CommandSequenceTracker\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CommandAdmissionQueue.cs:' || true)"
           cleanup_violations="$(grep -R -n -E '(ResetSession|RemoveClosedSession)\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(SessionCleanupService|CommandAdmissionQueue|SessionRegistry)\.cs:' || true)"
           queue_access_violations="$(grep -R -n -E '\.Try(Enqueue|Dequeue)\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CommandAdmissionService.cs:' || true)"
