@@ -17,6 +17,11 @@ namespace CostOfStaying.Core.Tests
             }
         }
 
+        private sealed class AllowAllTestValidator : ICommandPayloadValidator<string>
+        {
+            public Result Validate(string command) => Result.Success();
+        }
+
         [Test]
         public void CoreServices_ExposeNoPublicConstructors()
         {
@@ -34,6 +39,7 @@ namespace CostOfStaying.Core.Tests
                 typeof(CommandAdmissionService<string>),
                 typeof(MatchCommandAdmissionService<string>),
                 typeof(MatchCommandAuthorizationService<string>),
+                typeof(MatchCommandPayloadValidationService<string>),
                 typeof(SessionCleanupService<string>),
                 typeof(ConnectionAwareSessionCleanupService<string>)
             };
@@ -187,6 +193,38 @@ namespace CostOfStaying.Core.Tests
 
             Assert.Throws<System.ArgumentNullException>(() =>
                 composition.CreateMatchCommandAuthorizationService<string>(sessions, match, players, queue, null!));
+        }
+
+        [Test]
+        public void CreateMatchCommandPayloadValidationService_UsesExplicitAuthorizationAndValidator()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var sessions = composition.CreateSessionRegistry(4);
+            IMatchLifecycle match = composition.CreateMatchLifecycle(new MatchId(42));
+            IMatchPlayerRegistry players = composition.CreateMatchPlayerRegistry(new MatchId(42), 4);
+            var queue = composition.CreateCommandAdmissionQueue<string>(8, 4, 8);
+            IMatchCommandAuthorizationService<string> authorization =
+                composition.CreateMatchCommandAuthorizationService(sessions, match, players, queue, new AllowAllTestPolicy());
+
+            IMatchCommandPayloadValidationService<string> validation =
+                composition.CreateMatchCommandPayloadValidationService(authorization, new AllowAllTestValidator());
+
+            Assert.That(validation.MatchId, Is.EqualTo(new MatchId(42)));
+        }
+
+        [Test]
+        public void CreateMatchCommandPayloadValidationService_RequiresExplicitValidator()
+        {
+            CoreComposition composition = CoreComposition.Create();
+            var sessions = composition.CreateSessionRegistry(4);
+            IMatchLifecycle match = composition.CreateMatchLifecycle(new MatchId(42));
+            IMatchPlayerRegistry players = composition.CreateMatchPlayerRegistry(new MatchId(42), 4);
+            var queue = composition.CreateCommandAdmissionQueue<string>(8, 4, 8);
+            IMatchCommandAuthorizationService<string> authorization =
+                composition.CreateMatchCommandAuthorizationService(sessions, match, players, queue, new AllowAllTestPolicy());
+
+            Assert.Throws<System.ArgumentNullException>(() =>
+                composition.CreateMatchCommandPayloadValidationService<string>(authorization, null!));
         }
 
         [Test]
