@@ -1,0 +1,164 @@
+name: Security CI
+
+on:
+  push:
+    branches: [main, feature/core-lifecycle-resolution]
+    paths:
+      - "src/**/*.cs"
+      - "src/**/*.csproj"
+      - "tests/**/*.cs"
+      - "tests/**/*.csproj"
+      - ".github/workflows/security-ci.yml"
+      - "global.json"
+  pull_request:
+    branches: [main, feature/core-lifecycle-resolution]
+    paths:
+      - "src/**/*.cs"
+      - "src/**/*.csproj"
+      - "tests/**/*.cs"
+      - "tests/**/*.csproj"
+      - ".github/workflows/security-ci.yml"
+      - "global.json"
+  workflow_dispatch:
+  schedule:
+    - cron: "41 4 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gitleaks-self-test:
+    name: Verify Gitleaks fails on a synthetic secret
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Create isolated synthetic secret fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/gitleaks-fixture" "$GITHUB_WORKSPACE/artifacts/security"
+          printf 'github_token=%s%s\n' 'ghp_' '0123456789abcdef0123456789abcdef0123' \
+            > "$RUNNER_TEMP/gitleaks-fixture/synthetic-secret.txt"
+
+      - name: Assert Gitleaks returns a failure for the synthetic secret
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +e
+          docker run --rm \
+            --volume "$RUNNER_TEMP/gitleaks-fixture:/fixture:ro" \
+            --volume "$GITHUB_WORKSPACE/artifacts/security:/reports" \
+            ghcr.io/gitleaks/gitleaks:v8.30.1 \
+            dir /fixture \
+              --exit-code 1 \
+              --redact \
+              --report-format json \
+              --report-path /reports/gitleaks-self-test.json
+          scan_status=$?
+          set -e
+
+          if [ "$scan_status" -ne 1 ]; then
+            echo "::error::Gitleaks self-test expected exit code 1, received $scan_status."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = Path("artifacts/security/gitleaks-self-test.json")
+          payload = json.loads(report.read_text(encoding="utf-8"))
+          if not isinstance(payload, list) or not payload:
+              raise SystemExit("Gitleaks self-test returned no findings for the synthetic fixture.")
+          print(f"Gitleaks fail-closed self-test passed: {len(payload)} synthetic finding(s).")
+          PY
+
+      - name: Preserve Gitleaks self-test report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: gitleaks-self-test
+          path: artifacts/security/gitleaks-self-test.json
+          if-no-files-found: warn
+          retention-days: 30
+
+  gitleaks-history:
+    name: Scan repository history for secrets
+    needs: gitleaks-self-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Scan all available Git history with Gitleaks
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: "false"
+          GITLEAKS_ENABLE_SUMMARY: "true"
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "true"
+          GITLEAKS_VERSION: "8.30.1"
+
+  nuget-audit:
+    name: Audit direct and transitive NuGet dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Prepare NuGet audit artifacts
+        run: mkdir -p artifacts/security
+
+      - name: Set up pinned .NET SDK
+        uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73
+        with:
+          global-json-file: global.json
+
+      - name: Self-test the NuGet vulnerability report gate
+        run: python scripts/check_nuget_vulnerabilities.py --self-test
+
+      - name: Restore with NuGet audit enabled for all dependency levels
+        shell: bash
+        run: |
+          set -o pipefail
+          dotnet restore tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj \
+            --verbosity minimal \
+            -p:NuGetAudit=true \
+            -p:NuGetAuditMode=all \
+            -p:NuGetAuditLevel=low \
+            -p:TreatWarningsAsErrors=false \
+            2>&1 | tee artifacts/security/nuget-restore.log
+
+      - name: Generate machine-readable vulnerability report
+        run: |
+          dotnet package list \
+            --project tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj \
+            --no-restore \
+            --vulnerable \
+            --include-transitive \
+            --format json \
+            --output-version 1 \
+            > artifacts/security/nuget-vulnerabilities.json
+
+      - name: Fail on any known NuGet vulnerability
+        run: python scripts/check_nuget_vulnerabilities.py artifacts/security/nuget-vulnerabilities.json
+
+      - name: Upload NuGet audit evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: nuget-vulnerability-report
+          path: artifacts/security/
+          if-no-files-found: warn
+          retention-days: 30

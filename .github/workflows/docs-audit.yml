@@ -1,0 +1,54 @@
+name: Documentation Audit
+
+on:
+  push:
+    branches: [main, feature/core-lifecycle-resolution]
+    paths:
+      - "README.md"
+      - "docs/**/*.md"
+      - "scripts/check_markdown_links.py"
+      - ".github/workflows/docs-audit.yml"
+  pull_request:
+    branches: [main, feature/core-lifecycle-resolution]
+    paths:
+      - "README.md"
+      - "docs/**/*.md"
+      - "scripts/check_markdown_links.py"
+      - ".github/workflows/docs-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-audit-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  markdown-audit:
+    name: Validate canonical documentation links
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Prepare audit output
+        run: mkdir -p artifacts/docs-audit
+
+      - name: Check Markdown links in project entry documents
+        run: |
+          python scripts/check_markdown_links.py \
+            --report artifacts/docs-audit/markdown-links.txt \
+            README.md \
+            docs/README.md \
+            docs/PROJECT_STATUS_AND_EXECUTION_REGISTER.md
+
+      - name: Upload documentation audit report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: documentation-audit
+          path: artifacts/docs-audit/markdown-links.txt
+          if-no-files-found: warn
+          retention-days: 30

@@ -7,8 +7,9 @@ on:
       - "src/**/*.cs"
       - "tests/**/*.cs"
       - ".github/workflows/**"
+      - "global.json"
   pull_request:
-    branches: [main]
+    branches: [main, feature/core-lifecycle-resolution]
     paths:
       - "src/**/*.cs"
       - "tests/**/*.cs"
