@@ -14,7 +14,7 @@
 | 0.3 | `test_parity.py` 6 حالات | Domain | M | DONE `379b19df` | `parity 6/6` |
 | 0.4 | `simulate.py` استراتيجي (cooldown/capacity/range-aware, archetypes, vote vitality-aware) | Balancer | M | DONE `379b19df-2` | `sweep.csv` 3 نتائج (529/540 LastSurvivor, 9 Mutual, 2 Collective vs سابق 100% واحد) |
 | 0.5 | تنظيف `Clone()` + حد `SentAt` | Domain | S | DONE `379b19df` | `grep Clone` + `Intent SentAt` docs |
-| 0.6 | ترويسة `DECISIONS_LOG` | Governor | XS | TODO | `audit.py` — Warn مقبول (فهرس) |
+| 0.6 | ترويسة `DECISIONS_LOG` | Governor | XS | DONE `379b19df` | `audit.py` 0/0 — لا Warn |
 
 ## GATE-1 — القواعد (3أ) — فتح: بعد GATE-0
 
