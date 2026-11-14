@@ -19,6 +19,7 @@ The default branch is `main`. The implementation and consolidation work is isola
 | Unity source-package static review | PR #5 branch | Audit checkpoint | Does not claim the ZIP/binary package was uploaded |
 | P1 in-flight command completion | PR #25 — `fix/p1-inflight-command-cleanup-2026-11-14` | VERIFIED in review branch | 191 NUnit passed on its tested SHA; not merged |
 | P1.1 connection-to-session mapping | PR #26 — `fix/p1-connection-session-binding-2026-11-14` | VERIFIED in review branch | 210 NUnit passed on tested SHA; ADR-016 remains PROPOSED; not merged |
+| P1.2 credential validation / ActorId binding | ADR-017 proposal on docs branch | PROPOSED — no code | Provider, credential format and account-to-ActorId mapping require owner/security decisions |
 | Unity project and FishNet integration | Not present in reviewed tree | NOT IMPLEMENTED | Requires actual project/package files and exact-version verification |
 
 PR #6 is the consolidated Core/documentation review and supersedes PR #4, which is closed to avoid duplicate delivery. PR #5 is a separate source-package audit checkpoint. PR #2, PR #3 and PR #4 are superseded; do not continue parallel implementation on them.
@@ -104,6 +105,7 @@ Do not skip a gate to make the project appear more complete. Keep deferred syste
 3. Implement trusted transport-adapter hooks and credential validation only after the actual transport/API and identity provider are available. Do not trust client-supplied connection or session identifiers.
 4. Resolve per-ActorId multi-session policy, reconnect grace/expiry and session persistence through owner-reviewed ADR updates before implementing those policies.
 5. Define authoritative match/player aggregate ownership and gameplay command handlers after session/connection identity has been resolved.
+6. Review ADR-017 and select the identity provider, credential model and server-side account-to-ActorId assignment before starting authentication implementation.
 2. Add gameplay payload validation/application handlers after the verified authenticated-session admission gate and bounded queue.
 3. Implement movement and Debuff/atomic transfer only after their contracts and gameplay parameters are approved.
 6. Keep ADR-008 and ADR-016 PROPOSED until their production policies and integration boundaries are approved.
