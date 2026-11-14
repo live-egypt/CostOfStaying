@@ -18,6 +18,8 @@ def analyze(payload: Any) -> tuple[int, list[str]]:
     sources = payload.get("sources")
     if not isinstance(parameters, str) or "--vulnerable" not in parameters:
         raise ValueError("NuGet report was not generated with the --vulnerable filter.")
+    if "--include-transitive" not in parameters:
+        raise ValueError("NuGet report was not generated with --include-transitive; refusing a direct-only audit.")
     if not isinstance(sources, list) or not sources:
         raise ValueError("NuGet report contains no package/audit sources; refusing to assume a clean scan.")
 
@@ -111,6 +113,18 @@ def self_test() -> None:
     }
     _, clean_findings = analyze(clean)
     _, vulnerable_findings = analyze(vulnerable)
+
+    direct_only = {
+        **clean,
+        "parameters": "--vulnerable",
+    }
+    try:
+        analyze(direct_only)
+    except ValueError:
+        pass
+    else:
+        raise SystemExit("NuGet audit gate accepted a direct-only report without --include-transitive.")
+
     if clean_findings or len(vulnerable_findings) != 1:
         raise SystemExit("NuGet audit gate self-test failed.")
     print("NuGet audit gate self-test passed (clean input accepted; vulnerable input rejected).")
