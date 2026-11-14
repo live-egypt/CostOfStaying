@@ -57,6 +57,14 @@ namespace CostOfStaying.Core.Tests
             Assert.That(session.TryAuthenticate(new ActorId(7)).IsSuccess, Is.True);
             Assert.That(service.TryAdmit(envelope).ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
             Assert.That(queue.PendingCount, Is.Zero);
+
+            Assert.That(session.TryAuthenticate(new ActorId(7)).IsSuccess, Is.True);
+            Assert.That(service.TryAdmit(envelope).ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
+            Assert.That(queue.PendingCount, Is.Zero);
+
+            Assert.That(players.Register(new VitalityAccount(new ActorId(7))).IsSuccess, Is.True);
+            Assert.That(service.TryAdmit(envelope).IsSuccess, Is.True);
+            Assert.That(queue.PendingCount, Is.EqualTo(1));
         }
 
         [Test]
@@ -148,6 +156,23 @@ namespace CostOfStaying.Core.Tests
             Assert.That(service.TryAdmit(CreateEnvelope(session.SessionId, 1, "move")).IsSuccess, Is.True);
 
             Assert.That(players.Remove(actorId).IsSuccess, Is.True);
+            Assert.That(service.TryTakeNext().ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
+            Assert.That(queue.PendingCount, Is.Zero);
+        }
+
+        [Test]
+        public void TryTakeNext_RejectsCommandWhenSessionDisconnectsAfterAdmission()
+        {
+            var service = CreateService(
+                out SessionRegistry sessions,
+                out IMatchPlayerRegistry players,
+                out CommandAdmissionQueue<string> queue);
+            var actorId = new ActorId(42);
+            var session = RegisterAuthenticated(sessions, new SessionId(30), actorId);
+            players.Register(new VitalityAccount(actorId));
+            Assert.That(service.TryAdmit(CreateEnvelope(session.SessionId, 1, "move")).IsSuccess, Is.True);
+
+            Assert.That(session.TryDisconnect().IsSuccess, Is.True);
             Assert.That(service.TryTakeNext().ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
             Assert.That(queue.PendingCount, Is.Zero);
         }
