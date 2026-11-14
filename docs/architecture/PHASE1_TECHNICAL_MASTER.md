@@ -470,7 +470,7 @@ After a real Unity project and exact package lock exist, run EditMode and PlayMo
 Verification is recorded per review branch; these CI runs are independent and do not constitute one combined build:
 - Baseline run 41333575156 on source 8a193190fb5f2e10c05773fb0789171011bfd2eb: 181 passed, 0 failed, 0 skipped.
 - PR #25 run 43596902378 on source 7d82c3becf96eac338999de767770c75bc5795eb: 191 passed, 0 failed, 0 skipped; PR #25 is unmerged.
-- PR #26 run 43599420409 on tested source 95a7bc93a7fd4772f45e7dc428f7574906945061: 210 passed, 0 failed, 0 skipped; dependency-boundary and CoreComposition checks passed; both Release builds had 0 warnings and 0 errors. The current PR head 4ae4088716eb740ec736c3bea0f75727e2d6bc77 differs only by a later ADR-016 wording update.
+- PR #26 run 43599420409 on tested source 95a7bc93a7fd4772f45e7dc428f7574906945061: 210 passed, 0 failed, 0 skipped; dependency-boundary and CoreComposition checks passed; both Release builds had 0 warnings and 0 errors. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification.
 See [P1.1 CI evidence](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md). The runs verify pure-C# Core only, not combined PR integration, FishNet, credentials, production connection-ID allocation, reconnect policy, Unity or production security.
 
 ### Evidence required for VERIFIED
