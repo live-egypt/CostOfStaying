@@ -20,8 +20,13 @@ namespace CostOfStaying.Core.Tests
             }
 
             public SessionId SessionId { get; }
-            public SessionState State { get; set; }
+            public SessionState State { get; private set; }
             public ActorId? ActorId => null;
+
+            public void SimulateAuthenticatedStateWithoutActorBinding()
+            {
+                State = SessionState.Authenticated;
+            }
 
             public Result TryAuthenticate(ActorId actorId) => Result.Failure(CoreErrorCode.InvalidState);
             public Result TryDisconnect() => Result.Failure(CoreErrorCode.InvalidState);
@@ -80,8 +85,8 @@ namespace CostOfStaying.Core.Tests
             var sessions = new SessionRegistry(4);
             var queue = new CommandAdmissionQueue<string>(MaximumSequenceJump, 4, 4);
             var malformed = new MalformedAuthenticatedSession(new SessionId(10));
-            sessions.Register(malformed);
-            malformed.State = SessionState.Authenticated;
+            Assert.That(sessions.Register(malformed).IsSuccess, Is.True);
+            malformed.SimulateAuthenticatedStateWithoutActorBinding();
             var service = new CommandAdmissionService<string>(sessions, queue);
             var envelope = new CommandEnvelope<string>(malformed.SessionId, new CommandSequenceId(1), new ServerTick(0), "move");
 

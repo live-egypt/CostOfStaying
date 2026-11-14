@@ -52,6 +52,7 @@
 - [الاستجابة للحوادث](security/INCIDENT_RESPONSE.md)
 
 ## التدقيق وأدلة التحقق
+- [جرد P0 للفروع وطلبات السحب وحماية main](audit/P0_BRANCH_PR_INVENTORY_2026-11-14.md)
 - [تدقيق مصدر Phase 1 المرفوع](audit/UPLOADED_PHASE1_SOURCE_AUDIT.md)
 - [دليل تحقق Core عبر GitHub Actions](audit/PHASE1_CORE_CI_VERIFICATION.md)
 - [تدقيق تشغيل CI ومشكلات ماسحات الأمان](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md)
