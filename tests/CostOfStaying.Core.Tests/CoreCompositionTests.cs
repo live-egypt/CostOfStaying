@@ -9,6 +9,14 @@ namespace CostOfStaying.Core.Tests
     [TestFixture]
     public sealed class CoreCompositionTests
     {
+        private sealed class AllowAllTestPolicy : IMatchCommandAuthorizationPolicy<string>
+        {
+            public Result Authorize(MatchCommandAuthorizationContext<string> context)
+            {
+                return Result.Success();
+            }
+        }
+
         [Test]
         public void CoreServices_ExposeNoPublicConstructors()
         {
