@@ -43,7 +43,7 @@ jobs:
       - name: Enforce Core dependency boundary
         shell: bash
         run: |
-          if grep -R -n -E 'using (UnityEngine|FishNet)(\.|;)|UnityEngine\.|FishNet\.' src/CostOfStaying.Core --include='*.cs' --include='*.csproj'; then
+          if grep -R -n -E 'using (UnityEngine|FishNet)(\\.|;)|UnityEngine\\.|FishNet\\.' src/CostOfStaying.Core --include='*.cs' --include='*.csproj'; then
             echo "::error::Core must not reference UnityEngine or FishNet."
             exit 1
           fi
@@ -51,13 +51,13 @@ jobs:
       - name: Enforce Core composition root
         shell: bash
         run: |
-          aggregate_violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|SessionLifecycle|SessionRegistry|MatchPlayerRegistry|CommandAdmissionQueue|CommandAdmissionService|SessionCleanupService|MatchRosterSnapshotBuilder)(\(|<)' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
-          tracker_violations="$(grep -R -n -E 'new CommandSequenceTracker\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CommandAdmissionQueue.cs:' || true)"
-          cleanup_violations="$(grep -R -n -E '(ResetSession|RemoveClosedSession)\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(SessionCleanupService|CommandAdmissionQueue|SessionRegistry)\.cs:' || true)"
-          queue_access_violations="$(grep -R -n -E '\.Try(Enqueue|Dequeue)\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CommandAdmissionService.cs:' || true)"
-          snapshot_violations="$(grep -R -n -E 'new (MatchRosterSnapshot|PlayerStateSnapshot)\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'MatchRosterSnapshotBuilder.cs:' || true)"
+          aggregate_violations="$(grep -R -n -E 'new (BetrayalLedger|MatchLifecycle|VitalityAccount|SessionLifecycle|SessionRegistry|ConnectionSessionRegistry|MatchPlayerRegistry|CommandAdmissionQueue|CommandAdmissionService|SessionCleanupService|ConnectionAwareSessionCleanupService|MatchRosterSnapshotBuilder)(\\(|<)' src/CostOfStaying.Core --include='*.cs' | grep -v 'CoreComposition.cs:' || true)"
+          tracker_violations="$(grep -R -n -E 'new CommandSequenceTracker\\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CommandAdmissionQueue.cs:' || true)"
+          cleanup_violations="$(grep -R -n -E '(ResetSession|RemoveClosedSession)\\(' src/CostOfStaying.Core --include='*.cs' | grep -v -E '(SessionCleanupService|CommandAdmissionQueue|SessionRegistry)\\.cs:' || true)"
+          queue_access_violations="$(grep -R -n -E '\\.Try(Enqueue|Dequeue)\\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'CommandAdmissionService.cs:' || true)"
+          snapshot_violations="$(grep -R -n -E 'new (MatchRosterSnapshot|PlayerStateSnapshot)\\(' src/CostOfStaying.Core --include='*.cs' | grep -v 'MatchRosterSnapshotBuilder.cs:' || true)"
           if [ -n "$aggregate_violations$tracker_violations$cleanup_violations$queue_access_violations$snapshot_violations" ]; then
-            printf '%s\n%s\n%s\n%s\n%s\n' "$aggregate_violations" "$tracker_violations" "$cleanup_violations" "$queue_access_violations" "$snapshot_violations"
+            printf '%s\\n%s\\n%s\\n%s\\n%s\\n' "$aggregate_violations" "$tracker_violations" "$cleanup_violations" "$queue_access_violations" "$snapshot_violations"
             echo "::error::Core construction must be centralized in CoreComposition; command queue access, session cleanup and snapshot construction must use their designated services."
             exit 1
           fi
