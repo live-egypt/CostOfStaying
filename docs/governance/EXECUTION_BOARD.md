@@ -42,7 +42,7 @@
 | 3.1 | نقل Domain→Core + NetArchTest (Core+BetrayalLedger+boundary) | Architect | L | DONE `379b19df` — جزئي: Core project + BetrayalLedger (ADR-006) + boundary tests | 242 tests |
 
 
-| 3.2 | NetworkAdapter + Envelope | Net Sage | M | TODO | adapter tests |
+| 3.2 | NetworkAdapter + Envelope (ADR-008 Sequence) | Net Sage | M | DONE `379b19df` — CommandEnvelope + SequenceValidator 4 tests | adapter tests |
 | 3.3 | DedicatedServer + Snapshot + إعادة اتصال | Net Sage | L | TODO | server log |
 | 3.4 | AuthZ + Payload fail-closed (IntentValidator) | Sentinel | M | DONE `379b19df` | `IntentValidator.cs` + `THREAT_MODEL` + `NETWORK_ARCH` حدود موثوقة |
 | 3.5 | اختبارات RTT/loss/jitter | Verifier | M | TODO | net_tests.log |
