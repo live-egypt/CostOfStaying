@@ -1,5 +1,6 @@
 namespace CostOfStaying.Core
 {
+    using System;
     using CostOfStaying.Core.Contracts;
     using CostOfStaying.Core.Domain;
     using CostOfStaying.Core.Services;
@@ -71,6 +72,14 @@ namespace CostOfStaying.Core
             CommandAdmissionQueue<TCommand> queue,
             IConnectionSessionRegistry connections)
         {
+            if (!(connections is ConnectionSessionRegistry connectionRegistry) ||
+                !connectionRegistry.IsBackedBy(sessions))
+            {
+                throw new ArgumentException(
+                    "Connection registry must use the same SessionRegistry instance as cleanup.",
+                    nameof(connections));
+            }
+
             ISessionCleanupService<TCommand> inner = new SessionCleanupService<TCommand>(sessions, queue);
             return new ConnectionAwareSessionCleanupService<TCommand>(inner, connections);
         }
