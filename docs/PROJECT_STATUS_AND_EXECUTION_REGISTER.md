@@ -23,6 +23,7 @@ The default branch is `main`. The implementation and consolidation work is isola
 | P1.3 match roster command admission | PR #28 — `fix/p1-match-membership-command-admission-2026-11-14` | VERIFIED in review branch | Core CI run 43601883483; 222 tests passed; ADR-018 PROPOSED; not merged |
 | P1.4 match command authorization boundary | PR #29 — `fix/p1-command-authorization-gate-2026-11-14` | VERIFIED in review branch | Core CI run 43602883504; 234 tests passed; ADR-019 PROPOSED; no gameplay policy approved; not merged |
 | P2.1 typed command payload validation gate | PR #31 — `fix/p2-command-payload-validation-gate-2026-11-14` | VERIFIED in review branch | Core CI run 43603511612; 242 tests passed; ADR-020 PROPOSED; concrete command DTOs and transport parsing limits not implemented; not merged |
+| P2.2 typed gameplay command catalog | PR #32 / ADR-021 | PROPOSED — documentation only | Candidate intent families catalogued; DTO fields, wire version, serializer and limits require owner review |
 | Unity project and FishNet integration | Not present in reviewed tree | NOT IMPLEMENTED | Requires actual project/package files and exact-version verification |
 
 PR #6 is the consolidated Core/documentation review and supersedes PR #4, which is closed to avoid duplicate delivery. PR #5 is a separate source-package audit checkpoint. PR #2, PR #3 and PR #4 are superseded; do not continue parallel implementation on them.
@@ -111,7 +112,8 @@ Do not skip a gate to make the project appear more complete. Keep deferred syste
 6. Review ADR-017 and select the identity provider, credential model and server-side account-to-ActorId assignment before starting authentication implementation.
 7. Review PR #28's verified match-roster membership gate and PR #29's verified generic authorization boundary.
 8. Approve command taxonomy and the MatchPhase × PlayerLifecycleState permission matrix before creating a concrete application policy; ADR-004 remains PROPOSED FOR PLAYTEST.
-9. Define immutable/versioned typed DTOs for Movement, Attack, Suffering Transfer, Vote and Spirit intents only after field ownership, identifiers and size/range constraints are reviewed. Keep transport raw-frame/serialization quotas separate from Core typed-payload validation.
+9. Review ADR-021's candidate command catalog and approve MVP command family scope before defining concrete typed DTOs.
+10. For each approved DTO, define immutable/versioned fields, field ownership, identifiers, units, static size/range limits and validator tests. Keep raw-frame/serialization quotas in the transport adapter, separate from Core typed-payload validation.
 2. Add gameplay payload validation/application handlers after the verified authenticated-session admission gate and bounded queue.
 3. Implement movement and Debuff/atomic transfer only after their contracts and gameplay parameters are approved.
 6. Keep ADR-008 and ADR-016 PROPOSED until their production policies and integration boundaries are approved.
