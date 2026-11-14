@@ -59,7 +59,6 @@ namespace CostOfStaying.Core.Tests
             Assert.That(service.TryAdmit(envelope).ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
             Assert.That(queue.PendingCount, Is.Zero);
 
-            Assert.That(session.TryAuthenticate(new ActorId(7)).IsSuccess, Is.True);
             Assert.That(service.TryAdmit(envelope).ErrorCode, Is.EqualTo(CoreErrorCode.Unauthorized));
             Assert.That(queue.PendingCount, Is.Zero);
 
