@@ -1,5 +1,5 @@
 # سجل القرارات — v2.1
-**آخر مراجعة: 2026-11-14**
+**الحالة: PROPOSED | آخر مراجعة: 2026-11-14 | فهرس لا يرفع حالات**
 
 هذا الفهرس يعكس ملفات ADR الفعلية. الحالة هنا لا تتجاوز حالة الملف. التنظيم في [DOCUMENT_GOVERNANCE.md](DOCUMENT_GOVERNANCE.md). حسم التعارضات التحريرية في [CONFLICT_RESOLUTIONS.md](CONFLICT_RESOLUTIONS.md).
 

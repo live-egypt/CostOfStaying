@@ -230,35 +230,80 @@ class MatchSim:
             p.next_collapse_at = self.now + ratio * new_iv
             p.last_interval = new_iv
 
+def _threat_score(player, cfg):
+    """Urgency 0..1 — higher = more incentive to transfer (Balancer heuristic)."""
+    vitality_pressure = max(0.0, (1.0 - player.vitality / cfg["startingVitality"]))
+    deb = player.last_transferable()
+    debuff_threat = 0.0
+    if deb:
+        # bonus * remaining normalized (max 0.05*30=1.5 → cap 1.0)
+        debuff_threat = min(1.0, (deb["bonus"] * deb["remaining"]) / 1.5)
+    # mix 60% vitality + 40% debuff
+    base = vitality_pressure * 0.6 + debuff_threat * 0.4
+    # betrayal hesitation: -0.05 per betrayal point beyond 3 (soft)
+    if player.betrayal > 3:
+        base = max(0.0, base - (player.betrayal - 3) * 0.04)
+    return max(0.0, min(1.0, base))
+
 def run_match(cfg, seed=0, random_transfers=True, random_votes=True):
     m = MatchSim(cfg, seed)
     dt = 1.0 / cfg["tickHz"]
-    # Simulate up to time limit + vote
     max_steps = int((cfg["matchTimeLimitSeconds"] + 60) * cfg["tickHz"]) + 1000
     last_alive = m.alive_count()
     transfer_counter = 0
+    # Archetype per player: survivor (dump to healthiest) vs predator (target weakest) — GATE-0.4
+    archetypes = {pid: m.rng.choice(["survivor", "predator"]) for pid in m.players}
 
     for step in range(max_steps):
-        # Random transfer attempts (server validates everything)
-        if random_transfers and m.rng.random() < 0.08:  # ~8% per tick
-            alive_ids = [pid for pid, p in m.players.items() if p.state == "Alive" and p.last_transferable()]
-            if len(alive_ids) >= 2:
-                src = m.rng.choice(alive_ids)
-                # pick different alive target
-                candidates = [pid for pid in m.players if m.players[pid].state == "Alive" and pid != src]
-                if candidates:
-                    tgt = m.rng.choice(candidates)
-                    dist = m.rng.uniform(0.5, 3.0)
+        # Strategic transfer attempts — cooldown-aware, capacity-aware (GATE-0.4)
+        if random_transfers:
+            # Evaluate candidates that are ready (cooldown expired + have debuff)
+            ready = []
+            for pid, p in m.players.items():
+                if p.state != "Alive" or not p.last_transferable():
+                    continue
+                if m.now - p.last_transfer_at < cfg["transferCooldownSeconds"] - 1e-9:
+                    continue  # cooldown-aware: skip without wasting request
+                score = _threat_score(p, cfg)
+                # capacity-aware pre-check: at least one target has space
+                has_space = any(len(m.players[t].debuffs) < cfg["maxActiveDebuffs"] for t in m.players if t != pid and m.players[t].state == "Alive")
+                if not has_space:
+                    score *= 0.2  # deprioritize if no capacity
+                if score > 0.25:
+                    ready.append((score, pid))
+            # Sort by urgency descending; attempt at most 1 per tick weighted by threat
+            ready.sort(reverse=True)
+            for score, src in ready:
+                # Threat-proportional attempt probability: 0.3 base + 0.5*score
+                if m.rng.random() < (0.30 + 0.45 * score):
+                    candidates = [pid for pid in m.players if m.players[pid].state == "Alive" and pid != src and len(m.players[pid].debuffs) < cfg["maxActiveDebuffs"]]
+                    if not candidates:
+                        continue
+                    # Archetype chooses target: survivor→healthiest, predator→weakest
+                    if archetypes[src] == "predator":
+                        tgt = min(candidates, key=lambda x: m.players[x].vitality)
+                    else:
+                        tgt = max(candidates, key=lambda x: m.players[x].vitality)
+                    # Range-aware: strategic picks in-range 85% of time
+                    if m.rng.random() < 0.85:
+                        dist = m.rng.uniform(0.8, 1.8)  # within 2.0m
+                    else:
+                        dist = m.rng.uniform(2.1, 3.0)  # out-of-range (test rejection path)
                     req = f"req-{transfer_counter}"
                     transfer_counter += 1
                     m.try_transfer(src, tgt, dist, req)
+                    break  # at most 1 strategic transfer per tick
 
-        # Random vote choices when vote open
+        # Strategic vote choices when vote open — vitality-aware (GATE-0.4)
         if random_votes and m.vote_open:
             for pid in list(m.votes.keys()):
-                if m.votes[pid] == "Abstain" and m.rng.random() < 0.3:
-                    # 70% Yes bias for testing unanimous path
-                    m.votes[pid] = "Yes" if m.rng.random() < 0.7 else "No"
+                if m.votes[pid] != "Abstain":
+                    continue
+                # Low-vitality players more desperate → Yes bias; healthy → No bias
+                v = m.players[pid].vitality
+                yes_bias = 0.65 if v < 40 else (0.45 if v < 70 else 0.25)
+                if m.rng.random() < 0.35:  # decision rate per tick
+                    m.votes[pid] = "Yes" if m.rng.random() < yes_bias else "No"
 
         m.tick(dt)
 

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Core strict kernel — inherits LangVersion 9.0 from Directory.Build.props (GATE-3.1) -->
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>CostOfStaying.Core</RootNamespace>
+    <AssemblyName>CostOfStaying.Core</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Transplant: Core re-uses Domain RULE-01..05 as library (ADR-021) — no duplication yet -->
+    <ProjectReference Include="..\CostOfStaying.Domain\CostOfStaying.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

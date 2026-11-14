@@ -74,6 +74,7 @@
 | `architecture/NETWORK_ARCHITECTURE.md` | معمارية | PROPOSED |
 | `architecture/BACKEND_AND_HOSTING.md` | معمارية | PROPOSED |
 | `architecture/DATA_ARCHITECTURE.md` | معمارية | PROPOSED |
+| `architecture/STACK_COMPARISON.md` | معمارية | PROPOSED — مقارنة FishNet/NGO/Mirror (GATE-2.1) |
 | `architecture/DEPLOYMENT_ARCHITECTURE.md` | معمارية | PROPOSED |
 | `architecture/DOMAIN_CORE.md` | معمارية / تنفيذ | PROPOSED |
 | `security/SECURITY_ARCHITECTURE.md` | أمن | PROPOSED |
@@ -84,6 +85,10 @@
 | `security/INCIDENT_RESPONSE.md` | أمن | PROPOSED |
 | `quality/TEST_STRATEGY.md` | جودة | PROPOSED |
 | `quality/SECURITY_TEST_PLAN.md` | جودة | PROPOSED |
+| `quality/playtest/scenarios/README.md` | جودة / اختبار | PROPOSED — فهرس 3 سيناريوهات |
+| `quality/playtest/scenarios/01-social-pressure.md` | جودة / اختبار | PROPOSED — سيناريو ضغط اجتماعي |
+| `quality/playtest/scenarios/02-tactical-tradeoff.md` | جودة / اختبار | PROPOSED — مقايضة تكتيكية |
+| `quality/playtest/scenarios/03-spirit-witness.md` | جودة / اختبار | PROPOSED — شاهد الروح |
 | `quality/PLAYTEST_PLAN.md` | جودة | PROPOSED |
 | `quality/BALANCE_RISK_REVIEW.md` | جودة | PROPOSED |
 | `quality/PERFORMANCE_BUDGET.md` | جودة | PROPOSED |

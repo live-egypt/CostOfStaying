@@ -323,10 +323,9 @@ namespace CostOfStaying.Domain
                 return TransferResult.RejectedTargetFull;
             }
 
-            // ---- Atomic move ----
+            // ---- Atomic move (uses Debuff.Clone to preserve remaining duration) ----
             source.Debuffs.Remove(candidate);
-            // Preserve remaining duration and bonus
-            var moved = new Debuff(candidate.Id, candidate.DecayBonusPerSecond, candidate.RemainingSeconds, candidate.Transferable);
+            var moved = candidate.Clone();
             target.Debuffs.Add(moved);
 
             source.BetrayalPoints += 1;

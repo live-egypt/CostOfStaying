@@ -22,6 +22,7 @@
 
 ## المعمارية
 - [المعمارية التقنية](architecture/TECHNICAL_ARCHITECTURE.md)
+- [مقارنة التكدس FishNet/NGO/Mirror](architecture/STACK_COMPARISON.md) — جديد GATE-2.1
 - [معمارية الشبكة](architecture/NETWORK_ARCHITECTURE.md)
 - [Backend والاستضافة](architecture/BACKEND_AND_HOSTING.md)
 - [معمارية البيانات](architecture/DATA_ARCHITECTURE.md)
@@ -40,6 +41,10 @@
 - [استراتيجية الاختبار](quality/TEST_STRATEGY.md)
 - [خطة الاختبارات الأمنية](quality/SECURITY_TEST_PLAN.md)
 - [خطة اختبار اللعب](quality/PLAYTEST_PLAN.md)
+- [سيناريوهات Playtest — فهرس](quality/playtest/scenarios/README.md)
+- [سيناريوهات Playtest — 01 ضغط اجتماعي](quality/playtest/scenarios/01-social-pressure.md)
+- [سيناريوهات Playtest — 02 مقايضة تكتيكية](quality/playtest/scenarios/02-tactical-tradeoff.md)
+- [سيناريوهات Playtest — 03 شاهد الروح](quality/playtest/scenarios/03-spirit-witness.md)
 - [مراجعة مخاطر التوازن](quality/BALANCE_RISK_REVIEW.md)
 - [ميزانية الأداء](quality/PERFORMANCE_BUDGET.md)
 - [بروتوكول قياس الأداء](quality/PERFORMANCE_TEST_PROTOCOL.md)
