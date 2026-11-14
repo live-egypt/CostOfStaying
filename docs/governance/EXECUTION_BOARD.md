@@ -12,7 +12,7 @@
 | 0.1 | قفل `Directory.Build.props` 9.0 + WarnAsError | Architect | S | DONE `cb57b25`→`379b19df` | `dotnet build` log |
 | 0.2 | `dependabot.yml` + SHA-pin (منجز) | DevOps | S | DONE `4294eff`→`379b19df` | `ci.yml` + `dependabot.yml` |
 | 0.3 | `test_parity.py` 6 حالات | Domain | M | DONE `379b19df` | `parity 6/6` |
-| 0.4 | `simulate.py` استراتيجي | Balancer | M | TODO | `sweep.json` |
+| 0.4 | `simulate.py` استراتيجي (cooldown/capacity/range-aware, archetypes, vote vitality-aware) | Balancer | M | DONE `379b19df-2` | `sweep.csv` 3 نتائج (529/540 LastSurvivor, 9 Mutual, 2 Collective vs سابق 100% واحد) |
 | 0.5 | تنظيف `Clone()` + حد `SentAt` | Domain | S | DONE `379b19df` | `grep Clone` + `Intent SentAt` docs |
 | 0.6 | ترويسة `DECISIONS_LOG` | Governor | XS | TODO | `audit.py` — Warn مقبول (فهرس) |
 
