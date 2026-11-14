@@ -1,0 +1,31 @@
+# Build artifacts
+bin/
+obj/
+TestResults/
+*.user
+*.suo
+.vs/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Tools output (kept in repo only when explicitly committed as evidence)
+# /docs/quality/playtest-logs/*.json is evidence when committed with report
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets — never commit
+.env
+*.pem
+*.key
+secrets.json
+appsettings.Production.json
+
+# Vendor scanner caches
+.codeql/

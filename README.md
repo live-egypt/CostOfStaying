@@ -7,10 +7,10 @@
 ## الحالة الحالية
 - المنصة المستهدفة أولاً: Android.
 - نطاق MVP: مباراة مكتملة لأربعة لاعبين وخريطة واحدة.
-- حالة التنفيذ: لا يوجد كود لعبة أو Unity project أو Dedicated Server أو اختبارات منفذة.
+- حالة التنفيذ: النواة المجردة `src/CostOfStaying.Domain` واختباراتها ومحاكي التوازن وأداة Playtest منفذة كـ **PROPOSED** على فرع `arena/4bfc0882-costofstaying` (انظر `docs/architecture/DOMAIN_CORE.md` وADR-005). لا Unity project ولا Dedicated Server ولا Android build بعد؛ لا بند VERIFIED قبل CI أخضر على GitHub.
 - حالة قواعد اللعب: خط أساس PROPOSED FOR PLAYTEST، وليس اعتماداً نهائياً.
 - حالة التكدس التقني: PROPOSED، باستثناء مبدأ سلطة الخادم المعتمد تصميمياً وغير المنفذ.
-- قوالب الفحص في `.github/workflows` يدوية فقط وليست CI منفذاً.
+- الفحص الآلي: `ci.yml` يعمل عند كل push/PR (تدقيق وثائق + بناء واختبار النواة + محاكاة + فحص أسرار)؛ بقية القوالب تبقى يدوية فقط.
 
 ## نقطة البداية
 ابدأ من [فهرس الوثائق](docs/README.md) و[حوكمة الوثائق](docs/governance/DOCUMENT_GOVERNANCE.md) و[سجل حل التعارض](docs/governance/CONFLICT_RESOLUTIONS.md)، ثم [ميثاق المشروع](docs/00_PROJECT_CHARTER.md) و[قواعد اللعبة](docs/02_GAME_RULES_SPECIFICATION.md).

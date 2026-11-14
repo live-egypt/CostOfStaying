@@ -57,6 +57,8 @@
 - [ADR-002: سلطة الخادم](governance/adr/ADR-002-SERVER-AUTHORITY.md)
 - [ADR-003: Backend والاستضافة](governance/adr/ADR-003-BACKEND-AND-HOSTING.md)
 - [ADR-004: خط أساس قواعد اللعب](governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md)
+- [ADR-005: CI والنواة المجردة](governance/adr/ADR-005-CI-AND-DOMAIN-CORE.md)
+- [النواة المجردة Domain Core](architecture/DOMAIN_CORE.md)
 - [نطاق MVP](roadmap/MVP_SCOPE.md)
 - [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)

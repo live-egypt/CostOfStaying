@@ -90,8 +90,10 @@
 | `governance/adr/ADR-002-SERVER-AUTHORITY.md` | قرار | APPROVED كمبدأ / NOT IMPLEMENTED |
 | `governance/adr/ADR-003-BACKEND-AND-HOSTING.md` | قرار | PROPOSED |
 | `governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md` | قرار | PROPOSED FOR PLAYTEST |
+| `governance/adr/ADR-005-CI-AND-DOMAIN-CORE.md` | قرار | PROPOSED |
+| `architecture/DOMAIN_CORE.md` | معمارية | PROPOSED |
 | `roadmap/MVP_SCOPE.md` | تسليم | PROPOSED |
 | `roadmap/ACCEPTANCE_CRITERIA.md` | تسليم | PROPOSED |
 | `roadmap/DELIVERY_PLAN.md` | تسليم | PROPOSED |
 
-لا كود لعبة ولا خادم ولا اختبار منفذ. ملفات `.github/workflows` قوالب متوقفة على `workflow_dispatch` وليست دليل فحص ناجح.
+النواة المجردة وCI منفذان في `src/CostOfStaying.Domain` و`.github/workflows/ci.yml` على فرع `arena/4bfc0882-costofstaying` بحالة PROPOSED بانتظار CI أخضر. ملفات `.github/workflows` الأخرى تبقى قوالب موردين متوقفة على `workflow_dispatch` وليست دليل فحص ناجح.

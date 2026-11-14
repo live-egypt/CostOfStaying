@@ -1,0 +1,869 @@
+{
+  "session_id": "sim-20261114-014833-09",
+  "preset": "default",
+  "seed": 9,
+  "started_at": "20261114-014833",
+  "duration_seconds": 338.3,
+  "outcome": "LastSurvivor",
+  "winner": "P3",
+  "death_times": [
+    331.2,
+    335.5,
+    338.3
+  ],
+  "transfers": 92,
+  "collapses": 64,
+  "voted": true,
+  "players": [
+    {
+      "id": "P0",
+      "state": "Spirit",
+      "vitality": 0,
+      "betrayal": 23,
+      "debuffs": 0
+    },
+    {
+      "id": "P1",
+      "state": "Spirit",
+      "vitality": 0,
+      "betrayal": 20,
+      "debuffs": 1
+    },
+    {
+      "id": "P2",
+      "state": "Spirit",
+      "vitality": 0,
+      "betrayal": 22,
+      "debuffs": 1
+    },
+    {
+      "id": "P3",
+      "state": "Alive",
+      "vitality": 1.19,
+      "betrayal": 27,
+      "debuffs": 2
+    }
+  ],
+  "events": [
+    {
+      "t": 20.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 20.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 20.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 20.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 20.2,
+      "kind": "transfer",
+      "detail": "P2->P3 collapse-20.0-P2"
+    },
+    {
+      "t": 20.4,
+      "kind": "transfer",
+      "detail": "P0->P2 collapse-20.0-P0"
+    },
+    {
+      "t": 27.7,
+      "kind": "transfer",
+      "detail": "P3->P1 collapse-20.0-P2"
+    },
+    {
+      "t": 28.6,
+      "kind": "transfer",
+      "detail": "P1->P2 collapse-20.0-P2"
+    },
+    {
+      "t": 32.0,
+      "kind": "transfer",
+      "detail": "P2->P1 collapse-20.0-P2"
+    },
+    {
+      "t": 35.0,
+      "kind": "transfer",
+      "detail": "P3->P2 collapse-20.0-P3"
+    },
+    {
+      "t": 38.1,
+      "kind": "transfer",
+      "detail": "P1->P3 collapse-20.0-P2"
+    },
+    {
+      "t": 38.6,
+      "kind": "transfer",
+      "detail": "P2->P3 collapse-20.0-P3"
+    },
+    {
+      "t": 40.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 40.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 40.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 40.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 43.7,
+      "kind": "transfer",
+      "detail": "P3->P0 collapse-40.0-P3"
+    },
+    {
+      "t": 44.3,
+      "kind": "transfer",
+      "detail": "P2->P3 collapse-40.0-P2"
+    },
+    {
+      "t": 50.2,
+      "kind": "transfer",
+      "detail": "P1->P2 collapse-40.0-P1"
+    },
+    {
+      "t": 51.0,
+      "kind": "transfer",
+      "detail": "P3->P1 collapse-40.0-P2"
+    },
+    {
+      "t": 57.4,
+      "kind": "transfer",
+      "detail": "P0->P2 collapse-40.0-P3"
+    },
+    {
+      "t": 59.7,
+      "kind": "transfer",
+      "detail": "P2->P3 collapse-40.0-P3"
+    },
+    {
+      "t": 60.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 60.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 60.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 60.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 61.0,
+      "kind": "transfer",
+      "detail": "P1->P3 collapse-60.0-P1"
+    },
+    {
+      "t": 65.9,
+      "kind": "transfer",
+      "detail": "P0->P1 collapse-60.0-P0"
+    },
+    {
+      "t": 67.4,
+      "kind": "transfer",
+      "detail": "P3->P0 collapse-60.0-P1"
+    },
+    {
+      "t": 67.7,
+      "kind": "transfer",
+      "detail": "P2->P1 collapse-60.0-P2"
+    },
+    {
+      "t": 71.1,
+      "kind": "transfer",
+      "detail": "P0->P2 collapse-60.0-P1"
+    },
+    {
+      "t": 72.5,
+      "kind": "transfer",
+      "detail": "P1->P3 collapse-60.0-P2"
+    },
+    {
+      "t": 75.5,
+      "kind": "transfer",
+      "detail": "P3->P2 collapse-60.0-P2"
+    },
+    {
+      "t": 80.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 80.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 80.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 80.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 80.9,
+      "kind": "transfer",
+      "detail": "P3->P0 collapse-80.0-P3"
+    },
+    {
+      "t": 82.0,
+      "kind": "transfer",
+      "detail": "P2->P1 collapse-80.0-P2"
+    },
+    {
+      "t": 89.0,
+      "kind": "transfer",
+      "detail": "P1->P3 collapse-80.0-P2"
+    },
+    {
+      "t": 89.2,
+      "kind": "transfer",
+      "detail": "P0->P1 collapse-80.0-P3"
+    },
+    {
+      "t": 94.7,
+      "kind": "transfer",
+      "detail": "P3->P1 collapse-80.0-P2"
+    },
+    {
+      "t": 97.6,
+      "kind": "transfer",
+      "detail": "P0->P2 collapse-80.0-P0"
+    },
+    {
+      "t": 100.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 100.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 100.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 100.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 100.1,
+      "kind": "transfer",
+      "detail": "P1->P0 collapse-80.0-P2"
+    },
+    {
+      "t": 101.2,
+      "kind": "transfer",
+      "detail": "P2->P1 collapse-100.0-P2"
+    },
+    {
+      "t": 105.2,
+      "kind": "transfer",
+      "detail": "P3->P2 collapse-100.0-P3"
+    },
+    {
+      "t": 109.2,
+      "kind": "transfer",
+      "detail": "P1->P2 collapse-100.0-P2"
+    },
+    {
+      "t": 110.0,
+      "kind": "transfer",
+      "detail": "P2->P3 collapse-100.0-P2"
+    },
+    {
+      "t": 115.6,
+      "kind": "transfer",
+      "detail": "P0->P3 collapse-100.0-P0"
+    },
+    {
+      "t": 120.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 120.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 120.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 120.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 120.3,
+      "kind": "transfer",
+      "detail": "P3->P2 collapse-120.0-P3"
+    },
+    {
+      "t": 124.2,
+      "kind": "transfer",
+      "detail": "P0->P3 collapse-120.0-P0"
+    },
+    {
+      "t": 131.1,
+      "kind": "transfer",
+      "detail": "P1->P2 collapse-120.0-P1"
+    },
+    {
+      "t": 134.5,
+      "kind": "transfer",
+      "detail": "P3->P0 collapse-120.0-P0"
+    },
+    {
+      "t": 138.1,
+      "kind": "transfer",
+      "detail": "P2->P3 collapse-120.0-P1"
+    },
+    {
+      "t": 140.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 140.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 140.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 140.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 143.4,
+      "kind": "transfer",
+      "detail": "P0->P3 collapse-140.0-P0"
+    },
+    {
+      "t": 147.5,
+      "kind": "transfer",
+      "detail": "P2->P1 collapse-140.0-P2"
+    },
+    {
+      "t": 150.0,
+      "kind": "transfer",
+      "detail": "P1->P2 collapse-140.0-P2"
+    },
+    {
+      "t": 152.5,
+      "kind": "transfer",
+      "detail": "P3->P1 collapse-140.0-P0"
+    },
+    {
+      "t": 157.9,
+      "kind": "transfer",
+      "detail": "P2->P3 collapse-140.0-P2"
+    },
+    {
+      "t": 158.9,
+      "kind": "transfer",
+      "detail": "P3->P0 collapse-140.0-P2"
+    },
+    {
+      "t": 160.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 160.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 160.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 160.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 163.4,
+      "kind": "transfer",
+      "detail": "P1->P2 collapse-160.0-P1"
+    },
+    {
+      "t": 165.9,
+      "kind": "transfer",
+      "detail": "P2->P0 collapse-160.0-P1"
+    },
+    {
+      "t": 167.3,
+      "kind": "transfer",
+      "detail": "P3->P2 collapse-160.0-P3"
+    },
+    {
+      "t": 171.4,
+      "kind": "transfer",
+      "detail": "P2->P3 collapse-160.0-P3"
+    },
+    {
+      "t": 172.1,
+      "kind": "transfer",
+      "detail": "P0->P3 collapse-160.0-P1"
+    },
+    {
+      "t": 172.9,
+      "kind": "transfer",
+      "detail": "P3->P1 collapse-160.0-P1"
+    },
+    {
+      "t": 180.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 180.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 180.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 180.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 183.8,
+      "kind": "transfer",
+      "detail": "P1->P2 collapse-180.0-P1"
+    },
+    {
+      "t": 190.9,
+      "kind": "transfer",
+      "detail": "P2->P0 collapse-180.0-P1"
+    },
+    {
+      "t": 191.1,
+      "kind": "transfer",
+      "detail": "P3->P0 collapse-180.0-P3"
+    },
+    {
+      "t": 194.5,
+      "kind": "transfer",
+      "detail": "P0->P3 collapse-180.0-P3"
+    },
+    {
+      "t": 199.9,
+      "kind": "transfer",
+      "detail": "P0->P1 collapse-180.0-P1"
+    },
+    {
+      "t": 200.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 200.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 200.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 200.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 200.5,
+      "kind": "transfer",
+      "detail": "P2->P3 collapse-200.0-P2"
+    },
+    {
+      "t": 203.1,
+      "kind": "transfer",
+      "detail": "P1->P2 collapse-200.0-P1"
+    },
+    {
+      "t": 203.4,
+      "kind": "transfer",
+      "detail": "P3->P1 collapse-200.0-P2"
+    },
+    {
+      "t": 205.1,
+      "kind": "transfer",
+      "detail": "P0->P2 collapse-200.0-P0"
+    },
+    {
+      "t": 215.9,
+      "kind": "transfer",
+      "detail": "P2->P3 collapse-200.0-P0"
+    },
+    {
+      "t": 218.6,
+      "kind": "transfer",
+      "detail": "P3->P0 collapse-200.0-P0"
+    },
+    {
+      "t": 220.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 220.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 220.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 220.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 221.4,
+      "kind": "transfer",
+      "detail": "P2->P0 collapse-220.0-P2"
+    },
+    {
+      "t": 223.6,
+      "kind": "transfer",
+      "detail": "P0->P2 collapse-220.0-P2"
+    },
+    {
+      "t": 225.7,
+      "kind": "transfer",
+      "detail": "P3->P0 collapse-220.0-P3"
+    },
+    {
+      "t": 230.5,
+      "kind": "transfer",
+      "detail": "P0->P1 collapse-220.0-P3"
+    },
+    {
+      "t": 238.8,
+      "kind": "transfer",
+      "detail": "P1->P2 collapse-220.0-P3"
+    },
+    {
+      "t": 239.0,
+      "kind": "transfer",
+      "detail": "P2->P3 collapse-220.0-P3"
+    },
+    {
+      "t": 240.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 240.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 240.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 240.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 240.4,
+      "kind": "transfer",
+      "detail": "P0->P1 collapse-240.0-P0"
+    },
+    {
+      "t": 243.9,
+      "kind": "transfer",
+      "detail": "P3->P0 collapse-240.0-P3"
+    },
+    {
+      "t": 248.2,
+      "kind": "transfer",
+      "detail": "P1->P3 collapse-240.0-P0"
+    },
+    {
+      "t": 250.9,
+      "kind": "transfer",
+      "detail": "P0->P1 collapse-240.0-P3"
+    },
+    {
+      "t": 255.0,
+      "kind": "transfer",
+      "detail": "P3->P1 collapse-240.0-P0"
+    },
+    {
+      "t": 256.8,
+      "kind": "transfer",
+      "detail": "P1->P0 collapse-240.0-P0"
+    },
+    {
+      "t": 259.4,
+      "kind": "transfer",
+      "detail": "P2->P1 collapse-240.0-P2"
+    },
+    {
+      "t": 260.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 260.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 260.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 260.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 260.0,
+      "kind": "transfer",
+      "detail": "P0->P2 collapse-260.0-P0"
+    },
+    {
+      "t": 265.6,
+      "kind": "transfer",
+      "detail": "P3->P2 collapse-260.0-P3"
+    },
+    {
+      "t": 266.1,
+      "kind": "transfer",
+      "detail": "P2->P0 collapse-260.0-P3"
+    },
+    {
+      "t": 268.1,
+      "kind": "transfer",
+      "detail": "P0->P2 collapse-260.0-P3"
+    },
+    {
+      "t": 280.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 280.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 280.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 280.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 280.9,
+      "kind": "transfer",
+      "detail": "P3->P0 collapse-280.0-P3"
+    },
+    {
+      "t": 282.1,
+      "kind": "transfer",
+      "detail": "P1->P0 collapse-280.0-P1"
+    },
+    {
+      "t": 283.1,
+      "kind": "transfer",
+      "detail": "P0->P3 collapse-280.0-P1"
+    },
+    {
+      "t": 289.6,
+      "kind": "transfer",
+      "detail": "P3->P0 collapse-280.0-P1"
+    },
+    {
+      "t": 300.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 300.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 300.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 300.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 302.0,
+      "kind": "transfer",
+      "detail": "P3->P1 collapse-300.0-P3"
+    },
+    {
+      "t": 311.4,
+      "kind": "transfer",
+      "detail": "P1->P0 collapse-300.0-P3"
+    },
+    {
+      "t": 315.3,
+      "kind": "transfer",
+      "detail": "P0->P2 collapse-300.0-P3"
+    },
+    {
+      "t": 315.7,
+      "kind": "transfer",
+      "detail": "P2->P0 collapse-300.0-P3"
+    },
+    {
+      "t": 317.7,
+      "kind": "transfer",
+      "detail": "P1->P3 collapse-300.0-P1"
+    },
+    {
+      "t": 319.6,
+      "kind": "transfer",
+      "detail": "P3->P1 collapse-300.0-P1"
+    },
+    {
+      "t": 320.0,
+      "kind": "collapse",
+      "detail": "P0"
+    },
+    {
+      "t": 320.0,
+      "kind": "collapse",
+      "detail": "P1"
+    },
+    {
+      "t": 320.0,
+      "kind": "collapse",
+      "detail": "P2"
+    },
+    {
+      "t": 320.0,
+      "kind": "collapse",
+      "detail": "P3"
+    },
+    {
+      "t": 327.8,
+      "kind": "transfer",
+      "detail": "P1->P0 collapse-320.0-P1"
+    },
+    {
+      "t": 328.8,
+      "kind": "transfer",
+      "detail": "P0->P3 collapse-320.0-P1"
+    },
+    {
+      "t": 331.2,
+      "kind": "died",
+      "detail": "P2"
+    },
+    {
+      "t": 331.2,
+      "kind": "vote_open",
+      "detail": "None"
+    },
+    {
+      "t": 332.3,
+      "kind": "transfer",
+      "detail": "P3->P1 collapse-320.0-P1"
+    },
+    {
+      "t": 335.5,
+      "kind": "died",
+      "detail": "P1"
+    },
+    {
+      "t": 337.1,
+      "kind": "transfer",
+      "detail": "P0->P3 collapse-320.0-P0"
+    },
+    {
+      "t": 338.3,
+      "kind": "died",
+      "detail": "P0"
+    }
+  ],
+  "config": {
+    "startingVitality": 100.0,
+    "baseDecayPerSecond": 0.1,
+    "collapseDecayIncreasePerSecond": 0.02,
+    "collapseIntervalSeconds": 20.0,
+    "collapseIntervalThreeAliveSeconds": 15.0,
+    "debuffDurationSeconds": 30.0,
+    "debuffDecayBonusPerSecond": 0.03,
+    "transferCooldownSeconds": 5.0,
+    "maxActiveDebuffs": 3,
+    "transferRangeMeters": 2.0,
+    "voteDurationSeconds": 20.0,
+    "matchTimeLimitSeconds": 1200.0,
+    "playerCount": 4,
+    "hintCooldownSeconds": 15.0,
+    "tickHz": 10.0,
+    "note": "PROPOSED TEST VALUES — not approved balance. See MatchConfig.cs header."
+  },
+  "simulator_version": "0.1",
+  "note": "SIMULATED — not human playtest. Required human sessions must be logged separately."
+}

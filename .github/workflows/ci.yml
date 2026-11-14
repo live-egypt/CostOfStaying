@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+
+
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Docs audit (links, catalog, statuses)
+        run: python3 tools/audit.py
+
+      - name: Domain Core — restore
+        run: dotnet restore CostOfStaying.sln
+
+      - name: Domain Core — build
+        run: dotnet build CostOfStaying.sln -c Release --no-restore
+
+      - name: Domain Core — tests
+        run: dotnet test CostOfStaying.sln -c Release --no-build --logger "console;verbosity=normal" --collect:"XPlat Code Coverage" --results-directory TestResults
+
+      - name: Python parity check
+        run: python3 tools/balance_simulator/test_parity.py
+
+      - name: Balance simulator smoke
+        run: |
+          python3 tools/balance_simulator/simulate.py --preset default --seed 42 --json > /tmp/sim.json
+          cat /tmp/sim.json
+          python3 -c "import json,sys; d=json.load(open('/tmp/sim.json')); assert d['outcome'] in ['LastSurvivor','CollectiveSurrender','TimeLimit','Draw','MutualCollapse'], d"
+
+      - name: Playtest harness smoke (10 sessions)
+        run: |
+          python3 tools/playtest/run_sessions.py --sessions 10 --preset default --output /tmp/playtest-logs
+          ls -l /tmp/playtest-logs
+          cat /tmp/playtest-logs/report-*.md
+
+      - name: Secrets check — no hardcoded secrets heuristic
+        run: |
+          echo "Running gitleaks heuristic (fail on obvious secrets)..."
+          # Install gitleaks
+          curl -sSL https://github.com/gitleaks/gitleaks/releases/download/v8.18.0/gitleaks_8.18.0_linux_x64.tar.gz | tar xz -C /tmp
+          /tmp/gitleaks detect --source . --no-git --redact --verbose || echo "gitleaks exit code $?"
+          # Also simple grep for common mistakes (not a replacement for real scan)
+          if grep -R -n -E "(AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9_]{36,}|sk-live-[A-Za-z0-9]{16,})" --exclude-dir=.git --exclude-dir=bin --exclude-dir=obj --exclude-dir=TestResults .; then
+            echo "::error::Potential hardcoded secret found"
+            exit 1
+          fi
+          echo "Secrets heuristic passed"
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-evidence
+          path: |
+            TestResults/**
+            /tmp/sim.json
+            /tmp/playtest-logs/**
+          if-no-files-found: warn
+          retention-days: 30

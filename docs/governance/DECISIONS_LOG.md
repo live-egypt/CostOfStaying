@@ -9,10 +9,11 @@
 | ADR-002 | سلطة الخادم ومصدر حقيقة المباراة | APPROVED كمبدأ | التنفيذ NOT IMPLEMENTED |
 | ADR-003 | Backend واستضافة الخوادم | PROPOSED | لا مزود مختار |
 | ADR-004 | خط أساس قواعد اللعب الخمس | PROPOSED FOR PLAYTEST | 10 جلسات قبل الاعتماد، لا بعده |
+| ADR-005 | تفعيل CI وتنفيذ Domain Core | PROPOSED | CI وأدوات محاكاة واختبارات؛ يحتاج CI أخضر |
 
 ## قرارات نطاق ومبادئ
 - MVP لأربعة لاعبين وخريطة واحدة يبقى نطاق الميثاق حتى قرار موثق.
-- فصل Domain Core عن Unity/FishNet مبدأ مستهدف غير منفذ.
+- فصل Domain Core عن Unity/FishNet منفذ كـ PROPOSED في `src/CostOfStaying.Domain` و`docs/architecture/DOMAIN_CORE.md` بانتظار CI أخضر.
 - لا تحسين بلا قياس.
 - لا اعتماد لمزود Backend أو ميزانية أداء أو حد أدنى للأجهزة.
 - مراجعة مخاطر التوازن مدخل اختبار لا قرار.
