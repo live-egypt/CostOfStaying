@@ -1,6 +1,6 @@
 # Phase 1 Core — Canonical Implementation Status
 
-**Status:** PARTIALLY VERIFIED — latest Core CI passed boundary/composition checks, Release builds and 181/181 NUnit on commit `8a193190fb5f2e10c05773fb0789171011bfd2eb`; the broader Core scope remains incomplete.  
+**Status:** PARTIALLY VERIFIED — historical baseline: 181/181 NUnit; PR #25 separately verifies 191 tests for in-flight command cleanup; PR #26 verifies 210 tests for P1.1 connection/session binding. Both PRs target `feature/core-lifecycle-resolution` and remain unmerged. Unity/FishNet and production authentication remain unverified.  
 **Branch:** `feature/core-lifecycle-resolution`  
 **Core target:** .NET Standard 2.1  
 **Standalone tests:** .NET 10 / NUnit 3.14  
@@ -13,20 +13,23 @@
 **Session registry ADR:** ADR-011 (PROPOSED; capacity and multi-session policy owner review pending)  
 **Authenticated admission ADR:** ADR-012 (PROPOSED; transport identity and gameplay authorization remain outside Core)  
 **Session cleanup ADR:** ADR-013 (PROPOSED; in-flight handler completion remains an application responsibility)  
+**Connection binding ADR:** ADR-016 (PROPOSED; P1.1 Core contract implemented and CI-verified on PR #26; production adapter and owner approval pending)  
 **Unity/FishNet:** NOT IMPLEMENTED / NOT VERIFIED.
 
 ## Implemented Core source
 
 - Engine-independent .NET Standard 2.1 class library.
-- Strongly typed numeric identifiers: `ActorId`, `MatchId`, `SessionId`, `VictimId`, `EventSequenceId`, `CommandSequenceId` (all backed by `ulong`; zero is the invalid/default sentinel).
+- Strongly typed numeric identifiers: `ActorId`, `MatchId`, `SessionId`, `TransportConnectionId`, `VictimId`, `EventSequenceId`, `CommandSequenceId` (all backed by `ulong`; zero is the invalid/default sentinel). `TransportConnectionId` is introduced in PR #26 as a server-issued opaque transport identifier; the real adapter must allocate it and avoid reuse during a server-process lifetime.
 - Shared `Result` / `Result<T>` and stable `CoreErrorCode` categories.
 - `IVitalityAccount` / `VitalityAccount` implementing ADR-007 lifecycle and bounded vitality.
 - `IBetrayalLedger` / `BetrayalLedger` enforcing non-zero IDs, no self-target, monotonic event sequence, replay handling and actor score accumulation.
 - `IMatchLifecycle` / `MatchLifecycle` deterministic match-phase state machine.
 - `ISessionLifecycle` / `SessionLifecycle` server-owned Pending → Authenticated → Disconnected → Closed state machine (ADR-010 PROPOSED).
 - `ISessionRegistry` / `SessionRegistry` bounded by explicit capacity, keyed by SessionId, accepts Pending sessions; public removal is unavailable and cleanup service is required (ADR-011 PROPOSED).
+- `IConnectionSessionRegistry` / `ConnectionSessionRegistry` in PR #26 provides bounded bidirectional mapping between a server-issued `TransportConnectionId` and one registered Pending/Authenticated session; a live session has at most one live connection. It deliberately does not enforce one session per ActorId.
+- `ConnectionAwareSessionCleanupService` in PR #26 prevents removal while the same session registry still has a live connection binding; CoreComposition rejects mismatched registry instances.
 - `IMatchPlayerRegistry` / `MatchPlayerRegistry` bounded per-match membership with deterministic insertion order, immutable ID snapshots and membership-only removal (ADR-009 PROPOSED).
-- `CoreComposition` as the production construction root for the match-scoped ledger and factories for player vitality, match lifecycle, sequence tracker and command queue.
+- `CoreComposition` as the production construction root for the match-scoped ledger and factories for player vitality, match lifecycle, session registry, connection/session mapping, guarded cleanup, sequence tracker and command queue.
 - `ServerTick` and `StateRevision` value objects; zero is the initial value and revision advance refuses overflow.
 - `CommandEnvelope<TCommand>` for server-resolved session identity, sequence, receive tick and command intent. It is not a client wire DTO.
 - `CommandSequenceTracker` with strictly increasing per-session sequences, explicit maximum jump, explicit maximum tracked sessions, duplicate/stale rejection and bounded in-memory state.
@@ -100,7 +103,7 @@ Completed is terminal. Undefined enum values and all undocumented transitions fa
 
 The following remain unimplemented and must not be represented as complete:
 
-1. Transport connection-to-session mapping, credential validation and reconnect/timeout orchestration (per-session lifecycle, bounded registry and safe cleanup are implemented and verified).
+1. Credential validation, external account identity, production transport-adapter hooks, connection-ID allocation/reuse enforcement in that adapter, reconnect/timeout orchestration and persistence remain unimplemented. The pure-Core connection/session mapping contract is implemented and verified in PR #26 but is not merged. PR #25 separately tracks dequeued/in-flight commands for safe cleanup; it is also unmerged and is not part of PR #26's base branch.
 2. Full match aggregate, world-state ownership and cross-aggregate coordination (bounded match membership registry is implemented).
 3. Player aggregate and cross-system state coordination.
 4. Gameplay payload validation, application handlers and end-to-end authoritative execution pipeline (the authenticated session admission gate is implemented).
@@ -114,21 +117,17 @@ Unity project metadata, Unity assemblies, FishNet adapters, authenticated transp
 
 ## Verification evidence
 
-The latest Core CI run:
-- Run: `41333575156` — SUCCESS.
-- Source commit: `8a193190fb5f2e10c05773fb0789171011bfd2eb`.
-- Core dependency boundary and composition-root checks: PASS.
-- .NET 10 Release restore/build: PASS.
-- NUnit: 181 passed, 0 failed, 0 skipped.
-- TRX artifact: `13092964341`.
-- Artifact SHA-256: `b4067bbd6c6b0492a245dea4c8970acca23d7196d398018f5266da42709b4295`.
-- Detailed evidence: [Bounded command queue and session replay capacity CI](../audit/CORE_COMMAND_QUEUE_CI_VERIFICATION_2026-11-01.md).
+Core verification is cumulative across separate, unmerged review branches; do not treat their source trees as one integrated build:
 
-This run verifies the latest Core queue/capacity increment. It does not verify the unimplemented Core systems or Unity/FishNet.
+- Consolidated baseline: run `41333575156` on `8a193190fb5f2e10c05773fb0789171011bfd2eb`; 181 passed, 0 failed, 0 skipped.
+- PR #25 in-flight command cleanup: run `43596902378` on `7d82c3becf96eac338999de767770c75bc5795eb`; 191 passed, 0 failed, 0 skipped. PR #25 is unmerged.
+- PR #26 P1.1 connection/session binding: run `43599420409` on tested source commit `95a7bc93a7fd4772f45e7dc428f7574906945061`; 210 passed, 0 failed, 0 skipped. Dependency-boundary and CoreComposition scans passed; Core and test Release builds had 0 warnings and 0 errors. The current PR head `a5a19b7a1fe496b988fc839377c9433cccbb1ff3` adds only a documentation wording correction to ADR-016 after the test run. See [P1.1 verification report](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md).
+
+These checks verify separate pure-C# Core review branches only. They do not verify their combined merge result, Unity/FishNet, credential validation, actual connection-ID allocation by a transport adapter, reconnect policy or production security.
 
 ## Next implementation order
 
-1. Session lifecycle, bounded registry and safe cleanup primitives are implemented; transport connection mapping, credentials and reconnect policy remain incomplete.
+1. P1.1 pure-Core connection/session mapping is implemented and CI-verified on PR #26 (not merged). Next: trusted transport adapter hooks and credential validation; separately review PR #25 for in-flight completion before integrating both increments.
 2. Match/player aggregate ownership and authoritative state revision integration.
 3. Command payload validation and application handlers around the bounded queue.
 4. Movement command/rules/simulation.
