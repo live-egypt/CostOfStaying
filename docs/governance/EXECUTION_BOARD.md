@@ -41,8 +41,8 @@
 |---|---|---|---|---|---|
 | 3.1 | نقل Domain→Core + NetArchTest | Architect | L | TODO | 242 tests |
 | 3.2 | NetworkAdapter + Envelope | Net Sage | M | TODO | adapter tests |
-| 3.3 | DedicatedServer + Snapshot | Net Sage | L | TODO | server log |
-| 3.4 | AuthZ + Payload fail-closed | Sentinel | M | TODO | security tests |
+| 3.3 | DedicatedServer + Snapshot + إعادة اتصال | Net Sage | L | TODO | server log |
+| 3.4 | AuthZ + Payload fail-closed (IntentValidator) | Sentinel | M | DONE `379b19df` | `IntentValidator.cs` + `THREAT_MODEL` + `NETWORK_ARCH` حدود موثوقة |
 | 3.5 | اختبارات RTT/loss/jitter | Verifier | M | TODO | net_tests.log |
 | 3.6 | إثبات 4 أجهزة + فيديو | Verifier | M | TODO | video.mp4 |
 
@@ -60,8 +60,8 @@
 
 | # | المهمة | الوكيل | الحجم | الحالة | الدليل |
 |---|---|---|---|---|---|
-| 5.1 | CodeQL + SAST | Sentinel | M | TODO | scan report |
-| 5.2 | قياس Android+Server | Performance | M | TODO | PERF_BUDGET |
+| 5.1 | CodeQL + SAST (dependabot + SHA-pin منفذان) | Sentinel | M | DONE جزئي `379b19df` | `THREAT_MODEL` + `dependabot.yml` (كامل بعد GATE-5.1) |
+| 5.2 | قياس Android+Server — هيكل baseline | Performance | M | DONE `379b19df` | `PERFORMANCE_BUDGET v2.1` هيكل + بروتوكول (بلا أرقام معتمدة) |
 | 5.3 | 50 مباراة stability | Verifier | M | TODO | 50 logs |
 | 5.4 | ACCEPTANCE SHA+hash | Governor | S | TODO | ACCEPTANCE.md |
 
