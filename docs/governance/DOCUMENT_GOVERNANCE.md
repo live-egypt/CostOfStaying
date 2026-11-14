@@ -99,9 +99,11 @@
 | `governance/adr/ADR-003-BACKEND-AND-HOSTING.md` | قرار | PROPOSED |
 | `governance/adr/ADR-004-GAMEPLAY-RULES-BASELINE.md` | قرار | PROPOSED FOR PLAYTEST |
 | `governance/adr/ADR-005-CI-AND-DOMAIN-CORE.md` | قرار | PROPOSED |
+| `governance/AUDIT_REPORT_2026-11-14.md` | حوكمة / تدقيق | PROPOSED — تدقيق شامل 2026-11-14 |
 | `roadmap/MVP_SCOPE.md` | تسليم | PROPOSED |
 | `roadmap/ACCEPTANCE_CRITERIA.md` | تسليم | PROPOSED |
 | `roadmap/DELIVERY_PLAN.md` | تسليم | PROPOSED |
+| `roadmap/WORK_PLAN_2026-11-14.md` | تسليم / خطة | PROPOSED — خطة عمل 2026-11-14 (6 مراحل) |
 
 > **خارج الكتالوج (أدلة):** `quality/playtest-logs/*.json|*.csv|*.md` أدلة جلسات محاكاة — لا تخضع لحكم الفهرس، لكنها موثقة في `ci.yml`.
 >

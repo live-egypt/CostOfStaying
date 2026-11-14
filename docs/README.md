@@ -56,6 +56,7 @@
 - [سجل القرارات](governance/DECISIONS_LOG.md)
 - [تتبع المتطلبات](governance/REQUIREMENTS_TRACEABILITY.md)
 - [المصادر والمراجع الموحدة](governance/SOURCES_AND_REFERENCES.md)
+- [تقرير التدقيق الشامل 2026-11-14](governance/AUDIT_REPORT_2026-11-14.md)
 - [ADR-001: التكدس التقني](governance/adr/ADR-001-TECH-STACK.md)
 - [ADR-002: سلطة الخادم](governance/adr/ADR-002-SERVER-AUTHORITY.md)
 - [ADR-003: Backend والاستضافة](governance/adr/ADR-003-BACKEND-AND-HOSTING.md)
@@ -64,6 +65,7 @@
 - [نطاق MVP](roadmap/MVP_SCOPE.md)
 - [معايير قبول MVP](roadmap/ACCEPTANCE_CRITERIA.md)
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
+- [خطة العمل المفصلة 2026-11-14](roadmap/WORK_PLAN_2026-11-14.md)
 
 ## حالات الوثائق
 التعريف الملزم في [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md). ملخص:

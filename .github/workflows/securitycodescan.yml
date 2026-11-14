@@ -1,4 +1,4 @@
-# Inactive SecurityCodeScan template. Manual only. There is no .NET project.
+# Inactive SecurityCodeScan template. Manual only. Domain Core exists but not wired.
 name: SecurityCodeScan
 
 on:
@@ -10,5 +10,6 @@ jobs:
     steps:
       - name: Template inactive
         run: |
-          echo "SecurityCodeScan is not configured. There is no C# project yet."
+          echo "SecurityCodeScan template is inactive. Domain Core (netstandard2.1) exists but SCS is not wired to ci.yml yet."
+          echo "Do not treat a manual run as a successful scan. See ci.yml for the active quality gate."
           exit 1
