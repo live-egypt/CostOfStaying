@@ -94,6 +94,7 @@ namespace CostOfStaying.Core.Domain
     public readonly struct CommandSequenceId : IEquatable<CommandSequenceId>
     {
         public CommandSequenceId(ulong value) => Value = value;
+        public ulong Value { get; }
         public bool IsValid => Value != 0UL;
         public bool Equals(CommandSequenceId other) => Value == other.Value;
         public override bool Equals(object? obj) => obj is CommandSequenceId other && Equals(other);
