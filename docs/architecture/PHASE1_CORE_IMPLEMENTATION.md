@@ -15,7 +15,7 @@
 **Session cleanup ADR:** ADR-013 (PROPOSED; in-flight handler completion remains an application responsibility)  
 **Connection binding ADR:** ADR-016 (PROPOSED; P1.1 Core contract implemented and CI-verified on PR #26; production adapter and owner approval pending)  
 **Authentication boundary ADR:** ADR-017 (PROPOSED; credential validation and ActorId binding requirements documented; no provider or auth implementation selected)  
-**Match command admission ADR:** ADR-018 (PROPOSED; roster membership gate implemented on PR #28; CI pending)  
+**Match command admission ADR:** ADR-018 (PROPOSED; roster membership gate implemented and CI-verified on PR #28; owner review pending)  
 **Unity/FishNet:** NOT IMPLEMENTED / NOT VERIFIED.
 
 ## Implemented Core source
@@ -105,7 +105,7 @@ Completed is terminal. Undefined enum values and all undocumented transitions fa
 
 The following remain unimplemented and must not be represented as complete:
 
-1. Credential validation, external account identity, principal-to-ActorId assignment, production transport-adapter hooks, connection-ID allocation/reuse enforcement in that adapter, reconnect/timeout orchestration and persistence remain unimplemented. ADR-017 defines proposed boundaries only; provider and account mapping decisions remain unresolved. The pure-Core connection/session mapping contract is implemented and verified in PR #26 but is not merged. PR #25 separately tracks dequeued/in-flight commands for safe cleanup; it is also unmerged. PR #28 adds a match-roster membership gate that checks the authenticated ActorId at admission and dequeue; CI is pending.
+1. Credential validation, external account identity, principal-to-ActorId assignment, production transport-adapter hooks, connection-ID allocation/reuse enforcement in that adapter, reconnect/timeout orchestration and persistence remain unimplemented. ADR-017 defines proposed boundaries only; provider and account mapping decisions remain unresolved. The pure-Core connection/session mapping contract is implemented and verified in PR #26 but is not merged. PR #25 separately tracks dequeued/in-flight commands for safe cleanup; it is also unmerged. PR #28 adds a match-roster membership gate that checks the authenticated ActorId at admission and dequeue; run 43601883483 passed 222 NUnit tests on source SHA dd853f02ccea94fe12d46f13d586ee56dbd13fb7.
 2. Full match aggregate, world-state ownership and cross-aggregate coordination (bounded match membership registry is implemented).
 3. Player aggregate and cross-system state coordination.
 4. Gameplay payload validation, application handlers and end-to-end authoritative execution pipeline (the authenticated session admission gate is implemented).
@@ -129,7 +129,7 @@ These checks verify separate pure-C# Core review branches only. They do not veri
 
 ## Next implementation order
 
-1. P1.1 pure-Core connection/session mapping is implemented and CI-verified on PR #26 (not merged). PR #28 adds match-roster membership admission; verify its CI before treating the increment as verified. Next: trusted transport adapter hooks and credential validation after ADR-017 policy decisions; separately review PR #25 for in-flight completion.
+1. P1.1 pure-Core connection/session mapping is implemented and CI-verified on PR #26 (not merged). P1.3 match-roster membership admission is implemented and CI-verified on PR #28 (not merged). Next: command-specific phase/lifecycle authorization remains a separate policy gate; trusted transport adapter hooks and credential validation require ADR-017 owner decisions. Separately review PR #25 for in-flight completion.
 2. Match/player aggregate ownership and authoritative state revision integration.
 3. Command payload validation and application handlers around the bounded queue.
 4. Movement command/rules/simulation.
