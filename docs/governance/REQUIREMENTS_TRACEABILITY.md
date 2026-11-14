@@ -1,5 +1,5 @@
 # تتبع المتطلبات — v2.1
-**الحالة: PARTIALLY VERIFIED | Core baseline and separate P1 review branches have CI evidence; ADR-008 through ADR-018 remain proposed pending policy/owner review**
+**الحالة: PARTIALLY VERIFIED | Core baseline and separate P1 review branches have CI evidence; ADR-008 through ADR-019 remain proposed pending policy/owner review**
 
 الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. Historical Core CI run 41333575156 passed 181 tests. PR #25 separately passed 191 tests for in-flight cleanup; PR #26 separately passed 210 tests for P1.1 connection/session mapping (run 43599420409, tested source commit 95a7bc93a7fd4772f45e7dc428f7574906945061). These are separate, unmerged review branches, not a single combined build. The evidence verifies standalone pure-C# Core only, not Unity/FishNet or production transport integration.
 
@@ -113,3 +113,20 @@ ADR-018 is **PROPOSED**. PR #28 implements a pure-Core match-scoped gate that jo
 This service is membership-only. It does not decide command permissions for Alive/Spirit/Eliminated, MatchPhase, spectators, concurrent match membership, command payload validity or account-level multi-session policy. Those remain separate owner/application policy decisions. CoreComposition creates the inner authenticated admission gate from the same SessionRegistry and queue used by the match-scoped wrapper.
 
 CI evidence: [run 43601883483](https://github.com/live-egypt/CostOfStaying/actions/runs/43601883483) passed the Core dependency-boundary scan, CoreComposition construction-root scan, both Release builds (0 warnings, 0 errors), and **222 NUnit tests** (0 failed, 0 skipped) on source commit `dd853f02ccea94fe12d46f13d586ee56dbd13fb7`. Artifact `core-test-results` ID `14116607266`. See [P1.3 verification report](../audit/P1_MATCH_ROSTER_COMMAND_ADMISSION_CI_VERIFICATION_2026-11-14.md). PR #28 remains open and unmerged; ADR-018 remains PROPOSED.
+
+
+## ADR-019 — Match command authorization policy boundary
+
+ADR-019 is **PROPOSED**. PR #29 implements a generic pure-Core gate that requires an explicit application policy, builds context only from server-resolved session/actor/match/phase/player-lifecycle facts, evaluates the policy before queue admission, then re-evaluates it after dequeue before gameplay handoff. It does not define game-specific permissions.
+
+| Requirement ID | Requirement | Control | Test/evidence | Status |
+|---|---|---|---|---|
+| CORE-MATCH-AUTH-001 | No match command can pass authorization without an explicitly injected application policy; missing policy is a construction error | CORE-MATCH-AUTH-CTRL-001 | CoreCompositionTests: CreateMatchCommandAuthorizationService_RequiresExplicitPolicy | Core CI run 43602883504; 234 NUnit passed; PR #29, ADR-019 PROPOSED |
+| CORE-MATCH-AUTH-002 | Policy context is built from trusted server-resolved SessionId, ActorId, MatchId, MatchPhase and PlayerLifecycleState facts | CORE-MATCH-AUTH-CTRL-002 | MatchCommandAuthorizationServiceTests: TryAdmit_PolicyDenialDoesNotConsumeSequenceAndSameSequenceCanRetry | Core CI run 43602883504; 234 NUnit passed |
+| CORE-MATCH-AUTH-003 | Pre-admission policy rejection does not enqueue the command or consume sequence capacity; the same sequence can be retried after the policy allows | CORE-MATCH-AUTH-CTRL-003 | MatchCommandAuthorizationServiceTests: TryAdmit_PolicyDenialDoesNotConsumeSequenceAndSameSequenceCanRetry / TryAdmit_PolicyExceptionFailsClosedWithoutConsumingSequenceAndCanRetry | Core CI run 43602883504; 234 NUnit passed |
+| CORE-MATCH-AUTH-004 | Policy is re-evaluated after dequeue with current phase and player lifecycle; a denied stale command is not returned to the gameplay handler | CORE-MATCH-AUTH-CTRL-004 | MatchCommandAuthorizationServiceTests: TryTakeNext_RechecksCurrentMatchPhaseBeforeHandlerHandoff / TryTakeNext_RechecksPlayerLifecycleBeforeHandlerHandoff | Core CI run 43602883504; 234 NUnit passed |
+| CORE-MATCH-AUTH-005 | Default/uninitialized policy results and policy exceptions fail closed | CORE-MATCH-AUTH-CTRL-005 | MatchCommandAuthorizationServiceTests: TryAdmit_UninitializedPolicyResultFailsClosed / TryAdmit_PolicyExceptionFailsClosedWithoutConsumingSequenceAndCanRetry | Core CI run 43602883504; 234 NUnit passed |
+
+CI evidence: [run 43602883504](https://github.com/live-egypt/CostOfStaying/actions/runs/43602883504) passed dependency-boundary and CoreComposition checks, both Release builds (0 warnings, 0 errors), and **234 NUnit tests** (0 failed, 0 skipped) on tested source SHA `7dc7f1ceb1fd4dc9cccb6fd5a61ed036b41e17d5`. Artifact `core-test-results` ID `14117245816`. See [P1.4 verification report](../audit/P1_MATCH_COMMAND_AUTHORIZATION_POLICY_CI_VERIFICATION_2026-11-14.md). PR #29 remains open and unmerged; subsequent commits were a test-file addition on the intended review branch and its CI result is represented by the tested SHA. ADR-019 remains PROPOSED.
+
+This gate does not approve the specific permissions of Alive/Spirit/Eliminated or any MatchPhase; ADR-004 is still PROPOSED FOR PLAYTEST. No default policy should be interpreted as a game rule.
