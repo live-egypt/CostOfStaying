@@ -24,7 +24,7 @@
 | 1.2 | 10 جلسات بشرية | Verifier+Oracle | L | TODO | 10 JSON human |
 | 1.3 | تحليل + BALANCE_RISK_REVIEW | Architect+Balancer | M | TODO | report.md |
 | 1.4 | تحديث ADR-004 | Governor | S | TODO | PR |
-| 1.5 | توضيح COMBAT vs Vitality | Domain | S | TODO | GLOSSARY |
+| 1.5 | توضيح COMBAT vs Vitality (فصل GATE-1.5) | Domain | S | DONE `379b19df` | `COMBAT_SYSTEM` فصل + `GLOSSARY` مصطلح Combat Damage |
 
 ## GATE-2 — التكدس (4أ) — فتح: بعد GATE-1
 
