@@ -76,6 +76,23 @@ namespace CostOfStaying.Core
             return new MatchCommandAdmissionService<TCommand>(sessions, players, inner);
         }
 
+        public IMatchCommandAuthorizationService<TCommand> CreateMatchCommandAuthorizationService<TCommand>(
+            ISessionRegistry sessions,
+            IMatchLifecycle match,
+            IMatchPlayerRegistry players,
+            CommandAdmissionQueue<TCommand> queue,
+            IMatchCommandAuthorizationPolicy<TCommand> policy)
+        {
+            IMatchCommandAdmissionService<TCommand> admission =
+                CreateMatchCommandAdmissionService(sessions, players, queue);
+            return new MatchCommandAuthorizationService<TCommand>(
+                sessions,
+                match,
+                players,
+                admission,
+                policy);
+        }
+
         public ISessionCleanupService<TCommand> CreateSessionCleanupService<TCommand>(
             SessionRegistry sessions,
             CommandAdmissionQueue<TCommand> queue,
