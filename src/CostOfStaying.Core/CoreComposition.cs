@@ -1,6 +1,5 @@
 namespace CostOfStaying.Core
 {
-    using System;
     using CostOfStaying.Core.Contracts;
     using CostOfStaying.Core.Domain;
     using CostOfStaying.Core.Services;
@@ -72,7 +71,8 @@ namespace CostOfStaying.Core
             CommandAdmissionQueue<TCommand> queue,
             IConnectionSessionRegistry connections)
         {
-            return new SessionCleanupService<TCommand>(sessions, queue, connections);
+            ISessionCleanupService<TCommand> inner = new SessionCleanupService<TCommand>(sessions, queue);
+            return new ConnectionAwareSessionCleanupService<TCommand>(inner, connections);
         }
 
         public CommandAdmissionQueue<TCommand> CreateCommandAdmissionQueue<TCommand>(
