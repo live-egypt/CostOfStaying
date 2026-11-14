@@ -43,6 +43,11 @@ namespace CostOfStaying.Core
             return new SessionRegistry(capacity);
         }
 
+        public IConnectionSessionRegistry CreateConnectionSessionRegistry(ISessionRegistry sessions, int capacity)
+        {
+            return new ConnectionSessionRegistry(sessions, capacity);
+        }
+
         public IMatchPlayerRegistry CreateMatchPlayerRegistry(MatchId matchId, int capacity)
         {
             return new MatchPlayerRegistry(matchId, capacity);
@@ -64,9 +69,10 @@ namespace CostOfStaying.Core
 
         public ISessionCleanupService<TCommand> CreateSessionCleanupService<TCommand>(
             SessionRegistry sessions,
-            CommandAdmissionQueue<TCommand> queue)
+            CommandAdmissionQueue<TCommand> queue,
+            IConnectionSessionRegistry connections)
         {
-            return new SessionCleanupService<TCommand>(sessions, queue);
+            return new SessionCleanupService<TCommand>(sessions, queue, connections);
         }
 
         public CommandAdmissionQueue<TCommand> CreateCommandAdmissionQueue<TCommand>(
