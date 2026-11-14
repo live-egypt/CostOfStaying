@@ -1,5 +1,5 @@
 # تتبع المتطلبات — v2.1
-**الحالة: PARTIALLY VERIFIED | Core baseline and separate P1 review branches have CI evidence; ADR-008 through ADR-020 remain proposed pending policy/owner review**
+**الحالة: PARTIALLY VERIFIED | Core baseline and separate P1 review branches have CI evidence; ADR-008 through ADR-021 remain proposed pending policy/owner review**
 
 الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. Historical Core CI run 41333575156 passed 181 tests. PR #25 separately passed 191 tests for in-flight cleanup; PR #26 separately passed 210 tests for P1.1 connection/session mapping (run 43599420409, tested source commit 95a7bc93a7fd4772f45e7dc428f7574906945061). These are separate, unmerged review branches, not a single combined build. The evidence verifies standalone pure-C# Core only, not Unity/FishNet or production transport integration.
 
@@ -146,3 +146,17 @@ ADR-020 is **PROPOSED**. PR #31 implements a generic pure-Core boundary requirin
 CI evidence: [run 43603511612](https://github.com/live-egypt/CostOfStaying/actions/runs/43603511612) passed Core dependency-boundary and CoreComposition scans, both Release builds (0 warnings, 0 errors), and **242 NUnit tests** (0 failed, 0 skipped) on tested source SHA `e1941c6fdf6283827a0fd39f664ced7863e94a94`. Artifact `core-test-results` ID `14117630467`. See [P2.1 verification report](../audit/P2_TYPED_COMMAND_PAYLOAD_VALIDATION_CI_VERIFICATION_2026-11-14.md). PR #31 remains open and unmerged; ADR-020 remains PROPOSED.
 
 The validator applies only after safe deserialization. Raw wire-frame size, decompression/serialization quotas, nesting depth and parser hardening remain transport-adapter requirements. The gate does not define actual Movement/Attack/Transfer/Vote/Spirit DTOs, gameplay numeric bounds or handler transactions. Dynamic distance, cooldown, ownership, target eligibility and atomic effects remain separate application policy/handler checks.
+
+
+## ADR-021 — Typed gameplay command catalog and wire intent boundary
+
+ADR-021 is **PROPOSED** and documentation-only. It catalogs candidate command families without defining concrete DTO fields, wire schemas, serializer, payload ranges or gameplay permissions. The current generic envelope and payload validator do not constitute a concrete client/server command protocol.
+
+| Requirement ID | Requirement | Control | Test/evidence | Status |
+|---|---|---|---|---|
+| CORE-CATALOG-001 | Each client message must express intent only; server-owned identity, tick, revision, state and outcomes are derived server-side | CORE-CATALOG-CTRL-001 | DTO-specific prohibited-field tests required after each schema is approved | PROPOSED — no concrete DTOs |
+| CORE-CATALOG-002 | Each concrete DTO must have an immutable/versioned schema and explicit static type/range/size validation | CORE-CATALOG-CTRL-002 | Validator boundary/property/fuzz tests required for each approved DTO | PROPOSED — schema/version/limits unresolved |
+| CORE-CATALOG-003 | Raw frame/serializer/decompression limits must be enforced before typed Core payload validation | CORE-CATALOG-CTRL-003 | Transport parser quota/abuse tests required after serializer/transport selection | PROPOSED — transport not implemented |
+| CORE-CATALOG-004 | CommandSequenceId (session transport ordering) and logical CommandId (idempotency) remain distinct concepts | CORE-CATALOG-CTRL-004 | Cross-session/reconnect idempotency tests required under ADR-015 when approved | PROPOSED — ADR-015 remains proposed |
+
+Candidate families: Movement, Attack, Suffering Transfer, Collective Surrender vote, Spirit/Echo interactions. Resurrect/Eliminate remain explicit server-authoritative lifecycle operations; a client may not submit an authoritative transition/result. The exact DTO family scope and fields need owner approval before implementation.
