@@ -1,5 +1,5 @@
 # معايير قبول MVP — v2.1
-**الحالة: PROPOSED | لا يوجد بند VERIFIED**
+**الحالة: PROPOSED | لا يوجد بند VERIFIED | ربط التنفيذ في REQUIREMENTS_TRACEABILITY.md**
 
 لا يعد MVP مكتملاً حتى تتحقق البنود التالية على build محدد مع أدلة محفوظة.
 
@@ -31,4 +31,16 @@
 - سجلات الحوادث لا تحتوي أسراراً أو بيانات شخصية غير لازمة.
 
 ## Delivery Evidence
+
 لكل بند: Requirement ID وTest ID وcommit SHA وartifact hash وبيئة الاختبار والنتيجة وتاريخ التحقق. لا VERIFIED بدون دليل.
+
+| البند | Requirement | الدليل الحالي (PROPOSED) | المتبقي |
+|---|---|---|---|
+| Vitality/Collapse | GAME-001/COL-001 | `VitalityTests`, `CollapseTests` + محاكاة | CI أخضر + Playtest بشري |
+| Transfer | TRF-001 | `TransferTests` (10 حالات) | اختبار شبكة حقيقي |
+| Betrayal | BET-001 | `TransferTests` + `SecurityTests` | بوابة 4 |
+| Spirit | SP-001 | `SpiritTests` | اختبار تفاعلي |
+| Endgame 5 outcomes | END-001 | `VoteAndEndgameTests` + `playtest-logs/` | جلسات بشرية |
+| Server Authority | NET-001 | `SecurityTests` + `Intent.cs` | Dedicated Server |
+
+انظر `REQUIREMENTS_TRACEABILITY.md` و`architecture/DOMAIN_CORE.md` للتفصيل.

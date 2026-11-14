@@ -1,0 +1,27 @@
+name: "💡 Feature / system proposal"
+description: "Propose a new system or balance change (requires ADR if architectural)"
+title: "[Proposal] "
+labels: ["proposal"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: "Context & source"
+      description: "Which RULE/ADR/system? Link to SOURCES_AND_REFERENCES.md entry"
+    validations: { required: true }
+  - type: textarea
+    id: proposal
+    attributes:
+      label: "Proposal"
+      description: "What changes, with PROPOSED TEST VALUE vs approved numbers distinguished"
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternatives considered"
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: "Governance"
+      options:
+        - label: "I will update DOCUMENT_GOVERNANCE catalog + docs/README index in same commit"
+        - label: "Numbers are marked PROPOSED TEST VALUE until Playtest"

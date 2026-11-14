@@ -6,26 +6,45 @@ TestResults/
 *.suo
 .vs/
 .idea/
+*.lock.json
 
 # Python
 __pycache__/
 *.pyc
 .venv/
 venv/
+*.egg-info/
 
-# Tools output (kept in repo only when explicitly committed as evidence)
-# /docs/quality/playtest-logs/*.json is evidence when committed with report
+# Tools output — local runs (evidence only when explicitly committed)
+# Keep committed evidence in docs/quality/playtest-logs/; ignore temp
+/tmp/
+/tmp-playtest/
 
 # OS
 .DS_Store
 Thumbs.db
+ehthumbs.db
 
-# Secrets — never commit
+# Secrets — NEVER commit (SECRETS_MANAGEMENT.md)
 .env
 *.pem
 *.key
+*.pfx
+*.p12
 secrets.json
 appsettings.Production.json
+appsettings.*.local.json
 
 # Vendor scanner caches
 .codeql/
+.mobsf/
+
+# Unity (future — not yet in repo, but reserve)
+Library/
+Temp/
+Logs/
+obj/
+Build/
+Builds/
+UserSettings/
+MemoryCaptures/
