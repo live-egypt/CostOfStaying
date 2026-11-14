@@ -59,6 +59,7 @@
 - [دليل تحقق Core عبر GitHub Actions](audit/PHASE1_CORE_CI_VERIFICATION.md)
 - [تدقيق تشغيل CI ومشكلات ماسحات الأمان](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md)
 - [تدقيق P1.1: ربط اتصال النقل بجلسة الخادم — 210 اختبارات](audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md)
+- [تدقيق P1.3: التحقق من عضوية المباراة عند قبول الأوامر — 222 اختباراً](audit/P1_MATCH_ROSTER_COMMAND_ADMISSION_CI_VERIFICATION_2026-11-14.md)
 
 ## الجودة والاختبار
 - [استراتيجية الاختبار](quality/TEST_STRATEGY.md)
