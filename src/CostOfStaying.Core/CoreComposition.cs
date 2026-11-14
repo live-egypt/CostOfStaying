@@ -93,6 +93,13 @@ namespace CostOfStaying.Core
                 policy);
         }
 
+        public IMatchCommandPayloadValidationService<TCommand> CreateMatchCommandPayloadValidationService<TCommand>(
+            IMatchCommandAuthorizationService<TCommand> authorization,
+            ICommandPayloadValidator<TCommand> validator)
+        {
+            return new MatchCommandPayloadValidationService<TCommand>(authorization, validator);
+        }
+
         public ISessionCleanupService<TCommand> CreateSessionCleanupService<TCommand>(
             SessionRegistry sessions,
             CommandAdmissionQueue<TCommand> queue,
