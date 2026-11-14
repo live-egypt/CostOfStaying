@@ -7,12 +7,14 @@ on:
       - "src/**/*.cs"
       - "tests/**/*.cs"
       - ".github/workflows/**"
+      - "global.json"
   pull_request:
-    branches: [main]
+    branches: [main, feature/core-lifecycle-resolution]
     paths:
       - "src/**/*.cs"
       - "tests/**/*.cs"
       - ".github/workflows/**"
+      - "global.json"
   schedule:
     - cron: "24 14 * * 3"
   workflow_dispatch:

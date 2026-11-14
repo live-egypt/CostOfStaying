@@ -6,12 +6,12 @@ on:
   push:
     branches:
       - main
-      - feature/hotfix-cs0246
       - feature/core-lifecycle-resolution
     paths:
       - "src/CostOfStaying.Core/**"
       - "tests/CostOfStaying.Core.Tests/**"
       - ".github/workflows/**"
+      - "global.json"
   pull_request:
     branches:
       - main
@@ -20,6 +20,7 @@ on:
       - "src/CostOfStaying.Core/**"
       - "tests/CostOfStaying.Core.Tests/**"
       - ".github/workflows/**"
+      - "global.json"
   workflow_dispatch:
   schedule:
     - cron: "23 3 * * 1"
@@ -38,7 +39,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
       - name: Enforce Core dependency boundary
         shell: bash
@@ -62,29 +63,34 @@ jobs:
             exit 1
           fi
 
+      - name: Prepare artifact directories
+        run: mkdir -p artifacts/test-results artifacts/build-logs
+
       - name: Set up .NET 10
-        uses: actions/setup-dotnet@v6
+        uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73
         with:
-          dotnet-version: 10.0.x
-          cache: true
-          cache-dependency-path: tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj
+          global-json-file: global.json
 
       - name: Restore
-        run: dotnet restore tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj
+        run: dotnet restore tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --verbosity minimal
 
-      - name: Build Core
-        run: dotnet build src/CostOfStaying.Core/CostOfStaying.Core.csproj --configuration Release --no-restore
+      - name: Build Core (Release)
+        run: dotnet build src/CostOfStaying.Core/CostOfStaying.Core.csproj --configuration Release --no-restore -bl:"$GITHUB_WORKSPACE/artifacts/build-logs/core.binlog"
 
-      - name: Build test project
-        run: dotnet build tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-restore
+      - name: Build tests (Release)
+        run: dotnet build tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-restore -bl:"$GITHUB_WORKSPACE/artifacts/build-logs/tests.binlog"
 
-      - name: Run NUnit tests
-        run: dotnet test tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-build --no-restore --logger "trx;LogFileName=core-tests.trx" --results-directory artifacts/test-results
+      - name: Run NUnit tests (Release)
+        run: dotnet test tests/CostOfStaying.Core.Tests/CostOfStaying.Core.Tests.csproj --configuration Release --no-build --no-restore --logger "trx;LogFileName=core-tests.trx" --results-directory "$GITHUB_WORKSPACE/artifacts/test-results"
 
-      - name: Upload test results
+      - name: Verify TRX report exists
+        run: test -s "$GITHUB_WORKSPACE/artifacts/test-results/core-tests.trx"
+
+      - name: Upload build logs and test reports
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: core-test-results
-          path: artifacts/test-results/*.trx
+          name: core-ci-artifacts
+          path: artifacts/
           if-no-files-found: warn
+          retention-days: 30
