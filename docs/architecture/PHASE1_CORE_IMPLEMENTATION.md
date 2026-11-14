@@ -121,7 +121,7 @@ Core verification is cumulative across separate, unmerged review branches; do no
 
 - Consolidated baseline: run `41333575156` on `8a193190fb5f2e10c05773fb0789171011bfd2eb`; 181 passed, 0 failed, 0 skipped.
 - PR #25 in-flight command cleanup: run `43596902378` on `7d82c3becf96eac338999de767770c75bc5795eb`; 191 passed, 0 failed, 0 skipped. PR #25 is unmerged.
-- PR #26 P1.1 connection/session binding: run `43599420409` on tested source commit `95a7bc93a7fd4772f45e7dc428f7574906945061`; 210 passed, 0 failed, 0 skipped. Dependency-boundary and CoreComposition scans passed; Core and test Release builds had 0 warnings and 0 errors. The current PR head `a5a19b7a1fe496b988fc839377c9433cccbb1ff3` adds only a documentation wording correction to ADR-016 after the test run. See [P1.1 verification report](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md).
+- PR #26 P1.1 connection/session binding: run `43599420409` on tested source commit `95a7bc93a7fd4772f45e7dc428f7574906945061`; 210 passed, 0 failed, 0 skipped. Dependency-boundary and CoreComposition scans passed; Core and test Release builds had 0 warnings and 0 errors. The current PR head `4ae4088716eb740ec736c3bea0f75727e2d6bc77` adds only a documentation wording correction to ADR-016 after the test run. See [P1.1 verification report](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md).
 
 These checks verify separate pure-C# Core review branches only. They do not verify their combined merge result, Unity/FishNet, credential validation, actual connection-ID allocation by a transport adapter, reconnect policy or production security.
 
