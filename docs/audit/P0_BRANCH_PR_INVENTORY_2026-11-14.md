@@ -90,7 +90,7 @@ src/CostOfStaying.Core/Properties/AssemblyInfo.cs
 
 1. اشتراط Pull Request ومنع الدفع المباشر وForce Push.
 2. منع حذف main أو تحديثه بالقوة.
-3. اشتراط نجاح Core CI وGitleaks وNuGet Audit وDocumentation Audit وCodeQL وSecurityCodeScan عندما تكون الملفات ضمن النطاق.
+3. اختيار استراتيجية checks لا تسبب انتظاراً دائماً: بعض الـworkflows تستخدم path filters ولا تُصدر check في كل PR؛ اجعل checks المطلوبة غير مشروطة أو أضف aggregate gate يعمل في كل PR.
 4. اشتراط مراجعة مستقلة وإبطال الموافقات القديمة بعد تحديثات جوهرية، عند توفر مراجع مستقل.
 5. اشتراط حل كل محادثات المراجعة وتقييد صلاحيات تجاوز الحماية لأقل عدد ممكن.
 6. اختيار أسماء status checks المطلوبة من نتائج فعلية على SHA نفسه، لا من أسماء متوقعة أو قديمة.
@@ -98,6 +98,7 @@ src/CostOfStaying.Core/Properties/AssemblyInfo.cs
 ## تحديث الحالة — 14 نوفمبر 2026
 
 - تم تحويل PR #23 من مسودة إلى جاهز للمراجعة، مع بقائه مفتوحاً وغير مدمج.
+- فُتحت [Issue #24](https://github.com/live-egypt/CostOfStaying/issues/24) لتكليف المالك/المسؤول بالتحقق من حماية main وتطبيقها إن لزم.
 - جرى توسيع مشغلات Security CI لتعمل مع كل تغييرات الملفات على الفروع المستهدفة، حتى لا تُستثنى الوثائق أو الإعدادات أو الأصول من فحص Gitleaks.
 - ثُبّتت إشارات CodeQL (`checkout`, `init`, `analyze`) إلى SHA commits ثابتة بعد مطابقة المراجع الرسمية في مستودعات Actions الأصلية.
 - بعد كل تحديث للفرع، يجب اعتماد نتائج الفحوص على أحدث SHA، لا الاكتفاء بفحوص الرأس السابق.
