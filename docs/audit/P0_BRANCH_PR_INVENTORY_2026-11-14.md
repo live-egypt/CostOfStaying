@@ -52,7 +52,7 @@
 
 | PR | العنوان | الحالة / التفسير |
 |---:|---|---|
-| #23 | ci: harden P0 checks and Domain test access | مسودة P0؛ تستهدف feature/core-lifecycle-resolution |
+| #23 | ci: harden P0 checks and Domain test access | مفتوح وجاهز للمراجعة؛ يستهدف feature/core-lifecycle-resolution |
 | #22 | docs: preserve project state and ChatGPT migration handoff | مفتوح؛ الأرشيف الثنائي موثق بأنه لم يُرفع بعد |
 | #11 | docs: consolidate project governance and evidence baseline | مفتوح؛ حزمة توثيق تتداخل مع حزم أخرى |
 | #20 | docs(governance): PDR-014 SOURCE-ORIGIN-01 review | مفتوح؛ فجوة مصدر الأصل باقية |
@@ -94,6 +94,12 @@ src/CostOfStaying.Core/Properties/AssemblyInfo.cs
 4. اشتراط مراجعة مستقلة وإبطال الموافقات القديمة بعد تحديثات جوهرية، عند توفر مراجع مستقل.
 5. اشتراط حل كل محادثات المراجعة وتقييد صلاحيات تجاوز الحماية لأقل عدد ممكن.
 6. اختيار أسماء status checks المطلوبة من نتائج فعلية على SHA نفسه، لا من أسماء متوقعة أو قديمة.
+
+## تحديث الحالة — 14 نوفمبر 2026
+
+- تم تحويل PR #23 من مسودة إلى جاهز للمراجعة، مع بقائه مفتوحاً وغير مدمج.
+- رأس الفرع في آخر تحقق: `cf8f3b8ef1ac18d954580782ba779972ab69904a` قبل تصحيح نطاق تشغيل Security CI؛ ستُحدّث نتيجة الفحوص بعد هذا التصحيح.
+- لا توجد مراجعات أو محادثات مراجعة مسجلة على PR #23 وقت هذا التحديث.
 
 ## حدود P0
 
