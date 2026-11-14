@@ -56,6 +56,7 @@
 - [تدقيق مصدر Phase 1 المرفوع](audit/UPLOADED_PHASE1_SOURCE_AUDIT.md)
 - [دليل تحقق Core عبر GitHub Actions](audit/PHASE1_CORE_CI_VERIFICATION.md)
 - [تدقيق تشغيل CI ومشكلات ماسحات الأمان](audit/GITHUB_ACTIONS_PIPELINE_AUDIT_2026-11-01.md)
+- [تدقيق P1.1: ربط اتصال النقل بجلسة الخادم — 210 اختبارات](audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md)
 
 ## الجودة والاختبار
 - [استراتيجية الاختبار](quality/TEST_STRATEGY.md)
