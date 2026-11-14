@@ -1,5 +1,5 @@
 # سجل القرارات — v2.1
-**آخر مراجعة: 2026-11-01**
+**آخر مراجعة: 2026-11-14**
 
 هذا الفهرس يعكس ملفات ADR الفعلية. الحالة في هذا الجدول لا تتجاوز حالة ADR المرتبط.
 
@@ -20,6 +20,7 @@
 | ADR-013 | Safe Session Cleanup and Replay-State Release | PROPOSED | خدمة واحدة تنظّم إغلاق الجلسة وتفريغ الطابور وإعادة ضبط replay ثم إزالة التسجيل |
 | ADR-014 | Victim Scope | PROPOSED | تأجيل حسم فئات الضحايا؛ الإبقاء على VictimId دون تغيير؛ دعم NPCs غير معتمد؛ فئات الضحايا TBD. |
 | ADR-015 | Command Identity and Idempotency | PROPOSED | CommandId مستقل مرتبط بهوية اللاعب الموثوقة؛ سجل In-Memory مستقل عن Session Cleanup ويستمر عبر reconnect فقط؛ InProgress/النتيجة السابقة؛ بصمة الأمر وذرية الحجز مطلوبتان؛ التخزين الدائم ومدة الاحتفاظ TBD؛ المخاطر متوسطة. |
+| ADR-016 | Transport Connection to Session Binding | PROPOSED | ربط one-to-one مؤقت بين TransportConnectionId خادمي وSessionId مسجلة؛ فصل/تحديث دورة حياة الجلسة عند الانقطاع وحماية cleanup؛ لا يقرر عدد الجلسات لكل ActorId ولا ينفذ FishNet أو credential validation. |
 
 ## قرارات نطاق ومبادئ
 - MVP لأربعة لاعبين وخريطة واحدة: نطاق المنتج المستهدف في ميثاق المشروع، ويعاد تقييمه عبر قرار موثق إذا تغير.
