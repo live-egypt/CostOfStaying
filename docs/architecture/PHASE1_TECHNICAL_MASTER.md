@@ -66,6 +66,7 @@ Existing ADR identifiers are occupied:
 - ADR-018: match roster command admission (PROPOSED; Core membership gate implemented and CI-verified on PR #28; gameplay permissions remain downstream).
 - ADR-019: match command authorization policy boundary (PROPOSED; explicit application policy injection and pre-admission/pre-handoff revalidation implemented and CI-verified on PR #29; no command-specific policy is approved).
 - ADR-020: typed command payload validation boundary (PROPOSED; explicit typed-payload validator before admission and after dequeue implemented and CI-verified on PR #31; no concrete gameplay DTO catalog is approved).
+- ADR-021: typed gameplay command catalog and wire intent boundary (PROPOSED; candidate intent families and prohibited client-authoritative claims documented; concrete DTO/schema work requires owner review).
 - ADR-012: authenticated command admission gate (PROPOSED; gameplay payload validation remains downstream).
 - ADR-013: safe session cleanup and replay-state release (PROPOSED).
 
@@ -412,7 +413,7 @@ Do not create placeholder manifests or locks that imply an installed Unity/FishN
 
 ## 7. Required future ADRs
 
-The historical transcript suggested new ADRs numbered 001–006, which conflict with the existing register. ADR-006 is assigned to Core identifier and Betrayal ledger invariants; ADR-007 is assigned to the player lifecycle/Vitality conflict. ADR-008 through ADR-020 are now assigned in the decision log. New candidates must use the next unused ADR number and be created only when the decision is ready for review.
+The historical transcript suggested new ADRs numbered 001–006, which conflict with the existing register. ADR-006 is assigned to Core identifier and Betrayal ledger invariants; ADR-007 is assigned to the player lifecycle/Vitality conflict. ADR-008 through ADR-021 are now assigned in the decision log. New candidates must use the next unused ADR number and be created only when the decision is ready for review.
 
 | Candidate topic | Decision required | Gate |
 |---|---|---|
@@ -479,7 +480,7 @@ Verification is recorded per review branch; these CI runs are independent and do
 - Baseline run 41333575156 on source 8a193190fb5f2e10c05773fb0789171011bfd2eb: 181 passed, 0 failed, 0 skipped.
 - PR #25 run 43596902378 on source 7d82c3becf96eac338999de767770c75bc5795eb: 191 passed, 0 failed, 0 skipped; PR #25 is unmerged.
 - PR #26 run 43599420409 on tested source 95a7bc93a7fd4772f45e7dc428f7574906945061: 210 passed, 0 failed, 0 skipped; dependency-boundary and CoreComposition checks passed; both Release builds had 0 warnings and 0 errors. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification.
-See [P1.1 CI evidence](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md), [P1.3 CI evidence](../audit/P1_MATCH_ROSTER_COMMAND_ADMISSION_CI_VERIFICATION_2026-11-14.md), [P1.4 CI evidence](../audit/P1_MATCH_COMMAND_AUTHORIZATION_POLICY_CI_VERIFICATION_2026-11-14.md) and [P2.1 CI evidence](../audit/P2_TYPED_COMMAND_PAYLOAD_VALIDATION_CI_VERIFICATION_2026-11-14.md). The runs verify separate pure-C# Core scopes only, not merged/integrated PRs, FishNet, credentials, production connection-ID allocation, reconnect policy, approved gameplay permissions, Unity or production security.
+See [P1.1 CI evidence](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md), [P1.3 CI evidence](../audit/P1_MATCH_ROSTER_COMMAND_ADMISSION_CI_VERIFICATION_2026-11-14.md), [P1.4 CI evidence](../audit/P1_MATCH_COMMAND_AUTHORIZATION_POLICY_CI_VERIFICATION_2026-11-14.md) and [P2.1 CI evidence](../audit/P2_TYPED_COMMAND_PAYLOAD_VALIDATION_CI_VERIFICATION_2026-11-14.md). ADR-021 is a documentation proposal and has no executable verification. The runs verify separate pure-C# Core scopes only, not merged/integrated PRs, FishNet, credentials, production connection-ID allocation, reconnect policy, approved gameplay permissions, Unity or production security.
 
 ### Evidence required for VERIFIED
 - exact commit SHA;
@@ -501,7 +502,7 @@ See [P1.1 CI evidence](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_20
 
 ## 12. Exact current implementation status
 
-**Current implementation status:** ADR-007 is APPROVED; ADR-010 through ADR-020 remain PROPOSED. PR #25 verifies in-flight command completion (191 tests); PR #26 verifies P1.1 connection/session mapping (210 tests); PR #28 verifies P1.3 match-roster admission (222 tests); PR #29 verifies P1.4 generic authorization (234 tests); PR #31 verifies P2.1 typed payload validation (242 tests). PR #25, PR #26, PR #28 and PR #29 remain unmerged; PR #27 is the documentation-only ADR-017 proposal. These checks are separate stacked review branches, not one integrated merged build. PR #30 is a corrective PR to remove one test file accidentally committed to main; it is unmerged. PR #31 is the P2.1 payload validation branch and remains unmerged. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification.
+**Current implementation status:** ADR-007 is APPROVED; ADR-010 through ADR-021 remain PROPOSED. PR #25 verifies in-flight command completion (191 tests); PR #26 verifies P1.1 connection/session mapping (210 tests); PR #28 verifies P1.3 match-roster admission (222 tests); PR #29 verifies P1.4 generic authorization (234 tests); PR #31 verifies P2.1 typed payload validation (242 tests). PR #25, PR #26, PR #28 and PR #29 remain unmerged; PR #27 is the documentation-only ADR-017 proposal. These checks are separate stacked review branches, not one integrated merged build. PR #30 is a corrective PR to remove one test file accidentally committed to main; it is unmerged. PR #31 is the P2.1 payload validation branch and remains unmerged. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification.
 
 | Item | Status |
 |---|---|
