@@ -14,6 +14,7 @@
 **Authenticated admission ADR:** ADR-012 (PROPOSED; transport identity and gameplay authorization remain outside Core)  
 **Session cleanup ADR:** ADR-013 (PROPOSED; in-flight handler completion remains an application responsibility)  
 **Connection binding ADR:** ADR-016 (PROPOSED; P1.1 Core contract implemented and CI-verified on PR #26; production adapter and owner approval pending)  
+**Authentication boundary ADR:** ADR-017 (PROPOSED; credential validation and ActorId binding requirements documented; no provider or auth implementation selected)  
 **Unity/FishNet:** NOT IMPLEMENTED / NOT VERIFIED.
 
 ## Implemented Core source
@@ -103,7 +104,7 @@ Completed is terminal. Undefined enum values and all undocumented transitions fa
 
 The following remain unimplemented and must not be represented as complete:
 
-1. Credential validation, external account identity, production transport-adapter hooks, connection-ID allocation/reuse enforcement in that adapter, reconnect/timeout orchestration and persistence remain unimplemented. The pure-Core connection/session mapping contract is implemented and verified in PR #26 but is not merged. PR #25 separately tracks dequeued/in-flight commands for safe cleanup; it is also unmerged and is not part of PR #26's base branch.
+1. Credential validation, external account identity, principal-to-ActorId assignment, production transport-adapter hooks, connection-ID allocation/reuse enforcement in that adapter, reconnect/timeout orchestration and persistence remain unimplemented. ADR-017 defines proposed boundaries only; provider and account mapping decisions remain unresolved. The pure-Core connection/session mapping contract is implemented and verified in PR #26 but is not merged. PR #25 separately tracks dequeued/in-flight commands for safe cleanup; it is also unmerged and is not part of PR #26's base branch.
 2. Full match aggregate, world-state ownership and cross-aggregate coordination (bounded match membership registry is implemented).
 3. Player aggregate and cross-system state coordination.
 4. Gameplay payload validation, application handlers and end-to-end authoritative execution pipeline (the authenticated session admission gate is implemented).

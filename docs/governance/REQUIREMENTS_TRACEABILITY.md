@@ -1,5 +1,5 @@
 # تتبع المتطلبات — v2.1
-**الحالة: PARTIALLY VERIFIED | Core baseline and separate P1 review branches have CI evidence; ADR-008 through ADR-016 remain proposed pending policy/owner review**
+**الحالة: PARTIALLY VERIFIED | Core baseline and separate P1 review branches have CI evidence; ADR-008 through ADR-017 remain proposed pending policy/owner review**
 
 الغرض هو تتبع العلاقة من المتطلب إلى الضابط والاختبار والدليل. Historical Core CI run 41333575156 passed 181 tests. PR #25 separately passed 191 tests for in-flight cleanup; PR #26 separately passed 210 tests for P1.1 connection/session mapping (run 43599420409, tested source commit 95a7bc93a7fd4772f45e7dc428f7574906945061). These are separate, unmerged review branches, not a single combined build. The evidence verifies standalone pure-C# Core only, not Unity/FishNet or production transport integration.
 
@@ -84,3 +84,17 @@ ADR-013 is PROPOSED. Only SessionCleanupService can coordinate queue drain, inte
 ADR-016 is **PROPOSED**. The transport-neutral mapping contract and NUnit tests are implemented in PR #26, but the PR remains unmerged. Core CI run [43599420409](https://github.com/live-egypt/CostOfStaying/actions/runs/43599420409) passed 210 tests on tested source commit `95a7bc93a7fd4772f45e7dc428f7574906945061`; boundary and composition scans passed, and both Release builds reported 0 warnings and 0 errors. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification. Detailed evidence: [P1.1 verification report](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_2026-11-14.md).
 
 The contract covers typed `TransportConnectionId`, bounded bidirectional mapping, Pending-only binding, one live connection per session, detach transitions, stale-command rejection, and cleanup blocking while bound. It does not implement FishNet/transport integration, actual server connection-ID allocation or non-reuse enforcement by the adapter, credentials/account identity, one-session-per-ActorId policy, reconnect grace/expiry or persistence. The actor-level multi-session and reconnect choices remain unresolved and must not be inferred from this mapping.
+
+
+## ADR-017 — Credential validation and ActorId binding boundary
+
+ADR-017 is **PROPOSED**; no credential validator, identity provider, account store or ActorId resolver is implemented. The intended trust boundary is outside deterministic Core: resolve the server-issued connection to a Pending session, validate credentials through a selected trusted identity provider, resolve the authenticated principal to a server-owned in-match ActorId, then call `TryAuthenticate`. Account identity and ActorId must not be assumed to be the same identifier.
+
+| Requirement ID | Requirement | Control | Test/evidence | Status |
+|---|---|---|---|---|
+| CORE-AUTH-001 | A session can become Authenticated only after trusted server-side validation of credentials and principal | CORE-AUTH-CTRL-001 | Provider/application integration tests required after provider selection | PROPOSED — no implementation |
+| CORE-AUTH-002 | ActorId is assigned/resolved by the server and cannot be selected by an untrusted client or confused with a persistent account ID | CORE-AUTH-CTRL-002 | Principal-to-Actor resolver tests required | PROPOSED — actor assignment model unresolved |
+| CORE-AUTH-003 | Invalid, expired, revoked, malformed or unverifiable credentials do not authenticate a session or partially mutate match state | CORE-AUTH-CTRL-003 | Failure-injection and no-partial-mutation tests required | PROPOSED — credential semantics/provider unresolved |
+| CORE-AUTH-004 | Credentials and tokens are excluded from Core state and diagnostic output | CORE-AUTH-CTRL-004 | Redaction tests and security review required | PROPOSED — logging boundary not implemented |
+
+Owner decisions still required: identity provider and guest flow; credential/token format and validation; account-to-ActorId mapping and lifetime; provider outage behavior; retry/rate-limit/lockout; expiration/revocation/refresh; privacy retention; reconnect and concurrent-session policy. ADR-010 and ADR-011 are PROPOSED and do not by themselves settle these items.

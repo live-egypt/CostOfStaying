@@ -21,6 +21,7 @@
 | ADR-014 | Victim Scope | PROPOSED | تأجيل حسم فئات الضحايا؛ الإبقاء على VictimId دون تغيير؛ دعم NPCs غير معتمد؛ فئات الضحايا TBD. |
 | ADR-015 | Command Identity and Idempotency | PROPOSED | CommandId مستقل مرتبط بهوية اللاعب الموثوقة؛ سجل In-Memory مستقل عن Session Cleanup ويستمر عبر reconnect فقط؛ InProgress/النتيجة السابقة؛ بصمة الأمر وذرية الحجز مطلوبتان؛ التخزين الدائم ومدة الاحتفاظ TBD؛ المخاطر متوسطة. |
 | ADR-016 | Transport Connection to Session Binding | PROPOSED | ربط one-to-one مؤقت بين TransportConnectionId خادمي وSessionId مسجلة؛ فصل/تحديث دورة حياة الجلسة عند الانقطاع وحماية cleanup؛ لا يقرر عدد الجلسات لكل ActorId ولا ينفذ FishNet أو credential validation. |
+| ADR-017 | Credential Validation and Actor Binding Boundary | PROPOSED | فصل التحقق من بيانات اعتماد الحساب خارج Core عن تعيين ActorId خادمي وربطه بجلسة Pending؛ لا يختار مزود الهوية أو نوع الاعتماد ولا يقرر guest/multi-session/reconnect policy. |
 
 ## قرارات نطاق ومبادئ
 - MVP لأربعة لاعبين وخريطة واحدة: نطاق المنتج المستهدف في ميثاق المشروع، ويعاد تقييمه عبر قرار موثق إذا تغير.

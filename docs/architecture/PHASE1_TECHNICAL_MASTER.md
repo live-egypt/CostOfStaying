@@ -62,6 +62,7 @@ Existing ADR identifiers are occupied:
 - ADR-014: victim scope (PROPOSED).
 - ADR-015: command identity and idempotency (PROPOSED).
 - ADR-016: transport connection-to-session binding (PROPOSED; Core contract implemented and CI-verified on PR #26; transport adapter integration pending).
+- ADR-017: credential validation and ActorId binding boundary (PROPOSED; no identity provider, credential format, account store or authentication service selected).
 - ADR-012: authenticated command admission gate (PROPOSED; gameplay payload validation remains downstream).
 - ADR-013: safe session cleanup and replay-state release (PROPOSED).
 
@@ -405,13 +406,13 @@ Do not create placeholder manifests or locks that imply an installed Unity/FishN
 
 ## 7. Required future ADRs
 
-The historical transcript suggested new ADRs numbered 001–006, which conflict with the existing register. ADR-006 is assigned to Core identifier and Betrayal ledger invariants; ADR-007 is assigned to the player lifecycle/Vitality conflict. ADR-008 through ADR-016 are now assigned in the decision log. New candidates must use the next unused ADR number and be created only when the decision is ready for review.
+The historical transcript suggested new ADRs numbered 001–006, which conflict with the existing register. ADR-006 is assigned to Core identifier and Betrayal ledger invariants; ADR-007 is assigned to the player lifecycle/Vitality conflict. ADR-008 through ADR-017 are now assigned in the decision log. New candidates must use the next unused ADR number and be created only when the decision is ready for review.
 
 | Candidate topic | Decision required | Gate |
 |---|---|---|
 | Command ordering | Ordering key, tie-break, late command policy | Before pipeline |
 | Fixed tick | Tick rate, catch-up cap, overload policy | Before TickExecutor |
-| Session authentication | Credential/token validation, external identity, expiry and reconnect | Before network authentication adapter |
+| Session authentication | ADR-017 defines the trust boundary; provider, credential/token format, external principal model, account-to-ActorId assignment and expiry/reconnect policy require owner/security decisions | Before authentication implementation |
 | Snapshot strategy | Full/delta, frequency, revision semantics | Before replication |
 | Command policy | Production jump/session/queue limits, reconnect continuity, rate limits and timeout | ADR-008 owner review before network integration |
 | Movement model | Units, speed, acceleration, collision/input limits | Before movement implementation |
@@ -436,9 +437,10 @@ These must become automated regression tests before network release:
 
 ## 9. Implementation sequence
 
-1. Integrate the pure-Core connection/session mapping (PR #26) with a real trusted transport adapter and credential-validation boundary after exact transport/API availability; resolve reconnect and ActorId multi-session policy separately.
-2. Complete in-flight command handoff/completion integration and cleanup review (PR #25 is a separate unmerged branch).
-3. Full match/player aggregate ownership and authoritative revision integration.
+1. Integrate the pure-Core connection/session mapping (PR #26) with a real trusted transport adapter after exact transport/API availability.
+2. Select the identity provider and account-to-ActorId assignment model under ADR-017 before implementing credential validation. Keep credentials and provider I/O outside deterministic Core; resolve reconnect and ActorId multi-session policy separately.
+3. Complete in-flight command handoff/completion integration and cleanup review (PR #25 is a separate unmerged branch).
+4. Full match/player aggregate ownership and authoritative revision integration.
 4. Command payload validation and application handlers around the bounded FIFO admission queue.
 5. Movement command, rules and deterministic simulation.
 6. Debuff eligibility and atomic transfer transaction.
@@ -493,7 +495,7 @@ See [P1.1 CI evidence](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_20
 
 ## 12. Exact current implementation status
 
-**Current implementation status:** ADR-007 is APPROVED; ADR-010 through ADR-016 remain PROPOSED. PR #25 separately verifies in-flight command completion (191 tests). PR #26 verifies P1.1 transport-neutral connection/session binding (210 tests); both PRs target feature/core-lifecycle-resolution and remain unmerged. The current PR #26 head includes a docs-only ADR-016 wording commit after the tested source SHA.
+**Current implementation status:** ADR-007 is APPROVED; ADR-010 through ADR-017 remain PROPOSED. PR #25 separately verifies in-flight command completion (191 tests). PR #26 verifies P1.1 transport-neutral connection/session binding (210 tests); both PRs target feature/core-lifecycle-resolution and remain unmerged. Subsequent commits after the tested source SHA updated documentation only; no source, test or workflow files changed after verification.
 
 | Item | Status |
 |---|---|
@@ -509,7 +511,8 @@ See [P1.1 CI evidence](../audit/P1_CONNECTION_SESSION_BINDING_CI_VERIFICATION_20
 | NUnit tests | VERIFIED by scope: baseline 181; PR #25 191; PR #26 210 passed, 0 failed, 0 skipped |
 | Per-session Core lifecycle primitive | VERIFIED — 181 NUnit passed; ADR-010 PROPOSED |
 | Pure-Core connection/session mapping | IMPLEMENTED and VERIFIED in PR #26; not merged |
-| Credential validation, production adapter integration, connection-ID allocator/non-reuse, reconnect policy | NOT IMPLEMENTED / TBD |
+| Credential validation, identity provider, principal-to-ActorId mapping and production authentication service | NOT IMPLEMENTED — ADR-017 PROPOSED |
+| Production adapter integration, connection-ID allocator/non-reuse, reconnect policy | NOT IMPLEMENTED / TBD |
 | Full match/player/world aggregates | NOT IMPLEMENTED; bounded membership registry exists |
 | ServerTick / StateRevision | VERIFIED in Core CI baseline — 181 NUnit passed |
 | Command envelope and sequence tracker | VERIFIED — 181 NUnit passed; ADR-008 PROPOSED |
