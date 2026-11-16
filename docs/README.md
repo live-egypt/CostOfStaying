@@ -74,6 +74,15 @@
 - [خطة التسليم](roadmap/DELIVERY_PLAN.md)
 - [خطة العمل المفصلة 2026-11-14](roadmap/WORK_PLAN_2026-11-14.md) — الإصدار السابق
 
+## استعادة المصادر والحوكمة
+
+- [جرد المصادر](governance/sources/SOURCE_INVENTORY.md)
+- [سجل Provenance](governance/sources/PROVENANCE_REGISTER.md)
+- [مصفوفة تتبع القرارات](governance/sources/DECISION_TRACEABILITY_MATRIX.md)
+- [سجل التعارضات](governance/sources/CONFLICT_REGISTER.md)
+- [ضبط الوثائق](governance/sources/DOCUMENT_CONTROL.md)
+- [مراجعة Stage 1 — Source & Provenance](governance/sources/STAGE1_SOURCE_PROVENANCE_REVIEW.md)
+
 ## حالات الوثائق
 التعريف الملزم في [حوكمة الوثائق](governance/DOCUMENT_GOVERNANCE.md). ملخص:
 - **PROPOSED:** مقترح لم يعتمد.
